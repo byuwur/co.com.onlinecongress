@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view"-->
+
+    <group android:checkableBehavior="single">
+        <!--item
+            android:id="@+id/nav_reservar"
+            android:icon="@drawable/ic_menu_library_add"
+            android:title="Reservar" />
+        <item
+            android:id="@+id/nav_reservas"
+            android:icon="@drawable/ic_menu_beenhere"
+            android:title="Reservas" />
+        <item
+            android:id="@+id/nav_favorito"
+            android:icon="@drawable/ic_menu_star"
+            android:title="Favoritos" /-->
+        <item
+            android:id="@+id/nav_perfil"
+            android:icon="@drawable/ic_menu_account_box"
+            android:title="Perfil" />
+    </group>
+    <item
+        android:id="@+id/nav_cuenta"
+        android:icon="@drawable/ic_menu_settings"
+        android:title="Modificar cuenta" />
+    <item
+        android:id="@+id/nav_feed"
+        android:icon="@drawable/ic_menu_help"
+        android:title="Ayuda y comentarios" />
+</menu>
