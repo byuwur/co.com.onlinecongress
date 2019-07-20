@@ -14,7 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Chat"></activity>
+        <activity android:name=".Forget"></activity>
+        <activity android:name=".Register" />
+        <activity android:name=".Login" />
+        <activity android:name=".Chat" />
         <activity
             android:name=".Home"
             android:label="@string/title_activity_home"

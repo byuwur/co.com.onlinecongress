@@ -9,6 +9,20 @@
     tools:context=".Firsttime">
 
     <TextView
+        android:id="@+id/textviewinf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Asiste a múltiples congresos virutales con:"
+        android:textColor="#FFF"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/l1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
         android:id="@+id/textviewapc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

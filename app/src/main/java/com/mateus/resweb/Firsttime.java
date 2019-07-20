@@ -28,7 +28,7 @@ public class Firsttime extends AppCompatActivity {
                 .getBoolean("isFirstRun", true);
 
         if (!isFirstRun) {
-            Intent intentiniciar = new Intent(Firsttime.this, Home.class);
+            Intent intentiniciar = new Intent(Firsttime.this, Login.class);
             startActivity(intentiniciar);
             finish();
         }
@@ -59,7 +59,7 @@ public class Firsttime extends AppCompatActivity {
         //Convertir a falso para no mostrar la bienvenida
         getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                 .putBoolean("isFirstRun", false).apply();
-        Intent intentiniciar = new Intent(Firsttime.this, Home.class);
+        Intent intentiniciar = new Intent(Firsttime.this, Login.class);
         startActivity(intentiniciar);
         finish();
     }
