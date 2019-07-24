@@ -77,8 +77,12 @@ public class Home extends AppCompatActivity
         fabsearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent3 = new Intent(Home.this, Chat.class);
-                startActivity(intent3);
+                getSupportActionBar().setTitle("Buscar");
+                //switch fragment
+                Fragment fragmentbuscar = new SearchFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentbuscar).commit();
+                //hide fab
+                fabsearch.setVisibility(View.GONE);
             }
         });
 
@@ -185,24 +189,24 @@ public class Home extends AppCompatActivity
         FloatingActionButton fabsearch = findViewById(R.id.search);
 
         switch (id) {
-            /*case R.id.nav_reservar:
-                getSupportActionBar().setTitle("1");
-                //Fragment fragmentreservar = new ReservarFragment();getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentreservar).commit();
+            case R.id.nav_ponencia:
+                getSupportActionBar().setTitle("Ponencias");
+                Fragment fragmentreservar = new PonenciaFragment();getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentreservar).commit();
                 //show fab
                 fabsearch.setVisibility(View.VISIBLE);
                 break;
-            case R.id.nav_reservas:
-                getSupportActionBar().setTitle("1");
-                //Fragment fragmentreservas = new ReservasFragment();getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentreservas).commit();
+            case R.id.nav_ponente:
+                getSupportActionBar().setTitle("Ponentes");
+                Fragment fragmentreservas = new PonenteFragment();getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentreservas).commit();
                 //show fab
                 fabsearch.setVisibility(View.VISIBLE);
                 break;
-            case R.id.nav_favorito:
-                getSupportActionBar().setTitle("1");
-                //Fragment fragmentfavoritos = new FavoritosFragment();getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentfavoritos).commit();
+            case R.id.nav_agendado:
+                getSupportActionBar().setTitle("Agendados");
+                Fragment fragmentfavoritos = new AgendadoFragment();getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentfavoritos).commit();
                 //show fab
                 fabsearch.setVisibility(View.VISIBLE);
-                break;*/
+                break;
             case R.id.nav_perfil:
                 getSupportActionBar().setTitle("Mi perfil");
                 fabsearch.setVisibility(View.GONE);
@@ -212,9 +216,13 @@ public class Home extends AppCompatActivity
                 Intent intent1 = new Intent(Home.this, Cuenta.class);
                 startActivity(intent1);
                 break;
-            case R.id.nav_feed:
-                Intent intent2 = new Intent(Home.this, Feed.class);
+            case R.id.nav_chat:
+                Intent intent2 = new Intent(Home.this, Chat.class);
                 startActivity(intent2);
+                break;
+            case R.id.nav_feed:
+                Intent intent3 = new Intent(Home.this, Feed.class);
+                startActivity(intent3);
                 break;
         }
         DrawerLayout drawer = findViewById(R.id.home_drawer_layout);

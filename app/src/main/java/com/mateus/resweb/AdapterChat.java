@@ -37,7 +37,7 @@ public class AdapterChat extends ArrayAdapter<HolderChat> {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(
-                    R.layout.list_chat, parent, false);
+                    R.layout.item_chat, parent, false);
 
             holder = new AdapterChat.ViewHolder();
             holder.name = (TextView) convertView.findViewById(R.id.name);

@@ -5,9 +5,9 @@ public class DefaultValues {
     public String url = "http://www.sistemas-i-computacion-tic.com/reserv/phone/";
     public String urlinicio = url+"inicio/";
     public String urlcanchas = url+"canchas/";
-    public String urlreservar = url+"reservar/";
-    public String urlreservas = url+"reservas/";
-    public String urlfavoritos = url+"favoritos/";
+    public String urlponencia = url+"reservar/";
+    public String urlponente = url+"reservas/";
+    public String urlagendado = url+"favoritos/";
     public String urlcuenta = url+"cuenta/";
     public String urllistar = url+"listar/";
     public String imgcanchasurl = "http://www.sistemas-i-computacion-tic.com/reserv/admin/Imagenes_Canchas/";

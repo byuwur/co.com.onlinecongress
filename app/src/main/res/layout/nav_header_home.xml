@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:textColor="#FFF"
         android:maxLines="1"
-        android:text="@string/nav_header_subtitle"
+        android:text="#2B4C5D"
         android:textSize="12dp" />
 
     <TextView

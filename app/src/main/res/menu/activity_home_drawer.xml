@@ -4,23 +4,27 @@
     tools:showIn="navigation_view"-->
 
     <group android:checkableBehavior="single">
-        <!--item
-            android:id="@+id/nav_reservar"
+        <item
+            android:id="@+id/nav_ponencia"
             android:icon="@drawable/ic_menu_library_add"
-            android:title="Reservar" />
+            android:title="Ponencias" />
         <item
-            android:id="@+id/nav_reservas"
+            android:id="@+id/nav_ponente"
             android:icon="@drawable/ic_menu_beenhere"
-            android:title="Reservas" />
+            android:title="Ponentes" />
         <item
-            android:id="@+id/nav_favorito"
+            android:id="@+id/nav_agendado"
             android:icon="@drawable/ic_menu_star"
-            android:title="Favoritos" /-->
+            android:title="Agendados" />
         <item
             android:id="@+id/nav_perfil"
             android:icon="@drawable/ic_menu_account_box"
             android:title="Perfil" />
     </group>
+    <item
+        android:id="@+id/nav_chat"
+        android:icon="@drawable/ic_menu_star"
+        android:title="Chats" />
     <item
         android:id="@+id/nav_cuenta"
         android:icon="@drawable/ic_menu_settings"
