@@ -23,10 +23,6 @@ import android.widget.TextView;
 
 import java.io.File;
 
-<<<<<<<HEAD:app/src/main/java/com/byuwur/onlinecongress/Home.java
-        =======
-        >>>>>>>d0f5b0107ef84f1963f655bf78f1590c3e4d4d34:app/src/main/java/com/mateus/resweb/Home.java
-
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -188,7 +184,7 @@ public class Home extends AppCompatActivity
 
             deleteCache(ctx);
 
-            Intent intent = new Intent(Home.this, Home.class);
+            Intent intent = new Intent(Home.this, Login.class);
             startActivity(intent);
             finish();
         } else if (id == R.id.action_exit) {
@@ -232,30 +228,15 @@ public class Home extends AppCompatActivity
                 break;
             case R.id.nav_conferencia:
                 getSupportActionBar().setTitle("Conferencias");
-<<<<<<<HEAD:
-            app / src / main / java / com / byuwur / onlinecongress / Home.java
                 Fragment fragmentreservas = new ConferenciaFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentreservas).commit();
-=======
-                Fragment fragmentreservas = new ConferenciaFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentreservas).commit();
->>>>>>>d0f5b0107ef84f1963f655bf78f1590c3e4d4d34:
-            app / src / main / java / com / mateus / resweb / Home.java
                 //show fab
                 fabsearch.setVisibility(View.VISIBLE);
                 break;
             case R.id.nav_agenda:
                 getSupportActionBar().setTitle("Agenda");
-<<<<<<<HEAD:
-            app / src / main / java / com / byuwur / onlinecongress / Home.java
                 Fragment fragmentfavoritos = new AgendadoFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentfavoritos).commit();
-=======
-                Fragment fragmentfavoritos = new AgendadoFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentfavoritos).commit();
->>>>>>>d0f5b0107ef84f1963f655bf78f1590c3e4d4d34:
-            app / src / main / java / com / mateus / resweb / Home.java
-                //show fab
                 fabsearch.setVisibility(View.VISIBLE);
                 break;
             case R.id.nav_perfil:

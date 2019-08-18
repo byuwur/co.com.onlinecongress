@@ -128,54 +128,6 @@ public class Ponencia extends AppCompatActivity {
         loadimg();
         datoscancha();
         veriffavoritos();
-        //
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (iffav) {
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);
-                    dialog.setCancelable(false);
-                    dialog.setMessage("¿Desea quitar esta cancha de su lista de favoritos?");
-                    dialog.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //if user pressed "yes", then he is allowed to exit from application
-                            rmfav();
-                        }
-                    });
-                    dialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //if user select "No", just cancel this dialog and continue with app
-                            dialog.cancel();
-                        }
-                    });
-                    dialog.create();
-                    dialog.show();
-                } else {
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);
-                    dialog.setCancelable(false);
-                    dialog.setMessage("¿Desea añadir esta cancha a su lista de favoritos?");
-                    dialog.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //if user pressed "yes", then he is allowed to exit from application
-                            setfav();
-                        }
-                    });
-                    dialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //if user select "No", just cancel this dialog and continue with app
-                            dialog.cancel();
-                        }
-                    });
-                    dialog.create();
-                    dialog.show();
-                }
-            }
-        });
     }
 
     private void datoscancha() {
@@ -270,7 +222,6 @@ public class Ponencia extends AppCompatActivity {
     private void veriffavoritos() {
         usrid = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getString("id", null);
-        final FloatingActionButton fab = findViewById(R.id.fab);
         // Showing progress dialog at user registration time.
         jsrqverifav = new StringRequest(Request.Method.POST, URLverifav,
                 new Response.Listener<String>() {
@@ -290,11 +241,9 @@ public class Ponencia extends AppCompatActivity {
                                     Boolean fav = res.getBoolean("fav");
                                     if (fav) {
                                         iffav = true;
-                                        fab.setImageResource(R.drawable.ic_fav_star_set);
                                         break;
                                     } else {
                                         iffav = false;
-                                        fab.setImageResource(R.drawable.ic_fav_star_idle);
                                         break;
                                     }
                                 }

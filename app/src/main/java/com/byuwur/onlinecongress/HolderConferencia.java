@@ -1,4 +1,4 @@
-package com.mateus.resweb;
+package com.byuwur.onlinecongress;
 
 public class HolderConferencia {
     private String conferencianombre;

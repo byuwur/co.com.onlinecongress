@@ -39,12 +39,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Conferencia extends AppCompatActivity {
-<<<<<<<HEAD:app/src/main/java/com/byuwur/onlinecongress/Conferencia.java
     private static String usrid, idc, idr;
     private final long DELAY_MS = 500;//delay in milliseconds before task is to be executed
     private final long PERIOD_MS = 5000; // time in milliseconds between successive task executions
-=======
-        >>>>>>>d0f5b0107ef84f1963f655bf78f1590c3e4d4d34:app/src/main/java/com/byuwur/onlinecongress/Conferencia.java
     private DefaultValues dv = new DefaultValues();
     //register file to request
     private String URLdatosreserva = dv.urlcanchas + "datosreserva.php", URLcancelreserva = dv.urlcanchas + "reserva/rmreserv.php";
@@ -80,13 +77,7 @@ public class Conferencia extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(idc);
 
-<<<<<<<HEAD:
-        app / src / main / java / com / byuwur / onlinecongress / Conferencia.java
         ctx = Conferencia.this;
-=======
-        ctx = Conferencia.this;
->>>>>>>d0f5b0107ef84f1963f655bf78f1590c3e4d4d34:
-        app / src / main / java / com / byuwur / onlinecongress / Conferencia.java
         rq = Volley.newRequestQueue(ctx);
 
         usrid = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
@@ -405,18 +396,10 @@ public class Conferencia extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-<<<<<<<HEAD:app/src/main/java/com/byuwur/onlinecongress/Conferencia.java
-
     public void setid(String idc, String idr) {
         Conferencia.idc = idc;
         Conferencia.idr = idr;
-=======
-        public void setid (String idc, String idr){
-            Conferencia.idc = idc;
-            Conferencia.idr = idr;
->>>>>>>d0f5b0107ef84f1963f655bf78f1590c3e4d4d34:
-            app / src / main / java / com / byuwur / onlinecongress / Conferencia.java
-        }
+    }
 
         private void resetdata () {
             idc = null;

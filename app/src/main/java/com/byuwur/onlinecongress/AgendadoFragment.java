@@ -50,11 +50,7 @@ public class AgendadoFragment extends Fragment {
     private static String usrid;
     private DefaultValues dv = new DefaultValues();
     //register file to request
-<<<<<<<HEAD:app/src/main/java/com/byuwur/onlinecongress/AgendadoFragment.java
     private String IMGURL = dv.imgcanchasurl, URLlistaragendado = dv.urlagendado + "listarfavoritos.php";
-=======
-    private String IMGURL = dv.imgcanchasurl, URLlistaragendado = dv.urlagendado + "listarfavoritos.php";
->>>>>>>d0f5b0107ef84f1963f655bf78f1590c3e4d4d34:app/src/main/java/com/mateus/resweb/AgendadoFragment.java
     //set context
     private Context ctx;
     //

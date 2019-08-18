@@ -43,10 +43,6 @@ public class SearchFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
     private DefaultValues dv = new DefaultValues();
     //register file to request
     private String URLdep = dv.urllistar + "departamentos.php", URLciu = dv.urllistar + "ciudades.php";
@@ -61,11 +57,8 @@ public class SearchFragment extends Fragment {
     private ArrayList<String> ciudad = new ArrayList<>(), idciudad = new ArrayList<>();
     private ArrayList<String> op = new ArrayList<>();
     private String buscariddepar = "", buscaridciudad = "";
-<<<<<<<HEAD:app/src/main/java/com/byuwur/onlinecongress/SearchFragment.java
-=======
     private boolean buscarid;
     private EditText barriosearch, textsearch;
->>>>>>>d0f5b0107ef84f1963f655bf78f1590c3e4d4d34:app/src/main/java/com/mateus/resweb/SearchFragment.java
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;

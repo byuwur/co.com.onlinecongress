@@ -73,10 +73,7 @@ public class PonenciaFragment extends Fragment {
     private ArrayList<HolderPonencia> listaPonencia;
     private RecyclerView recyclerPonencia;
     private AdaptadorPonencia adapter;
-<<<<<<<HEAD:app/src/main/java/com/byuwur/onlinecongress/PonenciaFragment.java
     private boolean shouldRefreshOnResume = false;
-=======
-        >>>>>>>d0f5b0107ef84f1963f655bf78f1590c3e4d4d34:app/src/main/java/com/mateus/resweb/PonenciaFragment.java
 
     public PonenciaFragment() {
         // Required empty public constructor
@@ -173,13 +170,7 @@ public class PonenciaFragment extends Fragment {
         listaPonencia = new ArrayList<>();
         recyclerPonencia = viewsi.findViewById(R.id.recyclerPonencia);
         recyclerPonencia.setLayoutManager(new LinearLayoutManager(getContext()));
-<<<<<<<HEAD:
-        app / src / main / java / com / byuwur / onlinecongress / PonenciaFragment.java
         adapter = new AdaptadorPonencia(listaPonencia);
-=======
-        adapter = new AdaptadorPonencia(listaPonencia);
->>>>>>>d0f5b0107ef84f1963f655bf78f1590c3e4d4d34:
-        app / src / main / java / com / mateus / resweb / PonenciaFragment.java
         recyclerPonencia.setAdapter(adapter);
         //when it click an specific frame, let's see if we can display its id
         adapter.setonItemClickListener(new AdaptadorPonencia.onItemClickListener() {
@@ -355,8 +346,6 @@ public class PonenciaFragment extends Fragment {
                                         });
                                         dialogoerror.show();
                                     }
-<<<<<<<HEAD:
-                                    app / src / main / java / com / byuwur / onlinecongress / PonenciaFragment.java
                                 } else {
                                     listaPonencia.add(new HolderPonencia(
                                             "" + res.getString("NOMBRECANCHA"), res.getString("IDCANCHAS"),
@@ -364,16 +353,6 @@ public class PonenciaFragment extends Fragment {
                                             "" + res.getString("NOMBRECIUDAD"), "" + res.getString("DIASDISPONIBLE"),
                                             "De " + res.getString("HORAABRIR") + " a " + res.getString("HORACERRAR"),
                                             IMGURL + res.getString("IDCANCHAS") + "/1.jpg"));
-=======
-                                } else{
-                                    listaPonencia.add(new HolderPonencia(
-                                            "" + res.getString("NOMBRECANCHA"), res.getString("IDCANCHAS"),
-                                            "$COP " + res.getString("TARIFA") + "/hora", "" + res.getString("UBICACION"),
-                                            "" + res.getString("NOMBRECIUDAD"), "" + res.getString("DIASDISPONIBLE"),
-                                            "De " + res.getString("HORAABRIR") + " a " + res.getString("HORACERRAR"),
-                                            IMGURL + res.getString("IDCANCHAS") + "/1.jpg"));
->>>>>>>d0f5b0107ef84f1963f655bf78f1590c3e4d4d34:
-                                    app / src / main / java / com / mateus / resweb / PonenciaFragment.java
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -453,8 +432,6 @@ public class PonenciaFragment extends Fragment {
                                         });
                                         dialogoerror.show();
                                     }
-<<<<<<<HEAD:
-                                    app / src / main / java / com / byuwur / onlinecongress / PonenciaFragment.java
                                 } else {
                                     listaPonencia.add(new HolderPonencia(
                                             "" + res.getString("NOMBRECANCHA"), res.getString("IDCANCHAS"),
@@ -462,16 +439,6 @@ public class PonenciaFragment extends Fragment {
                                             "" + res.getString("NOMBRECIUDAD"), "" + res.getString("DIASDISPONIBLE"),
                                             "De " + res.getString("HORAABRIR") + " a " + res.getString("HORACERRAR"),
                                             IMGURL + res.getString("IDCANCHAS") + "/1.jpg"));
-=======
-                                } else{
-                                    listaPonencia.add(new HolderPonencia(
-                                            "" + res.getString("NOMBRECANCHA"), res.getString("IDCANCHAS"),
-                                            "$COP " + res.getString("TARIFA") + "/hora", "" + res.getString("UBICACION"),
-                                            "" + res.getString("NOMBRECIUDAD"), "" + res.getString("DIASDISPONIBLE"),
-                                            "De " + res.getString("HORAABRIR") + " a " + res.getString("HORACERRAR"),
-                                            IMGURL + res.getString("IDCANCHAS") + "/1.jpg"));
->>>>>>>d0f5b0107ef84f1963f655bf78f1590c3e4d4d34:
-                                    app / src / main / java / com / mateus / resweb / PonenciaFragment.java
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -551,8 +518,6 @@ public class PonenciaFragment extends Fragment {
                                         });
                                         dialogoerror.show();
                                     }
-<<<<<<<HEAD:
-                                    app / src / main / java / com / byuwur / onlinecongress / PonenciaFragment.java
                                 } else {
                                     listaPonencia.add(new HolderPonencia(
                                             "" + res.getString("NOMBRECANCHA"), res.getString("IDCANCHAS"),
@@ -560,16 +525,6 @@ public class PonenciaFragment extends Fragment {
                                             "" + res.getString("NOMBRECIUDAD"), "" + res.getString("DIASDISPONIBLE"),
                                             "De " + res.getString("HORAABRIR") + " a " + res.getString("HORACERRAR"),
                                             IMGURL + res.getString("IDCANCHAS") + "/1.jpg"));
-=======
-                                } else{
-                                    listaPonencia.add(new HolderPonencia(
-                                            "" + res.getString("NOMBRECANCHA"), res.getString("IDCANCHAS"),
-                                            "$COP " + res.getString("TARIFA") + "/hora", "" + res.getString("UBICACION"),
-                                            "" + res.getString("NOMBRECIUDAD"), "" + res.getString("DIASDISPONIBLE"),
-                                            "De " + res.getString("HORAABRIR") + " a " + res.getString("HORACERRAR"),
-                                            IMGURL + res.getString("IDCANCHAS") + "/1.jpg"));
->>>>>>>d0f5b0107ef84f1963f655bf78f1590c3e4d4d34:
-                                    app / src / main / java / com / mateus / resweb / PonenciaFragment.java
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();

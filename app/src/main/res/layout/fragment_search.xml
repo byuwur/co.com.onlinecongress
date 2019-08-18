@@ -55,26 +55,10 @@
             android:background="@color/colorPrimaryDark"
             android:text="Buscar"
             android:textColor="#FFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textsearch" />
 
-        <
-
-        <
-
-        <
-
-        <
-
-        <
-
-        <
-
-        < HEAD
-        =======
-        android:background="@color/colorPrimaryDark"
-        >>>>>>> d0f5b0107ef84f1963f655bf78f1590c3e4d4d34
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textsearch" />
     </android.support.constraint.ConstraintLayout>
 
 </FrameLayout>
