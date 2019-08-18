@@ -1,4 +1,4 @@
-package com.mateus.resweb;
+package com.byuwur.onlinecongress;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -48,11 +48,14 @@ import static android.content.Context.MODE_PRIVATE;
  * to handle interaction events.
  */
 public class PonenciaFragment extends Fragment {
+    //PUBLIC STATIC PARAMS OF SEARCH
+    private static boolean ifsearch, ifid;
+    private static String snombre, sbarrio, sciu, usrid, usrciudad;
     private DefaultValues dv = new DefaultValues();
     //register file to request
-    private String IMGURL = dv.imgcanchasurl, URLid= dv.urlponencia+"buscarid.php", URLactciudad=dv.urlponencia+"anadirciudad.php",
-            URLlistarstring= dv.urlponencia+"buscarnombre.php", URLlistarciudad= dv.urlponencia+"listarciudad.php",
-            URLdep= dv.urllistar+"departamentos.php", URLciu= dv.urllistar+"ciudades.php";
+    private String IMGURL = dv.imgcanchasurl, URLid = dv.urlponencia + "buscarid.php", URLactciudad = dv.urlponencia + "anadirciudad.php",
+            URLlistarstring = dv.urlponencia + "buscarnombre.php", URLlistarciudad = dv.urlponencia + "listarciudad.php",
+            URLdep = dv.urllistar + "departamentos.php", URLciu = dv.urllistar + "ciudades.php";
     //set context
     private Context ctx;
     //
@@ -64,17 +67,16 @@ public class PonenciaFragment extends Fragment {
     //list of each array
     private ArrayList<String> dep = new ArrayList<>(), iddep = new ArrayList<>();
     private ArrayList<String> ciudad = new ArrayList<>(), idciudad = new ArrayList<>();
-    private String buscariddepar="", buscaridciudad="";
-    //PUBLIC STATIC PARAMS OF SEARCH
-    private static boolean ifsearch, ifid;
-    private static String snombre, sbarrio, sciu, usrid, usrciudad;
-
-
+    private String buscariddepar = "", buscaridciudad = "";
     private OnFragmentInteractionListener mListener;
 
     private ArrayList<HolderPonencia> listaPonencia;
     private RecyclerView recyclerPonencia;
     private AdaptadorPonencia adapter;
+<<<<<<<HEAD:app/src/main/java/com/byuwur/onlinecongress/PonenciaFragment.java
+    private boolean shouldRefreshOnResume = false;
+=======
+        >>>>>>>d0f5b0107ef84f1963f655bf78f1590c3e4d4d34:app/src/main/java/com/mateus/resweb/PonenciaFragment.java
 
     public PonenciaFragment() {
         // Required empty public constructor
@@ -84,8 +86,8 @@ public class PonenciaFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View viewsi= inflater.inflate(R.layout.fragment_ponencia, container, false);
-        View viewno= inflater.inflate(R.layout.fragment_noponencia, container, false);
+        View viewsi = inflater.inflate(R.layout.fragment_ponencia, container, false);
+        View viewno = inflater.inflate(R.layout.fragment_noponencia, container, false);
         //
         ctx = getActivity();
         assert ctx != null;
@@ -110,60 +112,74 @@ public class PonenciaFragment extends Fragment {
         final Spinner spinnerdep = viewno.findViewById(R.id.spinnerdepartamento);
         final Spinner spinnerciu = viewno.findViewById(R.id.spinnerciudad);
         //set the spinner value from Arraylist
-        ArrayAdapter<String> adapterdep = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item,dep);
+        ArrayAdapter<String> adapterdep = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item, dep);
         adapterdep.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerdep.setAdapter(adapterdep);
         spinnerdep.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
-                spinnerciu.setEnabled(true);spinnerciu.setClickable(true);
+                spinnerciu.setEnabled(true);
+                spinnerciu.setClickable(true);
                 //Toast.makeText(ctx,adapterView.getItemAtPosition(pos)+". "+iddep.get(pos), Toast.LENGTH_SHORT).show();
-                buscariddepar=iddep.get(pos);
+                buscariddepar = iddep.get(pos);
                 //RESET CIUDAD ARRAYLIST
-                ciudad.clear();idciudad.clear();
-                ciudad.add("[--- Ciudades ---]");idciudad.add("0");
+                ciudad.clear();
+                idciudad.clear();
+                ciudad.add("[--- Ciudades ---]");
+                idciudad.add("0");
                 spinnerciu.setSelection(0);
                 //fill ciudad arraylist
                 llenarciudad();
-                if(pos==0){
-                    spinnerciu.setEnabled(false);spinnerciu.setClickable(false);
-                    buscaridciudad="";
+                if (pos == 0) {
+                    spinnerciu.setEnabled(false);
+                    spinnerciu.setClickable(false);
+                    buscaridciudad = "";
                 }
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> parent){}
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
         //set the spinner value from Arraylist
-        ArrayAdapter<String> adapterciu = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item,ciudad);
+        ArrayAdapter<String> adapterciu = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item, ciudad);
         adapterciu.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerciu.setAdapter(adapterciu);
         spinnerciu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
                 //Toast.makeText(ctx, adapterView.getItemAtPosition(pos)+". "+idciudad.get(pos), Toast.LENGTH_SHORT).show();
-                buscaridciudad=idciudad.get(pos);
-                if(pos==0){
-                    buscaridciudad="";
+                buscaridciudad = idciudad.get(pos);
+                if (pos == 0) {
+                    buscaridciudad = "";
                 }
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> parent){}
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
-            //search button script
-            Button buttonactualizar = viewno.findViewById(R.id.buttonactualizarciudad);
-            buttonactualizar.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View view){
-                    //Toast.makeText(ctx,buscaridciudad,Toast.LENGTH_SHORT).show();
-                    actualizarciudad(usrid, buscaridciudad);
-                }
-            });
+        //search button script
+        Button buttonactualizar = viewno.findViewById(R.id.buttonactualizarciudad);
+        buttonactualizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(ctx,buscaridciudad,Toast.LENGTH_SHORT).show();
+                actualizarciudad(usrid, buscaridciudad);
+            }
+        });
 
         //VIEWSI ELEMENTS
-        listaPonencia=new ArrayList<>();
-        recyclerPonencia=viewsi.findViewById(R.id.recyclerPonencia);
+        listaPonencia = new ArrayList<>();
+        recyclerPonencia = viewsi.findViewById(R.id.recyclerPonencia);
         recyclerPonencia.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter=new AdaptadorPonencia(listaPonencia);
+<<<<<<<HEAD:
+        app / src / main / java / com / byuwur / onlinecongress / PonenciaFragment.java
+        adapter = new AdaptadorPonencia(listaPonencia);
+=======
+        adapter = new AdaptadorPonencia(listaPonencia);
+>>>>>>>d0f5b0107ef84f1963f655bf78f1590c3e4d4d34:
+        app / src / main / java / com / mateus / resweb / PonenciaFragment.java
         recyclerPonencia.setAdapter(adapter);
         //when it click an specific frame, let's see if we can display its id
         adapter.setonItemClickListener(new AdaptadorPonencia.onItemClickListener() {
@@ -182,18 +198,17 @@ public class PonenciaFragment extends Fragment {
         });
         //AND VERIFY IF THERE'S ANYTHING,
         //if it isn't display an specific layout design
-        if ( (usrciudad.equalsIgnoreCase("null") || usrciudad.equalsIgnoreCase("")
-        || usrciudad==null ) && !ifsearch ){
+        if ((usrciudad.equalsIgnoreCase("null") || usrciudad.equalsIgnoreCase("")
+                || usrciudad == null) && !ifsearch) {
             return viewno;
-        }
-        else{
+        } else {
             LlenarListaPonencia(ifsearch, ifid, snombre, sbarrio, sciu);
             resetsearchvalues();
             return viewsi;
         }
     }
 
-    private void actualizarciudad(final String id, final String ciudad){
+    private void actualizarciudad(final String id, final String ciudad) {
         // Showing progress dialog at user registration time.
         final ProgressDialog progreso1 = new ProgressDialog(ctx);
         progreso1.setMessage("Por favor, espere...");
@@ -206,7 +221,7 @@ public class PonenciaFragment extends Fragment {
                         //Log.d("Response", response.toString());
                         JSONArray resp = null;
                         try {
-                            resp = new JSONArray( response );
+                            resp = new JSONArray(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -230,7 +245,7 @@ public class PonenciaFragment extends Fragment {
                                         }
                                     });
                                     dialogo.show();
-                                } else if (success){
+                                } else if (success) {
                                     AlertDialog.Builder dialogo = new AlertDialog.Builder(ctx);
                                     dialogo.setTitle("ACTUALIZAR");
                                     dialogo.setMessage("\n" + res.getString("mensaje"));
@@ -284,21 +299,20 @@ public class PonenciaFragment extends Fragment {
     }
 
     private void LlenarListaPonencia(boolean search, boolean id, String nombre, String barrio, String ciu) {
-        Log.d("Data enviada",""+search+", "+id+", "+nombre+", "+barrio+", "+ciu);
+        Log.d("Data enviada", "" + search + ", " + id + ", " + nombre + ", " + barrio + ", " + ciu);
         //let's see the params to list
-        if(search){
-            if (id){
+        if (search) {
+            if (id) {
                 buscarlistarid(nombre);
-            }
-            else {
+            } else {
                 buscarlistarnombre(nombre, barrio, ciu);
             }
-        } else{
+        } else {
             listarciudad();
         }
     }
 
-    private void listarciudad(){
+    private void listarciudad() {
         // Showing progress dialog at user registration time.
         final ProgressDialog progreso = new ProgressDialog(ctx);
         progreso.setMessage("Por favor, espere...");
@@ -314,7 +328,7 @@ public class PonenciaFragment extends Fragment {
                         //Log.d("Response", response.toString());
                         JSONArray resp = null;
                         try {
-                            resp = new JSONArray( response );
+                            resp = new JSONArray(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -325,7 +339,7 @@ public class PonenciaFragment extends Fragment {
                                 JSONObject res = resp.getJSONObject(i);
                                 recyclerPonencia.setAdapter(adapter);
 
-                                if(res.has("error")) {
+                                if (res.has("error")) {
                                     Boolean error = res.getBoolean("error");
                                     if (error) {
                                         AlertDialog.Builder dialogoerror = new AlertDialog.Builder(ctx);
@@ -341,13 +355,25 @@ public class PonenciaFragment extends Fragment {
                                         });
                                         dialogoerror.show();
                                     }
+<<<<<<<HEAD:
+                                    app / src / main / java / com / byuwur / onlinecongress / PonenciaFragment.java
+                                } else {
+                                    listaPonencia.add(new HolderPonencia(
+                                            "" + res.getString("NOMBRECANCHA"), res.getString("IDCANCHAS"),
+                                            "$COP " + res.getString("TARIFA") + "/hora", "" + res.getString("UBICACION"),
+                                            "" + res.getString("NOMBRECIUDAD"), "" + res.getString("DIASDISPONIBLE"),
+                                            "De " + res.getString("HORAABRIR") + " a " + res.getString("HORACERRAR"),
+                                            IMGURL + res.getString("IDCANCHAS") + "/1.jpg"));
+=======
                                 } else{
                                     listaPonencia.add(new HolderPonencia(
-                                            ""+res.getString("NOMBRECANCHA"),res.getString("IDCANCHAS"),
-                                            "$COP "+res.getString("TARIFA")+"/hora",""+res.getString("UBICACION"),
-                                            ""+res.getString("NOMBRECIUDAD"),""+res.getString("DIASDISPONIBLE"),
-                                            "De "+res.getString("HORAABRIR")+" a "+res.getString("HORACERRAR"),
-                                            IMGURL+ res.getString("IDCANCHAS") +"/1.jpg"));
+                                            "" + res.getString("NOMBRECANCHA"), res.getString("IDCANCHAS"),
+                                            "$COP " + res.getString("TARIFA") + "/hora", "" + res.getString("UBICACION"),
+                                            "" + res.getString("NOMBRECIUDAD"), "" + res.getString("DIASDISPONIBLE"),
+                                            "De " + res.getString("HORAABRIR") + " a " + res.getString("HORACERRAR"),
+                                            IMGURL + res.getString("IDCANCHAS") + "/1.jpg"));
+>>>>>>>d0f5b0107ef84f1963f655bf78f1590c3e4d4d34:
+                                    app / src / main / java / com / mateus / resweb / PonenciaFragment.java
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -386,7 +412,7 @@ public class PonenciaFragment extends Fragment {
         rq.add(jsrqciudad);
     }
 
-    private void buscarlistarid(final String id){
+    private void buscarlistarid(final String id) {
         // Showing progress dialog at user registration time.
         final ProgressDialog progreso = new ProgressDialog(ctx);
         progreso.setMessage("Por favor, espere...");
@@ -400,7 +426,7 @@ public class PonenciaFragment extends Fragment {
                         //Log.d("Response", response.toString());
                         JSONArray resp = null;
                         try {
-                            resp = new JSONArray( response );
+                            resp = new JSONArray(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -411,7 +437,7 @@ public class PonenciaFragment extends Fragment {
                                 JSONObject res = resp.getJSONObject(i);
                                 recyclerPonencia.setAdapter(adapter);
 
-                                if(res.has("error")) {
+                                if (res.has("error")) {
                                     Boolean error = res.getBoolean("error");
                                     if (error) {
                                         AlertDialog.Builder dialogoerror = new AlertDialog.Builder(ctx);
@@ -427,13 +453,25 @@ public class PonenciaFragment extends Fragment {
                                         });
                                         dialogoerror.show();
                                     }
+<<<<<<<HEAD:
+                                    app / src / main / java / com / byuwur / onlinecongress / PonenciaFragment.java
+                                } else {
+                                    listaPonencia.add(new HolderPonencia(
+                                            "" + res.getString("NOMBRECANCHA"), res.getString("IDCANCHAS"),
+                                            "$COP " + res.getString("TARIFA") + "/hora", "" + res.getString("UBICACION"),
+                                            "" + res.getString("NOMBRECIUDAD"), "" + res.getString("DIASDISPONIBLE"),
+                                            "De " + res.getString("HORAABRIR") + " a " + res.getString("HORACERRAR"),
+                                            IMGURL + res.getString("IDCANCHAS") + "/1.jpg"));
+=======
                                 } else{
                                     listaPonencia.add(new HolderPonencia(
-                                            ""+res.getString("NOMBRECANCHA"),res.getString("IDCANCHAS"),
-                                            "$COP "+res.getString("TARIFA")+"/hora",""+res.getString("UBICACION"),
-                                            ""+res.getString("NOMBRECIUDAD"),""+res.getString("DIASDISPONIBLE"),
-                                            "De "+res.getString("HORAABRIR")+" a "+res.getString("HORACERRAR"),
-                                            IMGURL+ res.getString("IDCANCHAS") +"/1.jpg"));
+                                            "" + res.getString("NOMBRECANCHA"), res.getString("IDCANCHAS"),
+                                            "$COP " + res.getString("TARIFA") + "/hora", "" + res.getString("UBICACION"),
+                                            "" + res.getString("NOMBRECIUDAD"), "" + res.getString("DIASDISPONIBLE"),
+                                            "De " + res.getString("HORAABRIR") + " a " + res.getString("HORACERRAR"),
+                                            IMGURL + res.getString("IDCANCHAS") + "/1.jpg"));
+>>>>>>>d0f5b0107ef84f1963f655bf78f1590c3e4d4d34:
+                                    app / src / main / java / com / mateus / resweb / PonenciaFragment.java
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -472,7 +510,7 @@ public class PonenciaFragment extends Fragment {
         rq.add(jsrqid);
     }
 
-    private void buscarlistarnombre(final String nombre, final String barrio, final String ciu){
+    private void buscarlistarnombre(final String nombre, final String barrio, final String ciu) {
         // Showing progress dialog at user registration time.
         final ProgressDialog progreso = new ProgressDialog(ctx);
         progreso.setMessage("Por favor, espere...");
@@ -486,7 +524,7 @@ public class PonenciaFragment extends Fragment {
                         //Log.d("Response", response.toString());
                         JSONArray resp = null;
                         try {
-                            resp = new JSONArray( response );
+                            resp = new JSONArray(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -497,7 +535,7 @@ public class PonenciaFragment extends Fragment {
                                 JSONObject res = resp.getJSONObject(i);
                                 recyclerPonencia.setAdapter(adapter);
 
-                                if(res.has("error")) {
+                                if (res.has("error")) {
                                     Boolean error = res.getBoolean("error");
                                     if (error) {
                                         AlertDialog.Builder dialogoerror = new AlertDialog.Builder(ctx);
@@ -513,13 +551,25 @@ public class PonenciaFragment extends Fragment {
                                         });
                                         dialogoerror.show();
                                     }
+<<<<<<<HEAD:
+                                    app / src / main / java / com / byuwur / onlinecongress / PonenciaFragment.java
+                                } else {
+                                    listaPonencia.add(new HolderPonencia(
+                                            "" + res.getString("NOMBRECANCHA"), res.getString("IDCANCHAS"),
+                                            "$COP " + res.getString("TARIFA") + "/hora", "" + res.getString("UBICACION"),
+                                            "" + res.getString("NOMBRECIUDAD"), "" + res.getString("DIASDISPONIBLE"),
+                                            "De " + res.getString("HORAABRIR") + " a " + res.getString("HORACERRAR"),
+                                            IMGURL + res.getString("IDCANCHAS") + "/1.jpg"));
+=======
                                 } else{
                                     listaPonencia.add(new HolderPonencia(
-                                            ""+res.getString("NOMBRECANCHA"),res.getString("IDCANCHAS"),
-                                            "$COP "+res.getString("TARIFA")+"/hora",""+res.getString("UBICACION"),
-                                            ""+res.getString("NOMBRECIUDAD"),""+res.getString("DIASDISPONIBLE"),
-                                            "De "+res.getString("HORAABRIR")+" a "+res.getString("HORACERRAR"),
-                                            IMGURL+ res.getString("IDCANCHAS") +"/1.jpg"));
+                                            "" + res.getString("NOMBRECANCHA"), res.getString("IDCANCHAS"),
+                                            "$COP " + res.getString("TARIFA") + "/hora", "" + res.getString("UBICACION"),
+                                            "" + res.getString("NOMBRECIUDAD"), "" + res.getString("DIASDISPONIBLE"),
+                                            "De " + res.getString("HORAABRIR") + " a " + res.getString("HORACERRAR"),
+                                            IMGURL + res.getString("IDCANCHAS") + "/1.jpg"));
+>>>>>>>d0f5b0107ef84f1963f655bf78f1590c3e4d4d34:
+                                    app / src / main / java / com / mateus / resweb / PonenciaFragment.java
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -560,21 +610,23 @@ public class PonenciaFragment extends Fragment {
         rq.add(jsrqnombre);
     }
 
-    public void setsearchvalues(boolean search, boolean id, String nombre, String barrio, String ciu){
-        ifsearch=search;
-        ifid=id;
-        snombre=nombre;
-        sbarrio=barrio;
-        sciu=ciu;
+    public void setsearchvalues(boolean search, boolean id, String nombre, String barrio, String ciu) {
+        ifsearch = search;
+        ifid = id;
+        snombre = nombre;
+        sbarrio = barrio;
+        sciu = ciu;
     }
-    private void resetsearchvalues(){
-        ifsearch=false;
-        ifid=false;
-        snombre=null;
-        sbarrio=null;
-        sciu=null;
+
+    private void resetsearchvalues() {
+        ifsearch = false;
+        ifid = false;
+        snombre = null;
+        sbarrio = null;
+        sciu = null;
     }
-    private void onclickbuscar(){
+
+    private void onclickbuscar() {
         //title toolbar
         Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle("Buscar");
@@ -586,18 +638,19 @@ public class PonenciaFragment extends Fragment {
         FloatingActionButton fabsearch = getActivity().findViewById(R.id.search);
         fabsearch.setVisibility(View.GONE);
     }
-    private void onclickself(){
+
+    private void onclickself() {
         Fragment fragmentponencia = new PonenciaFragment();
         assert getFragmentManager() != null;
         getFragmentManager().beginTransaction().replace(R.id.home, fragmentponencia).commit();
     }
 
-    private void llenardepartamentos(){
+    private void llenardepartamentos() {
         jsrqdep = new JsonArrayRequest(Request.Method.GET, URLdep,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        for(int i=0; i < response.length(); i++) {
+                        for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject res = response.getJSONObject(i);
                                 //Log.d("Response: ", "ID:"+res.getString("IDDEPARTAMENTOS")+". Nombre: "+res.getString("NOMBREDEPARTAMENTO"));
@@ -617,12 +670,12 @@ public class PonenciaFragment extends Fragment {
         rq.add(jsrqdep);
     }
 
-    private void llenarciudad(){
-        jsrqciu = new JsonArrayRequest(Request.Method.GET, URLciu+"?dep="+buscariddepar,
+    private void llenarciudad() {
+        jsrqciu = new JsonArrayRequest(Request.Method.GET, URLciu + "?dep=" + buscariddepar,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        for(int i=0; i < response.length(); i++) {
+                        for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject res = response.getJSONObject(i);
                                 //Log.d("Response: ", "ID:"+res.getString("IDCIUDADES")+". Nombre: "+res.getString("NOMBRECIUDAD"));
@@ -642,16 +695,16 @@ public class PonenciaFragment extends Fragment {
         rq.add(jsrqciu);
     }
 
-    private boolean shouldRefreshOnResume = false;
     @Override
     public void onResume() {
         super.onResume();
         // Check should we need to refresh the fragment
-        if(shouldRefreshOnResume){
+        if (shouldRefreshOnResume) {
             onclickself();
-            shouldRefreshOnResume=false;
+            shouldRefreshOnResume = false;
         }
     }
+
     @Override
     public void onStop() {
         super.onStop();
@@ -664,6 +717,7 @@ public class PonenciaFragment extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
+
     /*
     @Override
     public void onAttach(Context context) {
@@ -682,6 +736,7 @@ public class PonenciaFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated

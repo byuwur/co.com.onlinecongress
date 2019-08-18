@@ -1,4 +1,4 @@
-package com.mateus.resweb;
+package com.byuwur.onlinecongress;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -11,6 +11,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
@@ -18,7 +19,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -58,13 +58,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Cuenta extends AppCompatActivity {
+    //ACTUALIZAR FOTO DE PERFIL
+    private static final String TAG = Cuenta.class.getSimpleName();
+    private final static int FCR = 1;
     DefaultValues dv = new DefaultValues();
     //login file to request
-    private String URLnombreciudad= dv.urlcuenta+"nombreciudad.php",
-            URLactciudad=dv.urlcuenta+"ciudad.php", URLactnombre=dv.urlcuenta+"nombre.php",
-            URLactcorreo=dv.urlcuenta+"correo.php", URLactphone=dv.urlcuenta+"phone.php",
-            URLactpass=dv.urlcuenta+"pass.php", URLactfoto=dv.urlcuenta+"fotoperfil/fotos.php",
-            URLdep= dv.urllistar+"departamentos.php", URLciu= dv.urllistar+"ciudades.php";
+    private String URLnombreciudad = dv.urlcuenta + "nombreciudad.php",
+            URLactciudad = dv.urlcuenta + "ciudad.php", URLactnombre = dv.urlcuenta + "nombre.php",
+            URLactcorreo = dv.urlcuenta + "correo.php", URLactphone = dv.urlcuenta + "phone.php",
+            URLactpass = dv.urlcuenta + "pass.php", URLactfoto = dv.urlcuenta + "fotoperfil/fotos.php",
+            URLdep = dv.urllistar + "departamentos.php", URLciu = dv.urllistar + "ciudades.php";
     //
     private RequestQueue rq;
     //set context
@@ -75,43 +78,40 @@ public class Cuenta extends AppCompatActivity {
     //list of each array
     private ArrayList<String> dep = new ArrayList<>(), iddep = new ArrayList<>();
     private ArrayList<String> ciudad = new ArrayList<>(), idciudad = new ArrayList<>();
-    private String buscariddepar="", buscaridciudad="";
-
+    private String buscariddepar = "", buscaridciudad = "";
     private TextView textnombre, textcorreo, textphone, textciudad;
     private Button editarnombre, editarcorreo, editarphone, editarpass, editarciudad, editarfoto;
     private String usrnombre, usrcorreo, usrphone, usrciudad, usrid;
-    //ACTUALIZAR FOTO DE PERFIL
-    private static final String TAG = Cuenta.class.getSimpleName();
     private String mCM;
     private ValueCallback mUM;
     private ValueCallback<Uri[]> mUMA;
-    private final static int FCR=1;
     private WebView webviewfoto;
     //select whether you want to upload multiple files
     private boolean multiple_files = false;
+    private boolean shouldRefreshOnResume = false;
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent){
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
-        if(Build.VERSION.SDK_INT >= 21){
+        if (Build.VERSION.SDK_INT >= 21) {
             Uri[] results = null;
             //Check if response is positive
-            if(resultCode== Activity.RESULT_OK){
-                if(requestCode == FCR){
-                    if(null == mUMA){
+            if (resultCode == Activity.RESULT_OK) {
+                if (requestCode == FCR) {
+                    if (null == mUMA) {
                         return;
                     }
-                    if(intent == null || intent.getData() == null){
+                    if (intent == null || intent.getData() == null) {
                         //Capture Photo if no image available
-                        if(mCM != null){
+                        if (mCM != null) {
                             results = new Uri[]{Uri.parse(mCM)};
                         }
-                    }else{
+                    } else {
                         String dataString = intent.getDataString();
-                        if(dataString != null){
+                        if (dataString != null) {
                             results = new Uri[]{Uri.parse(dataString)};
                         } else {
-                            if(multiple_files) {
+                            if (multiple_files) {
                                 if (intent.getClipData() != null) {
                                     final int numSelectedFiles = intent.getClipData().getItemCount();
                                     results = new Uri[numSelectedFiles];
@@ -126,9 +126,9 @@ public class Cuenta extends AppCompatActivity {
             }
             mUMA.onReceiveValue(results);
             mUMA = null;
-        }else{
-            if(requestCode == FCR){
-                if(null == mUM) return;
+        } else {
+            if (requestCode == FCR) {
+                if (null == mUM) return;
                 Uri result = intent == null || resultCode != RESULT_OK ? null : intent.getData();
                 mUM.onReceiveValue(result);
                 mUM = null;
@@ -167,44 +167,44 @@ public class Cuenta extends AppCompatActivity {
         editarciudad = findViewById(R.id.editarciudad);
         editarfoto = findViewById(R.id.editarfoto);
 
-        editarnombre.setOnClickListener(new View.OnClickListener(){
+        editarnombre.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 vieweditarnombre();
             }
         });
 
-        editarcorreo.setOnClickListener(new View.OnClickListener(){
+        editarcorreo.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 vieweditarcorreo();
             }
         });
 
-        editarphone.setOnClickListener(new View.OnClickListener(){
+        editarphone.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 vieweditarphone();
             }
         });
 
-        editarpass.setOnClickListener(new View.OnClickListener(){
+        editarpass.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 vieweditarpass();
             }
         });
 
-        editarciudad.setOnClickListener(new View.OnClickListener(){
+        editarciudad.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 vieweditarciudad();
             }
         });
 
-        editarfoto.setOnClickListener(new View.OnClickListener(){
+        editarfoto.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 vieweditarfoto();
             }
         });
@@ -220,7 +220,7 @@ public class Cuenta extends AppCompatActivity {
         */
     }
 
-    private void vieweditarnombre(){
+    private void vieweditarnombre() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);
         @SuppressLint("InflateParams") View layout = LayoutInflater.from(ctx).inflate(R.layout.dialog_cambiarname, null);
         dialog.setView(layout);
@@ -246,7 +246,7 @@ public class Cuenta extends AppCompatActivity {
         dialog.show();
     }
 
-    private void actualizarnombre(final String id, final String nombre){
+    private void actualizarnombre(final String id, final String nombre) {
         // Showing progress dialog at user registration time.
         final ProgressDialog progreso = new ProgressDialog(ctx);
         progreso.setMessage("Por favor, espere...");
@@ -259,7 +259,7 @@ public class Cuenta extends AppCompatActivity {
                         //Log.d("Response", response.toString());
                         JSONArray resp = null;
                         try {
-                            resp = new JSONArray( response );
+                            resp = new JSONArray(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -285,7 +285,7 @@ public class Cuenta extends AppCompatActivity {
                                     });
                                     dialogo.show();
                                 }
-                                if (success){
+                                if (success) {
                                     getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                                             .putString("nombre", nombre).apply();
 
@@ -342,7 +342,7 @@ public class Cuenta extends AppCompatActivity {
         rq.add(jsrqactualizar);
     }
 
-    private void vieweditarcorreo(){
+    private void vieweditarcorreo() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);
         @SuppressLint("InflateParams") View layout = LayoutInflater.from(ctx).inflate(R.layout.dialog_cambiaremail, null);
         dialog.setView(layout);
@@ -368,7 +368,7 @@ public class Cuenta extends AppCompatActivity {
         dialog.show();
     }
 
-    private void actualizarcorreo(final String id, final String correo){
+    private void actualizarcorreo(final String id, final String correo) {
         // Showing progress dialog at user registration time.
         final ProgressDialog progreso = new ProgressDialog(ctx);
         progreso.setMessage("Por favor, espere...");
@@ -381,7 +381,7 @@ public class Cuenta extends AppCompatActivity {
                         //Log.d("Response", response.toString());
                         JSONArray resp = null;
                         try {
-                            resp = new JSONArray( response );
+                            resp = new JSONArray(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -407,7 +407,7 @@ public class Cuenta extends AppCompatActivity {
                                     });
                                     dialogo.show();
                                 }
-                                if (success){
+                                if (success) {
                                     getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                                             .putString("email", correo).apply();
 
@@ -462,7 +462,7 @@ public class Cuenta extends AppCompatActivity {
         rq.add(jsrqactualizar);
     }
 
-    private void vieweditarphone(){
+    private void vieweditarphone() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);
         @SuppressLint("InflateParams") View layout = LayoutInflater.from(ctx).inflate(R.layout.dialog_cambiarphone, null);
         dialog.setView(layout);
@@ -488,7 +488,7 @@ public class Cuenta extends AppCompatActivity {
         dialog.show();
     }
 
-    private void actualizarphone(final String id, final String phone){
+    private void actualizarphone(final String id, final String phone) {
         // Showing progress dialog at user registration time.
         final ProgressDialog progreso = new ProgressDialog(ctx);
         progreso.setMessage("Por favor, espere...");
@@ -501,7 +501,7 @@ public class Cuenta extends AppCompatActivity {
                         //Log.d("Response", response.toString());
                         JSONArray resp = null;
                         try {
-                            resp = new JSONArray( response );
+                            resp = new JSONArray(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -527,7 +527,7 @@ public class Cuenta extends AppCompatActivity {
                                     });
                                     dialogo.show();
                                 }
-                                if (success){
+                                if (success) {
                                     getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                                             .putString("phone", phone).apply();
 
@@ -582,7 +582,7 @@ public class Cuenta extends AppCompatActivity {
         rq.add(jsrqactualizar);
     }
 
-    private void vieweditarpass(){
+    private void vieweditarpass() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);
         @SuppressLint("InflateParams") View layout = LayoutInflater.from(ctx).inflate(R.layout.dialog_cambiarpass, null);
         dialog.setView(layout);
@@ -609,7 +609,7 @@ public class Cuenta extends AppCompatActivity {
         dialog.show();
     }
 
-    private void actualizarpass(final String id, final String passactual, final String passnueva){
+    private void actualizarpass(final String id, final String passactual, final String passnueva) {
         // Showing progress dialog at user registration time.
         final ProgressDialog progreso = new ProgressDialog(ctx);
         progreso.setMessage("Por favor, espere...");
@@ -622,7 +622,7 @@ public class Cuenta extends AppCompatActivity {
                         //Log.d("Response", response.toString());
                         JSONArray resp = null;
                         try {
-                            resp = new JSONArray( response );
+                            resp = new JSONArray(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -648,7 +648,7 @@ public class Cuenta extends AppCompatActivity {
                                     });
                                     dialogo.show();
                                 }
-                                if (success){
+                                if (success) {
                                     AlertDialog.Builder dialogo = new AlertDialog.Builder(ctx);
                                     dialogo.setTitle("ACTUALIZAR");
                                     dialogo.setMessage("\n" + res.getString("mensaje"));
@@ -718,7 +718,7 @@ public class Cuenta extends AppCompatActivity {
         rq.add(jsrqactualizar);
     }
 
-    private void vieweditarciudad(){
+    private void vieweditarciudad() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);
         @SuppressLint("InflateParams") View layout = LayoutInflater.from(ctx).inflate(R.layout.dialog_cambiarciudad, null);
         dialog.setView(layout);
@@ -734,44 +734,52 @@ public class Cuenta extends AppCompatActivity {
         final Spinner spinnerdep = layout.findViewById(R.id.spinnerdepartamento);
         final Spinner spinnerciu = layout.findViewById(R.id.spinnerciudad);
         //set the spinner value from Arraylist
-        ArrayAdapter<String> adapterdep = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item,dep);
+        ArrayAdapter<String> adapterdep = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item, dep);
         adapterdep.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerdep.setAdapter(adapterdep);
         spinnerdep.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
-                spinnerciu.setEnabled(true);spinnerciu.setClickable(true);
+                spinnerciu.setEnabled(true);
+                spinnerciu.setClickable(true);
                 //Toast.makeText(ctx,adapterView.getItemAtPosition(pos)+". "+iddep.get(pos), Toast.LENGTH_SHORT).show();
-                buscariddepar=iddep.get(pos);
+                buscariddepar = iddep.get(pos);
                 //RESET CIUDAD ARRAYLIST
-                ciudad.clear();idciudad.clear();
-                ciudad.add("[--- Ciudades ---]");idciudad.add("0");
+                ciudad.clear();
+                idciudad.clear();
+                ciudad.add("[--- Ciudades ---]");
+                idciudad.add("0");
                 spinnerciu.setSelection(0);
                 //fill ciudad arraylist
                 llenarciudad();
-                if(pos==0){
-                    spinnerciu.setEnabled(false);spinnerciu.setClickable(false);
-                    buscaridciudad="";
+                if (pos == 0) {
+                    spinnerciu.setEnabled(false);
+                    spinnerciu.setClickable(false);
+                    buscaridciudad = "";
                 }
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> parent){}
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
         //set the spinner value from Arraylist
-        ArrayAdapter<String> adapterciu = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item,ciudad);
+        ArrayAdapter<String> adapterciu = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item, ciudad);
         adapterciu.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerciu.setAdapter(adapterciu);
         spinnerciu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
                 //Toast.makeText(ctx, adapterView.getItemAtPosition(pos)+". "+idciudad.get(pos), Toast.LENGTH_SHORT).show();
-                buscaridciudad=idciudad.get(pos);
-                if(pos==0){
-                    buscaridciudad="";
+                buscaridciudad = idciudad.get(pos);
+                if (pos == 0) {
+                    buscaridciudad = "";
                 }
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> parent){}
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
 
         dialog.setCancelable(false);
@@ -806,7 +814,7 @@ public class Cuenta extends AppCompatActivity {
                         //Log.d("Response", response.toString());
                         JSONArray resp = null;
                         try {
-                            resp = new JSONArray( response );
+                            resp = new JSONArray(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -889,11 +897,11 @@ public class Cuenta extends AppCompatActivity {
 
     //PROFILE PHOTO WEBVIEW START
     @SuppressLint("SetJavaScriptEnabled")
-    private void vieweditarfoto(){
+    private void vieweditarfoto() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);
         @SuppressLint("InflateParams") View layout = LayoutInflater.from(ctx).inflate(R.layout.dialog_cambiarfoto, null);
 
-        if(Build.VERSION.SDK_INT >=23 && (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)) {
+        if (Build.VERSION.SDK_INT >= 23 && (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)) {
             ActivityCompat.requestPermissions(Cuenta.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, 1);
         }
 
@@ -902,29 +910,30 @@ public class Cuenta extends AppCompatActivity {
         webSettings.setJavaScriptEnabled(true);
         webSettings.setAllowFileAccess(true);
 
-        if(Build.VERSION.SDK_INT >= 21){
+        if (Build.VERSION.SDK_INT >= 21) {
             webSettings.setMixedContentMode(0);
             webviewfoto.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-        }else if(Build.VERSION.SDK_INT >= 19){
+        } else if (Build.VERSION.SDK_INT >= 19) {
             webviewfoto.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-        }else {
+        } else {
             webviewfoto.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         }
 
         String postdata = "id=" + usrid;
         webviewfoto.setWebViewClient(new Callback());
         webviewfoto.postUrl(URLactfoto, postdata.getBytes());
-        webviewfoto.setWebChromeClient(new WebChromeClient(){
+        webviewfoto.setWebChromeClient(new WebChromeClient() {
             //For Android 3.0+
-            public void openFileChooser(ValueCallback<Uri> uploadMsg){
+            public void openFileChooser(ValueCallback<Uri> uploadMsg) {
                 mUM = uploadMsg;
                 Intent i = new Intent(Intent.ACTION_GET_CONTENT);
                 i.addCategory(Intent.CATEGORY_OPENABLE);
                 i.setType("*/*");
-                Cuenta.this.startActivityForResult(Intent.createChooser(i,"File Chooser"), FCR);
+                Cuenta.this.startActivityForResult(Intent.createChooser(i, "File Chooser"), FCR);
             }
+
             // For Android 3.0+, above method not supported in some android 3+ versions, in such case we use this
-            public void openFileChooser(ValueCallback uploadMsg, String acceptType){
+            public void openFileChooser(ValueCallback uploadMsg, String acceptType) {
                 mUM = uploadMsg;
                 Intent i = new Intent(Intent.ACTION_GET_CONTENT);
                 i.addCategory(Intent.CATEGORY_OPENABLE);
@@ -933,49 +942,51 @@ public class Cuenta extends AppCompatActivity {
                         Intent.createChooser(i, "File Browser"),
                         FCR);
             }
+
             //For Android 4.1+
-            public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType, String capture){
+            public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType, String capture) {
                 mUM = uploadMsg;
                 Intent i = new Intent(Intent.ACTION_GET_CONTENT);
                 i.addCategory(Intent.CATEGORY_OPENABLE);
                 i.setType("*/*");
                 Cuenta.this.startActivityForResult(Intent.createChooser(i, "File Chooser"), Cuenta.FCR);
             }
+
             //For Android 5.0+
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
             public boolean onShowFileChooser(
                     WebView webView, ValueCallback<Uri[]> filePathCallback,
-                    FileChooserParams fileChooserParams){
-                if(mUMA != null){
+                    FileChooserParams fileChooserParams) {
+                if (mUMA != null) {
                     mUMA.onReceiveValue(null);
                 }
                 mUMA = filePathCallback;
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if(takePictureIntent.resolveActivity(Cuenta.this.getPackageManager()) != null){
+                if (takePictureIntent.resolveActivity(Cuenta.this.getPackageManager()) != null) {
                     File photoFile = null;
-                    try{
+                    try {
                         photoFile = createImageFile();
                         takePictureIntent.putExtra("PhotoPath", mCM);
-                    }catch(IOException ex){
+                    } catch (IOException ex) {
                         Log.e(TAG, "Image file creation failed", ex);
                     }
-                    if(photoFile != null){
+                    if (photoFile != null) {
                         mCM = "file:" + photoFile.getAbsolutePath();
                         takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
-                    }else{
+                    } else {
                         takePictureIntent = null;
                     }
                 }
                 Intent contentSelectionIntent = new Intent(Intent.ACTION_GET_CONTENT);
                 contentSelectionIntent.addCategory(Intent.CATEGORY_OPENABLE);
                 contentSelectionIntent.setType("*/*");
-                if(multiple_files) {
+                if (multiple_files) {
                     contentSelectionIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                 }
                 Intent[] intentArray;
-                if(takePictureIntent != null){
+                if (takePictureIntent != null) {
                     intentArray = new Intent[]{takePictureIntent};
-                }else{
+                } else {
                     intentArray = new Intent[0];
                 }
 
@@ -983,7 +994,7 @@ public class Cuenta extends AppCompatActivity {
                 chooserIntent.putExtra(Intent.EXTRA_INTENT, contentSelectionIntent);
                 chooserIntent.putExtra(Intent.EXTRA_TITLE, "Image Chooser");
                 chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, intentArray);
-                if(multiple_files && Build.VERSION.SDK_INT >= 18) {
+                if (multiple_files && Build.VERSION.SDK_INT >= 18) {
                     chooserIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                 }
                 startActivityForResult(chooserIntent, FCR);
@@ -1003,22 +1014,17 @@ public class Cuenta extends AppCompatActivity {
         dialog.create();
         dialog.show();
     }
-    //WEBVIEW CALLBACK
-    public class Callback extends WebViewClient {
-        public void onReceivedError(WebView view, int errorCode, String description, String failingUrl){
-            Toast.makeText(getApplicationContext(), "Failed loading app!", Toast.LENGTH_SHORT).show();
-        }
-    }
+
     //WEBVIEW CREATE IMAGE
-    private File createImageFile() throws IOException{
+    private File createImageFile() throws IOException {
         @SuppressLint("SimpleDateFormat") String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "img_"+timeStamp+"_";
+        String imageFileName = "img_" + timeStamp + "_";
         File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-        return File.createTempFile(imageFileName,".jpg",storageDir);
+        return File.createTempFile(imageFileName, ".jpg", storageDir);
     }
     //PROFILE PHOTO WEBVIEW END
 
-    private void settexts(){
+    private void settexts() {
         usrnombre = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getString("nombre", null);
         usrcorreo = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
@@ -1033,34 +1039,41 @@ public class Cuenta extends AppCompatActivity {
         setnombreciudad();
     }
 
-    private void setnombreciudad(){
+    private void setnombreciudad() {
         usrciudad = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getString("ciudad", null);
         jsrqnombreciudad = new JsonArrayRequest(Request.Method.GET, URLnombreciudad + "?ciudad=" + usrciudad,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        for(int i=0; i < response.length(); i++) {
+                        for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject res = response.getJSONObject(i);
-                                if (res.has("nombre")){ textciudad.setText(res.getString("nombre")); }
-                                else { textciudad.setText(usrciudad); }
-                            } catch (Exception e) { e.printStackTrace(); }
+                                if (res.has("nombre")) {
+                                    textciudad.setText(res.getString("nombre"));
+                                } else {
+                                    textciudad.setText(usrciudad);
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) { Log.d("Error", error.toString()); }
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error", error.toString());
+            }
         });
         rq.add(jsrqnombreciudad);
     }
 
-    private void llenardepartamentos(){
+    private void llenardepartamentos() {
         jsrqdep = new JsonArrayRequest(Request.Method.GET, URLdep,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        for(int i=0; i < response.length(); i++) {
+                        for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject res = response.getJSONObject(i);
                                 //Log.d("Response: ", "ID:"+res.getString("IDDEPARTAMENTOS")+". Nombre: "+res.getString("NOMBREDEPARTAMENTO"));
@@ -1080,12 +1093,12 @@ public class Cuenta extends AppCompatActivity {
         rq.add(jsrqdep);
     }
 
-    private void llenarciudad(){
-        jsrqciu = new JsonArrayRequest(Request.Method.GET, URLciu+"?dep="+buscariddepar,
+    private void llenarciudad() {
+        jsrqciu = new JsonArrayRequest(Request.Method.GET, URLciu + "?dep=" + buscariddepar,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        for(int i=0; i < response.length(); i++) {
+                        for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject res = response.getJSONObject(i);
                                 //Log.d("Response: ", "ID:"+res.getString("IDCIUDADES")+". Nombre: "+res.getString("NOMBRECIUDAD"));
@@ -1113,22 +1126,22 @@ public class Cuenta extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id==android.R.id.home) {
+        if (id == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private boolean shouldRefreshOnResume = false;
     @Override
     public void onResume() {
         super.onResume();
         // Check should we need to refresh the fragment
-        if(shouldRefreshOnResume){
+        if (shouldRefreshOnResume) {
             settexts();
-            shouldRefreshOnResume=false;
+            shouldRefreshOnResume = false;
         }
     }
+
     @Override
     public void onStop() {
         super.onStop();
@@ -1138,5 +1151,12 @@ public class Cuenta extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
+    }
+
+    //WEBVIEW CALLBACK
+    public class Callback extends WebViewClient {
+        public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+            Toast.makeText(getApplicationContext(), "Failed loading app!", Toast.LENGTH_SHORT).show();
+        }
     }
 }

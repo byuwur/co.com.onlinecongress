@@ -1,12 +1,12 @@
-package com.mateus.resweb;
+package com.byuwur.onlinecongress;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -34,9 +34,9 @@ import java.util.Map;
 public class Register extends AppCompatActivity {
     DefaultValues dv = new DefaultValues();
     //register file to request
-    private String URL= dv.urlinicio+"registrar.php";
-    private String URLdep= dv.urllistar+"departamentos.php";
-    private String URLciu= dv.urllistar+"ciudades.php";
+    private String URL = dv.urlinicio + "registrar.php";
+    private String URLdep = dv.urllistar + "departamentos.php";
+    private String URLciu = dv.urllistar + "ciudades.php";
     private RequestQueue rq;
     //set context
     private Context ctx;
@@ -44,12 +44,12 @@ public class Register extends AppCompatActivity {
     private JsonArrayRequest jsrqdep, jsrqciu;
     private StringRequest jsrqregistrar;
     //register fields declarations
-    private EditText et_nombre,et_correo,et_pass,et_phone;
+    private EditText et_nombre, et_correo, et_pass, et_phone;
     private CheckBox terms;
     //list of each array
     private ArrayList<String> dep = new ArrayList<>(), iddep = new ArrayList<>();
     private ArrayList<String> ciudad = new ArrayList<>(), idciudad = new ArrayList<>();
-    private String buscariddepar="", buscaridciudad="";
+    private String buscariddepar = "", buscaridciudad = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +60,11 @@ public class Register extends AppCompatActivity {
         ctx = Register.this;
         rq = Volley.newRequestQueue(ctx);
 
-        et_nombre= findViewById(R.id.nombreregistrar);
-        et_correo= findViewById(R.id.correoregistrar);
-        et_pass= findViewById(R.id.passregistrar);
-        et_phone= findViewById(R.id.telefonoregistrar);
-        terms= findViewById(R.id.checkboxregistrar);
+        et_nombre = findViewById(R.id.nombreregistrar);
+        et_correo = findViewById(R.id.correoregistrar);
+        et_pass = findViewById(R.id.passregistrar);
+        et_phone = findViewById(R.id.telefonoregistrar);
+        terms = findViewById(R.id.checkboxregistrar);
 
         //initial values
         dep.add("[--- Departamentos ---]");
@@ -77,53 +77,61 @@ public class Register extends AppCompatActivity {
         final Spinner spinnerdep = findViewById(R.id.spinnerdepartamento);
         final Spinner spinnerciu = findViewById(R.id.spinnerciudad);
         //set the spinner value from Arraylist
-        ArrayAdapter<String> adapterdep = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,dep);
+        ArrayAdapter<String> adapterdep = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, dep);
         adapterdep.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerdep.setAdapter(adapterdep);
         spinnerdep.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
-                spinnerciu.setEnabled(true);spinnerciu.setClickable(true);
+                spinnerciu.setEnabled(true);
+                spinnerciu.setClickable(true);
                 //Toast.makeText(ctx,adapterView.getItemAtPosition(pos)+". "+iddep.get(pos), Toast.LENGTH_SHORT).show();
-                buscariddepar=iddep.get(pos);
+                buscariddepar = iddep.get(pos);
                 //RESET CIUDAD ARRAYLIST
-                ciudad.clear();idciudad.clear();
-                ciudad.add("[--- Ciudades ---]");idciudad.add("0");
+                ciudad.clear();
+                idciudad.clear();
+                ciudad.add("[--- Ciudades ---]");
+                idciudad.add("0");
                 spinnerciu.setSelection(0);
                 //fill ciudad arraylist
                 llenarciudad();
-                if(pos==0){
-                    spinnerciu.setEnabled(false);spinnerciu.setClickable(false);
-                    buscaridciudad="";
+                if (pos == 0) {
+                    spinnerciu.setEnabled(false);
+                    spinnerciu.setClickable(false);
+                    buscaridciudad = "";
                 }
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> parent){}
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
         //set the spinner value from Arraylist
-        ArrayAdapter<String> adapterciu = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,ciudad);
+        ArrayAdapter<String> adapterciu = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, ciudad);
         adapterciu.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerciu.setAdapter(adapterciu);
         spinnerciu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
                 //Toast.makeText(ctx, adapterView.getItemAtPosition(pos)+". "+idciudad.get(pos), Toast.LENGTH_SHORT).show();
-                buscaridciudad=idciudad.get(pos);
-                if(pos==0){
-                    buscaridciudad="";
+                buscaridciudad = idciudad.get(pos);
+                if (pos == 0) {
+                    buscaridciudad = "";
                 }
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> parent){}
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
     }
 
-    private void llenardepartamentos(){
+    private void llenardepartamentos() {
         jsrqdep = new JsonArrayRequest(Request.Method.GET, URLdep,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        for(int i=0; i < response.length(); i++) {
+                        for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject res = response.getJSONObject(i);
                                 //Log.d("Response: ", "ID:"+res.getString("IDDEPARTAMENTOS")+". Nombre: "+res.getString("NOMBREDEPARTAMENTO"));
@@ -143,12 +151,12 @@ public class Register extends AppCompatActivity {
         rq.add(jsrqdep);
     }
 
-    private void llenarciudad(){
-        jsrqciu = new JsonArrayRequest(Request.Method.GET, URLciu+"?dep="+buscariddepar,
+    private void llenarciudad() {
+        jsrqciu = new JsonArrayRequest(Request.Method.GET, URLciu + "?dep=" + buscariddepar,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        for(int i=0; i < response.length(); i++) {
+                        for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject res = response.getJSONObject(i);
                                 //Log.d("Response: ", "ID:"+res.getString("IDCIUDADES")+". Nombre: "+res.getString("NOMBRECIUDAD"));
@@ -168,7 +176,7 @@ public class Register extends AppCompatActivity {
         rq.add(jsrqciu);
     }
 
-    public void onClickRegistrar (View view) {
+    public void onClickRegistrar(View view) {
         //verify if terms are checked
         if (terms.isChecked()) {
             // Showing progress dialog at user registration time.
@@ -182,12 +190,12 @@ public class Register extends AppCompatActivity {
                         public void onResponse(String response) {
                             JSONArray resp = null;
                             try {
-                                resp = new JSONArray( response );
+                                resp = new JSONArray(response);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
                             assert resp != null;
-                            for(int i=0; i < resp.length(); i++) {
+                            for (int i = 0; i < resp.length(); i++) {
                                 try {
                                     JSONObject res = resp.getJSONObject(i);
 
@@ -209,8 +217,7 @@ public class Register extends AppCompatActivity {
                                             }
                                         });
                                         dialogo.show();
-                                    }
-                                    else if (error) {
+                                    } else if (error) {
                                         AlertDialog.Builder dialogo = new AlertDialog.Builder(ctx);
                                         dialogo.setTitle("REGISTRAR");
                                         dialogo.setMessage("\n" + res.getString("mensaje"));
@@ -265,8 +272,7 @@ public class Register extends AppCompatActivity {
                 }
             };
             rq.add(jsrqregistrar);
-        }
-        else {
+        } else {
             AlertDialog.Builder dialogo1 = new AlertDialog.Builder(Register.this);
             dialogo1.setTitle("REGISTRAR");
             dialogo1.setMessage("\nPor favor, acepte términos y condiciones si desea realizar su registro.");
@@ -282,11 +288,12 @@ public class Register extends AppCompatActivity {
         }
     }
 
-    public void onClickRegistrarLogin (View view){
+    public void onClickRegistrarLogin(View view) {
         //Intent intentiniciar = new Intent(Register.this, Login.class);
         //startActivity(intentiniciar);
         finish();
     }
+
     @Override
     public void onBackPressed() {
         //Intent intentiniciar = new Intent(Register.this, Login.class);

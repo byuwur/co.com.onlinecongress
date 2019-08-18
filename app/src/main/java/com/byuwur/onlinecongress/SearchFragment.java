@@ -1,4 +1,4 @@
-package com.mateus.resweb;
+package com.byuwur.onlinecongress;
 
 import android.content.Context;
 import android.net.Uri;
@@ -39,9 +39,17 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class SearchFragment extends Fragment {
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
     private DefaultValues dv = new DefaultValues();
     //register file to request
-    private String URLdep= dv.urllistar+"departamentos.php", URLciu= dv.urllistar+"ciudades.php";
+    private String URLdep = dv.urllistar + "departamentos.php", URLciu = dv.urllistar + "ciudades.php";
     //set context
     private Context ctx;
     //
@@ -52,13 +60,12 @@ public class SearchFragment extends Fragment {
     private ArrayList<String> dep = new ArrayList<>(), iddep = new ArrayList<>();
     private ArrayList<String> ciudad = new ArrayList<>(), idciudad = new ArrayList<>();
     private ArrayList<String> op = new ArrayList<>();
-    private String buscariddepar="", buscaridciudad="";
+    private String buscariddepar = "", buscaridciudad = "";
+<<<<<<<HEAD:app/src/main/java/com/byuwur/onlinecongress/SearchFragment.java
+=======
     private boolean buscarid;
     private EditText barriosearch, textsearch;
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+>>>>>>>d0f5b0107ef84f1963f655bf78f1590c3e4d4d34:app/src/main/java/com/mateus/resweb/SearchFragment.java
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -111,39 +118,48 @@ public class SearchFragment extends Fragment {
 
         textsearch = view.findViewById(R.id.textsearch);
         //option values
-        op.add("Nombre");op.add("ID");
+        op.add("Nombre");
+        op.add("ID");
         //initial values
-        dep.add("[--- Departamentos ---]");iddep.add("0");
-        ciudad.add("[--- Ciudades ---]");idciudad.add("0");
+        dep.add("[--- Departamentos ---]");
+        iddep.add("0");
+        ciudad.add("[--- Ciudades ---]");
+        idciudad.add("0");
         //fill dep
         llenardepartamentos();
         //SPINNER STUFF
         final Spinner spinnerciu = view.findViewById(R.id.spinnerciudad);
         //set the spinner value from Arraylist CIUDAD
-        ArrayAdapter<String> adapterciu = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item,ciudad);
+        ArrayAdapter<String> adapterciu = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item, ciudad);
         adapterciu.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerciu.setAdapter(adapterciu);
         spinnerciu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
                 //Toast.makeText(ctx, adapterView.getItemAtPosition(pos)+". "+idciudad.get(pos), Toast.LENGTH_SHORT).show();
-                buscaridciudad=idciudad.get(pos);
-                barriosearch.setEnabled(true);barriosearch.setClickable(true);
-                barriosearch.setText(null);barriosearch.setHint("Barrio (Opcional)");
-                if(pos==0){
-                    buscaridciudad="";
-                    barriosearch.setEnabled(false);barriosearch.setClickable(false);
-                    barriosearch.setText(null);barriosearch.setHint("Barrio (ingrese ciudad)");
+                buscaridciudad = idciudad.get(pos);
+                barriosearch.setEnabled(true);
+                barriosearch.setClickable(true);
+                barriosearch.setText(null);
+                barriosearch.setHint("Barrio (Opcional)");
+                if (pos == 0) {
+                    buscaridciudad = "";
+                    barriosearch.setEnabled(false);
+                    barriosearch.setClickable(false);
+                    barriosearch.setText(null);
+                    barriosearch.setHint("Barrio (ingrese ciudad)");
                 }
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> parent){}
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
         //search button script
         Button buttontoreserv = view.findViewById(R.id.buttonbuscar);
-        buttontoreserv.setOnClickListener(new View.OnClickListener(){
+        buttontoreserv.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 PonenciaFragment rf = new PonenciaFragment();
                 rf.setsearchvalues(true, true, textsearch.getText().toString(), "", "");
                 snackbar.dismiss();
@@ -154,12 +170,12 @@ public class SearchFragment extends Fragment {
         return view;
     }
 
-    private void llenardepartamentos(){
+    private void llenardepartamentos() {
         jsrqdep = new JsonArrayRequest(Request.Method.GET, URLdep,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        for(int i=0; i < response.length(); i++) {
+                        for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject res = response.getJSONObject(i);
                                 //Log.d("Response: ", "ID:"+res.getString("IDDEPARTAMENTOS")+". Nombre: "+res.getString("NOMBREDEPARTAMENTO"));
@@ -179,12 +195,12 @@ public class SearchFragment extends Fragment {
         rq.add(jsrqdep);
     }
 
-    private void llenarciudad(){
-        jsrqciu = new JsonArrayRequest(Request.Method.GET, URLciu+"?dep="+buscariddepar,
+    private void llenarciudad() {
+        jsrqciu = new JsonArrayRequest(Request.Method.GET, URLciu + "?dep=" + buscariddepar,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        for(int i=0; i < response.length(); i++) {
+                        for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject res = response.getJSONObject(i);
                                 //Log.d("Response: ", "ID:"+res.getString("IDCIUDADES")+". Nombre: "+res.getString("NOMBRECIUDAD"));
@@ -204,7 +220,7 @@ public class SearchFragment extends Fragment {
         rq.add(jsrqciu);
     }
 
-    private void onclickbuscar(){
+    private void onclickbuscar() {
         Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle("Ponencia");
         Fragment fragmentreservar = new PonenciaFragment();
@@ -227,6 +243,7 @@ public class SearchFragment extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
+
     /*
     @Override
     public void onAttach(Context context) {
@@ -244,6 +261,7 @@ public class SearchFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated

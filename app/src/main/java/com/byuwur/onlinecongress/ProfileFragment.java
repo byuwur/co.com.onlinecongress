@@ -1,4 +1,4 @@
-package com.mateus.resweb;
+package com.byuwur.onlinecongress;
 
 import android.content.Context;
 import android.content.Intent;
@@ -40,9 +40,13 @@ import static android.content.Context.MODE_PRIVATE;
  * create an instance of this fragment.
  */
 public class ProfileFragment extends Fragment {
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
     DefaultValues dv = new DefaultValues();
     //login file to request
-    private String URLnombreciudad= dv.urlcuenta+"nombreciudad.php", URLfotoperfil = dv.imgfotoperfil;
+    private String URLnombreciudad = dv.urlcuenta + "nombreciudad.php", URLfotoperfil = dv.imgfotoperfil;
     //
     private RequestQueue rq;
     //set context
@@ -53,20 +57,17 @@ public class ProfileFragment extends Fragment {
     private ImageView fotoperfil;
     private TextView nombreperfil, correoperfil, telefonoperfil, institucionperfil, congresoperfil;
     private String usrnombre, usrcorreo, usrphone, usrciudad, usrid;
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private boolean shouldRefreshOnResume = false;
 
     public ProfileFragment() {
         // Required empty public constructor
     }
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -84,6 +85,7 @@ public class ProfileFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,7 +130,7 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
-    private void settexts(){
+    private void settexts() {
         usrnombre = ctx.getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getString("nombre", null);
         usrcorreo = ctx.getSharedPreferences("PREFERENCE", MODE_PRIVATE)
@@ -143,14 +145,15 @@ public class ProfileFragment extends Fragment {
         setnombreciudad();
 
         //LOAD IMAGE
-        Picasso.get().load(URLfotoperfil+usrid+"/1.jpg")
+        Picasso.get().load(URLfotoperfil + usrid + "/1.jpg")
                 .networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE)
                 .fit().centerCrop()
                 .into(fotoperfil, new Callback() {
                     @Override
                     public void onSuccess() {
-                        Log.d("Carga","Cargada");
+                        Log.d("Carga", "Cargada");
                     }
+
                     @Override
                     public void onError(Exception e) {
                         fotoperfil.setImageResource(R.drawable.no_profile);
@@ -158,38 +161,45 @@ public class ProfileFragment extends Fragment {
                 });
     }
 
-    private void setnombreciudad(){
+    private void setnombreciudad() {
         usrciudad = ctx.getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getString("ciudad", null);
         jsrqnombreciudad = new JsonArrayRequest(Request.Method.GET, URLnombreciudad + "?ciudad=" + usrciudad,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        for(int i=0; i < response.length(); i++) {
+                        for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject res = response.getJSONObject(i);
-                                if (res.has("nombre")){ institucionperfil.setText(res.getString("nombre")); }
-                                else { institucionperfil.setText(usrciudad); }
-                            } catch (Exception e) { e.printStackTrace(); }
+                                if (res.has("nombre")) {
+                                    institucionperfil.setText(res.getString("nombre"));
+                                } else {
+                                    institucionperfil.setText(usrciudad);
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) { Log.d("Error", error.toString()); }
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error", error.toString());
+            }
         });
         rq.add(jsrqnombreciudad);
     }
 
-    private boolean shouldRefreshOnResume = false;
     @Override
     public void onResume() {
         super.onResume();
         // Check should we need to refresh the fragment
-        if(shouldRefreshOnResume){
+        if (shouldRefreshOnResume) {
             settexts();
-            shouldRefreshOnResume=false;
+            shouldRefreshOnResume = false;
         }
     }
+
     @Override
     public void onStop() {
         super.onStop();
@@ -202,6 +212,7 @@ public class ProfileFragment extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
+
     /*
     @Override
     public void onAttach(Context context) {
@@ -219,6 +230,7 @@ public class ProfileFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated

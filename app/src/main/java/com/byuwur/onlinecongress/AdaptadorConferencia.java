@@ -19,22 +19,18 @@ public class AdaptadorConferencia extends RecyclerView.Adapter<AdaptadorConferen
     private ArrayList<HolderConferencia> listaconferencia;
     private onItemClickListener mlistener;
 
-    public interface onItemClickListener{
-        void onItemClick (int position);
-    }
-
-    public void setonItemClickListener(onItemClickListener listener){
-        mlistener = listener;
-    }
-
-    public AdaptadorConferencia(ArrayList<HolderConferencia> listaconferencia){
+    public AdaptadorConferencia(ArrayList<HolderConferencia> listaconferencia) {
         this.listaconferencia = listaconferencia;
+    }
+
+    public void setonItemClickListener(onItemClickListener listener) {
+        mlistener = listener;
     }
 
     @NonNull
     @Override
     public ConferenciaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_conferencia,null,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_conferencia, null, false);
         return new ConferenciaViewHolder(view, mlistener);
     }
 
@@ -54,11 +50,12 @@ public class AdaptadorConferencia extends RecyclerView.Adapter<AdaptadorConferen
                 .into(holder.conferenciaimg, new Callback() {
                     @Override
                     public void onSuccess() {
-                        Log.d("Carga","Cargada");
+                        Log.d("Carga", "Cargada");
                     }
+
                     @Override
                     public void onError(Exception e) {
-                        Log.d("Carga","Error al cargar");
+                        Log.d("Carga", "Error al cargar");
                         holder.conferenciaimg.setImageResource(R.drawable.no_image);
                         //Toast.makeText(ctx, "Ocurrieron errores al cargar algunas imágenes.",Toast.LENGTH_SHORT).show();
                     }
@@ -70,27 +67,31 @@ public class AdaptadorConferencia extends RecyclerView.Adapter<AdaptadorConferen
         return listaconferencia.size();
     }
 
+    public interface onItemClickListener {
+        void onItemClick(int position);
+    }
+
     public class ConferenciaViewHolder extends RecyclerView.ViewHolder {
-        TextView conferencianombre,conferenciaid, conferenciavalor,conferenciaidioma,conferenciacategoria,conferenciadias,conferenciahorario;
+        TextView conferencianombre, conferenciaid, conferenciavalor, conferenciaidioma, conferenciacategoria, conferenciadias, conferenciahorario;
         ImageView conferenciaimg;
 
         private ConferenciaViewHolder(View itemView, final onItemClickListener listener) {
             super(itemView);
-            conferencianombre= itemView.findViewById(R.id.conferencianombre);
+            conferencianombre = itemView.findViewById(R.id.conferencianombre);
             conferenciaid = itemView.findViewById(R.id.conferenciaid);
             conferenciavalor = itemView.findViewById(R.id.conferenciavalor);
-            conferenciaidioma= itemView.findViewById(R.id.conferenciaidioma);
-            conferenciacategoria= itemView.findViewById(R.id.conferenciacategoria);
-            conferenciadias= itemView.findViewById(R.id.conferenciadias);
-            conferenciahorario= itemView.findViewById(R.id.conferenciahorario);
-            conferenciaimg= itemView .findViewById(R.id.conferenciaimg);
+            conferenciaidioma = itemView.findViewById(R.id.conferenciaidioma);
+            conferenciacategoria = itemView.findViewById(R.id.conferenciacategoria);
+            conferenciadias = itemView.findViewById(R.id.conferenciadias);
+            conferenciahorario = itemView.findViewById(R.id.conferenciahorario);
+            conferenciaimg = itemView.findViewById(R.id.conferenciaimg);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (listener != null){
+                    if (listener != null) {
                         int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION){
+                        if (position != RecyclerView.NO_POSITION) {
                             listener.onItemClick(position);
                         }
                     }

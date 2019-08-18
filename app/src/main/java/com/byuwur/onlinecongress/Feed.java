@@ -1,4 +1,4 @@
-package com.mateus.resweb;
+package com.byuwur.onlinecongress;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -34,9 +34,10 @@ import java.util.Map;
 
 public class Feed extends AppCompatActivity {
 
+    private static String usrcorreo;
     private DefaultValues dv = new DefaultValues();
     //login file to request
-    private String URLfeed= dv.urlinicio+"submitfeed.php";
+    private String URLfeed = dv.urlinicio + "submitfeed.php";
     //
     private RequestQueue rq;
     //set context
@@ -45,7 +46,6 @@ public class Feed extends AppCompatActivity {
     private StringRequest jsrqfeed;
     private EditText feedtext;
     private TextView feedenviarcomo;
-    private static String usrcorreo;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -69,7 +69,7 @@ public class Feed extends AppCompatActivity {
         //feedenviarcomo.setText("Enviar como:\n" + usrcorreo);
     }
 
-    public void onClickEnviarFeed(View view){
+    public void onClickEnviarFeed(View view) {
         // Showing progress dialog at user registration time.
         final ProgressDialog progreso = new ProgressDialog(ctx);
         progreso.setMessage("Por favor, espere...");
@@ -82,7 +82,7 @@ public class Feed extends AppCompatActivity {
                         //Log.d("Response", response.toString());
                         JSONArray resp = null;
                         try {
-                            resp = new JSONArray( response );
+                            resp = new JSONArray(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -107,7 +107,7 @@ public class Feed extends AppCompatActivity {
                                     });
                                     dialogo.show();
                                 }
-                                if (success){
+                                if (success) {
                                     AlertDialog.Builder dialogo = new AlertDialog.Builder(ctx);
                                     dialogo.setTitle("COMENTARIO");
                                     dialogo.setMessage("\n" + res.getString("mensaje"));
@@ -173,7 +173,7 @@ public class Feed extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id==android.R.id.home) {
+        if (id == android.R.id.home) {
             finish();
         }
         if (id == R.id.action_versioninfo) {

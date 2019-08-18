@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ProfileFragment">
 
     <FrameLayout
@@ -15,9 +15,27 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="25dp"
+            android:alpha="1"
             android:scaleType="centerCrop"
-            android:src="@drawable/logo"
-            android:alpha="1" />
+
+        <
+
+        <
+
+        <
+
+        <
+
+        <
+
+        <
+
+        < HEAD
+            android:src="@drawable/logo" />
+        =======
+        android:src="@drawable/logo"
+        android:alpha="1" />
+        >>>>>>> d0f5b0107ef84f1963f655bf78f1590c3e4d4d34
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,202 +64,224 @@
             </LinearLayout>
         </LinearLayout>
     </FrameLayout>
+
     <LinearLayout
         android:id="@+id/linearprof"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@+id/frameprofile">
+        android:layout_below="@+id/frameprofile"
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
-                android:layout_weight="1"
                 android:id="@+id/usrusr"
-                android:textSize="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#0000"
+                android:gravity="left"
+                android:maxLength="12"
+                android:padding="16dp"
                 android:text="Nombre"
                 android:textColor="#a2a1b8"
-                android:maxLength="12"
-                android:background="#0000"
-                android:padding="16dp"
-                android:gravity="left" />
+                android:textSize="16dp" />
+
             <TextView
-                android:layout_weight="1"
                 android:id="@+id/nombreperfil"
-                android:textSize="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Mateus"
-                android:textColorHint="#181737"
-                android:textColor="#181737"
-                android:maxLength="12"
+                android:layout_weight="1"
                 android:background="#0000"
+                android:gravity="right"
+                android:hint="Mateus"
+                android:maxLength="12"
                 android:padding="16dp"
-                android:gravity="right" />
+                android:textColor="#181737"
+                android:textColorHint="#181737"
+                android:textSize="16dp" />
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#dad8d8"/>
+            android:background="#dad8d8" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
-                android:layout_weight="1"
                 android:id="@+id/mail"
-                android:textSize="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#0000"
+                android:gravity="left"
+                android:maxLength="12"
+                android:padding="16dp"
                 android:text="E-mail"
                 android:textColor="#a2a1b8"
-                android:maxLength="12"
-                android:background="#0000"
-                android:padding="16dp"
-                android:gravity="left"/>
+                android:textSize="16dp" />
+
             <TextView
-                android:layout_weight="1"
                 android:id="@+id/correoperfil"
-                android:textSize="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="#1b193b"
-                android:hint="mateus@mateus.com"
-                android:textColor="#181737"
-                android:maxLength="12"
+                android:layout_weight="1"
                 android:background="#0000"
+                android:gravity="right"
+                android:hint="mateus@mateus.com"
+                android:maxLength="12"
                 android:padding="16dp"
-                android:gravity="right" />
+                android:textColor="#181737"
+                android:textColorHint="#1b193b"
+                android:textSize="16dp" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#dad8d8"/>
+            android:background="#dad8d8" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
-                android:layout_weight="1"
                 android:id="@+id/pswrd"
-                android:textSize="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#0000"
+                android:gravity="left"
+                android:maxLength="12"
+                android:padding="16dp"
                 android:text="Teléfono"
                 android:textColor="#a2a1b8"
-                android:maxLength="12"
-                android:background="#0000"
-                android:padding="16dp"
-                android:gravity="left" />
+                android:textSize="16dp" />
+
             <TextView
-                android:layout_weight="1"
                 android:id="@+id/telefonoperfil"
-                android:textSize="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="#1b193b"
-                android:inputType="textPassword"
-                android:hint="+57 (3xx) xxx xxxx"
-                android:textColor="#181737"
-                android:maxLength="12"
+                android:layout_weight="1"
                 android:background="#0000"
+                android:gravity="right"
+                android:hint="+57 (3xx) xxx xxxx"
+                android:inputType="textPassword"
+                android:maxLength="12"
                 android:padding="16dp"
-                android:gravity="right" />
+                android:textColor="#181737"
+                android:textColorHint="#1b193b"
+                android:textSize="16dp" />
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#dad8d8" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
-                android:layout_weight="1"
                 android:id="@+id/goooogleee"
-                android:textSize="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#0000"
+                android:gravity="left"
+                android:maxLength="12"
+                android:padding="16dp"
                 android:text="Institución"
                 android:textColor="#a2a1b8"
-                android:maxLength="12"
-                android:background="#0000"
-                android:padding="16dp"
-                android:gravity="left" />
+                android:textSize="16dp" />
+
             <TextView
-                android:layout_weight="1"
                 android:id="@+id/institucionperfil"
-                android:textSize="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="ITFIP"
-                android:textColorHint="#181737"
-                android:maxLength="12"
+                android:layout_weight="1"
                 android:background="#0000"
+                android:gravity="right"
+                android:hint="ITFIP"
+                android:maxLength="12"
                 android:padding="16dp"
-                android:gravity="right" />
+                android:textColorHint="#181737"
+                android:textSize="16dp" />
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#dad8d8" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
-                android:layout_weight="1"
                 android:id="@+id/congreso"
-                android:textSize="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#0000"
+                android:gravity="left"
+                android:maxLength="12"
+                android:padding="16dp"
                 android:text="Congreso"
                 android:textColor="#a2a1b8"
-                android:maxLength="12"
-                android:background="#0000"
-                android:padding="16dp"
-                android:gravity="left" />
+                android:textSize="16dp" />
+
             <TextView
-                android:layout_weight="1"
                 android:id="@+id/congresoperfil"
-                android:textSize="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="CONGRESO"
-                android:textColorHint="#181737"
-                android:maxLength="12"
+                android:layout_weight="1"
                 android:background="#0000"
+                android:gravity="right"
+                android:hint="CONGRESO"
+                android:maxLength="12"
                 android:padding="16dp"
-                android:gravity="right" />
+                android:textColorHint="#181737"
+                android:textSize="16dp" />
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#dad8d8" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <Button
                 android:id="@+id/buttoneditar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:layout_marginEnd="12dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
                 android:layout_marginStart="12dp"
+                android:layout_marginLeft="12dp"
                 android:layout_marginTop="4dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="4dp"
                 android:background="@color/colorPrimaryDark"
                 android:text="EDITAR PERFIL"
                 android:textColor="#FFF"
                 android:textSize="16dp" />
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"

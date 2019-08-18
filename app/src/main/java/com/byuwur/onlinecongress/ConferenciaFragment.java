@@ -48,11 +48,14 @@ import static android.content.Context.MODE_PRIVATE;
  * to handle interaction events.
  */
 public class ConferenciaFragment extends Fragment {
+    //PUBLIC STATIC PARAMS OF SEARCH
+    private static boolean ifsearch, ifid;
+    private static String snombre, sbarrio, sciu, usrid, usrciudad;
     private DefaultValues dv = new DefaultValues();
     //register file to request
-    private String IMGURL = dv.imgcanchasurl, URLid= dv.urlconferencia+"buscarid.php", URLactciudad=dv.urlconferencia+"anadirciudad.php",
-            URLlistarstring= dv.urlconferencia+"buscarnombre.php", URLlistarciudad= dv.urlconferencia+"listarciudad.php",
-            URLdep= dv.urllistar+"departamentos.php", URLciu= dv.urllistar+"ciudades.php";
+    private String IMGURL = dv.imgcanchasurl, URLid = dv.urlconferencia + "buscarid.php", URLactciudad = dv.urlconferencia + "anadirciudad.php",
+            URLlistarstring = dv.urlconferencia + "buscarnombre.php", URLlistarciudad = dv.urlconferencia + "listarciudad.php",
+            URLdep = dv.urllistar + "departamentos.php", URLciu = dv.urllistar + "ciudades.php";
     //set context
     private Context ctx;
     //
@@ -64,17 +67,13 @@ public class ConferenciaFragment extends Fragment {
     //list of each array
     private ArrayList<String> dep = new ArrayList<>(), iddep = new ArrayList<>();
     private ArrayList<String> ciudad = new ArrayList<>(), idciudad = new ArrayList<>();
-    private String buscariddepar="", buscaridciudad="";
-    //PUBLIC STATIC PARAMS OF SEARCH
-    private static boolean ifsearch, ifid;
-    private static String snombre, sbarrio, sciu, usrid, usrciudad;
-
-
+    private String buscariddepar = "", buscaridciudad = "";
     private OnFragmentInteractionListener mListener;
 
     private ArrayList<HolderConferencia> listaConferencia;
     private RecyclerView recyclerConferencia;
     private AdaptadorConferencia adapter;
+    private boolean shouldRefreshOnResume = false;
 
     public ConferenciaFragment() {
         // Required empty public constructor
@@ -84,8 +83,8 @@ public class ConferenciaFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View viewsi= inflater.inflate(R.layout.fragment_conferencia, container, false);
-        View viewno= inflater.inflate(R.layout.fragment_noconferencia, container, false);
+        View viewsi = inflater.inflate(R.layout.fragment_conferencia, container, false);
+        View viewno = inflater.inflate(R.layout.fragment_noconferencia, container, false);
         //
         ctx = getActivity();
         assert ctx != null;
@@ -110,60 +109,68 @@ public class ConferenciaFragment extends Fragment {
         final Spinner spinnerdep = viewno.findViewById(R.id.spinnerdepartamento);
         final Spinner spinnerciu = viewno.findViewById(R.id.spinnerciudad);
         //set the spinner value from Arraylist
-        ArrayAdapter<String> adapterdep = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item,dep);
+        ArrayAdapter<String> adapterdep = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item, dep);
         adapterdep.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerdep.setAdapter(adapterdep);
         spinnerdep.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
-                spinnerciu.setEnabled(true);spinnerciu.setClickable(true);
+                spinnerciu.setEnabled(true);
+                spinnerciu.setClickable(true);
                 //Toast.makeText(ctx,adapterView.getItemAtPosition(pos)+". "+iddep.get(pos), Toast.LENGTH_SHORT).show();
-                buscariddepar=iddep.get(pos);
+                buscariddepar = iddep.get(pos);
                 //RESET CIUDAD ARRAYLIST
-                ciudad.clear();idciudad.clear();
-                ciudad.add("[--- Ciudades ---]");idciudad.add("0");
+                ciudad.clear();
+                idciudad.clear();
+                ciudad.add("[--- Ciudades ---]");
+                idciudad.add("0");
                 spinnerciu.setSelection(0);
                 //fill ciudad arraylist
                 llenarciudad();
-                if(pos==0){
-                    spinnerciu.setEnabled(false);spinnerciu.setClickable(false);
-                    buscaridciudad="";
+                if (pos == 0) {
+                    spinnerciu.setEnabled(false);
+                    spinnerciu.setClickable(false);
+                    buscaridciudad = "";
                 }
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> parent){}
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
         //set the spinner value from Arraylist
-        ArrayAdapter<String> adapterciu = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item,ciudad);
+        ArrayAdapter<String> adapterciu = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item, ciudad);
         adapterciu.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerciu.setAdapter(adapterciu);
         spinnerciu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
                 //Toast.makeText(ctx, adapterView.getItemAtPosition(pos)+". "+idciudad.get(pos), Toast.LENGTH_SHORT).show();
-                buscaridciudad=idciudad.get(pos);
-                if(pos==0){
-                    buscaridciudad="";
+                buscaridciudad = idciudad.get(pos);
+                if (pos == 0) {
+                    buscaridciudad = "";
                 }
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> parent){}
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
         //search button script
         Button buttonactualizar = viewno.findViewById(R.id.buttonactualizarciudad);
-        buttonactualizar.setOnClickListener(new View.OnClickListener(){
+        buttonactualizar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 //Toast.makeText(ctx,buscaridciudad,Toast.LENGTH_SHORT).show();
                 actualizarciudad(usrid, buscaridciudad);
             }
         });
 
         //VIEWSI ELEMENTS
-        listaConferencia=new ArrayList<>();
-        recyclerConferencia=viewsi.findViewById(R.id.recyclerConferencia);
+        listaConferencia = new ArrayList<>();
+        recyclerConferencia = viewsi.findViewById(R.id.recyclerConferencia);
         recyclerConferencia.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter=new AdaptadorConferencia(listaConferencia);
+        adapter = new AdaptadorConferencia(listaConferencia);
         recyclerConferencia.setAdapter(adapter);
         //when it click an specific frame, let's see if we can display its id
         adapter.setonItemClickListener(new AdaptadorConferencia.onItemClickListener() {
@@ -182,18 +189,17 @@ public class ConferenciaFragment extends Fragment {
         });
         //AND VERIFY IF THERE'S ANYTHING,
         //if it isn't display an specific layout design
-        if ( (usrciudad.equalsIgnoreCase("null") || usrciudad.equalsIgnoreCase("")
-                || usrciudad==null ) && !ifsearch ){
+        if ((usrciudad.equalsIgnoreCase("null") || usrciudad.equalsIgnoreCase("")
+                || usrciudad == null) && !ifsearch) {
             return viewno;
-        }
-        else{
+        } else {
             LlenarListaConferencia(ifsearch, ifid, snombre, sbarrio, sciu);
             resetsearchvalues();
             return viewsi;
         }
     }
 
-    private void actualizarciudad(final String id, final String ciudad){
+    private void actualizarciudad(final String id, final String ciudad) {
         // Showing progress dialog at user registration time.
         final ProgressDialog progreso1 = new ProgressDialog(ctx);
         progreso1.setMessage("Por favor, espere...");
@@ -206,7 +212,7 @@ public class ConferenciaFragment extends Fragment {
                         //Log.d("Response", response.toString());
                         JSONArray resp = null;
                         try {
-                            resp = new JSONArray( response );
+                            resp = new JSONArray(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -230,7 +236,7 @@ public class ConferenciaFragment extends Fragment {
                                         }
                                     });
                                     dialogo.show();
-                                } else if (success){
+                                } else if (success) {
                                     AlertDialog.Builder dialogo = new AlertDialog.Builder(ctx);
                                     dialogo.setTitle("ACTUALIZAR");
                                     dialogo.setMessage("\n" + res.getString("mensaje"));
@@ -284,21 +290,20 @@ public class ConferenciaFragment extends Fragment {
     }
 
     private void LlenarListaConferencia(boolean search, boolean id, String nombre, String barrio, String ciu) {
-        Log.d("Data enviada",""+search+", "+id+", "+nombre+", "+barrio+", "+ciu);
+        Log.d("Data enviada", "" + search + ", " + id + ", " + nombre + ", " + barrio + ", " + ciu);
         //let's see the params to list
-        if(search){
-            if (id){
+        if (search) {
+            if (id) {
                 buscarlistarid(nombre);
-            }
-            else {
+            } else {
                 buscarlistarnombre(nombre, barrio, ciu);
             }
-        } else{
+        } else {
             listarciudad();
         }
     }
 
-    private void listarciudad(){
+    private void listarciudad() {
         // Showing progress dialog at user registration time.
         final ProgressDialog progreso = new ProgressDialog(ctx);
         progreso.setMessage("Por favor, espere...");
@@ -314,7 +319,7 @@ public class ConferenciaFragment extends Fragment {
                         //Log.d("Response", response.toString());
                         JSONArray resp = null;
                         try {
-                            resp = new JSONArray( response );
+                            resp = new JSONArray(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -325,7 +330,7 @@ public class ConferenciaFragment extends Fragment {
                                 JSONObject res = resp.getJSONObject(i);
                                 recyclerConferencia.setAdapter(adapter);
 
-                                if(res.has("error")) {
+                                if (res.has("error")) {
                                     Boolean error = res.getBoolean("error");
                                     if (error) {
                                         AlertDialog.Builder dialogoerror = new AlertDialog.Builder(ctx);
@@ -341,13 +346,13 @@ public class ConferenciaFragment extends Fragment {
                                         });
                                         dialogoerror.show();
                                     }
-                                } else{
+                                } else {
                                     listaConferencia.add(new HolderConferencia(
-                                            ""+res.getString("NOMBRECANCHA"),res.getString("IDCANCHAS"),
-                                            "$COP "+res.getString("TARIFA")+"/hora",""+res.getString("UBICACION"),
-                                            ""+res.getString("NOMBRECIUDAD"),""+res.getString("DIASDISPONIBLE"),
-                                            "De "+res.getString("HORAABRIR")+" a "+res.getString("HORACERRAR"),
-                                            IMGURL+ res.getString("IDCANCHAS") +"/1.jpg"));
+                                            "" + res.getString("NOMBRECANCHA"), res.getString("IDCANCHAS"),
+                                            "$COP " + res.getString("TARIFA") + "/hora", "" + res.getString("UBICACION"),
+                                            "" + res.getString("NOMBRECIUDAD"), "" + res.getString("DIASDISPONIBLE"),
+                                            "De " + res.getString("HORAABRIR") + " a " + res.getString("HORACERRAR"),
+                                            IMGURL + res.getString("IDCANCHAS") + "/1.jpg"));
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -386,7 +391,7 @@ public class ConferenciaFragment extends Fragment {
         rq.add(jsrqciudad);
     }
 
-    private void buscarlistarid(final String id){
+    private void buscarlistarid(final String id) {
         // Showing progress dialog at user registration time.
         final ProgressDialog progreso = new ProgressDialog(ctx);
         progreso.setMessage("Por favor, espere...");
@@ -400,7 +405,7 @@ public class ConferenciaFragment extends Fragment {
                         //Log.d("Response", response.toString());
                         JSONArray resp = null;
                         try {
-                            resp = new JSONArray( response );
+                            resp = new JSONArray(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -411,7 +416,7 @@ public class ConferenciaFragment extends Fragment {
                                 JSONObject res = resp.getJSONObject(i);
                                 recyclerConferencia.setAdapter(adapter);
 
-                                if(res.has("error")) {
+                                if (res.has("error")) {
                                     Boolean error = res.getBoolean("error");
                                     if (error) {
                                         AlertDialog.Builder dialogoerror = new AlertDialog.Builder(ctx);
@@ -427,13 +432,13 @@ public class ConferenciaFragment extends Fragment {
                                         });
                                         dialogoerror.show();
                                     }
-                                } else{
+                                } else {
                                     listaConferencia.add(new HolderConferencia(
-                                            ""+res.getString("NOMBRECANCHA"),res.getString("IDCANCHAS"),
-                                            "$COP "+res.getString("TARIFA")+"/hora",""+res.getString("UBICACION"),
-                                            ""+res.getString("NOMBRECIUDAD"),""+res.getString("DIASDISPONIBLE"),
-                                            "De "+res.getString("HORAABRIR")+" a "+res.getString("HORACERRAR"),
-                                            IMGURL+ res.getString("IDCANCHAS") +"/1.jpg"));
+                                            "" + res.getString("NOMBRECANCHA"), res.getString("IDCANCHAS"),
+                                            "$COP " + res.getString("TARIFA") + "/hora", "" + res.getString("UBICACION"),
+                                            "" + res.getString("NOMBRECIUDAD"), "" + res.getString("DIASDISPONIBLE"),
+                                            "De " + res.getString("HORAABRIR") + " a " + res.getString("HORACERRAR"),
+                                            IMGURL + res.getString("IDCANCHAS") + "/1.jpg"));
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -472,7 +477,7 @@ public class ConferenciaFragment extends Fragment {
         rq.add(jsrqid);
     }
 
-    private void buscarlistarnombre(final String nombre, final String barrio, final String ciu){
+    private void buscarlistarnombre(final String nombre, final String barrio, final String ciu) {
         // Showing progress dialog at user registration time.
         final ProgressDialog progreso = new ProgressDialog(ctx);
         progreso.setMessage("Por favor, espere...");
@@ -486,7 +491,7 @@ public class ConferenciaFragment extends Fragment {
                         //Log.d("Response", response.toString());
                         JSONArray resp = null;
                         try {
-                            resp = new JSONArray( response );
+                            resp = new JSONArray(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -497,7 +502,7 @@ public class ConferenciaFragment extends Fragment {
                                 JSONObject res = resp.getJSONObject(i);
                                 recyclerConferencia.setAdapter(adapter);
 
-                                if(res.has("error")) {
+                                if (res.has("error")) {
                                     Boolean error = res.getBoolean("error");
                                     if (error) {
                                         AlertDialog.Builder dialogoerror = new AlertDialog.Builder(ctx);
@@ -513,13 +518,13 @@ public class ConferenciaFragment extends Fragment {
                                         });
                                         dialogoerror.show();
                                     }
-                                } else{
+                                } else {
                                     listaConferencia.add(new HolderConferencia(
-                                            ""+res.getString("NOMBRECANCHA"),res.getString("IDCANCHAS"),
-                                            "$COP "+res.getString("TARIFA")+"/hora",""+res.getString("UBICACION"),
-                                            ""+res.getString("NOMBRECIUDAD"),""+res.getString("DIASDISPONIBLE"),
-                                            "De "+res.getString("HORAABRIR")+" a "+res.getString("HORACERRAR"),
-                                            IMGURL+ res.getString("IDCANCHAS") +"/1.jpg"));
+                                            "" + res.getString("NOMBRECANCHA"), res.getString("IDCANCHAS"),
+                                            "$COP " + res.getString("TARIFA") + "/hora", "" + res.getString("UBICACION"),
+                                            "" + res.getString("NOMBRECIUDAD"), "" + res.getString("DIASDISPONIBLE"),
+                                            "De " + res.getString("HORAABRIR") + " a " + res.getString("HORACERRAR"),
+                                            IMGURL + res.getString("IDCANCHAS") + "/1.jpg"));
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -560,21 +565,23 @@ public class ConferenciaFragment extends Fragment {
         rq.add(jsrqnombre);
     }
 
-    public void setsearchvalues(boolean search, boolean id, String nombre, String barrio, String ciu){
-        ifsearch=search;
-        ifid=id;
-        snombre=nombre;
-        sbarrio=barrio;
-        sciu=ciu;
+    public void setsearchvalues(boolean search, boolean id, String nombre, String barrio, String ciu) {
+        ifsearch = search;
+        ifid = id;
+        snombre = nombre;
+        sbarrio = barrio;
+        sciu = ciu;
     }
-    private void resetsearchvalues(){
-        ifsearch=false;
-        ifid=false;
-        snombre=null;
-        sbarrio=null;
-        sciu=null;
+
+    private void resetsearchvalues() {
+        ifsearch = false;
+        ifid = false;
+        snombre = null;
+        sbarrio = null;
+        sciu = null;
     }
-    private void onclickbuscar(){
+
+    private void onclickbuscar() {
         //title toolbar
         Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle("Buscar");
@@ -586,18 +593,19 @@ public class ConferenciaFragment extends Fragment {
         FloatingActionButton fabsearch = getActivity().findViewById(R.id.search);
         fabsearch.setVisibility(View.GONE);
     }
-    private void onclickself(){
+
+    private void onclickself() {
         Fragment fragmentconferencia = new ConferenciaFragment();
         assert getFragmentManager() != null;
         getFragmentManager().beginTransaction().replace(R.id.home, fragmentconferencia).commit();
     }
 
-    private void llenardepartamentos(){
+    private void llenardepartamentos() {
         jsrqdep = new JsonArrayRequest(Request.Method.GET, URLdep,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        for(int i=0; i < response.length(); i++) {
+                        for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject res = response.getJSONObject(i);
                                 //Log.d("Response: ", "ID:"+res.getString("IDDEPARTAMENTOS")+". Nombre: "+res.getString("NOMBREDEPARTAMENTO"));
@@ -617,12 +625,12 @@ public class ConferenciaFragment extends Fragment {
         rq.add(jsrqdep);
     }
 
-    private void llenarciudad(){
-        jsrqciu = new JsonArrayRequest(Request.Method.GET, URLciu+"?dep="+buscariddepar,
+    private void llenarciudad() {
+        jsrqciu = new JsonArrayRequest(Request.Method.GET, URLciu + "?dep=" + buscariddepar,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        for(int i=0; i < response.length(); i++) {
+                        for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject res = response.getJSONObject(i);
                                 //Log.d("Response: ", "ID:"+res.getString("IDCIUDADES")+". Nombre: "+res.getString("NOMBRECIUDAD"));
@@ -642,16 +650,16 @@ public class ConferenciaFragment extends Fragment {
         rq.add(jsrqciu);
     }
 
-    private boolean shouldRefreshOnResume = false;
     @Override
     public void onResume() {
         super.onResume();
         // Check should we need to refresh the fragment
-        if(shouldRefreshOnResume){
+        if (shouldRefreshOnResume) {
             onclickself();
-            shouldRefreshOnResume=false;
+            shouldRefreshOnResume = false;
         }
     }
+
     @Override
     public void onStop() {
         super.onStop();
@@ -664,6 +672,7 @@ public class ConferenciaFragment extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
+
     /*
     @Override
     public void onAttach(Context context) {
@@ -682,6 +691,7 @@ public class ConferenciaFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated

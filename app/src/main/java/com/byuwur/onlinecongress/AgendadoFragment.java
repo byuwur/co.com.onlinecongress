@@ -1,4 +1,4 @@
-package com.mateus.resweb;
+package com.byuwur.onlinecongress;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -45,24 +45,28 @@ import static android.content.Context.MODE_PRIVATE;
  * to handle interaction events.
  */
 public class AgendadoFragment extends Fragment {
+    //public params of search
+    private static boolean ifres;
+    private static String usrid;
     private DefaultValues dv = new DefaultValues();
     //register file to request
-    private String IMGURL = dv.imgcanchasurl, URLlistaragendado= dv.urlagendado+"listarfavoritos.php";
+<<<<<<<HEAD:app/src/main/java/com/byuwur/onlinecongress/AgendadoFragment.java
+    private String IMGURL = dv.imgcanchasurl, URLlistaragendado = dv.urlagendado + "listarfavoritos.php";
+=======
+    private String IMGURL = dv.imgcanchasurl, URLlistaragendado = dv.urlagendado + "listarfavoritos.php";
+>>>>>>>d0f5b0107ef84f1963f655bf78f1590c3e4d4d34:app/src/main/java/com/mateus/resweb/AgendadoFragment.java
     //set context
     private Context ctx;
     //
     private RequestQueue rq;
     //create request
     private StringRequest jsrqagendado, jsrqconfreservas;
-    //public params of search
-    private static boolean ifres;
-    private static String usrid;
-
     private OnFragmentInteractionListener mListener;
 
     private ArrayList<HolderAgendado> listaAgendado;
     private RecyclerView recyclerAgendado;
     private AdaptadorAgendado adapter;
+    private boolean shouldRefreshOnResume = false;
 
     public AgendadoFragment() {
         // Required empty public constructor
@@ -72,18 +76,18 @@ public class AgendadoFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View viewsi= inflater.inflate(R.layout.fragment_agendado, container, false);
-        View viewno= inflater.inflate(R.layout.fragment_noagendado, container, false);
+        View viewsi = inflater.inflate(R.layout.fragment_agendado, container, false);
+        View viewno = inflater.inflate(R.layout.fragment_noagendado, container, false);
         //
         ctx = getActivity();
         assert ctx != null;
         rq = Volley.newRequestQueue(ctx);
         // Showing progress dialog at user registration time.
 
-        listaAgendado=new ArrayList<>();
-        recyclerAgendado=viewsi.findViewById(R.id.recyclerAgendado);
+        listaAgendado = new ArrayList<>();
+        recyclerAgendado = viewsi.findViewById(R.id.recyclerAgendado);
         recyclerAgendado.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter=new AdaptadorAgendado(listaAgendado);
+        adapter = new AdaptadorAgendado(listaAgendado);
         recyclerAgendado.setAdapter(adapter);
         //when it click an specific frame, let's see if we can display its id
         adapter.setonItemClickListener(new AdaptadorAgendado.onItemClickListener() {
@@ -101,27 +105,26 @@ public class AgendadoFragment extends Fragment {
             }
         });
         //Button from noreserv
-        Button buttontoreserv =  viewno.findViewById(R.id.buttontoreserv);
-        buttontoreserv.setOnClickListener(new View.OnClickListener(){
+        Button buttontoreserv = viewno.findViewById(R.id.buttontoreserv);
+        buttontoreserv.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View viewno){
+            public void onClick(View viewno) {
                 onclickreservar();
             }
         });
         //and verify if there's anything,
         //if it isn't display an specific layout design
-        if(ifres){
+        if (ifres) {
             LlenarListaAgendado();
-            ifres=false;
+            ifres = false;
             return viewsi;
-        }
-        else {
+        } else {
             verifagendado();
             return viewno;
         }
     }
 
-    private void verifagendado(){
+    private void verifagendado() {
         // Showing progress dialog at user registration time.
         final ProgressDialog progreso = new ProgressDialog(ctx);
         progreso.setMessage("Por favor, espere...");
@@ -136,7 +139,7 @@ public class AgendadoFragment extends Fragment {
                     public void onResponse(String response) {
                         JSONArray resp = null;
                         try {
-                            resp = new JSONArray( response );
+                            resp = new JSONArray(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -147,13 +150,21 @@ public class AgendadoFragment extends Fragment {
                                 JSONObject res = resp.getJSONObject(i);
                                 if (res.has("error")) {
                                     Boolean error = res.getBoolean("error");
-                                    if (error){ ifres=false;break; }
-                                } else { ifres=true; break; }
+                                    if (error) {
+                                        ifres = false;
+                                        break;
+                                    }
+                                } else {
+                                    ifres = true;
+                                    break;
+                                }
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         }
-                        if (ifres){ onclickself(); }
+                        if (ifres) {
+                            onclickself();
+                        }
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -189,7 +200,7 @@ public class AgendadoFragment extends Fragment {
                         //Log.d("Response", response.toString());
                         JSONArray resp = null;
                         try {
-                            resp = new JSONArray( response );
+                            resp = new JSONArray(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -200,7 +211,7 @@ public class AgendadoFragment extends Fragment {
                                 JSONObject res = resp.getJSONObject(i);
                                 recyclerAgendado.setAdapter(adapter);
 
-                                if(res.has("error")) {
+                                if (res.has("error")) {
                                     Boolean error = res.getBoolean("error");
                                     if (error) {
                                         AlertDialog.Builder dialogoerror = new AlertDialog.Builder(ctx);
@@ -215,13 +226,13 @@ public class AgendadoFragment extends Fragment {
                                         });
                                         dialogoerror.show();
                                     }
-                                } else{
+                                } else {
                                     listaAgendado.add(new HolderAgendado(
-                                            ""+res.getString("NOMBRECANCHA"),res.getString("canchas_IDCANCHA"),
-                                            "$COP "+res.getString("TARIFA")+"/hora",""+res.getString("UBICACION"),
-                                            ""+res.getString("NOMBRECIUDAD"),""+res.getString("DIASDISPONIBLE"),
-                                            "De "+res.getString("HORAABRIR")+" a "+res.getString("HORACERRAR"),
-                                            IMGURL+ res.getString("canchas_IDCANCHA") +"/1.jpg"));
+                                            "" + res.getString("NOMBRECANCHA"), res.getString("canchas_IDCANCHA"),
+                                            "$COP " + res.getString("TARIFA") + "/hora", "" + res.getString("UBICACION"),
+                                            "" + res.getString("NOMBRECIUDAD"), "" + res.getString("DIASDISPONIBLE"),
+                                            "De " + res.getString("HORAABRIR") + " a " + res.getString("HORACERRAR"),
+                                            IMGURL + res.getString("canchas_IDCANCHA") + "/1.jpg"));
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -260,7 +271,7 @@ public class AgendadoFragment extends Fragment {
         rq.add(jsrqagendado);
     }
 
-    private void onclickreservar(){
+    private void onclickreservar() {
         Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle("Ponencia");
         //switch fragment
@@ -271,22 +282,23 @@ public class AgendadoFragment extends Fragment {
         fragmentTransaction.replace(R.id.home, fragmentreservar);
         fragmentTransaction.commit();
     }
-    private void onclickself(){
+
+    private void onclickself() {
         Fragment fragmentagendado = new AgendadoFragment();
         assert getFragmentManager() != null;
         getFragmentManager().beginTransaction().replace(R.id.home, fragmentagendado).commit();
     }
 
-    private boolean shouldRefreshOnResume = false;
     @Override
     public void onResume() {
         super.onResume();
         // Check should we need to refresh the fragment
-        if(shouldRefreshOnResume){
+        if (shouldRefreshOnResume) {
             onclickself();
-            shouldRefreshOnResume=false;
+            shouldRefreshOnResume = false;
         }
     }
+
     @Override
     public void onStop() {
         super.onStop();
@@ -299,6 +311,7 @@ public class AgendadoFragment extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
+
     /*
     @Override
     public void onAttach(Context context) {
@@ -317,6 +330,7 @@ public class AgendadoFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated

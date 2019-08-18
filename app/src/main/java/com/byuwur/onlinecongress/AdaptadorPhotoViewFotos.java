@@ -1,4 +1,4 @@
-package com.mateus.resweb;
+package com.byuwur.onlinecongress;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,11 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-//import com.github.chrisbanes.photoview.PhotoView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
+
+//import com.github.chrisbanes.photoview.PhotoView;
 
 public class AdaptadorPhotoViewFotos extends PagerAdapter {
     private Context ctx;
@@ -21,7 +22,7 @@ public class AdaptadorPhotoViewFotos extends PagerAdapter {
     //private PhotoView imageviewfoto;
     private ImageView imageviewfoto;
 
-    AdaptadorPhotoViewFotos(Context ctx, String[] urlimages){
+    AdaptadorPhotoViewFotos(Context ctx, String[] urlimages) {
         this.ctx = ctx;
         this.urlimages = urlimages;
     }
@@ -48,13 +49,14 @@ public class AdaptadorPhotoViewFotos extends PagerAdapter {
                 .into(imageviewfoto, new Callback() {
                     @Override
                     public void onSuccess() {
-                        Log.d("Carga","Cargada");
+                        Log.d("Carga", "Cargada");
                     }
+
                     @Override
                     public void onError(Exception e) {
-                        Log.d("Carga","Error al cargar");
+                        Log.d("Carga", "Error al cargar");
                         imageviewfoto.setImageResource(R.drawable.no_image);
-                        Toast.makeText(ctx, "Ocurrieron errores al cargar algunas imágenes.",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ctx, "Ocurrieron errores al cargar algunas imágenes.", Toast.LENGTH_SHORT).show();
                     }
                 });
 

@@ -1,12 +1,12 @@
-package com.mateus.resweb;
+package com.byuwur.onlinecongress;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -29,7 +29,7 @@ import java.util.Map;
 public class Forget extends AppCompatActivity {
     private DefaultValues dv = new DefaultValues();
     //login file to request
-    private String URL= dv.urlcuenta+"forgetpass.php";
+    private String URL = dv.urlcuenta + "forgetpass.php";
     private RequestQueue rq;
     //set context
     private Context ctx;
@@ -46,7 +46,7 @@ public class Forget extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_forget);
 
-        ctx=Forget.this;
+        ctx = Forget.this;
         rq = Volley.newRequestQueue(ctx);
 
         correoforget = findViewById(R.id.correoforget);
@@ -67,20 +67,20 @@ public class Forget extends AppCompatActivity {
         });
     }
 
-    public void onClickOlvidar(){
+    public void onClickOlvidar() {
         // Showing progress dialog at user registration time.
         final ProgressDialog progreso1 = new ProgressDialog(ctx);
         progreso1.setMessage("Por favor, espere...");
         progreso1.show();
 
-        jsrqforget = new StringRequest(Request.Method.POST,URL,
+        jsrqforget = new StringRequest(Request.Method.POST, URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         //Log.d("Response", response.toString());
                         JSONArray resp = null;
                         try {
-                            resp = new JSONArray( response );
+                            resp = new JSONArray(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -103,8 +103,7 @@ public class Forget extends AppCompatActivity {
                                         }
                                     });
                                     dialogoerror.show();
-                                }
-                                else {
+                                } else {
                                     AlertDialog.Builder dialogoerror = new AlertDialog.Builder(ctx);
                                     dialogoerror.setTitle("OLVIDAR CONTRASEÑA");
                                     dialogoerror.setMessage("\n" + res.getString("mensaje"));
@@ -155,7 +154,7 @@ public class Forget extends AppCompatActivity {
         rq.add(jsrqforget);
     }
 
-    public void onClickOlvidarLogin(){
+    public void onClickOlvidarLogin() {
         finish();
     }
 

@@ -2,9 +2,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_noreservar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragment_noreservar"
     tools:context=".PonenciaFragment">
 
     <android.support.constraint.ConstraintLayout
@@ -15,12 +15,12 @@
             android:id="@+id/textView13"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
             android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
             android:text="No hay canchas para presentar.\nBusque canchas pulsando el botón de búsqueda o inserte una ciudad a su cuenta para listar canchas cercanas."
             android:textAlignment="center"
             android:textColor="#666"
@@ -36,11 +36,11 @@
             android:id="@+id/textView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="100dp"
             android:text="Busque canchas pulsando el\nbotón de la esquina."
             android:textAlignment="center"
             android:textColor="#666"
@@ -54,11 +54,11 @@
             android:id="@+id/spinnerdepartamento"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
             android:layout_marginStart="40dp"
+            android:layout_marginLeft="40dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginRight="40dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView13" />
@@ -67,11 +67,11 @@
             android:id="@+id/spinnerciudad"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
             android:layout_marginStart="40dp"
+            android:layout_marginLeft="40dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginRight="40dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinnerdepartamento" />
@@ -80,18 +80,35 @@
             android:id="@+id/buttonactualizarciudad"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="48dp"
-            android:layout_marginLeft="48dp"
-            android:layout_marginRight="48dp"
             android:layout_marginStart="48dp"
+            android:layout_marginLeft="48dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginRight="48dp"
+            android:background="@color/colorPrimaryDark"
             android:text="Actualizar"
             android:textColor="#FFF"
-            android:background="@color/colorPrimaryDark"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerciudad" />
+
+        <
+
+        <
+
+        <
+
+        <
+
+        <
+
+        <
+
+        < HEAD
+        =======
+        android:background="@color/colorPrimaryDark"
+        >>>>>>> d0f5b0107ef84f1963f655bf78f1590c3e4d4d34
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerciudad" />
 
     </android.support.constraint.ConstraintLayout>
 

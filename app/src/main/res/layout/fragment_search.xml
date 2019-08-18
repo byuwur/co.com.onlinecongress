@@ -2,9 +2,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_search"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragment_search"
     tools:context=".SearchFragment">
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -31,11 +31,11 @@
             android:id="@+id/textsearch"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginRight="24dp"
             android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
             android:ems="10"
             android:hint="Palabras clave"
             android:inputType="textPersonName"
@@ -47,17 +47,34 @@
             android:id="@+id/buttonbuscar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="48dp"
-            android:layout_marginLeft="48dp"
-            android:layout_marginRight="48dp"
             android:layout_marginStart="48dp"
+            android:layout_marginLeft="48dp"
             android:layout_marginTop="24dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginRight="48dp"
+            android:background="@color/colorPrimaryDark"
             android:text="Buscar"
             android:textColor="#FFF"
-            android:background="@color/colorPrimaryDark"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textsearch" />
+
+        <
+
+        <
+
+        <
+
+        <
+
+        <
+
+        <
+
+        < HEAD
+        =======
+        android:background="@color/colorPrimaryDark"
+        >>>>>>> d0f5b0107ef84f1963f655bf78f1590c3e4d4d34
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textsearch" />
     </android.support.constraint.ConstraintLayout>
 
 </FrameLayout>

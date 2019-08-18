@@ -1,9 +1,8 @@
-package com.mateus.resweb;
+package com.byuwur.onlinecongress;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
@@ -40,17 +39,19 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Ponencia extends AppCompatActivity {
-    private DefaultValues dv = new DefaultValues();
-    //register file to request
-    private String URLverifav = dv.urlcanchas+"verifav.php", URLdatoscancha=dv.urlcanchas+"datoscancha.php",
-            URLrmfav = dv.urlcanchas+"rmfav.php", URLsetfav = dv.urlcanchas+"setfav.php";
-    private Toolbar toolbar;
     private static String usrid, id, horaabrir, horacerrar;
     private static boolean iffav;
+    private final long DELAY_MS = 500;//delay in milliseconds before task is to be executed
+    private final long PERIOD_MS = 5000; // time in milliseconds between successive task executions
+    private DefaultValues dv = new DefaultValues();
+    //register file to request
+    private String URLverifav = dv.urlcanchas + "verifav.php", URLdatoscancha = dv.urlcanchas + "datoscancha.php",
+            URLrmfav = dv.urlcanchas + "rmfav.php", URLsetfav = dv.urlcanchas + "setfav.php";
+    private Toolbar toolbar;
     private TextView nombrecancha, diascancha, horascancha, tarifacancha, telefonocancha, direccioncancha, ciudadcancha, barriocancha, caracscancha;
     //array to present photos
     private String[] urlimages = new String[]{
-            dv.imgcanchasurl+id+"/1.jpg", dv.imgcanchasurl+id+"/2.jpg", dv.imgcanchasurl+id+"/3.jpg"
+            dv.imgcanchasurl + id + "/1.jpg", dv.imgcanchasurl + id + "/2.jpg", dv.imgcanchasurl + id + "/3.jpg"
     };
     //viewflipper de las fotos de la cancha
     private ViewPager pagerfotos;
@@ -66,8 +67,6 @@ public class Ponencia extends AppCompatActivity {
     //autoscroll values
     private int currentPage = 0;
     private Timer timer;
-    private final long DELAY_MS = 500;//delay in milliseconds before task is to be executed
-    private final long PERIOD_MS = 5000; // time in milliseconds between successive task executions
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +78,7 @@ public class Ponencia extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(id);
 
-        ctx= Ponencia.this;
+        ctx = Ponencia.this;
         rq = Volley.newRequestQueue(ctx);
 
         nombrecancha = findViewById(R.id.nombrecancha);
@@ -118,7 +117,7 @@ public class Ponencia extends AppCompatActivity {
             }
         };
         timer = new Timer(); // This will create a new Thread
-        timer .schedule(new TimerTask() { // task to be scheduled
+        timer.schedule(new TimerTask() { // task to be scheduled
             @Override
             public void run() {
                 handler.post(Update);
@@ -134,8 +133,9 @@ public class Ponencia extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (iffav){
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);dialog.setCancelable(false);
+                if (iffav) {
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);
+                    dialog.setCancelable(false);
                     dialog.setMessage("¿Desea quitar esta cancha de su lista de favoritos?");
                     dialog.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                         @Override
@@ -153,9 +153,9 @@ public class Ponencia extends AppCompatActivity {
                     });
                     dialog.create();
                     dialog.show();
-                }
-                else{
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);dialog.setCancelable(false);
+                } else {
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);
+                    dialog.setCancelable(false);
                     dialog.setMessage("¿Desea añadir esta cancha a su lista de favoritos?");
                     dialog.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                         @Override
@@ -178,7 +178,7 @@ public class Ponencia extends AppCompatActivity {
         });
     }
 
-    private void datoscancha(){
+    private void datoscancha() {
         // Showing progress dialog at user registration time.
         final ProgressDialog progreso = new ProgressDialog(ctx);
         progreso.setMessage("Por favor, espere...");
@@ -190,7 +190,7 @@ public class Ponencia extends AppCompatActivity {
                     public void onResponse(String response) {
                         JSONArray resp = null;
                         try {
-                            resp = new JSONArray( response );
+                            resp = new JSONArray(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -214,8 +214,7 @@ public class Ponencia extends AppCompatActivity {
                                         });
                                         dialogo.show();
                                     }
-                                }
-                                else {
+                                } else {
                                     nombrecancha.setText(res.getString("NOMBRECANCHA"));
                                     diascancha.setText(res.getString("DIASDISPONIBLE"));
                                     horascancha.setText("De " + res.getString("HORAABRIR") + " a " + res.getString("HORACERRAR"));
@@ -268,7 +267,7 @@ public class Ponencia extends AppCompatActivity {
         rq.add(jsrqdatoscancha);
     }
 
-    private void veriffavoritos(){
+    private void veriffavoritos() {
         usrid = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getString("id", null);
         final FloatingActionButton fab = findViewById(R.id.fab);
@@ -279,7 +278,7 @@ public class Ponencia extends AppCompatActivity {
                     public void onResponse(String response) {
                         JSONArray resp = null;
                         try {
-                            resp = new JSONArray( response );
+                            resp = new JSONArray(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -289,8 +288,15 @@ public class Ponencia extends AppCompatActivity {
                                 JSONObject res = resp.getJSONObject(i);
                                 if (res.has("fav")) {
                                     Boolean fav = res.getBoolean("fav");
-                                    if (fav){ iffav=true;fab.setImageResource(R.drawable.ic_fav_star_set);break; }
-                                    else { iffav=false;fab.setImageResource(R.drawable.ic_fav_star_idle);break; }
+                                    if (fav) {
+                                        iffav = true;
+                                        fab.setImageResource(R.drawable.ic_fav_star_set);
+                                        break;
+                                    } else {
+                                        iffav = false;
+                                        fab.setImageResource(R.drawable.ic_fav_star_idle);
+                                        break;
+                                    }
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -316,7 +322,7 @@ public class Ponencia extends AppCompatActivity {
         rq.add(jsrqverifav);
     }
 
-    private void setfav(){
+    private void setfav() {
         // Showing progress dialog at user registration time.
         final ProgressDialog progreso = new ProgressDialog(ctx);
         progreso.setMessage("Por favor, espere...");
@@ -331,7 +337,7 @@ public class Ponencia extends AppCompatActivity {
                     public void onResponse(String response) {
                         JSONArray resp = null;
                         try {
-                            resp = new JSONArray( response );
+                            resp = new JSONArray(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -354,8 +360,7 @@ public class Ponencia extends AppCompatActivity {
                                         }
                                     });
                                     dialogo.show();
-                                }
-                                else {
+                                } else {
                                     AlertDialog.Builder dialogo = new AlertDialog.Builder(ctx);
                                     dialogo.setTitle("FAVORITOS");
                                     dialogo.setMessage("\n" + res.getString("mensaje"));
@@ -407,7 +412,7 @@ public class Ponencia extends AppCompatActivity {
         rq.add(jsrqfav);
     }
 
-    private void rmfav(){
+    private void rmfav() {
         // Showing progress dialog at user registration time.
         final ProgressDialog progreso = new ProgressDialog(ctx);
         progreso.setMessage("Por favor, espere...");
@@ -422,7 +427,7 @@ public class Ponencia extends AppCompatActivity {
                     public void onResponse(String response) {
                         JSONArray resp = null;
                         try {
-                            resp = new JSONArray( response );
+                            resp = new JSONArray(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -445,8 +450,7 @@ public class Ponencia extends AppCompatActivity {
                                         }
                                     });
                                     dialogo.show();
-                                }
-                                else {
+                                } else {
                                     AlertDialog.Builder dialogo = new AlertDialog.Builder(ctx);
                                     dialogo.setTitle("FAVORITOS");
                                     dialogo.setMessage("\n" + res.getString("mensaje"));
@@ -498,15 +502,16 @@ public class Ponencia extends AppCompatActivity {
         rq.add(jsrqfav);
     }
 
-    private void loadimg(){
+    private void loadimg() {
         Picasso.get().load(urlimages[0])
                 .networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE)
                 .fit().centerCrop()
                 .into(canchaimg1, new Callback() {
                     @Override
                     public void onSuccess() {
-                        Log.d("Carga","Cargada");
+                        Log.d("Carga", "Cargada");
                     }
+
                     @Override
                     public void onError(Exception e) {
                         canchaimg1.setImageResource(R.drawable.no_image);
@@ -519,8 +524,9 @@ public class Ponencia extends AppCompatActivity {
                 .into(canchaimg2, new Callback() {
                     @Override
                     public void onSuccess() {
-                        Log.d("Carga","Cargada");
+                        Log.d("Carga", "Cargada");
                     }
+
                     @Override
                     public void onError(Exception e) {
                         canchaimg2.setImageResource(R.drawable.no_image);
@@ -533,8 +539,9 @@ public class Ponencia extends AppCompatActivity {
                 .into(canchaimg3, new Callback() {
                     @Override
                     public void onSuccess() {
-                        Log.d("Carga","Cargada");
+                        Log.d("Carga", "Cargada");
                     }
+
                     @Override
                     public void onError(Exception e) {
                         canchaimg3.setImageResource(R.drawable.no_image);
@@ -550,19 +557,20 @@ public class Ponencia extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id==android.R.id.home) {
+        if (id == android.R.id.home) {
             resetdata();
             finish();
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public void setid(String id){
-        Ponencia.id =id;
+    public void setid(String id) {
+        Ponencia.id = id;
     }
-    private void resetdata(){
-        Ponencia.id=null;
-        Ponencia.iffav=false;
+
+    private void resetdata() {
+        Ponencia.id = null;
+        Ponencia.iffav = false;
     }
 
     @Override

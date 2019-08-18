@@ -1,4 +1,4 @@
-package com.mateus.resweb;
+package com.byuwur.onlinecongress;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -7,22 +7,25 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
-import android.view.View;
-import android.support.v4.view.GravityCompat;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.File;
+
+<<<<<<<HEAD:app/src/main/java/com/byuwur/onlinecongress/Home.java
+        =======
+        >>>>>>>d0f5b0107ef84f1963f655bf78f1590c3e4d4d34:app/src/main/java/com/mateus/resweb/Home.java
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -32,11 +35,39 @@ public class Home extends AppCompatActivity
     //
     private String URLfotoperfil = dv.imgfotoperfil;
     //create edittexts
-    private TextView tvusername,tvuserid, tvuseremail;
+    private TextView tvusername, tvuserid, tvuseremail;
     //profile photo
     private ImageView fotoperfil;
     //
     private String usrid, usrnombre, usrcorreo;
+    private boolean shouldRefreshOnResume = false;
+
+    //DELETE CACHE WHEN SESSION'S GONE
+    public static void deleteCache(Context context) {
+        try {
+            File dir = context.getCacheDir();
+            deleteDir(dir);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static boolean deleteDir(File dir) {
+        if (dir != null && dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i = 0; i < children.length; i++) {
+                boolean success = deleteDir(new File(dir, children[i]));
+                if (!success) {
+                    return false;
+                }
+            }
+            return dir.delete();
+        } else if (dir != null && dir.isFile()) {
+            return dir.delete();
+        } else {
+            return false;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +84,10 @@ public class Home extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.getHeaderView(0);
-        tvusername= headerView.findViewById(R.id.usernombre);
-        tvuserid= headerView.findViewById(R.id.userid);
-        tvuseremail= headerView.findViewById(R.id.useremail);
-        fotoperfil= headerView.findViewById(R.id.fotoperfil);
+        tvusername = headerView.findViewById(R.id.usernombre);
+        tvuserid = headerView.findViewById(R.id.userid);
+        tvuseremail = headerView.findViewById(R.id.useremail);
+        fotoperfil = headerView.findViewById(R.id.fotoperfil);
 
         usrnombre = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getString("nombre", null);
@@ -98,7 +129,8 @@ public class Home extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             //super.onBackPressed();
-            AlertDialog.Builder dialog = new AlertDialog.Builder(this);dialog.setCancelable(false);
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            dialog.setCancelable(false);
             dialog.setMessage("¿Desea salir de la aplicación?");
             dialog.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                 @Override
@@ -118,6 +150,9 @@ public class Home extends AppCompatActivity
             dialog.show();
         }
     }
+    /*
+    @Override
+    public void onFragmentInteraction(Uri uri) {} */
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -157,7 +192,8 @@ public class Home extends AppCompatActivity
             startActivity(intent);
             finish();
         } else if (id == R.id.action_exit) {
-            AlertDialog.Builder dialog = new AlertDialog.Builder(this); dialog.setCancelable(false);
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            dialog.setCancelable(false);
             dialog.setMessage("¿Desea salir de la aplicación?");
             dialog.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                 @Override
@@ -189,19 +225,36 @@ public class Home extends AppCompatActivity
         switch (id) {
             case R.id.nav_ponencia:
                 getSupportActionBar().setTitle("Ponencias");
-                Fragment fragmentreservar = new PonenciaFragment();getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentreservar).commit();
+                Fragment fragmentreservar = new PonenciaFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentreservar).commit();
                 //show fab
                 fabsearch.setVisibility(View.VISIBLE);
                 break;
             case R.id.nav_conferencia:
                 getSupportActionBar().setTitle("Conferencias");
-                Fragment fragmentreservas = new ConferenciaFragment();getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentreservas).commit();
+<<<<<<<HEAD:
+            app / src / main / java / com / byuwur / onlinecongress / Home.java
+                Fragment fragmentreservas = new ConferenciaFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentreservas).commit();
+=======
+                Fragment fragmentreservas = new ConferenciaFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentreservas).commit();
+>>>>>>>d0f5b0107ef84f1963f655bf78f1590c3e4d4d34:
+            app / src / main / java / com / mateus / resweb / Home.java
                 //show fab
                 fabsearch.setVisibility(View.VISIBLE);
                 break;
             case R.id.nav_agenda:
                 getSupportActionBar().setTitle("Agenda");
-                Fragment fragmentfavoritos = new AgendadoFragment();getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentfavoritos).commit();
+<<<<<<<HEAD:
+            app / src / main / java / com / byuwur / onlinecongress / Home.java
+                Fragment fragmentfavoritos = new AgendadoFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentfavoritos).commit();
+=======
+                Fragment fragmentfavoritos = new AgendadoFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentfavoritos).commit();
+>>>>>>>d0f5b0107ef84f1963f655bf78f1590c3e4d4d34:
+            app / src / main / java / com / mateus / resweb / Home.java
                 //show fab
                 fabsearch.setVisibility(View.VISIBLE);
                 break;
@@ -223,47 +276,20 @@ public class Home extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    /*
-    @Override
-    public void onFragmentInteraction(Uri uri) {} */
 
-    private boolean shouldRefreshOnResume = false;
     @Override
     public void onResume() {
         super.onResume();
         // Check should we need to refresh the fragment
-        if(shouldRefreshOnResume){
+        if (shouldRefreshOnResume) {
             //setuserdata();
-            shouldRefreshOnResume=false;
+            shouldRefreshOnResume = false;
         }
     }
+
     @Override
     public void onStop() {
         super.onStop();
         shouldRefreshOnResume = true;
-    }
-
-    //DELETE CACHE WHEN SESSION'S GONE
-    public static void deleteCache(Context context) {
-        try {
-            File dir = context.getCacheDir();
-            deleteDir(dir);
-        } catch (Exception e) { e.printStackTrace();}
-    }
-    public static boolean deleteDir(File dir) {
-        if (dir != null && dir.isDirectory()) {
-            String[] children = dir.list();
-            for (int i = 0; i < children.length; i++) {
-                boolean success = deleteDir(new File(dir, children[i]));
-                if (!success) {
-                    return false;
-                }
-            }
-            return dir.delete();
-        } else if(dir!= null && dir.isFile()) {
-            return dir.delete();
-        } else {
-            return false;
-        }
     }
 }

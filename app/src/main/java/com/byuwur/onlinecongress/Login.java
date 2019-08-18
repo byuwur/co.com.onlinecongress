@@ -1,13 +1,13 @@
-package com.mateus.resweb;
+package com.byuwur.onlinecongress;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -31,14 +31,14 @@ import java.util.Map;
 public class Login extends AppCompatActivity {
     private DefaultValues dv = new DefaultValues();
     //login file to request
-    private String URL= dv.urlinicio+"login.php";
+    private String URL = dv.urlinicio + "login.php";
     private RequestQueue rq;
     //set context
     private Context ctx;
     //create request
     private StringRequest jsrqlogin;
     //create edittexts
-    private EditText et_id,et_pass;
+    private EditText et_id, et_pass;
     //buttons
     private Button buttontoforget, buttontoregister, buttonlogin;
 
@@ -52,12 +52,12 @@ public class Login extends AppCompatActivity {
         //requestqueue set to this
         rq = Volley.newRequestQueue(ctx);
         //get edittexts on xml
-        et_id= findViewById(R.id.correologin);
-        et_pass= findViewById(R.id.passlogin);
+        et_id = findViewById(R.id.correologin);
+        et_pass = findViewById(R.id.passlogin);
         //get buttons
-        buttontoforget=findViewById(R.id.buttontoforget);
-        buttontoregister=findViewById(R.id.buttontoregister);
-        buttonlogin=findViewById(R.id.buttonlogin);
+        buttontoforget = findViewById(R.id.buttontoforget);
+        buttontoregister = findViewById(R.id.buttontoregister);
+        buttonlogin = findViewById(R.id.buttonlogin);
 
         buttonlogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,14 +93,14 @@ public class Login extends AppCompatActivity {
         progreso1.setMessage("Por favor, espere...");
         progreso1.show();
 
-        jsrqlogin = new StringRequest(Request.Method.POST,URL,
+        jsrqlogin = new StringRequest(Request.Method.POST, URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         //Log.d("Response", response.toString());
                         JSONArray resp = null;
                         try {
-                            resp = new JSONArray( response );
+                            resp = new JSONArray(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -132,8 +132,7 @@ public class Login extends AppCompatActivity {
                                     startActivity(intentiniciar);
                                     Toast.makeText(ctx, res.getString("mensaje") + "\nBienvenido, " + res.getString("usrname") + ".", Toast.LENGTH_LONG).show();
                                     finish();
-                                }
-                                else if (error) {
+                                } else if (error) {
                                     AlertDialog.Builder dialogoerror = new AlertDialog.Builder(ctx);
                                     dialogoerror.setTitle("INICIAR SESIÓN");
                                     dialogoerror.setMessage("\n" + res.getString("mensaje"));
@@ -187,19 +186,22 @@ public class Login extends AppCompatActivity {
         rq.add(jsrqlogin);
     }
 
-    public void onClickLoginRegistrar(){
+    public void onClickLoginRegistrar() {
         Intent intentiniciar = new Intent(Login.this, Register.class);
         startActivity(intentiniciar);
         //finish();
     }
-    public void onClickLoginOlvidar(){
+
+    public void onClickLoginOlvidar() {
         Intent intentiniciar = new Intent(Login.this, Forget.class);
         startActivity(intentiniciar);
         //finish();
     }
+
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this); dialog.setCancelable(false);
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setCancelable(false);
         dialog.setMessage("¿Desea salir de la aplicación?");
         dialog.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
             @Override

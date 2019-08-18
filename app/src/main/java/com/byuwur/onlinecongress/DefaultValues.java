@@ -1,17 +1,27 @@
-package com.mateus.resweb;
+package com.byuwur.onlinecongress;
 
 public class DefaultValues {
 
     public String url = "http://www.sistemas-i-computacion-tic.com/reserv/phone/";
-    public String urlinicio = url+"inicio/";
-    public String urlcanchas = url+"canchas/";
-    public String urlponencia = url+"reservar/";
-    public String urlconferencia = url+"reservas/";
-    public String urlagendado = url+"favoritos/";
-    public String urlcuenta = url+"cuenta/";
-    public String urllistar = url+"listar/";
+<<<<<<<HEAD:app/src/main/java/com/byuwur/onlinecongress/DefaultValues.java
+    public String urlinicio = url + "inicio/";
+    public String urlcanchas = url + "canchas/";
+    public String urlponencia = url + "reservar/";
+    public String urlconferencia = url + "reservas/";
+    public String urlagendado = url + "favoritos/";
+    public String urlcuenta = url + "cuenta/";
+    public String urllistar = url + "listar/";
+=======
+    public String urlinicio = url + "inicio/";
+    public String urlcanchas = url + "canchas/";
+    public String urlponencia = url + "reservar/";
+    public String urlconferencia = url + "reservas/";
+    public String urlagendado = url + "favoritos/";
+    public String urlcuenta = url + "cuenta/";
+    public String urllistar = url + "listar/";
+>>>>>>>d0f5b0107ef84f1963f655bf78f1590c3e4d4d34:app/src/main/java/com/mateus/resweb/DefaultValues.java
     public String imgcanchasurl = "http://www.sistemas-i-computacion-tic.com/reserv/admin/Imagenes_Canchas/";
-    public String imgfotoperfil = url+"cuenta/fotoperfil/Imagenes_Usuario/";
+    public String imgfotoperfil = url + "cuenta/fotoperfil/Imagenes_Usuario/";
 }
 
     /*

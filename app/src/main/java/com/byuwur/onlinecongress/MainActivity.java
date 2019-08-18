@@ -1,35 +1,22 @@
-package com.mateus.resweb;
+package com.byuwur.onlinecongress;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.os.Handler;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
     private int DURACION_SPLASH = 1500;
 
     private DefaultValues dv = new DefaultValues();
-    private String URLconex=dv.url+"ver_con.php", URLpass=dv.url+"ver_pass.php", URLdatos=dv.url+"ver_datos.php";
+    private String URLconex = dv.url + "ver_con.php", URLpass = dv.url + "ver_pass.php", URLdatos = dv.url + "ver_datos.php";
     private RequestQueue rq;
     //set context
     private Context ctx;
@@ -315,10 +302,10 @@ public class MainActivity extends AppCompatActivity {
 
     */
 
-    private void jumpnext(){
+    private void jumpnext() {
         //from splash screen to next screen
-        new Handler().postDelayed(new Runnable(){
-            public void run(){
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
                 Intent intent = new Intent(ctx, Firsttime.class);
                 startActivity(intent);
                 finish();
@@ -327,6 +314,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {}
+    public void onBackPressed() {
+    }
 
 }

@@ -1,11 +1,11 @@
-package com.mateus.resweb;
+package com.byuwur.onlinecongress;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,7 +14,7 @@ import android.widget.TextView;
 public class Firsttime extends AppCompatActivity {
     private ImageView l1;
     //private Animation alpha,downtoup;
-    private TextView textviewapc,textviewapc2,textviewapc3;
+    private TextView textviewapc, textviewapc2, textviewapc3;
     private Button botoniniciar;
     private Boolean isFirstRun;
 
@@ -37,7 +37,7 @@ public class Firsttime extends AppCompatActivity {
         textviewapc = findViewById(R.id.textviewapc);
         textviewapc2 = findViewById(R.id.textviewapc2);
         textviewapc3 = findViewById(R.id.textviewapc3);
-        botoniniciar = findViewById (R.id.botoniniciar);
+        botoniniciar = findViewById(R.id.botoniniciar);
 
         /*
         alpha = AnimationUtils.loadAnimation(this, com.APC.Reserv.R.anim.alpha);
@@ -55,7 +55,7 @@ public class Firsttime extends AppCompatActivity {
 
     }
 
-    public void onClickIniciar(View view){
+    public void onClickIniciar(View view) {
         //Convertir a falso para no mostrar la bienvenida
         getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                 .putBoolean("isFirstRun", false).apply();
@@ -66,7 +66,8 @@ public class Firsttime extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this); dialog.setCancelable(false);
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setCancelable(false);
         dialog.setMessage("¿Desea salir de la aplicación?");
         dialog.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
             @Override

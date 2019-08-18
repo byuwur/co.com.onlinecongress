@@ -1,4 +1,4 @@
-package com.mateus.resweb;
+package com.byuwur.onlinecongress;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -39,15 +39,20 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Conferencia extends AppCompatActivity {
+<<<<<<<HEAD:app/src/main/java/com/byuwur/onlinecongress/Conferencia.java
+    private static String usrid, idc, idr;
+    private final long DELAY_MS = 500;//delay in milliseconds before task is to be executed
+    private final long PERIOD_MS = 5000; // time in milliseconds between successive task executions
+=======
+        >>>>>>>d0f5b0107ef84f1963f655bf78f1590c3e4d4d34:app/src/main/java/com/byuwur/onlinecongress/Conferencia.java
     private DefaultValues dv = new DefaultValues();
     //register file to request
-    private String URLdatosreserva=dv.urlcanchas+"datosreserva.php", URLcancelreserva=dv.urlcanchas+"reserva/rmreserv.php";
+    private String URLdatosreserva = dv.urlcanchas + "datosreserva.php", URLcancelreserva = dv.urlcanchas + "reserva/rmreserv.php";
     private Toolbar toolbar;
-    private static String usrid, idc, idr;
     private TextView nombrecancha, diar, horainicio, horafin, tarifacancha, telefonocancha, direccioncancha, ciudadcancha;
     //array to present photos
     private String[] urlimages = new String[]{
-            dv.imgcanchasurl+idc+"/1.jpg", dv.imgcanchasurl+idc+"/2.jpg", dv.imgcanchasurl+idc+"/3.jpg"
+            dv.imgcanchasurl + idc + "/1.jpg", dv.imgcanchasurl + idc + "/2.jpg", dv.imgcanchasurl + idc + "/3.jpg"
     };
     //viewflipper de las fotos de la cancha
     private ViewPager pagerfotos;
@@ -64,8 +69,6 @@ public class Conferencia extends AppCompatActivity {
     //autoscroll values
     private int currentPage = 0;
     private Timer timer;
-    private final long DELAY_MS = 500;//delay in milliseconds before task is to be executed
-    private final long PERIOD_MS = 5000; // time in milliseconds between successive task executions
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +80,13 @@ public class Conferencia extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(idc);
 
-        ctx= Conferencia.this;
+<<<<<<<HEAD:
+        app / src / main / java / com / byuwur / onlinecongress / Conferencia.java
+        ctx = Conferencia.this;
+=======
+        ctx = Conferencia.this;
+>>>>>>>d0f5b0107ef84f1963f655bf78f1590c3e4d4d34:
+        app / src / main / java / com / byuwur / onlinecongress / Conferencia.java
         rq = Volley.newRequestQueue(ctx);
 
         usrid = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
@@ -113,7 +122,8 @@ public class Conferencia extends AppCompatActivity {
         buttoncancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder dialog = new AlertDialog.Builder(ctx); dialog.setCancelable(false);
+                AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);
+                dialog.setCancelable(false);
                 dialog.setTitle("CANCELAR");
                 dialog.setMessage("¿Desea cancelar esta reserva?");
                 dialog.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
@@ -150,7 +160,7 @@ public class Conferencia extends AppCompatActivity {
             }
         };
         timer = new Timer(); // This will create a new Thread
-        timer .schedule(new TimerTask() { // task to be scheduled
+        timer.schedule(new TimerTask() { // task to be scheduled
             @Override
             public void run() {
                 handler.post(Update);
@@ -163,7 +173,7 @@ public class Conferencia extends AppCompatActivity {
         //
     }
 
-    private void datosreserva(){
+    private void datosreserva() {
         // Showing progress dialog at user registration time.
         final ProgressDialog progreso = new ProgressDialog(ctx);
         progreso.setMessage("Por favor, espere...");
@@ -175,7 +185,7 @@ public class Conferencia extends AppCompatActivity {
                     public void onResponse(String response) {
                         JSONArray resp = null;
                         try {
-                            resp = new JSONArray( response );
+                            resp = new JSONArray(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -199,8 +209,7 @@ public class Conferencia extends AppCompatActivity {
                                         });
                                         dialogo.show();
                                     }
-                                }
-                                else {
+                                } else {
                                     nombrecancha.setText(res.getString("NOMBRECANCHA"));
                                     diar.setText(res.getString("FECHA"));
                                     horainicio.setText(res.getString("HORAINICIO"));
@@ -247,7 +256,7 @@ public class Conferencia extends AppCompatActivity {
         rq.add(jsrqdatosreserva);
     }
 
-    private void cancelreserva(){
+    private void cancelreserva() {
         // Showing progress dialog at user registration time.
         final ProgressDialog progreso = new ProgressDialog(ctx);
         progreso.setMessage("Por favor, espere...");
@@ -259,7 +268,7 @@ public class Conferencia extends AppCompatActivity {
                     public void onResponse(String response) {
                         JSONArray resp = null;
                         try {
-                            resp = new JSONArray( response );
+                            resp = new JSONArray(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -269,33 +278,33 @@ public class Conferencia extends AppCompatActivity {
                                 progreso.dismiss();
                                 JSONObject res = resp.getJSONObject(i);
 
-                                    Boolean error = res.getBoolean("error");
-                                    if (error) {
-                                        AlertDialog.Builder dialogo = new AlertDialog.Builder(ctx);
-                                        dialogo.setTitle("CANCELAR");
-                                        dialogo.setMessage("\n" + res.getString("mensaje"));
-                                        dialogo.setCancelable(false);
-                                        dialogo.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialogo, int id) {
-                                                //Ejecute acciones, deje vacio para solo aceptar
-                                                dialogo.cancel();
-                                            }
-                                        });
-                                        dialogo.show();
-                                    } else {
-                                        AlertDialog.Builder dialogo = new AlertDialog.Builder(ctx);
-                                        dialogo.setTitle("CANCELAR");
-                                        dialogo.setMessage("\n" + res.getString("mensaje"));
-                                        dialogo.setCancelable(false);
-                                        dialogo.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialogo, int id) {
-                                                //Ejecute acciones, deje vacio para solo aceptar
-                                                finish();
-                                                dialogo.cancel();
-                                            }
-                                        });
-                                        dialogo.show();
-                                    }
+                                Boolean error = res.getBoolean("error");
+                                if (error) {
+                                    AlertDialog.Builder dialogo = new AlertDialog.Builder(ctx);
+                                    dialogo.setTitle("CANCELAR");
+                                    dialogo.setMessage("\n" + res.getString("mensaje"));
+                                    dialogo.setCancelable(false);
+                                    dialogo.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialogo, int id) {
+                                            //Ejecute acciones, deje vacio para solo aceptar
+                                            dialogo.cancel();
+                                        }
+                                    });
+                                    dialogo.show();
+                                } else {
+                                    AlertDialog.Builder dialogo = new AlertDialog.Builder(ctx);
+                                    dialogo.setTitle("CANCELAR");
+                                    dialogo.setMessage("\n" + res.getString("mensaje"));
+                                    dialogo.setCancelable(false);
+                                    dialogo.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialogo, int id) {
+                                            //Ejecute acciones, deje vacio para solo aceptar
+                                            finish();
+                                            dialogo.cancel();
+                                        }
+                                    });
+                                    dialogo.show();
+                                }
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -334,15 +343,16 @@ public class Conferencia extends AppCompatActivity {
         rq.add(jsrqcancelreserva);
     }
 
-    private void loadimg(){
+    private void loadimg() {
         Picasso.get().load(urlimages[0])
                 .networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE)
                 .fit().centerCrop()
                 .into(canchaimg1, new Callback() {
                     @Override
                     public void onSuccess() {
-                        Log.d("Carga","Cargada");
+                        Log.d("Carga", "Cargada");
                     }
+
                     @Override
                     public void onError(Exception e) {
                         canchaimg1.setImageResource(R.drawable.no_image);
@@ -355,8 +365,9 @@ public class Conferencia extends AppCompatActivity {
                 .into(canchaimg2, new Callback() {
                     @Override
                     public void onSuccess() {
-                        Log.d("Carga","Cargada");
+                        Log.d("Carga", "Cargada");
                     }
+
                     @Override
                     public void onError(Exception e) {
                         canchaimg2.setImageResource(R.drawable.no_image);
@@ -369,8 +380,9 @@ public class Conferencia extends AppCompatActivity {
                 .into(canchaimg3, new Callback() {
                     @Override
                     public void onSuccess() {
-                        Log.d("Carga","Cargada");
+                        Log.d("Carga", "Cargada");
                     }
+
                     @Override
                     public void onError(Exception e) {
                         canchaimg3.setImageResource(R.drawable.no_image);
@@ -386,25 +398,34 @@ public class Conferencia extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id==android.R.id.home) {
+        if (id == android.R.id.home) {
             resetdata();
             finish();
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public void setid(String idc, String idr){
-        Conferencia.idc =idc;
-        Conferencia.idr =idr;
-    }
-    private void resetdata(){
-        idc=null;
-        idr=null;
-    }
+<<<<<<<HEAD:app/src/main/java/com/byuwur/onlinecongress/Conferencia.java
 
-    @Override
-    public void onBackPressed() {
-        resetdata();
-        finish();
+    public void setid(String idc, String idr) {
+        Conferencia.idc = idc;
+        Conferencia.idr = idr;
+=======
+        public void setid (String idc, String idr){
+            Conferencia.idc = idc;
+            Conferencia.idr = idr;
+>>>>>>>d0f5b0107ef84f1963f655bf78f1590c3e4d4d34:
+            app / src / main / java / com / byuwur / onlinecongress / Conferencia.java
+        }
+
+        private void resetdata () {
+            idc = null;
+            idr = null;
+        }
+
+        @Override
+        public void onBackPressed () {
+            resetdata();
+            finish();
+        }
     }
-}

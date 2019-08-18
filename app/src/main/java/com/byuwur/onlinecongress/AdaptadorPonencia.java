@@ -1,4 +1,4 @@
-package com.mateus.resweb;
+package com.byuwur.onlinecongress;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -19,22 +19,18 @@ public class AdaptadorPonencia extends RecyclerView.Adapter<AdaptadorPonencia.Po
     private ArrayList<HolderPonencia> listaponencia;
     private onItemClickListener mlistener;
 
-    public interface onItemClickListener{
-        void onItemClick (int position);
-    }
-
-    public void setonItemClickListener(onItemClickListener listener){
-        mlistener = listener;
-    }
-
-    public AdaptadorPonencia(ArrayList<HolderPonencia> listaponencia){
+    public AdaptadorPonencia(ArrayList<HolderPonencia> listaponencia) {
         this.listaponencia = listaponencia;
+    }
+
+    public void setonItemClickListener(onItemClickListener listener) {
+        mlistener = listener;
     }
 
     @NonNull
     @Override
     public PonenciaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_ponencia,null,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_ponencia, null, false);
         return new PonenciaViewHolder(view, mlistener);
     }
 
@@ -52,17 +48,18 @@ public class AdaptadorPonencia extends RecyclerView.Adapter<AdaptadorPonencia.Po
                 //.networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE)
                 .fit().centerCrop()
                 .into(holder.ponenciaimg, new Callback() {
-            @Override
-            public void onSuccess() {
-                Log.d("Carga","Cargada");
-            }
-            @Override
-            public void onError(Exception e) {
-                Log.d("Carga","Error al cargar");
-                holder.ponenciaimg.setImageResource(R.drawable.no_image);
-                //Toast.makeText(ctx, "Ocurrieron errores al cargar algunas imágenes.",Toast.LENGTH_SHORT).show();
-            }
-        });
+                    @Override
+                    public void onSuccess() {
+                        Log.d("Carga", "Cargada");
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        Log.d("Carga", "Error al cargar");
+                        holder.ponenciaimg.setImageResource(R.drawable.no_image);
+                        //Toast.makeText(ctx, "Ocurrieron errores al cargar algunas imágenes.",Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     @Override
@@ -70,27 +67,31 @@ public class AdaptadorPonencia extends RecyclerView.Adapter<AdaptadorPonencia.Po
         return listaponencia.size();
     }
 
+    public interface onItemClickListener {
+        void onItemClick(int position);
+    }
+
     public class PonenciaViewHolder extends RecyclerView.ViewHolder {
-        TextView ponencianombre,ponenciaid, ponenciavalor,ponenciaidioma,ponenciacategoria,ponenciadias,ponenciahorario;
+        TextView ponencianombre, ponenciaid, ponenciavalor, ponenciaidioma, ponenciacategoria, ponenciadias, ponenciahorario;
         ImageView ponenciaimg;
 
         private PonenciaViewHolder(View itemView, final onItemClickListener listener) {
             super(itemView);
-            ponencianombre= itemView.findViewById(R.id.ponencianombre);
+            ponencianombre = itemView.findViewById(R.id.ponencianombre);
             ponenciaid = itemView.findViewById(R.id.ponenciaid);
             ponenciavalor = itemView.findViewById(R.id.ponenciavalor);
-            ponenciaidioma= itemView.findViewById(R.id.ponenciaidioma);
-            ponenciacategoria= itemView.findViewById(R.id.ponenciacategoria);
-            ponenciadias= itemView.findViewById(R.id.ponenciadias);
-            ponenciahorario= itemView.findViewById(R.id.ponenciahorario);
-            ponenciaimg= itemView .findViewById(R.id.ponenciaimg);
+            ponenciaidioma = itemView.findViewById(R.id.ponenciaidioma);
+            ponenciacategoria = itemView.findViewById(R.id.ponenciacategoria);
+            ponenciadias = itemView.findViewById(R.id.ponenciadias);
+            ponenciahorario = itemView.findViewById(R.id.ponenciahorario);
+            ponenciaimg = itemView.findViewById(R.id.ponenciaimg);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (listener != null){
+                    if (listener != null) {
                         int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION){
+                        if (position != RecyclerView.NO_POSITION) {
                             listener.onItemClick(position);
                         }
                     }

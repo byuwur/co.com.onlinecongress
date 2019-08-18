@@ -3,17 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_versioninfo"
-        android:title="Información de la versión"
         android:orderInCategory="100"
+        android:title="Información de la versión"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_terms"
+        android:orderInCategory="100"
         android:title="Términos y Condiciones"
-        android:orderInCategory="100"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/action_contrib"
-        android:title="Equipo desarrollador"
-        android:orderInCategory="100"
-        app:showAsAction="never" />
+    <item android:id="@+id/action_contrib"
+    <
+    <
+    <
+    <
+    <
+    <
+    < HEAD
+    =======
+    android:title="Equipo desarrollador"
+    >>>>>>> d0f5b0107ef84f1963f655bf78f1590c3e4d4d34
+    android:orderInCategory="100"
+    android:title="Equipo desarrollador"
+    app:showAsAction="never" />
 </menu>

@@ -1,70 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:id="@+id/fragment_noreservas"
-    tools:context=".ConferenciaFragment">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"<<<<<<< HEAD:app/src/main/res/layout/fragment_noconferencia.xml=======android:id="@+id/fragment_noreservas">>>>>>> d0f5b0107ef84f1963f655bf78f1590c3e4d4d34:app/src/main/res/layout/fragment_noconferencia.xmltools:context=".ConferenciaFragment">
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout
+android:layout_width="match_parent"
+android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView13"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="No tiene reservas pendientes.\nVisualice canchas para reservar yendo a 'Reservar' en el panel lateral o pulsando el bóton debajo."
-            android:textAlignment="center"
-            android:textColor="#666"
-            android:textSize="14dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.3" />
+<TextView
+    android:id="@+id/textView13"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginBottom="8dp"
+    android:text="No tiene reservas pendientes.\nVisualice canchas para reservar yendo a 'Reservar' en el panel lateral o pulsando el bóton debajo."
+    android:textAlignment="center"
+    android:textColor="#666"
+    android:textSize="14dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.3" />
 
-        <TextView
-            android:id="@+id/textView14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
-            android:text="Busque canchas pulsando el\nbotón de la esquina."
-            android:textAlignment="center"
-            android:textColor="#666"
-            android:textSize="14dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.75"
-            app:layout_constraintStart_toStartOf="parent" />
+<TextView
+    android:id="@+id/textView14"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="100dp"
+    android:text="Busque canchas pulsando el\nbotón de la esquina."
+    android:textAlignment="center"
+    android:textColor="#666"
+    android:textSize="14dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.75"
+    app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:id="@+id/buttontoreserv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="48dp"
-            android:layout_marginLeft="48dp"
-            android:layout_marginRight="48dp"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="8dp"
-            android:text="Reservar"
-            android:textColor="#FFF"
-            android:background="@color/colorPrimaryDark"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView13" />
+<Button
+    android:id="@+id/buttontoreserv"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="48dp"
+    android:layout_marginLeft="48dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="48dp"
+    android:layout_marginRight="48dp"
+    android:background="@color/colorPrimaryDark"
+    android:text="Reservar"
+    android:textColor="#FFF"
 
-    </android.support.constraint.ConstraintLayout>
+<
 
-</FrameLayout>
+<
+
+<
+
+<
+
+<
+
+<
+
+< HEAD:app/src/main/res/layout/fragment_noconferencia.xml
+=======
+android:background="@color/colorPrimaryDark"
+>>>>>>> d0f5b0107ef84f1963f655bf78f1590c3e4d4d34:app/src/main/res/layout/fragment_noconferencia.xml
+app:layout_constraintEnd_toEndOf="parent"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+</android.support.constraint.ConstraintLayout>
+
+    </FrameLayout>
