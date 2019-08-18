@@ -77,7 +77,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="Sistema de Congresos Virtuales"
+        android:text="ONLINE CONGRESS"
         android:textColor="#000"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"

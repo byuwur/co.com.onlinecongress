@@ -44,7 +44,7 @@
             android:layout_weight="1"
             android:maxLines="1"
             android:text=""
-            android:textColor="#044"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="12dp" />
 
         <LinearLayout
@@ -113,7 +113,7 @@
             android:layout_weight="1"
             android:maxLines="1"
             android:text="Días disponible"
-            android:textColor="#044" />
+            android:textColor="@color/colorPrimaryDark" />
 
         <TextView
             android:id="@+id/horascancha"
@@ -141,7 +141,7 @@
             android:layout_weight="1"
             android:maxLines="1"
             android:text="Horario de atención"
-            android:textColor="#044" />
+            android:textColor="@color/colorPrimaryDark" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -181,7 +181,7 @@
                     android:layout_weight="1"
                     android:maxLines="1"
                     android:text="Tarifa"
-                    android:textColor="#044" />
+                    android:textColor="@color/colorPrimaryDark" />
             </LinearLayout>
 
             <LinearLayout
@@ -216,7 +216,7 @@
                     android:layout_weight="1"
                     android:maxLines="1"
                     android:text="Número teléfonico"
-                    android:textColor="#044" />
+                    android:textColor="@color/colorPrimaryDark" />
             </LinearLayout>
         </LinearLayout>
 
@@ -246,7 +246,7 @@
             android:layout_weight="1"
             android:maxLines="1"
             android:text="Dirección"
-            android:textColor="#044" />
+            android:textColor="@color/colorPrimaryDark" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -286,7 +286,7 @@
                     android:layout_weight="1"
                     android:maxLines="1"
                     android:text="Ciudad"
-                    android:textColor="#044" />
+                    android:textColor="@color/colorPrimaryDark" />
             </LinearLayout>
 
             <LinearLayout
@@ -321,7 +321,7 @@
                     android:layout_weight="1"
                     android:maxLines="1"
                     android:text="Barrio"
-                    android:textColor="#044" />
+                    android:textColor="@color/colorPrimaryDark" />
             </LinearLayout>
         </LinearLayout>
 
@@ -336,7 +336,7 @@
             android:layout_marginTop="24dp"
             android:layout_weight="1"
             android:text="Características"
-            android:textColor="#044" />
+            android:textColor="@color/colorPrimaryDark" />
 
         <TextView
             android:id="@+id/caracscancha"
@@ -362,7 +362,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
             android:layout_weight="1"
-            android:background="#044"
+            android:background="@color/colorPrimaryDark"
             android:text="RESERVAR"
             android:textColor="#FFF" />
 

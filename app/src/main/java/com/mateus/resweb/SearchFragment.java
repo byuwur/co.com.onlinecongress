@@ -54,7 +54,7 @@ public class SearchFragment extends Fragment {
     private ArrayList<String> op = new ArrayList<>();
     private String buscariddepar="", buscaridciudad="";
     private boolean buscarid;
-    private EditText barriosearch, nombresearch;
+    private EditText barriosearch, textsearch;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -101,7 +101,7 @@ public class SearchFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         //BUT TWICE BECAUSE OF BUGS
-        final Snackbar snackbar = Snackbar.make(view, "Filtre canchas según requiera. Cuando termine, pulse 'Buscar' para visualizarlas.",
+        final Snackbar snackbar = Snackbar.make(view, "Filtre las ponencias o conferencias según su categoria.",
                 Snackbar.LENGTH_INDEFINITE).setAction("Action", null);
         snackbar.show();
         //
@@ -109,8 +109,7 @@ public class SearchFragment extends Fragment {
         assert ctx != null;
         rq = Volley.newRequestQueue(ctx);
 
-        nombresearch = view.findViewById(R.id.nombresearch);
-        barriosearch = view.findViewById(R.id.barriosearch);
+        textsearch = view.findViewById(R.id.textsearch);
         //option values
         op.add("Nombre");op.add("ID");
         //initial values
@@ -119,55 +118,7 @@ public class SearchFragment extends Fragment {
         //fill dep
         llenardepartamentos();
         //SPINNER STUFF
-        final Spinner spinnerop = view.findViewById(R.id.spinneropcion);
-        final Spinner spinnerdep = view.findViewById(R.id.spinnerdepartamento);
         final Spinner spinnerciu = view.findViewById(R.id.spinnerciudad);
-        //set the spinner value from Arraylist OP
-        ArrayAdapter<String> adapterop = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item,op);
-        adapterop.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerop.setAdapter(adapterop);
-        spinnerop.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
-                if(pos==0){
-                    buscarid=false;
-                    spinnerdep.setEnabled(true);spinnerciu.setClickable(true);
-                    nombresearch.setText(null);nombresearch.setHint("Nombre (Opcional)");
-                }
-                else if (pos==1){
-                    buscarid=true;
-                    spinnerciu.setEnabled(false);spinnerciu.setClickable(false);spinnerciu.setSelection(0);
-                    spinnerdep.setEnabled(false);spinnerciu.setClickable(false);spinnerdep.setSelection(0);
-                    nombresearch.setText(null);nombresearch.setHint("ID*");
-                }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent){}
-        });
-        //set the spinner value from Arraylist DEPARTAMENTO
-        ArrayAdapter<String> adapterdep = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item,dep);
-        adapterdep.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerdep.setAdapter(adapterdep);
-        spinnerdep.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
-                //Toast.makeText(ctx,adapterView.getItemAtPosition(pos)+". "+iddep.get(pos), Toast.LENGTH_SHORT).show();
-                buscariddepar=iddep.get(pos);
-                spinnerciu.setEnabled(true);spinnerciu.setClickable(true);
-                //RESET CIUDAD ARRAYLIST
-                ciudad.clear();idciudad.clear();
-                ciudad.add("[--- Ciudades ---]");idciudad.add("0");
-                spinnerciu.setSelection(0);
-                //fill ciudad arraylist
-                llenarciudad();
-                if(pos==0){
-                    buscaridciudad="";
-                    spinnerciu.setEnabled(false);spinnerciu.setClickable(false);
-                }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent){}
-        });
         //set the spinner value from Arraylist CIUDAD
         ArrayAdapter<String> adapterciu = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item,ciudad);
         adapterciu.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -194,7 +145,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View view){
                 PonenciaFragment rf = new PonenciaFragment();
-                rf.setsearchvalues(true, buscarid, nombresearch.getText().toString(), barriosearch.getText().toString(), buscaridciudad);
+                rf.setsearchvalues(true, true, textsearch.getText().toString(), "", "");
                 snackbar.dismiss();
                 onclickbuscar();
             }

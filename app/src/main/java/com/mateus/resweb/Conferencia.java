@@ -38,7 +38,7 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Ponente extends AppCompatActivity {
+public class Conferencia extends AppCompatActivity {
     private DefaultValues dv = new DefaultValues();
     //register file to request
     private String URLdatosreserva=dv.urlcanchas+"datosreserva.php", URLcancelreserva=dv.urlcanchas+"reserva/rmreserv.php";
@@ -77,7 +77,7 @@ public class Ponente extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(idc);
 
-        ctx= Ponente.this;
+        ctx= Conferencia.this;
         rq = Volley.newRequestQueue(ctx);
 
         usrid = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
@@ -239,7 +239,7 @@ public class Ponente extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> parametros = new HashMap<>();
 
-                parametros.put("id", Ponente.idr);
+                parametros.put("id", Conferencia.idr);
 
                 return parametros;
             }
@@ -325,8 +325,8 @@ public class Ponente extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> parametros = new HashMap<>();
 
-                parametros.put("idu", Ponente.usrid);
-                parametros.put("idr", Ponente.idr);
+                parametros.put("idu", Conferencia.usrid);
+                parametros.put("idr", Conferencia.idr);
 
                 return parametros;
             }
@@ -394,8 +394,8 @@ public class Ponente extends AppCompatActivity {
     }
 
     public void setid(String idc, String idr){
-        Ponente.idc =idc;
-        Ponente.idr =idr;
+        Conferencia.idc =idc;
+        Conferencia.idr =idr;
     }
     private void resetdata(){
         idc=null;

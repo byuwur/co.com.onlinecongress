@@ -7,7 +7,7 @@
     android:layout_weight="1"
     android:padding="1dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Ponente"
+    tools:context=".Conferencia"
     tools:showIn="@layout/activity_ponente">
 
     <LinearLayout
@@ -47,7 +47,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_weight="1.5"
-                android:background="#044"
+                android:background="@color/colorPrimaryDark"
                 android:text="VER\nCANCHA"
                 android:textColor="#FFF"
                 android:textSize="14dp" />
@@ -66,7 +66,7 @@
             android:layout_weight="1"
             android:maxLines="1"
             android:text=""
-            android:textColor="#044"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="12dp" />
 
         <LinearLayout
@@ -135,7 +135,7 @@
             android:layout_weight="1"
             android:maxLines="1"
             android:text="Fecha (AAAA/MM/DD)"
-            android:textColor="#044" />
+            android:textColor="@color/colorPrimaryDark" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -175,7 +175,7 @@
                     android:layout_weight="1"
                     android:maxLines="1"
                     android:text="Hora de inicio"
-                    android:textColor="#044" />
+                    android:textColor="@color/colorPrimaryDark" />
             </LinearLayout>
 
             <LinearLayout
@@ -210,7 +210,7 @@
                     android:layout_weight="1"
                     android:maxLines="1"
                     android:text="Hora de término"
-                    android:textColor="#044" />
+                    android:textColor="@color/colorPrimaryDark" />
             </LinearLayout>
         </LinearLayout>
 
@@ -253,7 +253,7 @@
                     android:layout_weight="1"
                     android:maxLines="1"
                     android:text="Dirección"
-                    android:textColor="#044" />
+                    android:textColor="@color/colorPrimaryDark" />
             </LinearLayout>
 
             <LinearLayout
@@ -288,7 +288,7 @@
                     android:layout_weight="1"
                     android:maxLines="1"
                     android:text="Ciudad"
-                    android:textColor="#044" />
+                    android:textColor="@color/colorPrimaryDark" />
             </LinearLayout>
         </LinearLayout>
 
@@ -330,7 +330,7 @@
                     android:layout_weight="1"
                     android:maxLines="1"
                     android:text="Tarifa"
-                    android:textColor="#044" />
+                    android:textColor="@color/colorPrimaryDark" />
             </LinearLayout>
 
             <LinearLayout
@@ -365,7 +365,7 @@
                     android:layout_weight="1"
                     android:maxLines="1"
                     android:text="Número teléfonico"
-                    android:textColor="#044" />
+                    android:textColor="@color/colorPrimaryDark" />
             </LinearLayout>
         </LinearLayout>
 

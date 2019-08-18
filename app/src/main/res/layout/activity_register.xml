@@ -107,6 +107,24 @@
                 app:layout_constraintTop_toBottomOf="@+id/correoregistrar" />
 
             <EditText
+                android:id="@+id/verifpassregistrar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:ems="10"
+                android:hint="Verificar contraseña"
+                android:inputType="textPassword"
+                android:maxLength="100"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.505"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/passregistrar" />
+
+            <EditText
                 android:id="@+id/telefonoregistrar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -120,8 +138,9 @@
                 android:inputType="phone"
                 android:maxLength="10"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/passregistrar" />
+                app:layout_constraintTop_toBottomOf="@+id/verifpassregistrar" />
 
             <CheckBox
                 android:id="@+id/checkboxregistrar"
@@ -132,10 +151,11 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
-                android:text="Acepto Términos y Condiciones para registrarme como RESERVISTA"
+                android:text="Acepto Términos y Condiciones para registrarme"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerinstitucion" />
+                app:layout_constraintTop_toBottomOf="@+id/institucionregistrar" />
 
             <Button
                 android:id="@+id/botonregistrar"
@@ -146,7 +166,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="64dp"
                 android:layout_marginRight="64dp"
-                android:background="#044"
+                android:background="@color/colorPrimaryDark"
                 android:text="Registrar"
                 android:textColor="#FFF"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -166,7 +186,7 @@
                 android:layout_marginBottom="32dp"
                 android:background="#FFF"
                 android:text="INICIAR SESIÓN"
-                android:textColor="#044"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -183,14 +203,14 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:text="Departamento, Ciudad e Institución"
+                android:text="País, Provincia, Ciudad e Institución"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/telefonoregistrar" />
 
             <Spinner
-                android:id="@+id/spinnerdepartamento"
+                android:id="@+id/spinnerpais"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginStart="24dp"
@@ -204,6 +224,20 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
             <Spinner
+                android:id="@+id/spinnerprovincia"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:background="#FFF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerpais" />
+
+            <Spinner
                 android:id="@+id/spinnerciudad"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -215,19 +249,23 @@
                 android:background="#FFF"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerdepartamento" />
+                app:layout_constraintTop_toBottomOf="@+id/spinnerprovincia" />
 
-            <Spinner
-                android:id="@+id/spinnerinstitucion"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginLeft="24dp"
+            <EditText
+                android:id="@+id/institucionregistrar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
                 android:layout_marginTop="4dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginRight="24dp"
-                android:background="#FFF"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:ems="10"
+                android:hint="Institución Educativa"
+                android:inputType="textPersonName"
+                android:maxLength="100"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/spinnerciudad" />
 

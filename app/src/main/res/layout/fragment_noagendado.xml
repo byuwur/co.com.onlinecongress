@@ -77,7 +77,7 @@
             android:layout_marginTop="8dp"
             android:text="Reservar"
             android:textColor="#FFF"
-            android:background="#044"
+            android:background="@color/colorPrimaryDark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"

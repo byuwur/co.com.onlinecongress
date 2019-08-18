@@ -4,11 +4,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -195,14 +193,14 @@ public class Home extends AppCompatActivity
                 //show fab
                 fabsearch.setVisibility(View.VISIBLE);
                 break;
-            case R.id.nav_ponente:
-                getSupportActionBar().setTitle("Ponentes");
-                Fragment fragmentreservas = new PonenteFragment();getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentreservas).commit();
+            case R.id.nav_conferencia:
+                getSupportActionBar().setTitle("Conferencias");
+                Fragment fragmentreservas = new ConferenciaFragment();getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentreservas).commit();
                 //show fab
                 fabsearch.setVisibility(View.VISIBLE);
                 break;
-            case R.id.nav_agendado:
-                getSupportActionBar().setTitle("Agendados");
+            case R.id.nav_agenda:
+                getSupportActionBar().setTitle("Agenda");
                 Fragment fragmentfavoritos = new AgendadoFragment();getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentfavoritos).commit();
                 //show fab
                 fabsearch.setVisibility(View.VISIBLE);
@@ -215,10 +213,6 @@ public class Home extends AppCompatActivity
             case R.id.nav_cuenta:
                 Intent intent1 = new Intent(Home.this, Cuenta.class);
                 startActivity(intent1);
-                break;
-            case R.id.nav_chat:
-                Intent intent2 = new Intent(Home.this, Chat.class);
-                startActivity(intent2);
                 break;
             case R.id.nav_feed:
                 Intent intent3 = new Intent(Home.this, Feed.class);

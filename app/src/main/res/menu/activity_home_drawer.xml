@@ -9,22 +9,18 @@
             android:icon="@drawable/ic_menu_library_add"
             android:title="Ponencias" />
         <item
-            android:id="@+id/nav_ponente"
+            android:id="@+id/nav_conferencia"
             android:icon="@drawable/ic_menu_beenhere"
-            android:title="Ponentes" />
+            android:title="Conferencias" />
         <item
-            android:id="@+id/nav_agendado"
+            android:id="@+id/nav_agenda"
             android:icon="@drawable/ic_menu_star"
-            android:title="Agendados" />
+            android:title="Agenda" />
         <item
             android:id="@+id/nav_perfil"
             android:icon="@drawable/ic_menu_account_box"
             android:title="Perfil" />
     </group>
-    <item
-        android:id="@+id/nav_chat"
-        android:icon="@drawable/ic_menu_star"
-        android:title="Chats" />
     <item
         android:id="@+id/nav_cuenta"
         android:icon="@drawable/ic_menu_settings"

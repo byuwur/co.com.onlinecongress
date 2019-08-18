@@ -55,7 +55,7 @@ public class Feed extends AppCompatActivity {
         setContentView(R.layout.activity_feed);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Ayuda y Comentarios");
+        getSupportActionBar().setTitle("Ayuda y comentarios");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ctx = Feed.this;

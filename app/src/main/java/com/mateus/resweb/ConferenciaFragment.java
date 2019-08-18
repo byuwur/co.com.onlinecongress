@@ -44,14 +44,14 @@ import static android.content.Context.MODE_PRIVATE;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link PonenciaFragment.OnFragmentInteractionListener} interface
+ * {@link ConferenciaFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class PonenciaFragment extends Fragment {
+public class ConferenciaFragment extends Fragment {
     private DefaultValues dv = new DefaultValues();
     //register file to request
-    private String IMGURL = dv.imgcanchasurl, URLid= dv.urlponencia+"buscarid.php", URLactciudad=dv.urlponencia+"anadirciudad.php",
-            URLlistarstring= dv.urlponencia+"buscarnombre.php", URLlistarciudad= dv.urlponencia+"listarciudad.php",
+    private String IMGURL = dv.imgcanchasurl, URLid= dv.urlconferencia+"buscarid.php", URLactciudad=dv.urlconferencia+"anadirciudad.php",
+            URLlistarstring= dv.urlconferencia+"buscarnombre.php", URLlistarciudad= dv.urlconferencia+"listarciudad.php",
             URLdep= dv.urllistar+"departamentos.php", URLciu= dv.urllistar+"ciudades.php";
     //set context
     private Context ctx;
@@ -72,11 +72,11 @@ public class PonenciaFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    private ArrayList<HolderPonencia> listaPonencia;
-    private RecyclerView recyclerPonencia;
-    private AdaptadorPonencia adapter;
+    private ArrayList<HolderConferencia> listaConferencia;
+    private RecyclerView recyclerConferencia;
+    private AdaptadorConferencia adapter;
 
-    public PonenciaFragment() {
+    public ConferenciaFragment() {
         // Required empty public constructor
     }
 
@@ -84,8 +84,8 @@ public class PonenciaFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View viewsi= inflater.inflate(R.layout.fragment_ponencia, container, false);
-        View viewno= inflater.inflate(R.layout.fragment_noponencia, container, false);
+        View viewsi= inflater.inflate(R.layout.fragment_conferencia, container, false);
+        View viewno= inflater.inflate(R.layout.fragment_noconferencia, container, false);
         //
         ctx = getActivity();
         assert ctx != null;
@@ -149,45 +149,45 @@ public class PonenciaFragment extends Fragment {
             @Override
             public void onNothingSelected(AdapterView<?> parent){}
         });
-            //search button script
-            Button buttonactualizar = viewno.findViewById(R.id.buttonactualizarciudad);
-            buttonactualizar.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View view){
-                    //Toast.makeText(ctx,buscaridciudad,Toast.LENGTH_SHORT).show();
-                    actualizarciudad(usrid, buscaridciudad);
-                }
-            });
+        //search button script
+        Button buttonactualizar = viewno.findViewById(R.id.buttonactualizarciudad);
+        buttonactualizar.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                //Toast.makeText(ctx,buscaridciudad,Toast.LENGTH_SHORT).show();
+                actualizarciudad(usrid, buscaridciudad);
+            }
+        });
 
         //VIEWSI ELEMENTS
-        listaPonencia=new ArrayList<>();
-        recyclerPonencia=viewsi.findViewById(R.id.recyclerPonencia);
-        recyclerPonencia.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter=new AdaptadorPonencia(listaPonencia);
-        recyclerPonencia.setAdapter(adapter);
+        listaConferencia=new ArrayList<>();
+        recyclerConferencia=viewsi.findViewById(R.id.recyclerConferencia);
+        recyclerConferencia.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter=new AdaptadorConferencia(listaConferencia);
+        recyclerConferencia.setAdapter(adapter);
         //when it click an specific frame, let's see if we can display its id
-        adapter.setonItemClickListener(new AdaptadorPonencia.onItemClickListener() {
+        adapter.setonItemClickListener(new AdaptadorConferencia.onItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                String id = ((TextView) recyclerPonencia.findViewHolderForAdapterPosition(position)
-                        .itemView.findViewById(R.id.ponenciaid)).getText().toString();
+                String id = ((TextView) recyclerConferencia.findViewHolderForAdapterPosition(position)
+                        .itemView.findViewById(R.id.conferenciaid)).getText().toString();
                 String idcancha = id.replaceAll("#", "");
                 //Toast.makeText(ctx, "ID: "+idcancha, Toast.LENGTH_SHORT).show();
-                Ponencia ponencia = new Ponencia();
-                ponencia.setid(idcancha);
+                Conferencia conferencia = new Conferencia();
+                conferencia.setid(idcancha, "");
 
-                Intent intent1 = new Intent(ctx, Ponencia.class);
+                Intent intent1 = new Intent(ctx, Conferencia.class);
                 startActivity(intent1);
             }
         });
         //AND VERIFY IF THERE'S ANYTHING,
         //if it isn't display an specific layout design
         if ( (usrciudad.equalsIgnoreCase("null") || usrciudad.equalsIgnoreCase("")
-        || usrciudad==null ) && !ifsearch ){
+                || usrciudad==null ) && !ifsearch ){
             return viewno;
         }
         else{
-            LlenarListaPonencia(ifsearch, ifid, snombre, sbarrio, sciu);
+            LlenarListaConferencia(ifsearch, ifid, snombre, sbarrio, sciu);
             resetsearchvalues();
             return viewsi;
         }
@@ -283,7 +283,7 @@ public class PonenciaFragment extends Fragment {
         rq.add(jsrqactciudad);
     }
 
-    private void LlenarListaPonencia(boolean search, boolean id, String nombre, String barrio, String ciu) {
+    private void LlenarListaConferencia(boolean search, boolean id, String nombre, String barrio, String ciu) {
         Log.d("Data enviada",""+search+", "+id+", "+nombre+", "+barrio+", "+ciu);
         //let's see the params to list
         if(search){
@@ -323,7 +323,7 @@ public class PonenciaFragment extends Fragment {
                             try {
                                 progreso.dismiss();
                                 JSONObject res = resp.getJSONObject(i);
-                                recyclerPonencia.setAdapter(adapter);
+                                recyclerConferencia.setAdapter(adapter);
 
                                 if(res.has("error")) {
                                     Boolean error = res.getBoolean("error");
@@ -342,7 +342,7 @@ public class PonenciaFragment extends Fragment {
                                         dialogoerror.show();
                                     }
                                 } else{
-                                    listaPonencia.add(new HolderPonencia(
+                                    listaConferencia.add(new HolderConferencia(
                                             ""+res.getString("NOMBRECANCHA"),res.getString("IDCANCHAS"),
                                             "$COP "+res.getString("TARIFA")+"/hora",""+res.getString("UBICACION"),
                                             ""+res.getString("NOMBRECIUDAD"),""+res.getString("DIASDISPONIBLE"),
@@ -409,7 +409,7 @@ public class PonenciaFragment extends Fragment {
                             try {
                                 progreso.dismiss();
                                 JSONObject res = resp.getJSONObject(i);
-                                recyclerPonencia.setAdapter(adapter);
+                                recyclerConferencia.setAdapter(adapter);
 
                                 if(res.has("error")) {
                                     Boolean error = res.getBoolean("error");
@@ -428,7 +428,7 @@ public class PonenciaFragment extends Fragment {
                                         dialogoerror.show();
                                     }
                                 } else{
-                                    listaPonencia.add(new HolderPonencia(
+                                    listaConferencia.add(new HolderConferencia(
                                             ""+res.getString("NOMBRECANCHA"),res.getString("IDCANCHAS"),
                                             "$COP "+res.getString("TARIFA")+"/hora",""+res.getString("UBICACION"),
                                             ""+res.getString("NOMBRECIUDAD"),""+res.getString("DIASDISPONIBLE"),
@@ -495,7 +495,7 @@ public class PonenciaFragment extends Fragment {
                             try {
                                 progreso.dismiss();
                                 JSONObject res = resp.getJSONObject(i);
-                                recyclerPonencia.setAdapter(adapter);
+                                recyclerConferencia.setAdapter(adapter);
 
                                 if(res.has("error")) {
                                     Boolean error = res.getBoolean("error");
@@ -514,7 +514,7 @@ public class PonenciaFragment extends Fragment {
                                         dialogoerror.show();
                                     }
                                 } else{
-                                    listaPonencia.add(new HolderPonencia(
+                                    listaConferencia.add(new HolderConferencia(
                                             ""+res.getString("NOMBRECANCHA"),res.getString("IDCANCHAS"),
                                             "$COP "+res.getString("TARIFA")+"/hora",""+res.getString("UBICACION"),
                                             ""+res.getString("NOMBRECIUDAD"),""+res.getString("DIASDISPONIBLE"),
@@ -587,9 +587,9 @@ public class PonenciaFragment extends Fragment {
         fabsearch.setVisibility(View.GONE);
     }
     private void onclickself(){
-        Fragment fragmentponencia = new PonenciaFragment();
+        Fragment fragmentconferencia = new ConferenciaFragment();
         assert getFragmentManager() != null;
-        getFragmentManager().beginTransaction().replace(R.id.home, fragmentponencia).commit();
+        getFragmentManager().beginTransaction().replace(R.id.home, fragmentconferencia).commit();
     }
 
     private void llenardepartamentos(){

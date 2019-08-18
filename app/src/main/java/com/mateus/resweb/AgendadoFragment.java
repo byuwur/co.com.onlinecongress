@@ -47,7 +47,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class AgendadoFragment extends Fragment {
     private DefaultValues dv = new DefaultValues();
     //register file to request
-    private String IMGURL = dv.imgcanchasurl, URLlistaragendado= dv.urlagendado+"listaragendado.php";
+    private String IMGURL = dv.imgcanchasurl, URLlistaragendado= dv.urlagendado+"listarfavoritos.php";
     //set context
     private Context ctx;
     //

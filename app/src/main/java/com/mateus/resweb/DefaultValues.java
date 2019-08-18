@@ -6,7 +6,7 @@ public class DefaultValues {
     public String urlinicio = url+"inicio/";
     public String urlcanchas = url+"canchas/";
     public String urlponencia = url+"reservar/";
-    public String urlponente = url+"reservas/";
+    public String urlconferencia = url+"reservas/";
     public String urlagendado = url+"favoritos/";
     public String urlcuenta = url+"cuenta/";
     public String urllistar = url+"listar/";
