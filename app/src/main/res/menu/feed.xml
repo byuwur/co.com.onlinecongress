@@ -11,7 +11,8 @@
         android:orderInCategory="100"
         android:title="Términos y Condiciones"
         app:showAsAction="never" />
-    <item android:id="@+id/action_contrib"
+    <item
+        android:id="@+id/action_contrib"
         android:orderInCategory="100"
         android:title="Equipo desarrollador"
         app:showAsAction="never" />

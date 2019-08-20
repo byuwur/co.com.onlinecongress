@@ -401,14 +401,14 @@ public class Conferencia extends AppCompatActivity {
         Conferencia.idr = idr;
     }
 
-        private void resetdata () {
-            idc = null;
-            idr = null;
-        }
-
-        @Override
-        public void onBackPressed () {
-            resetdata();
-            finish();
-        }
+    private void resetdata() {
+        idc = null;
+        idr = null;
     }
+
+    @Override
+    public void onBackPressed() {
+        resetdata();
+        finish();
+    }
+}
