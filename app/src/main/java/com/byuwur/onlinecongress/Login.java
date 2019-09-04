@@ -31,7 +31,7 @@ import java.util.Map;
 public class Login extends AppCompatActivity {
     private DefaultValues dv = new DefaultValues();
     //login file to request
-    private String URL = dv.urlinicio + "login.php";
+    private String URL = dv.url + "login.php";
     private RequestQueue rq;
     //set context
     private Context ctx;
@@ -118,7 +118,13 @@ public class Login extends AppCompatActivity {
                                     getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                                             .putString("id", res.getString("usrid")).apply();
                                     getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                                            .putString("tipodni", res.getString("usrtipodni")).apply();
+                                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                                            .putString("dni", res.getString("usrdni")).apply();
+                                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                                             .putString("nombre", res.getString("usrname")).apply();
+                                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                                            .putString("apellido", res.getString("usrape")).apply();
                                     getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                                             .putString("email", res.getString("usremail")).apply();
                                     getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
@@ -127,10 +133,14 @@ public class Login extends AppCompatActivity {
                                             .putString("phone", res.getString("usrcel")).apply();
                                     getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                                             .putString("pass", res.getString("usrpass")).apply();
+                                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                                            .putString("sexo", res.getString("usrsex")).apply();
+                                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                                            .putString("institucion", res.getString("usrinst")).apply();
 
-                                    Intent intentiniciar = new Intent(Login.this, Home.class);
+                                    Intent intentiniciar = new Intent(Login.this, Congresos.class);
                                     startActivity(intentiniciar);
-                                    Toast.makeText(ctx, res.getString("mensaje") + "\nBienvenido, " + res.getString("usrname") + ".", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(ctx, res.getString("mensaje") + "\nBienvenido, " + res.getString("usrname") + " " + res.getString("usrape") + ".", Toast.LENGTH_LONG).show();
                                     finish();
                                 } else if (error) {
                                     AlertDialog.Builder dialogoerror = new AlertDialog.Builder(ctx);

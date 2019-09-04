@@ -1,15 +1,28 @@
 package com.byuwur.onlinecongress;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,11 +55,11 @@ public class MainActivity extends AppCompatActivity {
         usrpass = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getString("pass", null);
 
-        //vercon(loginsesion, usrid, usrpass);
-        jumpnext();
+        vercon(loginsesion, usrid, usrpass);
+
     }
 
-    /*
+
 
     private void vercon(final Boolean sesion, final String usrid, final String usrpass){
         //verify connection
@@ -151,6 +164,8 @@ public class MainActivity extends AppCompatActivity {
                                     getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                                             .putString("nombre", null).apply();
                                     getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                                            .putString("apellido", null).apply();
+                                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                                             .putString("email", null).apply();
                                     getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                                             .putString("ciudad", null).apply();
@@ -158,6 +173,10 @@ public class MainActivity extends AppCompatActivity {
                                             .putString("phone", null).apply();
                                     getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                                             .putString("pass", null).apply();
+                                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                                            .putString("sexo", null).apply();
+                                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                                            .putString("institucion", null).apply();
 
                                     Home.deleteCache(ctx);
 
@@ -255,11 +274,17 @@ public class MainActivity extends AppCompatActivity {
                                     getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                                             .putString("nombre", res.getString("usrname")).apply();
                                     getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                                            .putString("apellido", res.getString("usrape")).apply();
+                                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                                             .putString("email", res.getString("usremail")).apply();
                                     getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                                             .putString("ciudad", res.getString("usrciudad")).apply();
                                     getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                                             .putString("phone", res.getString("usrcel")).apply();
+                                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                                            .putString("sexo", res.getString("usrsex")).apply();
+                                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                                            .putString("institucion", res.getString("usrinst")).apply();
 
                                     jumpnext();
                                 }
@@ -300,7 +325,6 @@ public class MainActivity extends AppCompatActivity {
         rq.add(jsrqdatos);
     }
 
-    */
 
     private void jumpnext() {
         //from splash screen to next screen

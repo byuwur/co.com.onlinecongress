@@ -17,7 +17,7 @@
         app:titleTextColor="#DDD" />
 
     <Spinner
-        android:id="@+id/spinnerdepartamento"
+        android:id="@+id/spinnerpais"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginStart="32dp"
@@ -30,6 +30,19 @@
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
     <Spinner
+        android:id="@+id/spinnerprovincia"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerpais" />
+
+    <Spinner
         android:id="@+id/spinnerciudad"
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -40,20 +53,7 @@
         android:layout_marginRight="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerdepartamento" />
-
-    <Spinner
-        android:id="@+id/spinnerinstitucion"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerciudad" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerprovincia" />
 
     <TextView
         android:id="@+id/textView16"

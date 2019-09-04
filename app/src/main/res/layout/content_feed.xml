@@ -56,7 +56,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
             <Spinner
-                android:id="@+id/spinnercongreso"
+                android:id="@+id/spinnerasunto"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginStart="32dp"
@@ -86,7 +86,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnercongreso" />
+                app:layout_constraintTop_toBottomOf="@+id/spinnerasunto" />
 
             <Button
                 android:id="@+id/feedenviar"

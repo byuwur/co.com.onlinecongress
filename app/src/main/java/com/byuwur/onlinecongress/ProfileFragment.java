@@ -46,7 +46,7 @@ public class ProfileFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     DefaultValues dv = new DefaultValues();
     //login file to request
-    private String URLnombreciudad = dv.urlcuenta + "nombreciudad.php", URLfotoperfil = dv.imgfotoperfil;
+    private String URLnombreciudad = dv.url + "nombreciudad.php", URLfotoperfil = dv.imgfotoperfil;
     //
     private RequestQueue rq;
     //set context
@@ -56,7 +56,7 @@ public class ProfileFragment extends Fragment {
     private Button buttoneditar;
     private ImageView fotoperfil;
     private TextView nombreperfil, correoperfil, telefonoperfil, institucionperfil, congresoperfil;
-    private String usrnombre, usrcorreo, usrphone, usrciudad, usrid;
+    private String usrnombre, usrcorreo, usrphone, usrciudad, usrid, usrinst;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -132,15 +132,19 @@ public class ProfileFragment extends Fragment {
 
     private void settexts() {
         usrnombre = ctx.getSharedPreferences("PREFERENCE", MODE_PRIVATE)
-                .getString("nombre", null);
+                .getString("nombre", null) + " " + ctx.getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                .getString("apellido", null);
         usrcorreo = ctx.getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getString("email", null);
         usrphone = ctx.getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getString("phone", null);
+        usrinst = ctx.getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                .getString("institucion", null);
 
         nombreperfil.setText(usrnombre);
         correoperfil.setText(usrcorreo);
         telefonoperfil.setText(usrphone);
+        institucionperfil.setText(usrinst);
 
         setnombreciudad();
 
@@ -171,10 +175,10 @@ public class ProfileFragment extends Fragment {
                         for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject res = response.getJSONObject(i);
-                                if (res.has("nombre")) {
-                                    institucionperfil.setText(res.getString("nombre"));
+                                if (res.has("name_ciu")) {
+                                    //ciudadperfil.setText(res.getString("name_ciu"));
                                 } else {
-                                    institucionperfil.setText(usrciudad);
+                                    //ciudadperfil.setText(usrciudad);
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();

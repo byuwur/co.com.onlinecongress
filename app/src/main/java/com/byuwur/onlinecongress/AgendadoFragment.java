@@ -50,7 +50,7 @@ public class AgendadoFragment extends Fragment {
     private static String usrid;
     private DefaultValues dv = new DefaultValues();
     //register file to request
-    private String IMGURL = dv.imgcanchasurl, URLlistaragendado = dv.urlagendado + "listarfavoritos.php";
+    private String IMGURL = dv.imgcanchasurl, URLlistaragendado = dv.url + "listarfavoritos.php";
     //set context
     private Context ctx;
     //

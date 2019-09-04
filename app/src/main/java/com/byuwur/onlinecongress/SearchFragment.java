@@ -45,7 +45,7 @@ public class SearchFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private DefaultValues dv = new DefaultValues();
     //register file to request
-    private String URLdep = dv.urllistar + "departamentos.php", URLciu = dv.urllistar + "ciudades.php";
+    private String URLpais = dv.url + "paises.php", URLdep = dv.url + "departamentos.php", URLciu = dv.url + "ciudades.php";
     //set context
     private Context ctx;
     //

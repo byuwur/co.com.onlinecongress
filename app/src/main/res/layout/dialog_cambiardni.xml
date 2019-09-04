@@ -14,29 +14,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Cambiar Nombre"
+        app:title="Cambiar doc. identidad"
         app:titleTextColor="#DDD" />
 
-    <EditText
-        android:id="@+id/nombrenuevo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+    <Spinner
+        android:id="@+id/spinnerdninuevo"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        android:ems="10"
-        android:hint="Nombre nuevo"
-        android:inputType="textMultiLine"
-        android:maxLength="100"
-        android:maxLines="2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <EditText
-        android:id="@+id/apellidonuevo"
+        android:id="@+id/dninuevo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -45,14 +40,14 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:ems="10"
-        android:hint="Apellido nuevo"
+        android:hint="DNI nuevo"
         android:inputType="textMultiLine"
         android:maxLength="100"
         android:maxLines="2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nombrenuevo" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerdninuevo" />
 
 </android.support.constraint.ConstraintLayout>
 

@@ -53,9 +53,9 @@ public class PonenciaFragment extends Fragment {
     private static String snombre, sbarrio, sciu, usrid, usrciudad;
     private DefaultValues dv = new DefaultValues();
     //register file to request
-    private String IMGURL = dv.imgcanchasurl, URLid = dv.urlponencia + "buscarid.php", URLactciudad = dv.urlponencia + "anadirciudad.php",
-            URLlistarstring = dv.urlponencia + "buscarnombre.php", URLlistarciudad = dv.urlponencia + "listarciudad.php",
-            URLdep = dv.urllistar + "departamentos.php", URLciu = dv.urllistar + "ciudades.php";
+    private String IMGURL = dv.imgcanchasurl, URLid = dv.url + "buscarid.php", URLactciudad = dv.url + "anadirciudad.php",
+            URLlistarstring = dv.url + "buscarnombre.php", URLlistarciudad = dv.url + "listarciudad.php",
+            URLpais = dv.url + "paises.php", URLdep = dv.url + "departamentos.php", URLciu = dv.url + "ciudades.php";
     //set context
     private Context ctx;
     //

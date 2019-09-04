@@ -53,9 +53,9 @@ public class ConferenciaFragment extends Fragment {
     private static String snombre, sbarrio, sciu, usrid, usrciudad;
     private DefaultValues dv = new DefaultValues();
     //register file to request
-    private String IMGURL = dv.imgcanchasurl, URLid = dv.urlconferencia + "buscarid.php", URLactciudad = dv.urlconferencia + "anadirciudad.php",
-            URLlistarstring = dv.urlconferencia + "buscarnombre.php", URLlistarciudad = dv.urlconferencia + "listarciudad.php",
-            URLdep = dv.urllistar + "departamentos.php", URLciu = dv.urllistar + "ciudades.php";
+    private String IMGURL = dv.imgcanchasurl, URLid = dv.url + "buscarid.php", URLactciudad = dv.url + "anadirciudad.php",
+            URLlistarstring = dv.url + "buscarnombre.php", URLlistarciudad = dv.url + "listarciudad.php",
+            URLpais = dv.url + "paises.php", URLdep = dv.url + "departamentos.php", URLciu = dv.url + "ciudades.php";
     //set context
     private Context ctx;
     //

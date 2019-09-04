@@ -20,6 +20,10 @@
             android:id="@+id/nav_perfil"
             android:icon="@drawable/ic_menu_account_box"
             android:title="Perfil" />
+        <item
+            android:id="@+id/nav_congreso"
+            android:icon="@drawable/ic_menu_account_box"
+            android:title="Sobre el congreso" />
     </group>
     <item
         android:id="@+id/nav_cuenta"

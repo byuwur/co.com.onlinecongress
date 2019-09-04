@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -34,22 +35,27 @@ import java.util.Map;
 public class Register extends AppCompatActivity {
     DefaultValues dv = new DefaultValues();
     //register file to request
-    private String URL = dv.urlinicio + "registrar.php";
-    private String URLdep = dv.urllistar + "departamentos.php";
-    private String URLciu = dv.urllistar + "ciudades.php";
+    private String URL = dv.url + "registrar.php";
+    private String URLpais = dv.url + "paises.php";
+    private String URLdep = dv.url + "provincias.php";
+    private String URLciu = dv.url + "ciudades.php";
     private RequestQueue rq;
     //set context
     private Context ctx;
+    //buttons
+    private Button buttonregistrar, button4;
     //create request
-    private JsonArrayRequest jsrqdep, jsrqciu;
+    private JsonArrayRequest jsrqpais, jsrqdep, jsrqciu;
     private StringRequest jsrqregistrar;
     //register fields declarations
-    private EditText et_nombre, et_correo, et_pass, et_phone;
+    private EditText et_dni, et_nombre, et_apellido, et_correo, et_pass, et_confpass, et_phone, et_inst;
     private CheckBox terms;
     //list of each array
+    private ArrayList<String> tipodni = new ArrayList<>(),sexo = new ArrayList<>();
+    private ArrayList<String> pais = new ArrayList<>(), idpais = new ArrayList<>();
     private ArrayList<String> dep = new ArrayList<>(), iddep = new ArrayList<>();
     private ArrayList<String> ciudad = new ArrayList<>(), idciudad = new ArrayList<>();
-    private String buscariddepar = "", buscaridciudad = "";
+    private String buscaridpais = "", buscariddepar = "", buscaridciudad = "", stringtipodni="", stringsexo="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,24 +66,109 @@ public class Register extends AppCompatActivity {
         ctx = Register.this;
         rq = Volley.newRequestQueue(ctx);
 
+        buttonregistrar = findViewById(R.id.botonregistrar);
+        buttonregistrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickRegistrar();
+            }
+        });
+        button4 = findViewById(R.id.button4);
+        button4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickRegistrarLogin();
+            }
+        });
+
+        et_dni = findViewById(R.id.dniregistrar);
         et_nombre = findViewById(R.id.nombreregistrar);
+        et_apellido = findViewById(R.id.apellidoregistrar);
         et_correo = findViewById(R.id.correoregistrar);
         et_pass = findViewById(R.id.passregistrar);
+        et_confpass = findViewById(R.id.verifpassregistrar);
         et_phone = findViewById(R.id.telefonoregistrar);
+        et_inst = findViewById(R.id.institucionregistrar);
         terms = findViewById(R.id.checkboxregistrar);
 
         //initial values
-        dep.add("[--- Departamentos ---]");
+        pais.add("[--- Países (+cód. país) ---]");
+        idpais.add("0");
+        dep.add("[--- Provincias ---]");
         iddep.add("0");
         ciudad.add("[--- Ciudades ---]");
         idciudad.add("0");
         //fill dep
-        llenardepartamentos();
+        llenarpaises();
         //SPINNER STUFF
-        final Spinner spinnerdep = findViewById(R.id.spinnerdepartamento);
+        final Spinner spinnertipodni = findViewById(R.id.tipodni);
+        final Spinner spinnersexo = findViewById(R.id.sexoregistrar);
+        final Spinner spinnerpais = findViewById(R.id.spinnerpais);
+        final Spinner spinnerdep = findViewById(R.id.spinnerprovincia);
         final Spinner spinnerciu = findViewById(R.id.spinnerciudad);
+
+        tipodni.add("Cédula de ciudadanía");
+        tipodni.add("Cédula de extranjería");
+        tipodni.add("Tarjeta de identidad");
+        tipodni.add("Pasaporte");
+        ArrayAdapter<String> adaptertipodni = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item, tipodni);
+        adaptertipodni.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnertipodni.setAdapter(adaptertipodni);
+        spinnertipodni.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
+                stringtipodni = tipodni.get(pos);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        sexo.add("Masculino");
+        sexo.add("Femenino");
+        ArrayAdapter<String> adaptersexo = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item, sexo);
+        adaptersexo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnersexo.setAdapter(adaptersexo);
+        spinnersexo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
+                stringsexo = sexo.get(pos);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
         //set the spinner value from Arraylist
-        ArrayAdapter<String> adapterdep = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, dep);
+        ArrayAdapter<String> adapterpais = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item, pais);
+        adapterpais.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerpais.setAdapter(adapterpais);
+        spinnerpais.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
+                spinnerdep.setEnabled(true);
+                spinnerdep.setClickable(true);
+                //Toast.makeText(ctx,adapterView.getItemAtPosition(pos)+". "+iddep.get(pos), Toast.LENGTH_SHORT).show();
+                buscaridpais = idpais.get(pos);
+                //RESET CIUDAD ARRAYLIST
+                dep.clear();
+                iddep.clear();
+                dep.add("[--- Provincias ---]");
+                iddep.add("0");
+                spinnerdep.setSelection(0);
+                //fill ciudad arraylist
+                llenardepartamentos();
+                if (pos == 0) {
+                    spinnerdep.setEnabled(false);
+                    spinnerdep.setClickable(false);
+                    buscariddepar = "";
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        //set the spinner value from Arraylist
+        ArrayAdapter<String> adapterdep = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item, dep);
         adapterdep.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerdep.setAdapter(adapterdep);
         spinnerdep.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -107,7 +198,7 @@ public class Register extends AppCompatActivity {
             }
         });
         //set the spinner value from Arraylist
-        ArrayAdapter<String> adapterciu = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, ciudad);
+        ArrayAdapter<String> adapterciu = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item, ciudad);
         adapterciu.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerciu.setAdapter(adapterciu);
         spinnerciu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -126,8 +217,8 @@ public class Register extends AppCompatActivity {
         });
     }
 
-    private void llenardepartamentos() {
-        jsrqdep = new JsonArrayRequest(Request.Method.GET, URLdep,
+    private void llenarpaises() {
+        jsrqpais = new JsonArrayRequest(Request.Method.GET, URLpais,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -135,8 +226,33 @@ public class Register extends AppCompatActivity {
                             try {
                                 JSONObject res = response.getJSONObject(i);
                                 //Log.d("Response: ", "ID:"+res.getString("IDDEPARTAMENTOS")+". Nombre: "+res.getString("NOMBREDEPARTAMENTO"));
-                                dep.add(res.getString("NOMBREDEPARTAMENTO"));
-                                iddep.add(res.getString("IDDEPARTAMENTOS"));
+                                pais.add(res.getString("name_pais") + " (+" + res.getString("phonecode") + ")");
+                                idpais.add(res.getString("id"));
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error", error.toString());
+            }
+        });
+        rq.add(jsrqpais);
+    }
+
+    private void llenardepartamentos() {
+        jsrqdep = new JsonArrayRequest(Request.Method.GET, URLdep + "?pais=" + buscaridpais,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                JSONObject res = response.getJSONObject(i);
+                                //Log.d("Response: ", "ID:"+res.getString("IDDEPARTAMENTOS")+". Nombre: "+res.getString("NOMBREDEPARTAMENTO"));
+                                dep.add(res.getString("name_pro"));
+                                iddep.add(res.getString("id"));
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -152,7 +268,7 @@ public class Register extends AppCompatActivity {
     }
 
     private void llenarciudad() {
-        jsrqciu = new JsonArrayRequest(Request.Method.GET, URLciu + "?dep=" + buscariddepar,
+        jsrqciu = new JsonArrayRequest(Request.Method.GET, URLciu + "?provincia=" + buscariddepar,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -160,8 +276,8 @@ public class Register extends AppCompatActivity {
                             try {
                                 JSONObject res = response.getJSONObject(i);
                                 //Log.d("Response: ", "ID:"+res.getString("IDCIUDADES")+". Nombre: "+res.getString("NOMBRECIUDAD"));
-                                ciudad.add(res.getString("NOMBRECIUDAD"));
-                                idciudad.add(res.getString("IDCIUDADES"));
+                                ciudad.add(res.getString("name_ciu"));
+                                idciudad.add(res.getString("id"));
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -176,9 +292,9 @@ public class Register extends AppCompatActivity {
         rq.add(jsrqciu);
     }
 
-    public void onClickRegistrar(View view) {
+    public void onClickRegistrar() {
         //verify if terms are checked
-        if (terms.isChecked()) {
+        if (terms.isChecked() && (et_pass.getText().toString().equals(et_confpass.getText().toString())) ) {
             // Showing progress dialog at user registration time.
             final ProgressDialog progreso1 = new ProgressDialog(Register.this);
             progreso1.setMessage("Por favor, espere...");
@@ -227,6 +343,7 @@ public class Register extends AppCompatActivity {
                                                 //Ejecute acciones, deje vacio para solo aceptar
                                                 dialogo.cancel();
                                                 et_pass.setText(null);
+                                                et_confpass.setText(null);
                                             }
                                         });
                                         dialogo.show();
@@ -250,6 +367,7 @@ public class Register extends AppCompatActivity {
                             //Ejecute acciones, deje vacio para solo aceptar
                             dialogoerror.cancel();
                             et_pass.setText(null);
+                            et_confpass.setText(null);
                         }
                     });
                     dialogoerror.show();
@@ -262,17 +380,22 @@ public class Register extends AppCompatActivity {
                 protected Map<String, String> getParams() {
                     Map<String, String> parametros = new HashMap<>();
 
+                    parametros.put("tipodni", stringtipodni);
+                    parametros.put("dni", et_dni.getText().toString());
                     parametros.put("name", et_nombre.getText().toString());
+                    parametros.put("last", et_apellido.getText().toString());
+                    parametros.put("sexo", stringsexo);
                     parametros.put("email", et_correo.getText().toString());
                     parametros.put("pass", et_pass.getText().toString());
                     parametros.put("phone", et_phone.getText().toString());
                     parametros.put("ciudad", buscaridciudad);
+                    parametros.put("inst", et_inst.getText().toString());
 
                     return parametros;
                 }
             };
             rq.add(jsrqregistrar);
-        } else {
+        } else if (!terms.isChecked()) {
             AlertDialog.Builder dialogo1 = new AlertDialog.Builder(Register.this);
             dialogo1.setTitle("REGISTRAR");
             dialogo1.setMessage("\nPor favor, acepte términos y condiciones si desea realizar su registro.");
@@ -282,13 +405,28 @@ public class Register extends AppCompatActivity {
                     //Ejecute acciones, deje vacio para solo aceptar
                     dialogo1.cancel();
                     et_pass.setText(null);
+                    et_confpass.setText(null);
+                }
+            });
+            dialogo1.show();
+        } else if (!et_pass.getText().toString().equals(et_confpass.getText().toString())) {
+            AlertDialog.Builder dialogo1 = new AlertDialog.Builder(Register.this);
+            dialogo1.setTitle("REGISTRAR");
+            dialogo1.setMessage("\nPor favor, verifique sus contraseñas.");
+            dialogo1.setCancelable(false);
+            dialogo1.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialogo1, int id) {
+                    //Ejecute acciones, deje vacio para solo aceptar
+                    dialogo1.cancel();
+                    et_pass.setText(null);
+                    et_confpass.setText(null);
                 }
             });
             dialogo1.show();
         }
     }
 
-    public void onClickRegistrarLogin(View view) {
+    public void onClickRegistrarLogin() {
         //Intent intentiniciar = new Intent(Register.this, Login.class);
         //startActivity(intentiniciar);
         finish();

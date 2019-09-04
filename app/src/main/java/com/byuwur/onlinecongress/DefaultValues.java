@@ -2,16 +2,12 @@ package com.byuwur.onlinecongress;
 
 public class DefaultValues {
 
-    public String url = "http://www.sistemas-i-computacion-tic.com/reserv/phone/";
-    public String urlinicio = url + "inicio/";
-    public String urlcanchas = url + "canchas/";
-    public String urlponencia = url + "reservar/";
-    public String urlconferencia = url + "reservas/";
-    public String urlagendado = url + "favoritos/";
+    public String url = "http://192.168.0.4/onlinecongress.com/phone/";
     public String urlcuenta = url + "cuenta/";
-    public String urllistar = url + "listar/";
-    public String imgcanchasurl = "http://www.sistemas-i-computacion-tic.com/reserv/admin/Imagenes_Canchas/";
+    public String urlcanchas = url + "canchas/";
     public String imgfotoperfil = url + "cuenta/fotoperfil/Imagenes_Usuario/";
+    public String imgcongresosurl = url + "imgcongresos/";
+    public String imgcanchasurl = "http://www.sistemas-i-computacion-tic.com/reserv/admin/Imagenes_Canchas/";
 }
 
     /*

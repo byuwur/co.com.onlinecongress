@@ -14,7 +14,10 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,23 +32,26 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Feed extends AppCompatActivity {
 
-    private static String usrcorreo;
+    private static String usrcorreo, usrnombre;
     private DefaultValues dv = new DefaultValues();
     //login file to request
-    private String URLfeed = dv.urlinicio + "submitfeed.php";
+    private String URLfeed = dv.url + "submitfeed.php", stringasunto="";
     //
     private RequestQueue rq;
-    //set context
+    //set context|
     private Context ctx;
     //create request
     private StringRequest jsrqfeed;
+    private Spinner spinnerasunto;
     private EditText feedtext;
     private TextView feedenviarcomo;
+    private ArrayList<String> asunto = new ArrayList<>();
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -62,11 +68,29 @@ public class Feed extends AppCompatActivity {
         rq = Volley.newRequestQueue(ctx);
 
         feedtext = findViewById(R.id.feedtext);
+        spinnerasunto = findViewById(R.id.spinnerasunto);
 
-        //usrcorreo = getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("email", null);
+        usrcorreo = getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("email", null);
+        usrnombre = getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("nombre", null) + " " +
+                getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("apellido", null);
 
         feedenviarcomo = findViewById(R.id.feedenviarcomo);
-        //feedenviarcomo.setText("Enviar como:\n" + usrcorreo);
+        feedenviarcomo.setText("Enviar como: " + usrnombre + "\nCorreo: " + usrcorreo);
+
+        asunto.add("Soporte técnico y ayuda");
+        asunto.add("Comentarios y sugerencias");
+        ArrayAdapter<String> adapterasunto = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item, asunto);
+        adapterasunto.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerasunto.setAdapter(adapterasunto);
+        spinnerasunto.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
+                stringasunto = asunto.get(pos);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
     }
 
     public void onClickEnviarFeed(View view) {
@@ -150,6 +174,8 @@ public class Feed extends AppCompatActivity {
                 Map<String, String> parametros = new HashMap<>();
 
                 parametros.put("correo", usrcorreo);
+                parametros.put("nombre", usrnombre);
+                parametros.put("asunto", stringasunto);
                 parametros.put("feed", feedtext.getText().toString());
 
                 return parametros;

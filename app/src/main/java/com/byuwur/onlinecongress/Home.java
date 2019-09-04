@@ -96,9 +96,10 @@ public class Home extends AppCompatActivity
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Mi perfil");
+        getSupportActionBar().setTitle("Mi Perfil");
 
         final FloatingActionButton fabsearch = findViewById(R.id.search);
+        fabsearch.setVisibility(View.GONE);
         fabsearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -207,6 +208,10 @@ public class Home extends AppCompatActivity
             });
             dialog.create();
             dialog.show();
+        }  else if (id == R.id.action_change) {
+            Intent intent = new Intent(Home.this, Congresos.class);
+            startActivity(intent);
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -241,6 +246,11 @@ public class Home extends AppCompatActivity
                 break;
             case R.id.nav_perfil:
                 getSupportActionBar().setTitle("Mi perfil");
+                fabsearch.setVisibility(View.GONE);
+                //Fragment fragmentperfil = new PerfilFragment();getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentperfil).commit();
+                break;
+            case R.id.nav_congreso:
+                getSupportActionBar().setTitle("Sobre el congreso");
                 fabsearch.setVisibility(View.GONE);
                 //Fragment fragmentperfil = new PerfilFragment();getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentperfil).commit();
                 break;
