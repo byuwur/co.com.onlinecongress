@@ -56,7 +56,7 @@ public class ProfileFragment extends Fragment {
     private Button buttoneditar;
     private ImageView fotoperfil;
     private TextView nombreperfil, correoperfil, telefonoperfil, institucionperfil, congresoperfil;
-    private String usrnombre, usrcorreo, usrphone, usrciudad, usrid, usrinst;
+    private String usrnombre, usrcorreo, usrphone, usrciudad, usrid, usrinst, idcongreso, nombrecongreso, colorcongreso;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -140,11 +140,18 @@ public class ProfileFragment extends Fragment {
                 .getString("phone", null);
         usrinst = ctx.getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getString("institucion", null);
+        idcongreso = ctx.getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                .getString("congreso", "");
+        nombrecongreso = ctx.getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                .getString("nombrecongreso", null);
+        colorcongreso = ctx.getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                .getString("color", null);
 
         nombreperfil.setText(usrnombre);
         correoperfil.setText(usrcorreo);
         telefonoperfil.setText(usrphone);
         institucionperfil.setText(usrinst);
+        congresoperfil.setText(nombrecongreso);
 
         setnombreciudad();
 

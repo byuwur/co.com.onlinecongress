@@ -1,22 +1,27 @@
 package com.byuwur.onlinecongress;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Firsttime extends AppCompatActivity {
     private ImageView l1;
     //private Animation alpha,downtoup;
+    private String buscaridcongreso;
+    private Context ctx;
     private TextView textviewapc, textviewapc2, textviewapc3;
     private Button botoniniciar;
-    private Boolean isFirstRun;
+    private Boolean isFirstRun, loginsesion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,13 +29,36 @@ public class Firsttime extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_firsttime);
 
+        ctx = Firsttime.this;
+        buscaridcongreso = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                .getString("congreso", "");
         isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getBoolean("isFirstRun", true);
+        loginsesion = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                .getBoolean("loginsesion", false);
 
         if (!isFirstRun) {
-            Intent intentiniciar = new Intent(Firsttime.this, Login.class);
-            startActivity(intentiniciar);
-            finish();
+            if (buscaridcongreso.equals("")) {
+                if (loginsesion) {
+                    Intent intentiniciar = new Intent(Firsttime.this, Congresos.class);
+                    startActivity(intentiniciar);
+                    finish();
+                } else {
+                    Intent intentiniciar = new Intent(Firsttime.this, Login.class);
+                    startActivity(intentiniciar);
+                    finish();
+                }
+            } else {
+                if (loginsesion) {
+                    Intent intentiniciar = new Intent(Firsttime.this, Congresos.class);
+                    startActivity(intentiniciar);
+                    finish();
+                } else {
+                    Intent intentiniciar = new Intent(Firsttime.this, Login.class);
+                    startActivity(intentiniciar);
+                    finish();
+                }
+            }
         }
 
         l1 = findViewById(R.id.l1);

@@ -254,6 +254,8 @@ public class Cuenta extends AppCompatActivity {
     private void vieweditarcongreso() {
         Intent intentiniciar = new Intent(Cuenta.this, Congresos.class);
         startActivity(intentiniciar);
+        Home.home.finish();
+        finish();
     }
 
     private void vieweditarnombre() {

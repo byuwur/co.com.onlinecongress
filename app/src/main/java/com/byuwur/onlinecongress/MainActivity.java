@@ -177,6 +177,12 @@ public class MainActivity extends AppCompatActivity {
                                             .putString("sexo", null).apply();
                                     getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                                             .putString("institucion", null).apply();
+                                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                                            .putString("congreso", "").apply();
+                                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                                            .putString("nombrecongreso", null).apply();
+                                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                                            .putString("color", "0277bd").apply();
 
                                     Home.deleteCache(ctx);
 

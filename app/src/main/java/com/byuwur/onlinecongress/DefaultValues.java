@@ -1,15 +1,14 @@
 package com.byuwur.onlinecongress;
 
 public class DefaultValues {
-
-    public String url = "http://192.168.0.4/onlinecongress.com/phone/";
+    public String urlraiz = "http://10.0.2.2/onlinecongress.com/";
+    public String url = urlraiz + "phone/";
     public String urlcuenta = url + "cuenta/";
     public String urlcanchas = url + "canchas/";
     public String imgfotoperfil = url + "cuenta/fotoperfil/Imagenes_Usuario/";
     public String imgcongresosurl = url + "imgcongresos/";
     public String imgcanchasurl = "http://www.sistemas-i-computacion-tic.com/reserv/admin/Imagenes_Canchas/";
 }
-
     /*
     STRINGREQUESTEXAMPLE
         StringRequest strq = new StringRequest(Request.Method.POST, URL,
@@ -59,5 +58,4 @@ public class DefaultValues {
             }
         };
         rq.add(strq);
-
         */

@@ -1,5 +1,6 @@
 package com.byuwur.onlinecongress;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,11 +16,17 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 
@@ -28,6 +35,7 @@ public class Home extends AppCompatActivity
 
     DefaultValues dv = new DefaultValues();
     private Context ctx;
+    public static Activity home;
     //
     private String URLfotoperfil = dv.imgfotoperfil;
     //create edittexts
@@ -72,7 +80,7 @@ public class Home extends AppCompatActivity
         setContentView(R.layout.activity_home);
 
         ctx = Home.this;
-
+        home = this;
         //
         Fragment fragmentprofile = new ProfileFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentprofile).commit();
@@ -86,13 +94,14 @@ public class Home extends AppCompatActivity
         fotoperfil = headerView.findViewById(R.id.fotoperfil);
 
         usrnombre = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
-                .getString("nombre", null);
+                .getString("nombre", null) + " " + getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                .getString("apellido", null);
         usrid = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getString("id", null);
         usrcorreo = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getString("email", null);
 
-        //setuserdata();
+        setuserdata();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -117,6 +126,28 @@ public class Home extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+    }
+
+    private void setuserdata() {
+        tvusername.setText(usrnombre);
+        tvuserid.setText(usrcorreo);
+        tvuseremail.setText("#" + usrid);
+
+        //LOAD IMAGE
+        Picasso.get().load(URLfotoperfil + usrid + "/1.jpg")
+                .networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE)
+                .fit().centerCrop()
+                .into(fotoperfil, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        Log.d("Carga", "Cargada");
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        fotoperfil.setImageResource(R.drawable.no_profile);
+                    }
+                });
     }
 
     @Override
@@ -175,6 +206,8 @@ public class Home extends AppCompatActivity
             getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                     .putString("nombre", null).apply();
             getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                    .putString("apellido", null).apply();
+            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                     .putString("email", null).apply();
             getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                     .putString("ciudad", null).apply();
@@ -182,6 +215,16 @@ public class Home extends AppCompatActivity
                     .putString("phone", null).apply();
             getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                     .putString("pass", null).apply();
+            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                    .putString("sexo", null).apply();
+            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                    .putString("institucion", null).apply();
+            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                    .putString("congreso", "").apply();
+            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                    .putString("nombrecongreso", null).apply();
+            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                    .putString("color", "0277bd").apply();
 
             deleteCache(ctx);
 
