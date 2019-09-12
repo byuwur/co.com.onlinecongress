@@ -2,6 +2,7 @@ package com.byuwur.onlinecongress;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -126,7 +127,7 @@ public class ProfileFragment extends Fragment {
                 startActivity(intent1);
             }
         });
-
+        buttoneditar.setBackgroundColor(Color.parseColor("#" + ctx.getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
         return view;
     }
 

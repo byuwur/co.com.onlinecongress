@@ -5,8 +5,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -20,7 +24,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Callback;
@@ -34,6 +40,7 @@ public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     DefaultValues dv = new DefaultValues();
+    PonenciaFragment pf = new PonenciaFragment();
     private Context ctx;
     public static Activity home;
     //
@@ -88,6 +95,9 @@ public class Home extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.getHeaderView(0);
+        headerView.findViewById(R.id.navbg);
+        headerView.setBackgroundColor(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
+
         tvusername = headerView.findViewById(R.id.usernombre);
         tvuserid = headerView.findViewById(R.id.userid);
         tvuseremail = headerView.findViewById(R.id.useremail);
@@ -105,21 +115,11 @@ public class Home extends AppCompatActivity
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Mi Perfil");
+        getSupportActionBar().setTitle("Categorías");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd"))));
 
         final FloatingActionButton fabsearch = findViewById(R.id.search);
         fabsearch.setVisibility(View.GONE);
-        fabsearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getSupportActionBar().setTitle("Buscar");
-                //switch fragment
-                Fragment fragmentbuscar = new SearchFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentbuscar).commit();
-                //hide fab
-                fabsearch.setVisibility(View.GONE);
-            }
-        });
 
         DrawerLayout drawer = findViewById(R.id.home_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -259,7 +259,6 @@ public class Home extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
@@ -269,41 +268,46 @@ public class Home extends AppCompatActivity
         switch (id) {
             case R.id.nav_ponencia:
                 getSupportActionBar().setTitle("Ponencias");
-                Fragment fragmentreservar = new PonenciaFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentreservar).commit();
-                //show fab
-                fabsearch.setVisibility(View.VISIBLE);
+                pf.setfragment(true,false,false,false, false);
+                Fragment fragmentponencia0 = new PonenciaFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentponencia0).commit();
                 break;
             case R.id.nav_conferencia:
                 getSupportActionBar().setTitle("Conferencias");
-                Fragment fragmentreservas = new ConferenciaFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentreservas).commit();
-                //show fab
-                fabsearch.setVisibility(View.VISIBLE);
+                pf.setfragment(false,true,false,false, false);
+                Fragment fragmentponencia1 = new PonenciaFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentponencia1).commit();
+                break;
+            case R.id.nav_categoria:
+                getSupportActionBar().setTitle("Categorías");
+                pf.setfragment(false,false,true,false, false);
+                Fragment fragmentponencia2 = new PonenciaFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentponencia2).commit();
                 break;
             case R.id.nav_agenda:
                 getSupportActionBar().setTitle("Agenda");
-                Fragment fragmentfavoritos = new AgendadoFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentfavoritos).commit();
-                fabsearch.setVisibility(View.VISIBLE);
+                pf.setfragment(false,false,false,true, false);
+                Fragment fragmentponencia3 = new PonenciaFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentponencia3).commit();
+                break;
+            case R.id.nav_sobre:
+                getSupportActionBar().setTitle("Sobre " + ctx.getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("nombrecongreso", null));
+                pf.setfragment(false,false,false,false, true);
+                Fragment fragmentponencia4 = new PonenciaFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentponencia4).commit();
                 break;
             case R.id.nav_perfil:
-                getSupportActionBar().setTitle("Mi perfil");
-                fabsearch.setVisibility(View.GONE);
-                //Fragment fragmentperfil = new PerfilFragment();getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentperfil).commit();
-                break;
-            case R.id.nav_congreso:
-                getSupportActionBar().setTitle("Sobre el congreso");
-                fabsearch.setVisibility(View.GONE);
-                //Fragment fragmentperfil = new PerfilFragment();getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentperfil).commit();
+                getSupportActionBar().setTitle(getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("nombre", null) + " " + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("apellido", null));
+                Fragment fragmentperfil = new ProfileFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentperfil).commit();
                 break;
             case R.id.nav_cuenta:
-                Intent intent1 = new Intent(Home.this, Cuenta.class);
-                startActivity(intent1);
+                Intent intent0 = new Intent(Home.this, Cuenta.class);
+                startActivity(intent0);
                 break;
             case R.id.nav_feed:
-                Intent intent3 = new Intent(Home.this, Feed.class);
-                startActivity(intent3);
+                Intent intent1 = new Intent(Home.this, Feed.class);
+                startActivity(intent1);
                 break;
         }
         DrawerLayout drawer = findViewById(R.id.home_drawer_layout);
@@ -316,7 +320,7 @@ public class Home extends AppCompatActivity
         super.onResume();
         // Check should we need to refresh the fragment
         if (shouldRefreshOnResume) {
-            //setuserdata();
+            setuserdata();
             shouldRefreshOnResume = false;
         }
     }

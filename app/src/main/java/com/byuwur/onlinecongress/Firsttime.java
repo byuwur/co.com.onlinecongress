@@ -38,8 +38,8 @@ public class Firsttime extends AppCompatActivity {
                 .getBoolean("loginsesion", false);
 
         if (!isFirstRun) {
-            if (buscaridcongreso.equals("")) {
-                if (loginsesion) {
+            if (loginsesion) {
+                if (buscaridcongreso.equals("")) {
                     Intent intentiniciar = new Intent(Firsttime.this, Congresos.class);
                     startActivity(intentiniciar);
                     finish();
@@ -49,15 +49,9 @@ public class Firsttime extends AppCompatActivity {
                     finish();
                 }
             } else {
-                if (loginsesion) {
-                    Intent intentiniciar = new Intent(Firsttime.this, Congresos.class);
-                    startActivity(intentiniciar);
-                    finish();
-                } else {
-                    Intent intentiniciar = new Intent(Firsttime.this, Login.class);
-                    startActivity(intentiniciar);
-                    finish();
-                }
+                Intent intentiniciar = new Intent(Firsttime.this, Login.class);
+                startActivity(intentiniciar);
+                finish();
             }
         }
 

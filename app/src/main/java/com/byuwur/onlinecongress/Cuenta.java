@@ -9,6 +9,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -149,6 +151,8 @@ public class Cuenta extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Modificar Cuenta");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd"))));
+
         //
         ctx = Cuenta.this;
         rq = Volley.newRequestQueue(ctx);
@@ -239,6 +243,17 @@ public class Cuenta extends AppCompatActivity {
                 vieweditarfoto();
             }
         });
+
+        editarnombre.setBackgroundColor(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
+        editardni.setBackgroundColor(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
+        editarcorreo.setBackgroundColor(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
+        editarcongreso.setBackgroundColor(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
+        editarinstitucion.setBackgroundColor(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
+        editarphone.setBackgroundColor(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
+        editarpass.setBackgroundColor(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
+        editarsexo.setBackgroundColor(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
+        editarciudad.setBackgroundColor(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
+        editarfoto.setBackgroundColor(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
         /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -262,6 +277,9 @@ public class Cuenta extends AppCompatActivity {
         AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);
         @SuppressLint("InflateParams") View layout = LayoutInflater.from(ctx).inflate(R.layout.dialog_cambiarname, null);
         dialog.setView(layout);
+
+        Toolbar toolbarview = layout.findViewById(R.id.toolbar);
+        //toolbarview.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd"))));
 
         final EditText nombrenuevo = layout.findViewById(R.id.nombrenuevo);
         final EditText apellidonuevo = layout.findViewById(R.id.apellidonuevo);
@@ -649,11 +667,15 @@ public class Cuenta extends AppCompatActivity {
         @SuppressLint("InflateParams") View layout = LayoutInflater.from(ctx).inflate(R.layout.dialog_cambiarsexo, null);
         dialog.setView(layout);
 
+        Toolbar toolbarview = layout.findViewById(R.id.toolbar);
+        //toolbarview.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd"))));
+
         final Spinner spinnersexo  = layout.findViewById(R.id.spinnersexonuevo);
         final String[] stringsexo = new String[1];
 
         sexo.add("Masculino");
         sexo.add("Femenino");
+        sexo.add("Otro");
         ArrayAdapter<String> adaptersexo = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item, sexo);
         adaptersexo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnersexo.setAdapter(adaptersexo);
@@ -785,6 +807,9 @@ public class Cuenta extends AppCompatActivity {
         @SuppressLint("InflateParams") View layout = LayoutInflater.from(ctx).inflate(R.layout.dialog_cambiarinst, null);
         dialog.setView(layout);
 
+        Toolbar toolbarview = layout.findViewById(R.id.toolbar);
+        //toolbarview.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd"))));
+
         final EditText instnueva = layout.findViewById(R.id.instnuevo);
 
         dialog.setCancelable(false);
@@ -905,6 +930,9 @@ public class Cuenta extends AppCompatActivity {
         @SuppressLint("InflateParams") View layout = LayoutInflater.from(ctx).inflate(R.layout.dialog_cambiarphone, null);
         dialog.setView(layout);
 
+        Toolbar toolbarview = layout.findViewById(R.id.toolbar);
+        //toolbarview.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd"))));
+
         final EditText telefononuevo = layout.findViewById(R.id.telefononuevo);
 
         dialog.setCancelable(false);
@@ -1024,6 +1052,9 @@ public class Cuenta extends AppCompatActivity {
         AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);
         @SuppressLint("InflateParams") View layout = LayoutInflater.from(ctx).inflate(R.layout.dialog_cambiarpass, null);
         dialog.setView(layout);
+
+        Toolbar toolbarview = layout.findViewById(R.id.toolbar);
+        //toolbarview.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd"))));
 
         final EditText passactual = layout.findViewById(R.id.passactual);
         final EditText passnueva = layout.findViewById(R.id.passnueva);
@@ -1177,6 +1208,9 @@ public class Cuenta extends AppCompatActivity {
         AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);
         @SuppressLint("InflateParams") View layout = LayoutInflater.from(ctx).inflate(R.layout.dialog_cambiarciudad, null);
         dialog.setView(layout);
+
+        Toolbar toolbarview = layout.findViewById(R.id.toolbar);
+        //toolbarview.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd"))));
 
         //initial values
         pais.add("[--- Países (+cód. país) ---]");
@@ -1388,6 +1422,9 @@ public class Cuenta extends AppCompatActivity {
     private void vieweditarfoto() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);
         @SuppressLint("InflateParams") View layout = LayoutInflater.from(ctx).inflate(R.layout.dialog_cambiarfoto, null);
+
+        Toolbar toolbarview = layout.findViewById(R.id.toolbar);
+        //toolbarview.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd"))));
 
         if (Build.VERSION.SDK_INT >= 23 && (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)) {
             ActivityCompat.requestPermissions(Cuenta.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, 1);

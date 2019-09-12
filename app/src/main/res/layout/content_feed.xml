@@ -100,7 +100,6 @@
                 android:layout_marginRight="48dp"
                 android:layout_marginBottom="32dp"
                 android:background="@color/colorPrimaryDark"
-                android:onClick="onClickEnviarFeed"
                 android:text="Enviar comentario"
                 android:textColor="#FFF"
                 app:layout_constraintBottom_toBottomOf="parent"

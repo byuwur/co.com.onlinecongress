@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,6 +18,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -49,25 +53,19 @@ import static android.content.Context.MODE_PRIVATE;
  */
 public class PonenciaFragment extends Fragment {
     //PUBLIC STATIC PARAMS OF SEARCH
-    private static boolean ifsearch, ifid;
+    private static boolean ifponencia, ifconferencia, ifcategoria, ifagenda, ifsobre;
     private static String snombre, sbarrio, sciu, usrid, usrciudad;
     private DefaultValues dv = new DefaultValues();
     //register file to request
     private String IMGURL = dv.imgcanchasurl, URLid = dv.url + "buscarid.php", URLactciudad = dv.url + "anadirciudad.php",
-            URLlistarstring = dv.url + "buscarnombre.php", URLlistarciudad = dv.url + "listarciudad.php",
-            URLpais = dv.url + "paises.php", URLdep = dv.url + "departamentos.php", URLciu = dv.url + "ciudades.php";
-    //set context
+            URLlistarstring = dv.url + "buscarnombre.php", URLlistarciudad = dv.url + "listarciudad.php";
+    //set context, requestqueue
     private Context ctx;
-    //
     private RequestQueue rq;
     //create request
     private JsonArrayRequest jsrqdep, jsrqciu;
     private StringRequest jsrqciudad, jsrqid, jsrqnombre, jsrqactciudad;
-    //ARRAYS FOR VIEWNO
-    //list of each array
-    private ArrayList<String> dep = new ArrayList<>(), iddep = new ArrayList<>();
-    private ArrayList<String> ciudad = new ArrayList<>(), idciudad = new ArrayList<>();
-    private String buscariddepar = "", buscaridciudad = "";
+    //
     private OnFragmentInteractionListener mListener;
 
     private ArrayList<HolderPonencia> listaPonencia;
@@ -83,6 +81,7 @@ public class PonenciaFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        View viewsobre = inflater.inflate(R.layout.fragment_sobre, container, false);
         View viewsi = inflater.inflate(R.layout.fragment_ponencia, container, false);
         View viewno = inflater.inflate(R.layout.fragment_noponencia, container, false);
         //
@@ -96,75 +95,6 @@ public class PonenciaFragment extends Fragment {
                 .getString("id", null);
         usrciudad = getActivity().getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getString("ciudad", null);
-
-        //VIEWNO ELEMENTS
-        //initial values
-        dep.add("[--- Departamentos ---]");
-        iddep.add("0");
-        ciudad.add("[--- Ciudades ---]");
-        idciudad.add("0");
-        //fill dep
-        llenardepartamentos();
-        //SPINNER STUFF
-        final Spinner spinnerdep = viewno.findViewById(R.id.spinnerdepartamento);
-        final Spinner spinnerciu = viewno.findViewById(R.id.spinnerciudad);
-        //set the spinner value from Arraylist
-        ArrayAdapter<String> adapterdep = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item, dep);
-        adapterdep.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerdep.setAdapter(adapterdep);
-        spinnerdep.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
-                spinnerciu.setEnabled(true);
-                spinnerciu.setClickable(true);
-                //Toast.makeText(ctx,adapterView.getItemAtPosition(pos)+". "+iddep.get(pos), Toast.LENGTH_SHORT).show();
-                buscariddepar = iddep.get(pos);
-                //RESET CIUDAD ARRAYLIST
-                ciudad.clear();
-                idciudad.clear();
-                ciudad.add("[--- Ciudades ---]");
-                idciudad.add("0");
-                spinnerciu.setSelection(0);
-                //fill ciudad arraylist
-                llenarciudad();
-                if (pos == 0) {
-                    spinnerciu.setEnabled(false);
-                    spinnerciu.setClickable(false);
-                    buscaridciudad = "";
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-        //set the spinner value from Arraylist
-        ArrayAdapter<String> adapterciu = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item, ciudad);
-        adapterciu.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerciu.setAdapter(adapterciu);
-        spinnerciu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
-                //Toast.makeText(ctx, adapterView.getItemAtPosition(pos)+". "+idciudad.get(pos), Toast.LENGTH_SHORT).show();
-                buscaridciudad = idciudad.get(pos);
-                if (pos == 0) {
-                    buscaridciudad = "";
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-        //search button script
-        Button buttonactualizar = viewno.findViewById(R.id.buttonactualizarciudad);
-        buttonactualizar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Toast.makeText(ctx,buscaridciudad,Toast.LENGTH_SHORT).show();
-                actualizarciudad(usrid, buscaridciudad);
-            }
-        });
 
         //VIEWSI ELEMENTS
         listaPonencia = new ArrayList<>();
@@ -189,105 +119,41 @@ public class PonenciaFragment extends Fragment {
         });
         //AND VERIFY IF THERE'S ANYTHING,
         //if it isn't display an specific layout design
-        if ((usrciudad.equalsIgnoreCase("null") || usrciudad.equalsIgnoreCase("")
-                || usrciudad == null) && !ifsearch) {
-            return viewno;
-        } else {
-            LlenarListaPonencia(ifsearch, ifid, snombre, sbarrio, sciu);
-            resetsearchvalues();
+        if (ifponencia || ifconferencia || ifcategoria || ifagenda) {
             return viewsi;
+        } else if (ifsobre) {
+            final ProgressDialog[] prDialog = new ProgressDialog[1];
+            final WebView webviewsobre = viewsobre.findViewById(R.id.webviewsobre);
+            webviewsobre.setWebChromeClient(new WebChromeClient());
+            webviewsobre.getSettings().setJavaScriptEnabled(true);
+            webviewsobre.setWebViewClient(new WebViewClient(){
+                @Override
+                public boolean shouldOverrideUrlLoading(WebView view, String url){
+                    view.loadUrl(url);
+                    return true;
+                }
+                @Override
+                public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                    super.onPageStarted(view, url, favicon);
+                    prDialog[0] = new ProgressDialog(ctx);
+                    prDialog[0].setMessage("Por favor, espere...");
+                    prDialog[0].show();
+                }
+                @Override
+                public void onPageFinished(WebView view, String url) {
+                    super.onPageFinished(view, url);
+                    if(prDialog[0] !=null){
+                        prDialog[0].dismiss();
+                    }
+                }
+            });
+            webviewsobre.loadUrl("http://covaite.com");
+            return viewsobre;
+        } else {
+            return viewno;
         }
     }
 
-    private void actualizarciudad(final String id, final String ciudad) {
-        // Showing progress dialog at user registration time.
-        final ProgressDialog progreso1 = new ProgressDialog(ctx);
-        progreso1.setMessage("Por favor, espere...");
-        progreso1.show();
-
-        jsrqactciudad = new StringRequest(Request.Method.POST, URLactciudad,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        //Log.d("Response", response.toString());
-                        JSONArray resp = null;
-                        try {
-                            resp = new JSONArray(response);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        assert resp != null;
-                        for (int i = 0; i < resp.length(); i++) {
-                            try {
-                                progreso1.dismiss();
-                                JSONObject res = resp.getJSONObject(i);
-                                Boolean success = res.getBoolean("success");
-                                Boolean error = res.getBoolean("error");
-
-                                if (error) {
-                                    AlertDialog.Builder dialogo = new AlertDialog.Builder(ctx);
-                                    dialogo.setTitle("ERROR");
-                                    dialogo.setMessage("\n" + res.getString("mensaje"));
-                                    dialogo.setCancelable(false);
-                                    dialogo.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialogo, int id) {
-                                            //Ejecute acciones, deje vacio para solo aceptar
-                                            dialogo.cancel();
-                                        }
-                                    });
-                                    dialogo.show();
-                                } else if (success) {
-                                    AlertDialog.Builder dialogo = new AlertDialog.Builder(ctx);
-                                    dialogo.setTitle("ACTUALIZAR");
-                                    dialogo.setMessage("\n" + res.getString("mensaje"));
-                                    dialogo.setCancelable(false);
-                                    dialogo.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialogo, int id) {
-                                            //Ejecute acciones, deje vacio para solo aceptar
-                                            getActivity().getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                                                    .putString("ciudad", ciudad).apply();
-                                            dialogo.cancel();
-                                            onclickself();
-                                        }
-                                    });
-                                    dialogo.show();
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                AlertDialog.Builder dialogoerror = new AlertDialog.Builder(ctx);
-                dialogoerror.setTitle("ERROR");
-                dialogoerror.setMessage("\nNo es posible contactar al servidor. Verifique su conexión a Internet e inténtelo más tarde.");
-                dialogoerror.setCancelable(false);
-                dialogoerror.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialogoerror, int id) {
-                        //Ejecute acciones, deje vacio para solo aceptar
-                        dialogoerror.cancel();
-                    }
-                });
-                dialogoerror.show();
-
-                Log.d("Error", error.toString());
-                //Toast.makeText(ctx, "Unable to fetch data: " + error.getMessage(),Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> parametros = new HashMap<>();
-
-                parametros.put("id", id);
-                parametros.put("ciudad", ciudad);
-
-                return parametros;
-            }
-        };
-        rq.add(jsrqactciudad);
-    }
 
     private void LlenarListaPonencia(boolean search, boolean id, String nombre, String barrio, String ciu) {
         Log.d("Data enviada", "" + search + ", " + id + ", " + nombre + ", " + barrio + ", " + ciu);
@@ -341,7 +207,6 @@ public class PonenciaFragment extends Fragment {
                                             public void onClick(DialogInterface dialogoerror, int id) {
                                                 //Ejecute acciones, deje vacio para solo aceptar
                                                 dialogoerror.cancel();
-                                                onclickbuscar();
                                             }
                                         });
                                         dialogoerror.show();
@@ -427,7 +292,6 @@ public class PonenciaFragment extends Fragment {
                                             public void onClick(DialogInterface dialogoerror, int id) {
                                                 //Ejecute acciones, deje vacio para solo aceptar
                                                 dialogoerror.cancel();
-                                                onclickbuscar();
                                             }
                                         });
                                         dialogoerror.show();
@@ -513,7 +377,6 @@ public class PonenciaFragment extends Fragment {
                                             public void onClick(DialogInterface dialogoerror, int id) {
                                                 //Ejecute acciones, deje vacio para solo aceptar
                                                 dialogoerror.cancel();
-                                                onclickbuscar();
                                             }
                                         });
                                         dialogoerror.show();
@@ -565,89 +428,33 @@ public class PonenciaFragment extends Fragment {
         rq.add(jsrqnombre);
     }
 
-    public void setsearchvalues(boolean search, boolean id, String nombre, String barrio, String ciu) {
-        ifsearch = search;
-        ifid = id;
-        snombre = nombre;
-        sbarrio = barrio;
-        sciu = ciu;
+    public void setfragment(boolean ponencia, boolean conferencia, boolean categoria, boolean agenda, boolean sobre) {
+        ifponencia = ponencia;
+        ifconferencia = conferencia;
+        ifcategoria = categoria;
+        ifagenda = agenda;
+        ifsobre = sobre;
     }
 
-    private void resetsearchvalues() {
-        ifsearch = false;
-        ifid = false;
-        snombre = null;
-        sbarrio = null;
-        sciu = null;
+    private void resetfragment() {
+        ifponencia = false;
+        ifconferencia = false;
+        ifcategoria = false;
+        ifagenda = false;
+        ifsobre = false;
     }
 
-    private void onclickbuscar() {
-        //title toolbar
-        Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
-        toolbar.setTitle("Buscar");
-        //switch fragment
-        Fragment fragmentbuscar = new SearchFragment();
+    private void onclickself(boolean ponencia, boolean conferencia, boolean categoria, boolean agenda, boolean sobre) {
+        setfragment(ponencia, conferencia, categoria, agenda, sobre);
+        Fragment fragmentponencia = new PonenciaFragment();
         assert getFragmentManager() != null;
-        getFragmentManager().beginTransaction().replace(R.id.home, fragmentbuscar).commit();
-        // hide fab
-        FloatingActionButton fabsearch = getActivity().findViewById(R.id.search);
-        fabsearch.setVisibility(View.GONE);
+        getFragmentManager().beginTransaction().replace(R.id.home, fragmentponencia).commit();
     }
 
     private void onclickself() {
         Fragment fragmentponencia = new PonenciaFragment();
         assert getFragmentManager() != null;
         getFragmentManager().beginTransaction().replace(R.id.home, fragmentponencia).commit();
-    }
-
-    private void llenardepartamentos() {
-        jsrqdep = new JsonArrayRequest(Request.Method.GET, URLdep,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        for (int i = 0; i < response.length(); i++) {
-                            try {
-                                JSONObject res = response.getJSONObject(i);
-                                //Log.d("Response: ", "ID:"+res.getString("IDDEPARTAMENTOS")+". Nombre: "+res.getString("NOMBREDEPARTAMENTO"));
-                                dep.add(res.getString("NOMBREDEPARTAMENTO"));
-                                iddep.add(res.getString("IDDEPARTAMENTOS"));
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("Error", error.toString());
-            }
-        });
-        rq.add(jsrqdep);
-    }
-
-    private void llenarciudad() {
-        jsrqciu = new JsonArrayRequest(Request.Method.GET, URLciu + "?dep=" + buscariddepar,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        for (int i = 0; i < response.length(); i++) {
-                            try {
-                                JSONObject res = response.getJSONObject(i);
-                                //Log.d("Response: ", "ID:"+res.getString("IDCIUDADES")+". Nombre: "+res.getString("NOMBRECIUDAD"));
-                                ciudad.add(res.getString("NOMBRECIUDAD"));
-                                idciudad.add(res.getString("IDCIUDADES"));
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("Error", error.toString());
-            }
-        });
-        rq.add(jsrqciu);
     }
 
     @Override

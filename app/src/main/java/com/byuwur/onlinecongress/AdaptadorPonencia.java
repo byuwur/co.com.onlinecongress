@@ -79,11 +79,10 @@ public class AdaptadorPonencia extends RecyclerView.Adapter<AdaptadorPonencia.Po
             super(itemView);
             ponencianombre = itemView.findViewById(R.id.ponencianombre);
             ponenciaid = itemView.findViewById(R.id.ponenciaid);
-            ponenciavalor = itemView.findViewById(R.id.ponenciavalor);
+            ponenciavalor = itemView.findViewById(R.id.ponenciainst);
             ponenciaidioma = itemView.findViewById(R.id.ponenciaidioma);
             ponenciacategoria = itemView.findViewById(R.id.ponenciacategoria);
             ponenciadias = itemView.findViewById(R.id.ponenciadias);
-            ponenciahorario = itemView.findViewById(R.id.ponenciahorario);
             ponenciaimg = itemView.findViewById(R.id.ponenciaimg);
 
             itemView.setOnClickListener(new View.OnClickListener() {

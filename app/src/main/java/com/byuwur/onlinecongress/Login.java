@@ -78,7 +78,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        Boolean loginsesion = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+        boolean loginsesion = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getBoolean("loginsesion", false);
         if (loginsesion) {
             Intent intentiniciar = new Intent(Login.this, Home.class);

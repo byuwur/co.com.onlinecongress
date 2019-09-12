@@ -5,6 +5,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -51,6 +54,7 @@ public class Feed extends AppCompatActivity {
     private Spinner spinnerasunto;
     private EditText feedtext;
     private TextView feedenviarcomo;
+    private Button buttonfeed;
     private ArrayList<String> asunto = new ArrayList<>();
 
     @SuppressLint("SetTextI18n")
@@ -63,6 +67,7 @@ public class Feed extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Ayuda y comentarios");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd"))));
 
         ctx = Feed.this;
         rq = Volley.newRequestQueue(ctx);
@@ -76,6 +81,15 @@ public class Feed extends AppCompatActivity {
 
         feedenviarcomo = findViewById(R.id.feedenviarcomo);
         feedenviarcomo.setText("Enviar como: " + usrnombre + "\nCorreo: " + usrcorreo);
+
+        buttonfeed = findViewById(R.id.feedenviar);
+        buttonfeed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickEnviarFeed();
+            }
+        });
+        buttonfeed.setBackgroundColor(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
 
         asunto.add("Soporte técnico y ayuda");
         asunto.add("Comentarios y sugerencias");
@@ -93,7 +107,7 @@ public class Feed extends AppCompatActivity {
         });
     }
 
-    public void onClickEnviarFeed(View view) {
+    public void onClickEnviarFeed() {
         // Showing progress dialog at user registration time.
         final ProgressDialog progreso = new ProgressDialog(ctx);
         progreso.setMessage("Por favor, espere...");

@@ -21,8 +21,8 @@
             android:icon="@drawable/ic_menu_beenhere"
             android:title="Agenda" />
         <item
-            android:id="@+id/nav_congreso"
-            android:icon="@drawable/ic_menu_beenhere"
+            android:id="@+id/nav_sobre"
+            android:icon="@drawable/ic_menu_account_box"
             android:title="Sobre el congreso" />
         <item
             android:id="@+id/nav_perfil"

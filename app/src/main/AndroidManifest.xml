@@ -19,7 +19,6 @@
         <activity android:name=".Register" />
         <activity android:name=".Login" />
         <activity android:name=".Ponencia" />
-        <activity android:name=".Conferencia" />
         <activity
             android:name=".Home"
             android:label="@string/title_activity_home"

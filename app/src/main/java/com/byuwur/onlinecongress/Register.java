@@ -125,6 +125,7 @@ public class Register extends AppCompatActivity {
         });
         sexo.add("Masculino");
         sexo.add("Femenino");
+        sexo.add("Otro");
         ArrayAdapter<String> adaptersexo = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item, sexo);
         adaptersexo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnersexo.setAdapter(adaptersexo);
