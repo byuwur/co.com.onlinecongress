@@ -3,21 +3,19 @@ package com.byuwur.onlinecongress;
 public class HolderPonencia {
     private String ponencianombre;
     private String ponenciaid;
-    private String ponenciavalor;
+    private String ponenciainst;
     private String ponenciaidioma;
     private String ponenciacategoria;
     private String ponenciadias;
-    private String ponenciahorario;
     private String ponenciaimg;
 
-    public HolderPonencia(String nombre, String id, String valor, String idioma, String categoria, String dias, String horario, String imgcancha) {
+    public HolderPonencia(String nombre, String id, String inst, String idioma, String categoria, String dias, String imgcancha) {
         this.ponencianombre = nombre;
         this.ponenciaid = id;
-        this.ponenciavalor = valor;
+        this.ponenciainst = inst;
         this.ponenciaidioma = idioma;
         this.ponenciacategoria = categoria;
         this.ponenciadias = dias;
-        this.ponenciahorario = horario;
         this.ponenciaimg = imgcancha;
     }
 
@@ -37,27 +35,27 @@ public class HolderPonencia {
         this.ponenciaid = id;
     }
 
-    public String getValor() {
-        return ponenciavalor;
+    public String getInst() {
+        return ponenciainst;
     }
 
-    public void setValor(String valor) {
-        this.ponenciavalor = valor;
+    public void setInst(String inst) {
+        this.ponenciainst = inst;
     }
 
-    public String getDireccion() {
+    public String getIdioma() {
         return ponenciaidioma;
     }
 
-    public void setDireccion(String idioma) {
+    public void setIdioma(String idioma) {
         this.ponenciaidioma = idioma;
     }
 
-    public String getCiudad() {
+    public String getCategoria() {
         return ponenciacategoria;
     }
 
-    public void setCiudad(String categoria) {
+    public void setCategoria(String categoria) {
         this.ponenciacategoria = categoria;
     }
 
@@ -67,14 +65,6 @@ public class HolderPonencia {
 
     public void setDias(String dias) {
         this.ponenciadias = dias;
-    }
-
-    public String getHorario() {
-        return ponenciahorario;
-    }
-
-    public void setHorario(String horario) {
-        this.ponenciahorario = horario;
     }
 
     public String getImg() {

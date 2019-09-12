@@ -44,7 +44,7 @@ public class Feed extends AppCompatActivity {
     private static String usrcorreo, usrnombre;
     private DefaultValues dv = new DefaultValues();
     //login file to request
-    private String URLfeed = dv.url + "submitfeed.php", stringasunto="";
+    private String URLfeed = dv.url + "submitfeed.php", stringasunto = "";
     //
     private RequestQueue rq;
     //set context|
@@ -101,6 +101,7 @@ public class Feed extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
                 stringasunto = asunto.get(pos);
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }

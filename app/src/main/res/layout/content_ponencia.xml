@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="1"
-    android:padding="1dp"
     android:background="#EEE"
+    android:padding="1dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Ponencia"
     tools:showIn="@layout/activity_ponencia">
@@ -17,36 +17,20 @@
         android:orientation="vertical"
         android:padding="1dp">
 
-        <TextView
-            android:id="@+id/nombrecancha"
+        <Button
+            android:id="@+id/buttonreservar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginBottom="64dp"
             android:layout_weight="1"
-            android:maxLines="2"
-            android:text="NOMBRE CANCHA"
-            android:textColor="#000"
-            android:textSize="24dp" />
-
-        <TextView
-            android:id="@+id/textView27"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            android:layout_marginBottom="4dp"
-            android:layout_weight="1"
-            android:maxLines="1"
-            android:text=""
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="12dp" />
+            android:background="@color/colorPrimaryDark"
+            android:text="RESERVAR"
+            android:textColor="#FFF" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -87,62 +71,6 @@
                 android:layout_weight="1"
                 app:srcCompat="@drawable/no_image" />
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/diascancha"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            android:layout_weight="1"
-            android:maxLines="2"
-            android:text="Días"
-            android:textColor="#000"
-            android:textSize="18dp" />
-
-        <TextView
-            android:id="@+id/textView19"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            android:layout_weight="1"
-            android:maxLines="1"
-            android:text="Días disponible"
-            android:textColor="@color/colorPrimaryDark" />
-
-        <TextView
-            android:id="@+id/horascancha"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            android:layout_weight="1"
-            android:maxLines="2"
-            android:text="Horas"
-            android:textColor="#000"
-            android:textSize="18dp" />
-
-        <TextView
-            android:id="@+id/textView22"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            android:layout_weight="1"
-            android:maxLines="1"
-            android:text="Horario de atención"
-            android:textColor="@color/colorPrimaryDark" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -220,34 +148,6 @@
                     android:textColor="@color/colorPrimaryDark" />
             </LinearLayout>
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/ubicacioncancha"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            android:layout_weight="1"
-            android:maxLines="2"
-            android:text="Dirección"
-            android:textColor="#000"
-            android:textSize="18dp" />
-
-        <TextView
-            android:id="@+id/textView24"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            android:layout_weight="1"
-            android:maxLines="1"
-            android:text="Dirección"
-            android:textColor="@color/colorPrimaryDark" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -327,6 +227,121 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/nombrecancha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_weight="1"
+            android:maxLines="2"
+            android:text="NOMBRE CANCHA"
+            android:textColor="#000"
+            android:textSize="24dp" />
+
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="4dp"
+            android:layout_weight="1"
+            android:maxLines="1"
+            android:text=""
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/diascancha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_weight="1"
+            android:maxLines="2"
+            android:text="Días"
+            android:textColor="#000"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_weight="1"
+            android:maxLines="1"
+            android:text="Días disponible"
+            android:textColor="@color/colorPrimaryDark" />
+
+        <TextView
+            android:id="@+id/horascancha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_weight="1"
+            android:maxLines="2"
+            android:text="Horas"
+            android:textColor="#000"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_weight="1"
+            android:maxLines="1"
+            android:text="Horario de atención"
+            android:textColor="@color/colorPrimaryDark" />
+
+        <TextView
+            android:id="@+id/ubicacioncancha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_weight="1"
+            android:maxLines="2"
+            android:text="Dirección"
+            android:textColor="#000"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_weight="1"
+            android:maxLines="1"
+            android:text="Dirección"
+            android:textColor="@color/colorPrimaryDark" />
+
+        <TextView
             android:id="@+id/textView26"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -351,21 +366,6 @@
             android:text="Características"
             android:textColor="#000"
             android:textSize="18dp" />
-
-        <Button
-            android:id="@+id/buttonreservar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginRight="32dp"
-            android:layout_marginBottom="64dp"
-            android:layout_weight="1"
-            android:background="@color/colorPrimaryDark"
-            android:text="RESERVAR"
-            android:textColor="#FFF" />
 
     </LinearLayout>
 </ScrollView>

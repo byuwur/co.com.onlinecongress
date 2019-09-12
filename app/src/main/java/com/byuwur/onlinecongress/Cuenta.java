@@ -70,7 +70,7 @@ public class Cuenta extends AppCompatActivity {
             URLactinst = dv.urlcuenta + "inst.php", URLactsexo = dv.urlcuenta + "sexo.php", URLactdni = dv.urlcuenta + "dni.php",
             URLactcorreo = dv.urlcuenta + "correo.php", URLactphone = dv.urlcuenta + "phone.php",
             URLactpass = dv.urlcuenta + "pass.php", URLactfoto = dv.urlcuenta + "fotoperfil/fotos.php",
-            URLpais= dv.url + "paises.php", URLdep = dv.url + "provincias.php", URLciu = dv.url + "ciudades.php";
+            URLpais = dv.url + "paises.php", URLdep = dv.url + "provincias.php", URLciu = dv.url + "ciudades.php";
     //
     private RequestQueue rq;
     //set context
@@ -79,7 +79,7 @@ public class Cuenta extends AppCompatActivity {
     private JsonArrayRequest jsrqnombreciudad, jsrqpais, jsrqdep, jsrqciu;
     private StringRequest jsrqactualizar;
     //list of each array
-    private ArrayList<String> tipodni = new ArrayList<>(),sexo = new ArrayList<>();
+    private ArrayList<String> tipodni = new ArrayList<>(), sexo = new ArrayList<>();
     private ArrayList<String> pais = new ArrayList<>(), idpais = new ArrayList<>();
     private ArrayList<String> dep = new ArrayList<>(), iddep = new ArrayList<>();
     private ArrayList<String> ciudad = new ArrayList<>(), idciudad = new ArrayList<>();
@@ -405,6 +405,9 @@ public class Cuenta extends AppCompatActivity {
         @SuppressLint("InflateParams") View layout = LayoutInflater.from(ctx).inflate(R.layout.dialog_cambiardni, null);
         dialog.setView(layout);
 
+        Toolbar toolbarview = layout.findViewById(R.id.toolbar);
+        //toolbarview.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd"))));
+
         final Spinner spinnertipodni = layout.findViewById(R.id.spinnerdninuevo);
         final String[] stringtipodninuevo = new String[1];
         final EditText dninuevo = layout.findViewById(R.id.dninuevo);
@@ -421,6 +424,7 @@ public class Cuenta extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
                 stringtipodninuevo[0] = tipodni.get(pos);
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -547,6 +551,9 @@ public class Cuenta extends AppCompatActivity {
         @SuppressLint("InflateParams") View layout = LayoutInflater.from(ctx).inflate(R.layout.dialog_cambiaremail, null);
         dialog.setView(layout);
 
+        Toolbar toolbarview = layout.findViewById(R.id.toolbar);
+        //toolbarview.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd"))));
+
         final EditText correonuevo = layout.findViewById(R.id.correonuevo);
 
         dialog.setCancelable(false);
@@ -670,7 +677,7 @@ public class Cuenta extends AppCompatActivity {
         Toolbar toolbarview = layout.findViewById(R.id.toolbar);
         //toolbarview.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd"))));
 
-        final Spinner spinnersexo  = layout.findViewById(R.id.spinnersexonuevo);
+        final Spinner spinnersexo = layout.findViewById(R.id.spinnersexonuevo);
         final String[] stringsexo = new String[1];
 
         sexo.add("Masculino");
@@ -684,6 +691,7 @@ public class Cuenta extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
                 stringsexo[0] = sexo.get(pos);
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }

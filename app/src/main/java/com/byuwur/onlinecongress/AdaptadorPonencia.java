@@ -38,11 +38,10 @@ public class AdaptadorPonencia extends RecyclerView.Adapter<AdaptadorPonencia.Po
     public void onBindViewHolder(@NonNull final PonenciaViewHolder holder, int position) {
         holder.ponencianombre.setText(listaponencia.get(position).getNombre());
         holder.ponenciaid.setText(listaponencia.get(position).getId());
-        holder.ponenciavalor.setText(listaponencia.get(position).getValor());
-        holder.ponenciaidioma.setText(listaponencia.get(position).getDireccion());
-        holder.ponenciacategoria.setText(listaponencia.get(position).getCiudad());
+        holder.ponenciainst.setText(listaponencia.get(position).getInst());
+        holder.ponenciaidioma.setText(listaponencia.get(position).getIdioma());
+        holder.ponenciacategoria.setText(listaponencia.get(position).getCategoria());
         holder.ponenciadias.setText(listaponencia.get(position).getDias());
-        holder.ponenciahorario.setText(listaponencia.get(position).getHorario());
         //load image
         Picasso.get().load(listaponencia.get(position).getImg())
                 //.networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE)
@@ -72,14 +71,14 @@ public class AdaptadorPonencia extends RecyclerView.Adapter<AdaptadorPonencia.Po
     }
 
     public class PonenciaViewHolder extends RecyclerView.ViewHolder {
-        TextView ponencianombre, ponenciaid, ponenciavalor, ponenciaidioma, ponenciacategoria, ponenciadias, ponenciahorario;
+        TextView ponencianombre, ponenciaid, ponenciainst, ponenciaidioma, ponenciacategoria, ponenciadias;
         ImageView ponenciaimg;
 
         private PonenciaViewHolder(View itemView, final onItemClickListener listener) {
             super(itemView);
             ponencianombre = itemView.findViewById(R.id.ponencianombre);
             ponenciaid = itemView.findViewById(R.id.ponenciaid);
-            ponenciavalor = itemView.findViewById(R.id.ponenciainst);
+            ponenciainst = itemView.findViewById(R.id.ponenciainst);
             ponenciaidioma = itemView.findViewById(R.id.ponenciaidioma);
             ponenciacategoria = itemView.findViewById(R.id.ponenciacategoria);
             ponenciadias = itemView.findViewById(R.id.ponenciadias);

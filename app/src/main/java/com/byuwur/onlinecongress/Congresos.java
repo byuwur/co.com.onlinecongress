@@ -94,11 +94,16 @@ public class Congresos extends AppCompatActivity {
                             public void onSuccess() {
                                 Log.d("Carga", "Cargada");
                             }
+
                             @Override
-                            public void onError(Exception e) { imgcongreso.setImageResource(R.drawable.logo); }
+                            public void onError(Exception e) {
+                                imgcongreso.setImageResource(R.drawable.logo);
+                            }
                         });
                 if (pos == 0) {
-                    buscaridcongreso = ""; buscarcolorcongreso = ""; buscarnombrecongreso = "";
+                    buscaridcongreso = "";
+                    buscarcolorcongreso = "";
+                    buscarnombrecongreso = "";
                     nombrecongreso.setText("CONGRESO VIRTUAL");
                     congresos.setBackgroundColor(Color.parseColor("#" + colorcongreso.get(pos)));
                     Picasso.get().load(URLimgcon)
@@ -109,8 +114,11 @@ public class Congresos extends AppCompatActivity {
                                 public void onSuccess() {
                                     Log.d("Carga", "Cargada");
                                 }
+
                                 @Override
-                                public void onError(Exception e) { imgcongreso.setImageResource(R.drawable.logo); }
+                                public void onError(Exception e) {
+                                    imgcongreso.setImageResource(R.drawable.logo);
+                                }
                             });
                 }
             }
@@ -136,7 +144,7 @@ public class Congresos extends AppCompatActivity {
                         for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject res = response.getJSONObject(i);
-                                Log.d("Response: ", "ID:"+res.getString("Id")+". Color: "+res.getString("Color")+". Logo: "+res.getString("Logo"));
+                                Log.d("Response: ", "ID:" + res.getString("Id") + ". Color: " + res.getString("Color") + ". Logo: " + res.getString("Logo"));
                                 congreso.add(res.getString("Nombre") + " (" + res.getString("Año") + ")");
                                 idcongreso.add(res.getString("Id"));
                                 colorcongreso.add(res.getString("Color"));
@@ -155,7 +163,7 @@ public class Congresos extends AppCompatActivity {
         rq.add(jsrqpais);
     }
 
-    private void onclickCongreso(){
+    private void onclickCongreso() {
         if (buscaridcongreso.equals("") || buscaridcongreso == null) {
             Toast.makeText(ctx, "Por favor, seleccione un congreso.", Toast.LENGTH_LONG).show();
         } else {
@@ -173,5 +181,7 @@ public class Congresos extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() { Toast.makeText(ctx, "Por favor, seleccione un congreso.", Toast.LENGTH_LONG).show();}
+    public void onBackPressed() {
+        Toast.makeText(ctx, "Por favor, seleccione un congreso.", Toast.LENGTH_LONG).show();
+    }
 }

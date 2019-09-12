@@ -60,8 +60,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-    private void vercon(final Boolean sesion, final String usrid, final String usrpass){
+    private void vercon(final Boolean sesion, final String usrid, final String usrpass) {
         //verify connection
         jsrqconn = new StringRequest(Request.Method.POST, URLconex,
                 new Response.Listener<String>() {
@@ -70,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                         //Log.d("Response", response.toString());
                         JSONArray resp = null;
                         try {
-                            resp = new JSONArray( response );
+                            resp = new JSONArray(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -81,15 +80,13 @@ public class MainActivity extends AppCompatActivity {
                                 Boolean conexion = res.getBoolean("conexion");
 
                                 if (conexion) {
-                                    Log.d("Res","Estamos dentro");
-                                    if ( sesion && usrpass!=null ){
+                                    Log.d("Res", "Estamos dentro");
+                                    if (sesion && usrpass != null) {
                                         verpass(usrid, usrpass);
-                                    }
-                                    else{
+                                    } else {
                                         jumpnext();
                                     }
-                                }
-                                else{
+                                } else {
                                     AlertDialog.Builder dialogoerror = new AlertDialog.Builder(ctx);
                                     dialogoerror.setTitle("ERROR");
                                     dialogoerror.setMessage("\nNo es posible contactar al servidor. Verifique su conexión a Internet e inténtelo más tarde.");
@@ -135,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
         rq.add(jsrqconn);
     }
 
-    private void verpass(final String id, final String pass){
+    private void verpass(final String id, final String pass) {
 
         jsrqpass = new StringRequest(Request.Method.POST, URLpass,
                 new Response.Listener<String>() {
@@ -144,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
                         //Log.d("Response", response.toString());
                         JSONArray resp = null;
                         try {
-                            resp = new JSONArray( response );
+                            resp = new JSONArray(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -199,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
                                     });
                                     dialogo.show();
                                 }
-                                if (success){
+                                if (success) {
                                     Log.d("Res", res.getString("mensaje"));
                                     verdatos(id, pass);
                                 }
@@ -240,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
         rq.add(jsrqpass);
     }
 
-    private void verdatos(final String id, final String pass){
+    private void verdatos(final String id, final String pass) {
 
         jsrqdatos = new StringRequest(Request.Method.POST, URLdatos,
                 new Response.Listener<String>() {
@@ -249,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
                         //Log.d("Response", response.toString());
                         JSONArray resp = null;
                         try {
-                            resp = new JSONArray( response );
+                            resp = new JSONArray(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -274,7 +271,7 @@ public class MainActivity extends AppCompatActivity {
                                     });
                                     dialogo.show();
                                 }
-                                if (success){
+                                if (success) {
                                     Log.d("Res", res.getString("mensaje"));
 
                                     getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()

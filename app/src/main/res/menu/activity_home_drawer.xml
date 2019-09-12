@@ -14,7 +14,7 @@
             android:title="Conferencias" />
         <item
             android:id="@+id/nav_categoria"
-            android:icon="@drawable/ic_menu_library_add"
+            android:icon="@drawable/ic_menu_beenhere"
             android:title="Categorías" />
         <item
             android:id="@+id/nav_agenda"

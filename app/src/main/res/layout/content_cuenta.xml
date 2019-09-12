@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#EEE"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Cuenta"
-    android:background="#EEE"
     tools:showIn="@layout/activity_cuenta">
 
     <ScrollView
@@ -38,14 +38,6 @@
                         android:layout_margin="10dp"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:maxLines="1"
-                            android:text="Nombre"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="10sp" />
-
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -53,6 +45,14 @@
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
                             android:src="@drawable/ic_menu_person" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:text="Nombre"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="10sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -93,6 +93,7 @@
                         android:background="@color/colorPrimaryDark"
                         android:text="Editar"
                         android:textColor="#FFF" />
+
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -112,14 +113,6 @@
                         android:layout_margin="10dp"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:maxLines="1"
-                            android:text="Identidad"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="10sp" />
-
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -127,6 +120,14 @@
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
                             android:src="@drawable/ic_menu_person" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:text="Identidad"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="10sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -168,6 +169,7 @@
                         android:background="@color/colorPrimaryDark"
                         android:text="Editar"
                         android:textColor="#FFF" />
+
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -187,14 +189,6 @@
                         android:layout_margin="10dp"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:maxLines="2"
-                            android:text="Correo"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="10sp" />
-
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -202,6 +196,14 @@
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
                             android:src="@drawable/ic_menu_account_box" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="2"
+                            android:text="Correo"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="10sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -242,6 +244,7 @@
                         android:background="@color/colorPrimaryDark"
                         android:text="Editar"
                         android:textColor="#FFF" />
+
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -261,14 +264,6 @@
                         android:layout_margin="10dp"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:maxLines="2"
-                            android:text="Congreso"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="10sp" />
-
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -276,6 +271,14 @@
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
                             android:src="@drawable/ic_menu_account_box" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="2"
+                            android:text="Congreso"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="10sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -316,6 +319,7 @@
                         android:background="@color/colorPrimaryDark"
                         android:text="Editar"
                         android:textColor="#FFF" />
+
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -335,14 +339,6 @@
                         android:layout_margin="10dp"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:maxLines="2"
-                            android:text="Institución"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="10sp" />
-
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -350,6 +346,14 @@
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
                             android:src="@drawable/ic_menu_account_box" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="2"
+                            android:text="Institución"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="10sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -390,6 +394,7 @@
                         android:background="@color/colorPrimaryDark"
                         android:text="Editar"
                         android:textColor="#FFF" />
+
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -409,14 +414,6 @@
                         android:layout_margin="10dp"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:maxLines="1"
-                            android:text="Teléfono"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="10sp" />
-
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -424,6 +421,14 @@
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
                             android:src="@drawable/ic_phone_black" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:text="Teléfono"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="10sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -464,6 +469,7 @@
                         android:background="@color/colorPrimaryDark"
                         android:text="Editar"
                         android:textColor="#FFF" />
+
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -483,14 +489,6 @@
                         android:layout_margin="10dp"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:maxLines="1"
-                            android:text="Seguridad"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="10sp" />
-
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -498,6 +496,14 @@
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
                             android:src="@drawable/ic_lock_black" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:text="Seguridad"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="10sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -537,6 +543,7 @@
                         android:background="@color/colorPrimaryDark"
                         android:text="Editar"
                         android:textColor="#FFF" />
+
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -556,14 +563,6 @@
                         android:layout_margin="10dp"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:maxLines="1"
-                            android:text="Sexo"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="10sp" />
-
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -571,6 +570,14 @@
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
                             android:src="@drawable/ic_menu_person" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:text="Sexo"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="10sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -612,6 +619,7 @@
                         android:background="@color/colorPrimaryDark"
                         android:text="Editar"
                         android:textColor="#FFF" />
+
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -631,14 +639,6 @@
                         android:layout_margin="10dp"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:maxLines="1"
-                            android:text="Ubicación"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="10sp" />
-
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -646,6 +646,14 @@
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
                             android:src="@drawable/ic_location_on_black_24dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:text="Ubicación"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="10sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -686,6 +694,7 @@
                         android:background="@color/colorPrimaryDark"
                         android:text="Editar"
                         android:textColor="#FFF" />
+
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -706,6 +715,14 @@
                         android:layout_margin="10dp"
                         android:orientation="vertical">
 
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:src="@drawable/ic_photo_black" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -714,14 +731,6 @@
                             android:textAlignment="center"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="10sp" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:src="@drawable/ic_photo_black" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -762,6 +771,7 @@
                         android:background="@color/colorPrimaryDark"
                         android:text="Cambiar"
                         android:textColor="#FFF" />
+
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 

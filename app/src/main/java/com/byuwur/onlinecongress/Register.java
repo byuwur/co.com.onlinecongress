@@ -51,11 +51,11 @@ public class Register extends AppCompatActivity {
     private EditText et_dni, et_nombre, et_apellido, et_correo, et_pass, et_confpass, et_phone, et_inst;
     private CheckBox terms;
     //list of each array
-    private ArrayList<String> tipodni = new ArrayList<>(),sexo = new ArrayList<>();
+    private ArrayList<String> tipodni = new ArrayList<>(), sexo = new ArrayList<>();
     private ArrayList<String> pais = new ArrayList<>(), idpais = new ArrayList<>();
     private ArrayList<String> dep = new ArrayList<>(), iddep = new ArrayList<>();
     private ArrayList<String> ciudad = new ArrayList<>(), idciudad = new ArrayList<>();
-    private String buscaridpais = "", buscariddepar = "", buscaridciudad = "", stringtipodni="", stringsexo="";
+    private String buscaridpais = "", buscariddepar = "", buscaridciudad = "", stringtipodni = "", stringsexo = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +119,7 @@ public class Register extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
                 stringtipodni = tipodni.get(pos);
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -134,6 +135,7 @@ public class Register extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
                 stringsexo = sexo.get(pos);
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -295,7 +297,7 @@ public class Register extends AppCompatActivity {
 
     public void onClickRegistrar() {
         //verify if terms are checked
-        if (terms.isChecked() && (et_pass.getText().toString().equals(et_confpass.getText().toString())) ) {
+        if (terms.isChecked() && (et_pass.getText().toString().equals(et_confpass.getText().toString()))) {
             // Showing progress dialog at user registration time.
             final ProgressDialog progreso1 = new ProgressDialog(Register.this);
             progreso1.setMessage("Por favor, espere...");
