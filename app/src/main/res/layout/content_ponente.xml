@@ -29,7 +29,7 @@
             android:layout_marginBottom="64dp"
             android:layout_weight="1"
             android:background="#400"
-            android:text="CANCELAR RESERVA"
+            android:text="CONTACTAR"
             android:textColor="#FFF" />
 
         <LinearLayout

@@ -115,8 +115,17 @@ public class Home extends AppCompatActivity
         getSupportActionBar().setTitle("Categorías");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd"))));
 
-        final FloatingActionButton fabsearch = findViewById(R.id.search);
-        fabsearch.setVisibility(View.GONE);
+        final FloatingActionButton fabnotif = findViewById(R.id.search);
+        fabnotif.setVisibility(View.VISIBLE);
+        fabnotif.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getSupportActionBar().setTitle("Anuncios y notificaciones");
+                getSupportFragmentManager().beginTransaction().replace(R.id.home, new NotifFragment()).commit();
+                //hide fab
+                fabnotif.setVisibility(View.GONE);
+            }
+        });
 
         DrawerLayout drawer = findViewById(R.id.home_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -175,6 +184,7 @@ public class Home extends AppCompatActivity
             dialog.show();
         }
     }
+
     /*
     @Override
     public void onFragmentInteraction(Uri uri) {} */
@@ -224,9 +234,7 @@ public class Home extends AppCompatActivity
                     .putString("color", "0277bd").apply();
 
             deleteCache(ctx);
-
-            Intent intent = new Intent(Home.this, Login.class);
-            startActivity(intent);
+            startActivity(new Intent(Home.this, Login.class));
             finish();
         } else if (id == R.id.action_exit) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
@@ -249,8 +257,7 @@ public class Home extends AppCompatActivity
             dialog.create();
             dialog.show();
         } else if (id == R.id.action_change) {
-            Intent intent = new Intent(Home.this, Congresos.class);
-            startActivity(intent);
+            startActivity(new Intent(Home.this, Congresos.class));
             finish();
         }
         return super.onOptionsItemSelected(item);
@@ -260,50 +267,48 @@ public class Home extends AppCompatActivity
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
+        FloatingActionButton fabnotif = findViewById(R.id.search);
         switch (id) {
             case R.id.nav_ponencia:
                 getSupportActionBar().setTitle("Ponencias");
                 pf.setfragment(true, false, false, false, false);
-                Fragment fragmentponencia0 = new PonenciaFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentponencia0).commit();
+                fabnotif.setVisibility(View.VISIBLE);
+                getSupportFragmentManager().beginTransaction().replace(R.id.home, new PonenciaFragment()).commit();
                 break;
             case R.id.nav_conferencia:
                 getSupportActionBar().setTitle("Conferencias");
                 pf.setfragment(false, true, false, false, false);
-                Fragment fragmentponencia1 = new PonenciaFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentponencia1).commit();
+                fabnotif.setVisibility(View.VISIBLE);
+                getSupportFragmentManager().beginTransaction().replace(R.id.home, new PonenciaFragment()).commit();
                 break;
             case R.id.nav_categoria:
                 getSupportActionBar().setTitle("Categorías");
                 pf.setfragment(false, false, true, false, false);
-                Fragment fragmentponencia2 = new PonenciaFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentponencia2).commit();
+                fabnotif.setVisibility(View.VISIBLE);
+                getSupportFragmentManager().beginTransaction().replace(R.id.home, new PonenciaFragment()).commit();
                 break;
             case R.id.nav_agenda:
                 getSupportActionBar().setTitle("Agenda");
                 pf.setfragment(false, false, false, true, false);
-                Fragment fragmentponencia3 = new PonenciaFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentponencia3).commit();
+                fabnotif.setVisibility(View.VISIBLE);
+                getSupportFragmentManager().beginTransaction().replace(R.id.home, new PonenciaFragment()).commit();
                 break;
             case R.id.nav_sobre:
                 getSupportActionBar().setTitle("Sobre " + ctx.getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("nombrecongreso", null));
                 pf.setfragment(false, false, false, false, true);
-                Fragment fragmentponencia4 = new PonenciaFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentponencia4).commit();
+                fabnotif.setVisibility(View.VISIBLE);
+                getSupportFragmentManager().beginTransaction().replace(R.id.home, new PonenciaFragment()).commit();
                 break;
             case R.id.nav_perfil:
                 getSupportActionBar().setTitle(getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("nombre", null) + " " + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("apellido", null));
-                Fragment fragmentperfil = new ProfileFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.home, fragmentperfil).commit();
+                fabnotif.setVisibility(View.VISIBLE);
+                getSupportFragmentManager().beginTransaction().replace(R.id.home, new ProfileFragment()).commit();
                 break;
             case R.id.nav_cuenta:
-                Intent intent0 = new Intent(Home.this, Cuenta.class);
-                startActivity(intent0);
+                startActivity(new Intent(Home.this, Cuenta.class));
                 break;
             case R.id.nav_feed:
-                Intent intent1 = new Intent(Home.this, Feed.class);
-                startActivity(intent1);
+                startActivity(new Intent(Home.this, Feed.class));
                 break;
         }
         DrawerLayout drawer = findViewById(R.id.home_drawer_layout);
@@ -314,7 +319,6 @@ public class Home extends AppCompatActivity
     @Override
     public void onResume() {
         super.onResume();
-        // Check should we need to refresh the fragment
         if (shouldRefreshOnResume) {
             setuserdata();
             shouldRefreshOnResume = false;

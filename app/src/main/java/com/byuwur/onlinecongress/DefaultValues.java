@@ -1,7 +1,8 @@
 package com.byuwur.onlinecongress;
 
 public class DefaultValues {
-    public String urlraiz = "http://192.168.0.8/onlinecongress.com/";
+    //public String urlraiz = "http://10.0.2.2/onlinecongress-web/";
+    public String urlraiz = "http://192.168.0.6/onlinecongress-web/";
     public String url = urlraiz + "phone/";
     public String urlcuenta = url + "cuenta/";
     public String urlcanchas = url + "canchas/";
@@ -9,7 +10,7 @@ public class DefaultValues {
     public String imgcongresosurl = url + "imgcongresos/";
     public String imgcanchasurl = "http://www.sistemas-i-computacion-tic.com/reserv/admin/Imagenes_Canchas/";
 }
-    /*
+/*
     STRINGREQUESTEXAMPLE
         StringRequest strq = new StringRequest(Request.Method.POST, URL,
                 new Response.Listener<String>() {
@@ -58,4 +59,4 @@ public class DefaultValues {
             }
         };
         rq.add(strq);
-        */
+*/

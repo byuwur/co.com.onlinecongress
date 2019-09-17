@@ -33,8 +33,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -49,6 +47,7 @@ public class PonenciaFragment extends Fragment {
     private static boolean ifponencia, ifconferencia, ifcategoria, ifagenda, ifsobre;
     private static String usrid, usrciudad, scategoria = "", congreso;
     private DefaultValues dv = new DefaultValues();
+    private Ponencia ponencia = new Ponencia();
     //register file to request
     private String IMGURL = dv.imgcanchasurl, URLcat = dv.url + "categorias.php", URLponcat = dv.url + "poncat.php",
             URLpon = dv.url + "ponencias.php", URLcon = dv.url + "conferencias.php", URLage = dv.url + "agenda.php", URLinfo = dv.urlraiz + "";
@@ -97,20 +96,40 @@ public class PonenciaFragment extends Fragment {
         adapter = new AdaptadorPonencia(listaPonencia);
         recyclerPonencia.setAdapter(adapter);
         //when it click an specific frame, let's see if we can display its id
-        adapter.setonItemClickListener(new AdaptadorPonencia.onItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                String id = ((TextView) recyclerPonencia.findViewHolderForAdapterPosition(position)
-                        .itemView.findViewById(R.id.ponenciaid)).getText().toString();
-                String idcancha = id.replaceAll("#", "");
-                //Toast.makeText(ctx, "ID: "+idcancha, Toast.LENGTH_SHORT).show();
-                Ponencia ponencia = new Ponencia();
-                ponencia.setid(idcancha);
-
-                Intent intent1 = new Intent(ctx, Ponencia.class);
-                startActivity(intent1);
+        if (ifponencia || ifconferencia || ifagenda) {
+            adapter.setonItemClickListener(new AdaptadorPonencia.onItemClickListener() {
+                @Override
+                public void onItemClick(int position) {
+                    String id = ((TextView) recyclerPonencia.findViewHolderForAdapterPosition(position).itemView.findViewById(R.id.ponenciaid)).getText().toString();
+                    id = id.replaceAll("Id: ", "");
+                    ponencia.setid(id);
+                    Intent intent = new Intent(ctx, Ponencia.class);
+                    startActivity(intent);
+                }
+            });
+        } else if (ifcategoria) {
+            if (scategoria == null || scategoria.equalsIgnoreCase("")) {
+                adapter.setonItemClickListener(new AdaptadorPonencia.onItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        String id = ((TextView) recyclerPonencia.findViewHolderForAdapterPosition(position).itemView.findViewById(R.id.ponenciaid)).getText().toString();
+                        scategoria = id.replaceAll("Categoría: ", "");
+                        onclickself(false, false, true, false, false);
+                    }
+                });
+            } else {
+                adapter.setonItemClickListener(new AdaptadorPonencia.onItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        String id = ((TextView) recyclerPonencia.findViewHolderForAdapterPosition(position).itemView.findViewById(R.id.ponenciaid)).getText().toString();
+                        id = id.replaceAll("Id: ", "");
+                        ponencia.setid(id);
+                        Intent intent = new Intent(ctx, Ponencia.class);
+                        startActivity(intent);
+                    }
+                });
             }
-        });
+        }
         //AND VERIFY IF THERE'S ANYTHING,
         //if it isn't display an specific layout design
         if (ifponencia || ifconferencia || ifcategoria || ifagenda) {
@@ -119,16 +138,6 @@ public class PonenciaFragment extends Fragment {
             } else if (ifconferencia) {
                 llenarconferencia();
             } else if (ifcategoria) {
-                adapter.setonItemClickListener(new AdaptadorPonencia.onItemClickListener() {
-                    @Override
-                    public void onItemClick(int position) {
-                        String id = ((TextView) recyclerPonencia.findViewHolderForAdapterPosition(position)
-                                .itemView.findViewById(R.id.ponenciaid)).getText().toString();
-                        scategoria = id.replaceAll("Categoría: ", "");
-                        //Toast.makeText(ctx, "CAT: "+scategoria, Toast.LENGTH_SHORT).show();
-                        onclickself(false, false, true, false, false);
-                    }
-                });
                 if (scategoria == null || scategoria.equalsIgnoreCase("")) {
                     llenarcategoria();
                 } else {
