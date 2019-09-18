@@ -226,10 +226,9 @@ public class PonenciaFragment extends Fragment {
                                     }
                                 } else {
                                     listaPonencia.add(new HolderPonencia(
-                                            "" + res.getString("Categoria"),
+                                            "" + res.getString("Categoria"), "", "",
+                                            "Congreso: " + res.getString("IdCongreso"), "",
                                             "Categoría: " + res.getString("Id"),
-                                            "Congreso: " + res.getString("IdCongreso"),
-                                            "", "", "",
                                             IMGURL + res.getString("ImgCategoria") + "/1.jpg"));
                                 }
                             } catch (Exception e) {
@@ -302,7 +301,7 @@ public class PonenciaFragment extends Fragment {
                                 } else {
                                     listaPonencia.add(new HolderPonencia(
                                             "" + res.getString("Titulo"),
-                                            "Id: " + res.getString("IdPonencia"),
+                                            "ID: " + res.getString("IdPonencia"),
                                             "Institución: " + res.getString("InstitucionPatrocinadora"),
                                             "Idioma: " + res.getString("Idioma"),
                                             "Categoría: " + res.getString("Categoria"),
@@ -379,7 +378,7 @@ public class PonenciaFragment extends Fragment {
                                 } else {
                                     listaPonencia.add(new HolderPonencia(
                                             "" + res.getString("Titulo"),
-                                            "Id: " + res.getString("IdPonencia"),
+                                            "ID: " + res.getString("IdPonencia"),
                                             "Institución: " + res.getString("InstitucionPatrocinadora"),
                                             "Idioma: " + res.getString("Idioma"),
                                             "Categoría: " + res.getString("Categoria"),
@@ -533,7 +532,7 @@ public class PonenciaFragment extends Fragment {
                                 } else {
                                     listaPonencia.add(new HolderPonencia(
                                             "" + res.getString("Titulo"),
-                                            "Id: " + res.getString("IdPonencia"),
+                                            "ID: " + res.getString("IdPonencia"),
                                             "Institución: " + res.getString("InstitucionPatrocinadora"),
                                             "Idioma: " + res.getString("Idioma"),
                                             "Categoría: " + res.getString("Categoria"),

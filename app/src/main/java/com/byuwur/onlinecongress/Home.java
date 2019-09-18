@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -116,6 +117,7 @@ public class Home extends AppCompatActivity
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd"))));
 
         final FloatingActionButton fabnotif = findViewById(R.id.search);
+        fabnotif.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd"))));
         fabnotif.setVisibility(View.VISIBLE);
         fabnotif.setOnClickListener(new View.OnClickListener() {
             @Override

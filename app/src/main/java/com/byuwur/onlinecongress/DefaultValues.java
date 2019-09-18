@@ -1,8 +1,8 @@
 package com.byuwur.onlinecongress;
 
 public class DefaultValues {
-    //public String urlraiz = "http://10.0.2.2/onlinecongress-web/";
-    public String urlraiz = "http://192.168.0.6/onlinecongress-web/";
+    public String urlraiz = "http://10.0.2.2/onlinecongress-web/";
+    //public String urlraiz = "http://192.168.0.6/onlinecongress-web/";
     public String url = urlraiz + "phone/";
     public String urlcuenta = url + "cuenta/";
     public String urlcanchas = url + "canchas/";

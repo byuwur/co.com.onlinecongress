@@ -81,7 +81,7 @@ public class NotifFragment extends Fragment {
                 dialogoerror.cancel();
             }
         });
-        dialogoerror.show();
+        //dialogoerror.show();
 
         return view;
     }
@@ -127,7 +127,7 @@ public class NotifFragment extends Fragment {
                                     }
                                 } else {
                                     listaNotif.add(new HolderNotif(
-                                            "" + res.getString("Notificacion"),
+                                            ">> " + res.getString("Notificacion"),
                                             "Fecha: " + res.getString("FechaNotificacion")));
                                 }
                             } catch (Exception e) {
