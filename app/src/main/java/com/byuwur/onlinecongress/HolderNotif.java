@@ -4,7 +4,7 @@ public class HolderNotif {
     private String notiftext;
     private String notiffecha;
 
-    public HolderNotif(String nombre, String id) {
+    HolderNotif(String nombre, String id) {
         this.notiftext = nombre;
         this.notiffecha = id;
     }

@@ -1,5 +1,6 @@
 package com.byuwur.onlinecongress;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -38,8 +39,6 @@ public class Congresos extends AppCompatActivity {
     private String usrid, buscaridcongreso = "", buscarcolorcongreso = "", buscarnombrecongreso = "", URLcon = dv.url + "congresos.php", URLfotoperfil = dv.imgfotoperfil, URLimgcon = dv.urlraiz + "img-main/logo.png";
     private Context ctx;
     private TextView nombrecongreso;
-    private JsonArrayRequest jsrqpais;
-    private Button buttoncongreso;
     private RequestQueue rq;
     private ImageView imgcongreso;
     private View congresos;
@@ -53,7 +52,7 @@ public class Congresos extends AppCompatActivity {
         rq = Volley.newRequestQueue(ctx);
         final Spinner spinnercongreso = findViewById(R.id.spinnercongreso);
         nombrecongreso = findViewById(R.id.nombrecongreso);
-        buttoncongreso = findViewById(R.id.buttoncongreso);
+        Button buttoncongreso = findViewById(R.id.buttoncongreso);
         imgcongreso = findViewById(R.id.imgcongreso);
         congresos = findViewById(R.id.congresos);
 
@@ -78,6 +77,7 @@ public class Congresos extends AppCompatActivity {
         adaptercon.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnercongreso.setAdapter(adaptercon);
         spinnercongreso.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
                 //Toast.makeText(ctx, adapterView.getItemAtPosition(pos)+". "+idciudad.get(pos), Toast.LENGTH_SHORT).show();
@@ -138,7 +138,7 @@ public class Congresos extends AppCompatActivity {
     }
 
     private void llenarcongresos() {
-        jsrqpais = new JsonArrayRequest(Request.Method.GET, URLcon,
+        JsonArrayRequest jsrqpais = new JsonArrayRequest(Request.Method.GET, URLcon,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -165,7 +165,7 @@ public class Congresos extends AppCompatActivity {
     }
 
     private void onclickCongreso() {
-        if (buscaridcongreso.equals("") || buscaridcongreso == null) {
+        if (buscaridcongreso.equals("")) {
             Toast.makeText(ctx, "Por favor, seleccione un congreso.", Toast.LENGTH_LONG).show();
         } else {
             getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()

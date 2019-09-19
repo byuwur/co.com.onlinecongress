@@ -1,6 +1,6 @@
 package com.byuwur.onlinecongress;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,6 +8,7 @@ import android.content.pm.ActivityInfo;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -17,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,13 +35,13 @@ import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.util.Objects;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static Activity home;
-    DefaultValues dv = new DefaultValues();
-    PonenciaFragment pf = new PonenciaFragment();
+    private DefaultValues dv = new DefaultValues();
+    private PonenciaFragment pf = new PonenciaFragment();
     private Context ctx;
     //
     private String URLfotoperfil = dv.imgfotoperfil;
@@ -64,8 +66,9 @@ public class Home extends AppCompatActivity
     public static boolean deleteDir(File dir) {
         if (dir != null && dir.isDirectory()) {
             String[] children = dir.list();
-            for (int i = 0; i < children.length; i++) {
-                boolean success = deleteDir(new File(dir, children[i]));
+            assert children != null;
+            for (String child : children) {
+                boolean success = deleteDir(new File(dir, child));
                 if (!success) {
                     return false;
                 }
@@ -78,6 +81,8 @@ public class Home extends AppCompatActivity
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +90,6 @@ public class Home extends AppCompatActivity
         setContentView(R.layout.activity_home);
 
         ctx = Home.this;
-        home = this;
         //
         pf.setfragment(false, false, true, false, false);
         Fragment fragment = new PonenciaFragment();
@@ -114,7 +118,7 @@ public class Home extends AppCompatActivity
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Categorías");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Categorías");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd"))));
 
         final FloatingActionButton fabnotif = findViewById(R.id.search);
@@ -123,7 +127,7 @@ public class Home extends AppCompatActivity
         fabnotif.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getSupportActionBar().setTitle("Anuncios y notificaciones");
+                Objects.requireNonNull(getSupportActionBar()).setTitle("Anuncios y notificaciones");
                 getSupportFragmentManager().beginTransaction().replace(R.id.home, new NotifFragment()).commit();
                 //hide fab
                 fabnotif.setVisibility(View.GONE);
@@ -137,6 +141,7 @@ public class Home extends AppCompatActivity
         toggle.syncState();
     }
 
+    @SuppressLint("SetTextI18n")
     private void setuserdata() {
         tvusername.setText(usrnombre);
         tvuserid.setText(usrcorreo);
@@ -266,6 +271,8 @@ public class Home extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @SuppressLint("RestrictedApi")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
@@ -273,37 +280,37 @@ public class Home extends AppCompatActivity
         FloatingActionButton fabnotif = findViewById(R.id.search);
         switch (id) {
             case R.id.nav_ponencia:
-                getSupportActionBar().setTitle("Ponencias");
+                Objects.requireNonNull(getSupportActionBar()).setTitle("Ponencias");
                 pf.setfragment(true, false, false, false, false);
                 fabnotif.setVisibility(View.VISIBLE);
                 getSupportFragmentManager().beginTransaction().replace(R.id.home, new PonenciaFragment()).commit();
                 break;
             case R.id.nav_conferencia:
-                getSupportActionBar().setTitle("Conferencias");
+                Objects.requireNonNull(getSupportActionBar()).setTitle("Conferencias");
                 pf.setfragment(false, true, false, false, false);
                 fabnotif.setVisibility(View.VISIBLE);
                 getSupportFragmentManager().beginTransaction().replace(R.id.home, new PonenciaFragment()).commit();
                 break;
             case R.id.nav_categoria:
-                getSupportActionBar().setTitle("Categorías");
+                Objects.requireNonNull(getSupportActionBar()).setTitle("Categorías");
                 pf.setfragment(false, false, true, false, false);
                 fabnotif.setVisibility(View.VISIBLE);
                 getSupportFragmentManager().beginTransaction().replace(R.id.home, new PonenciaFragment()).commit();
                 break;
             case R.id.nav_agenda:
-                getSupportActionBar().setTitle("Agenda");
+                Objects.requireNonNull(getSupportActionBar()).setTitle("Agenda");
                 pf.setfragment(false, false, false, true, false);
                 fabnotif.setVisibility(View.VISIBLE);
                 getSupportFragmentManager().beginTransaction().replace(R.id.home, new PonenciaFragment()).commit();
                 break;
             case R.id.nav_sobre:
-                getSupportActionBar().setTitle("Sobre " + ctx.getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("nombrecongreso", null));
+                Objects.requireNonNull(getSupportActionBar()).setTitle("Sobre " + ctx.getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("nombrecongreso", null));
                 pf.setfragment(false, false, false, false, true);
                 fabnotif.setVisibility(View.VISIBLE);
                 getSupportFragmentManager().beginTransaction().replace(R.id.home, new PonenciaFragment()).commit();
                 break;
             case R.id.nav_perfil:
-                getSupportActionBar().setTitle(getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("nombre", null) + " " + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("apellido", null));
+                Objects.requireNonNull(getSupportActionBar()).setTitle(getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("nombre", null) + " " + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("apellido", null));
                 fabnotif.setVisibility(View.VISIBLE);
                 getSupportFragmentManager().beginTransaction().replace(R.id.home, new ProfileFragment()).commit();
                 break;

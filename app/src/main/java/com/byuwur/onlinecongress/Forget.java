@@ -34,12 +34,8 @@ public class Forget extends AppCompatActivity {
     private RequestQueue rq;
     //set context
     private Context ctx;
-    //create request
-    private StringRequest jsrqforget;
     //create edittexts
     private EditText correoforget;
-    //buttons
-    private Button buttonforget, buttonforgettologin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +47,9 @@ public class Forget extends AppCompatActivity {
         rq = Volley.newRequestQueue(ctx);
 
         correoforget = findViewById(R.id.correoforget);
-        buttonforget = findViewById(R.id.buttonforget);
-        buttonforgettologin = findViewById(R.id.buttonforgettologin);
+        //buttons
+        Button buttonforget = findViewById(R.id.buttonforget);
+        Button buttonforgettologin = findViewById(R.id.buttonforgettologin);
 
         buttonforgettologin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +71,7 @@ public class Forget extends AppCompatActivity {
         progreso1.setMessage("Por favor, espere...");
         progreso1.show();
 
-        jsrqforget = new StringRequest(Request.Method.POST, URL,
+        StringRequest jsrqforget = new StringRequest(Request.Method.POST, URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -90,7 +87,7 @@ public class Forget extends AppCompatActivity {
                             try {
                                 JSONObject res = resp.getJSONObject(i);
                                 progreso1.dismiss();
-                                Boolean error = res.getBoolean("error");
+                                boolean error = res.getBoolean("error");
 
                                 if (error) {
                                     AlertDialog.Builder dialogoerror = new AlertDialog.Builder(ctx);

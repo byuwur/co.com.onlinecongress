@@ -26,18 +26,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-
-    private int DURACION_SPLASH = 1500;
-
     private DefaultValues dv = new DefaultValues();
     private String URLconex = dv.url + "ver_con.php", URLpass = dv.url + "ver_pass.php", URLdatos = dv.url + "ver_datos.php";
     private RequestQueue rq;
-    //set context
     private Context ctx;
-    //create request
-    private StringRequest jsrqconn, jsrqpass, jsrqdatos;
-    private String usrid, usrpass;
-    private Boolean loginsesion;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,21 +41,19 @@ public class MainActivity extends AppCompatActivity {
         //requestqueue set to this
         rq = Volley.newRequestQueue(ctx);
 
-        loginsesion = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+        boolean loginsesion = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getBoolean("loginsesion", false);
-        usrid = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+        String usrid = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getString("id", null);
-        usrpass = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+        String usrpass = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getString("pass", null);
 
         vercon(loginsesion, usrid, usrpass);
 
     }
 
-
-    private void vercon(final Boolean sesion, final String usrid, final String usrpass) {
-        //verify connection
-        jsrqconn = new StringRequest(Request.Method.POST, URLconex,
+    private void vercon(final boolean sesion, final String usrid, final String usrpass) {
+        StringRequest jsrqconn = new StringRequest(Request.Method.POST, URLconex,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -78,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                         for (int i = 0; i < resp.length(); i++) {
                             try {
                                 JSONObject res = resp.getJSONObject(i);
-                                Boolean conexion = res.getBoolean("conexion");
+                                boolean conexion = res.getBoolean("conexion");
 
                                 if (conexion) {
                                     Log.d("Res", "Estamos dentro");
@@ -134,8 +124,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void verpass(final String id, final String pass) {
-
-        jsrqpass = new StringRequest(Request.Method.POST, URLpass,
+        StringRequest jsrqpass = new StringRequest(Request.Method.POST, URLpass,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -150,8 +139,8 @@ public class MainActivity extends AppCompatActivity {
                         for (int i = 0; i < resp.length(); i++) {
                             try {
                                 JSONObject res = resp.getJSONObject(i);
-                                Boolean success = res.getBoolean("success");
-                                Boolean error = res.getBoolean("error");
+                                boolean success = res.getBoolean("success");
+                                boolean error = res.getBoolean("error");
 
                                 if (error) {
                                     //LOGOUT ACTION
@@ -239,8 +228,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void verdatos(final String id, final String pass) {
-
-        jsrqdatos = new StringRequest(Request.Method.POST, URLdatos,
+        StringRequest jsrqdatos = new StringRequest(Request.Method.POST, URLdatos,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -255,8 +243,8 @@ public class MainActivity extends AppCompatActivity {
                         for (int i = 0; i < resp.length(); i++) {
                             try {
                                 JSONObject res = resp.getJSONObject(i);
-                                Boolean success = res.getBoolean("success");
-                                Boolean error = res.getBoolean("error");
+                                boolean success = res.getBoolean("success");
+                                boolean error = res.getBoolean("error");
 
                                 if (error) {
                                     AlertDialog.Builder dialogo = new AlertDialog.Builder(ctx);
@@ -331,7 +319,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void jumpnext() {
-        //from splash screen to next screen
+        int DURACION_SPLASH = 1500;
         new Handler().postDelayed(new Runnable() {
             public void run() {
                 Intent intent = new Intent(ctx, Firsttime.class);
@@ -344,5 +332,4 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
     }
-
 }

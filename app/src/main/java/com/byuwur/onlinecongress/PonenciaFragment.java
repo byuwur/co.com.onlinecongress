@@ -1,11 +1,13 @@
 package com.byuwur.onlinecongress;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +19,7 @@ import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,6 +37,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -46,12 +50,12 @@ import static android.content.Context.MODE_PRIVATE;
 public class PonenciaFragment extends Fragment {
     //PUBLIC STATIC PARAMS OF SEARCH
     private static boolean ifponencia, ifconferencia, ifcategoria, ifagenda, ifsobre;
-    private static String usrid, usrciudad, scategoria = "", congreso;
+    private static String scategoria = "", congreso;
     private DefaultValues dv = new DefaultValues();
     private Ponencia ponencia = new Ponencia();
     //register file to request
     private String IMGURL = dv.imgcanchasurl, URLcat = dv.url + "categorias.php", URLponcat = dv.url + "poncat.php",
-            URLpon = dv.url + "ponencias.php", URLcon = dv.url + "conferencias.php", URLage = dv.url + "agenda.php", URLinfo = dv.urlraiz + "";
+            URLpon = dv.url + "ponencias.php", URLcon = dv.url + "conferencias.php", URLage = dv.url + "agenda.php", URLinfo = dv.urlraiz;
     //set context, requestqueue
     private Context ctx;
     private RequestQueue rq;
@@ -69,6 +73,7 @@ public class PonenciaFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -83,10 +88,6 @@ public class PonenciaFragment extends Fragment {
         // Showing progress dialog at user registration time.
 
         //GET VALUES FROM USER
-        usrid = getActivity().getSharedPreferences("PREFERENCE", MODE_PRIVATE)
-                .getString("id", null);
-        usrciudad = getActivity().getSharedPreferences("PREFERENCE", MODE_PRIVATE)
-                .getString("ciudad", null);
         congreso = getActivity().getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getString("congreso", null);
 
@@ -99,10 +100,11 @@ public class PonenciaFragment extends Fragment {
         //when it click an specific frame, let's see if we can display its id
         if (ifponencia || ifconferencia || ifagenda) {
             adapter.setonItemClickListener(new AdaptadorPonencia.onItemClickListener() {
+                @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                 @Override
                 public void onItemClick(int position) {
-                    String id = ((TextView) recyclerPonencia.findViewHolderForAdapterPosition(position).itemView.findViewById(R.id.ponenciaid)).getText().toString();
-                    id = id.replaceAll("Id: ", "");
+                    String id = ((TextView) Objects.requireNonNull(recyclerPonencia.findViewHolderForAdapterPosition(position)).itemView.findViewById(R.id.ponenciaid)).getText().toString();
+                    id = id.replaceAll("ID: ", "");
                     ponencia.setid(id);
                     Intent intent = new Intent(ctx, Ponencia.class);
                     startActivity(intent);
@@ -111,19 +113,21 @@ public class PonenciaFragment extends Fragment {
         } else if (ifcategoria) {
             if (scategoria == null || scategoria.equalsIgnoreCase("")) {
                 adapter.setonItemClickListener(new AdaptadorPonencia.onItemClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                     @Override
                     public void onItemClick(int position) {
-                        String id = ((TextView) recyclerPonencia.findViewHolderForAdapterPosition(position).itemView.findViewById(R.id.ponenciaid)).getText().toString();
+                        String id = ((TextView) Objects.requireNonNull(recyclerPonencia.findViewHolderForAdapterPosition(position)).itemView.findViewById(R.id.ponenciadias)).getText().toString();
                         scategoria = id.replaceAll("Categoría: ", "");
                         onclickself(false, false, true, false, false);
                     }
                 });
             } else {
                 adapter.setonItemClickListener(new AdaptadorPonencia.onItemClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                     @Override
                     public void onItemClick(int position) {
-                        String id = ((TextView) recyclerPonencia.findViewHolderForAdapterPosition(position).itemView.findViewById(R.id.ponenciaid)).getText().toString();
-                        id = id.replaceAll("Id: ", "");
+                        String id = ((TextView) Objects.requireNonNull(recyclerPonencia.findViewHolderForAdapterPosition(position)).itemView.findViewById(R.id.ponenciaid)).getText().toString();
+                        id = id.replaceAll("ID: ", "");
                         ponencia.setid(id);
                         Intent intent = new Intent(ctx, Ponencia.class);
                         startActivity(intent);
@@ -145,14 +149,14 @@ public class PonenciaFragment extends Fragment {
                     llenarponcat(scategoria);
                     scategoria = "";
                 }
-            } else if (ifagenda) {
-                llenaragenda();
             } else {
-                return viewno;
+                llenaragenda();
             }
             return viewsi;
         } else if (ifsobre) {
             final ProgressDialog[] prDialog = new ProgressDialog[1];
+            prDialog[0] = new ProgressDialog(ctx);
+            prDialog[0].setMessage("Por favor, espere...");
             final WebView webviewsobre = viewsobre.findViewById(R.id.webviewsobre);
             webviewsobre.setWebChromeClient(new WebChromeClient());
             webviewsobre.getSettings().setJavaScriptEnabled(true);
@@ -166,8 +170,6 @@ public class PonenciaFragment extends Fragment {
                 @Override
                 public void onPageStarted(WebView view, String url, Bitmap favicon) {
                     super.onPageStarted(view, url, favicon);
-                    prDialog[0] = new ProgressDialog(ctx);
-                    prDialog[0].setMessage("Por favor, espere...");
                     prDialog[0].show();
                 }
 
@@ -179,7 +181,7 @@ public class PonenciaFragment extends Fragment {
                     }
                 }
             });
-            webviewsobre.loadUrl("http://covaite.com");
+            webviewsobre.loadUrl(URLinfo);
             return viewsobre;
         } else {
             return viewno;
@@ -192,7 +194,7 @@ public class PonenciaFragment extends Fragment {
         progreso.setMessage("Por favor, espere...");
         progreso.show();
         // Showing progress dialog at user registration time.
-        jsrqllenar = new StringRequest(Request.Method.GET, URLcat + "?congreso=" + congreso ,
+        jsrqllenar = new StringRequest(Request.Method.GET, URLcat + "?congreso=" + congreso,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -211,7 +213,7 @@ public class PonenciaFragment extends Fragment {
                                 recyclerPonencia.setAdapter(adapter);
 
                                 if (res.has("error")) {
-                                    Boolean error = res.getBoolean("error");
+                                    boolean error = res.getBoolean("error");
                                     if (error) {
                                         AlertDialog.Builder dialogoerror = new AlertDialog.Builder(ctx);
                                         dialogoerror.setTitle("BUSCAR");
@@ -285,7 +287,7 @@ public class PonenciaFragment extends Fragment {
                                 recyclerPonencia.setAdapter(adapter);
 
                                 if (res.has("error")) {
-                                    Boolean error = res.getBoolean("error");
+                                    boolean error = res.getBoolean("error");
                                     if (error) {
                                         AlertDialog.Builder dialogoerror = new AlertDialog.Builder(ctx);
                                         dialogoerror.setTitle("BUSCAR");
@@ -362,7 +364,7 @@ public class PonenciaFragment extends Fragment {
                                 recyclerPonencia.setAdapter(adapter);
 
                                 if (res.has("error")) {
-                                    Boolean error = res.getBoolean("error");
+                                    boolean error = res.getBoolean("error");
                                     if (error) {
                                         AlertDialog.Builder dialogoerror = new AlertDialog.Builder(ctx);
                                         dialogoerror.setTitle("BUSCAR");
@@ -439,7 +441,7 @@ public class PonenciaFragment extends Fragment {
                                 recyclerPonencia.setAdapter(adapter);
 
                                 if (res.has("error")) {
-                                    Boolean error = res.getBoolean("error");
+                                    boolean error = res.getBoolean("error");
                                     if (error) {
                                         AlertDialog.Builder dialogoerror = new AlertDialog.Builder(ctx);
                                         dialogoerror.setTitle("BUSCAR");
@@ -456,7 +458,7 @@ public class PonenciaFragment extends Fragment {
                                 } else {
                                     listaPonencia.add(new HolderPonencia(
                                             "" + res.getString("Titulo"),
-                                            "Id: " + res.getString("IdPonencia"),
+                                            "ID: " + res.getString("IdPonencia"),
                                             "Institución: " + res.getString("InstitucionPatrocinadora"),
                                             "Idioma: " + res.getString("Idioma"),
                                             "Categoría: " + res.getString("Categoria"),
@@ -516,7 +518,7 @@ public class PonenciaFragment extends Fragment {
                                 recyclerPonencia.setAdapter(adapter);
 
                                 if (res.has("error")) {
-                                    Boolean error = res.getBoolean("error");
+                                    boolean error = res.getBoolean("error");
                                     if (error) {
                                         AlertDialog.Builder dialogoerror = new AlertDialog.Builder(ctx);
                                         dialogoerror.setTitle("BUSCAR");
@@ -568,20 +570,12 @@ public class PonenciaFragment extends Fragment {
         rq.add(jsrqllenar);
     }
 
-    public void setfragment(boolean ponencia, boolean conferencia, boolean categoria, boolean agenda, boolean sobre) {
+    void setfragment(boolean ponencia, boolean conferencia, boolean categoria, boolean agenda, boolean sobre) {
         ifponencia = ponencia;
         ifconferencia = conferencia;
         ifcategoria = categoria;
         ifagenda = agenda;
         ifsobre = sobre;
-    }
-
-    private void resetfragment() {
-        ifponencia = false;
-        ifconferencia = false;
-        ifcategoria = false;
-        ifagenda = false;
-        ifsobre = false;
     }
 
     private void onclickself(boolean ponencia, boolean conferencia, boolean categoria, boolean agenda, boolean sobre) {
@@ -613,7 +607,6 @@ public class PonenciaFragment extends Fragment {
         shouldRefreshOnResume = true;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -639,16 +632,6 @@ public class PonenciaFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

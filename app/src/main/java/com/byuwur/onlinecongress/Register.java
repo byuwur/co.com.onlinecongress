@@ -36,26 +36,15 @@ import java.util.Map;
 public class Register extends AppCompatActivity {
     DefaultValues dv = new DefaultValues();
     //register file to request
-    private String URL = dv.url + "registrar.php";
-    private String URLpais = dv.url + "paises.php";
-    private String URLdep = dv.url + "provincias.php";
-    private String URLciu = dv.url + "ciudades.php";
+    private String URL = dv.url + "registrar.php", URLpais = dv.url + "paises.php", URLdep = dv.url + "provincias.php", URLciu = dv.url + "ciudades.php";
     private RequestQueue rq;
     //set context
     private Context ctx;
-    //buttons
-    private Button buttonregistrar, button4;
-    //create request
-    private JsonArrayRequest jsrqpais, jsrqdep, jsrqciu;
-    private StringRequest jsrqregistrar;
     //register fields declarations
     private EditText et_dni, et_nombre, et_apellido, et_correo, et_pass, et_confpass, et_phone, et_inst;
     private CheckBox terms;
     //list of each array
-    private ArrayList<String> tipodni = new ArrayList<>(), sexo = new ArrayList<>();
-    private ArrayList<String> pais = new ArrayList<>(), idpais = new ArrayList<>();
-    private ArrayList<String> dep = new ArrayList<>(), iddep = new ArrayList<>();
-    private ArrayList<String> ciudad = new ArrayList<>(), idciudad = new ArrayList<>();
+    private ArrayList<String> tipodni = new ArrayList<>(), sexo = new ArrayList<>(), pais = new ArrayList<>(), idpais = new ArrayList<>(), dep = new ArrayList<>(), iddep = new ArrayList<>(), ciudad = new ArrayList<>(), idciudad = new ArrayList<>();
     private String buscaridpais = "", buscariddepar = "", buscaridciudad = "", stringtipodni = "", stringsexo = "";
 
     @Override
@@ -67,14 +56,15 @@ public class Register extends AppCompatActivity {
         ctx = Register.this;
         rq = Volley.newRequestQueue(ctx);
 
-        buttonregistrar = findViewById(R.id.botonregistrar);
+        //buttons
+        Button buttonregistrar = findViewById(R.id.botonregistrar);
         buttonregistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onClickRegistrar();
             }
         });
-        button4 = findViewById(R.id.button4);
+        Button button4 = findViewById(R.id.button4);
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -222,7 +212,8 @@ public class Register extends AppCompatActivity {
     }
 
     private void llenarpaises() {
-        jsrqpais = new JsonArrayRequest(Request.Method.GET, URLpais,
+        //Log.d("Response: ", "ID:"+res.getString("IDDEPARTAMENTOS")+". Nombre: "+res.getString("NOMBREDEPARTAMENTO"));
+        JsonArrayRequest jsrqpais = new JsonArrayRequest(Request.Method.GET, URLpais,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -247,7 +238,8 @@ public class Register extends AppCompatActivity {
     }
 
     private void llenardepartamentos() {
-        jsrqdep = new JsonArrayRequest(Request.Method.GET, URLdep + "?pais=" + buscaridpais,
+        //Log.d("Response: ", "ID:"+res.getString("IDDEPARTAMENTOS")+". Nombre: "+res.getString("NOMBREDEPARTAMENTO"));
+        JsonArrayRequest jsrqdep = new JsonArrayRequest(Request.Method.GET, URLdep + "?pais=" + buscaridpais,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -272,7 +264,8 @@ public class Register extends AppCompatActivity {
     }
 
     private void llenarciudad() {
-        jsrqciu = new JsonArrayRequest(Request.Method.GET, URLciu + "?provincia=" + buscariddepar,
+        //Log.d("Response: ", "ID:"+res.getString("IDCIUDADES")+". Nombre: "+res.getString("NOMBRECIUDAD"));
+        JsonArrayRequest jsrqciu = new JsonArrayRequest(Request.Method.GET, URLciu + "?provincia=" + buscariddepar,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -304,7 +297,7 @@ public class Register extends AppCompatActivity {
             progreso1.setMessage("Por favor, espere...");
             progreso1.show();
 
-            jsrqregistrar = new StringRequest(Request.Method.POST, URL,
+            StringRequest jsrqregistrar = new StringRequest(Request.Method.POST, URL,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -318,10 +311,8 @@ public class Register extends AppCompatActivity {
                             for (int i = 0; i < resp.length(); i++) {
                                 try {
                                     JSONObject res = resp.getJSONObject(i);
-
-                                    Boolean success = res.getBoolean("success");
-                                    Boolean error = res.getBoolean("error");
-
+                                    boolean success = res.getBoolean("success");
+                                    boolean error = res.getBoolean("error");
                                     progreso1.dismiss();
 
                                     if (success) {
@@ -431,15 +422,11 @@ public class Register extends AppCompatActivity {
     }
 
     public void onClickRegistrarLogin() {
-        //Intent intentiniciar = new Intent(Register.this, Login.class);
-        //startActivity(intentiniciar);
         finish();
     }
 
     @Override
     public void onBackPressed() {
-        //Intent intentiniciar = new Intent(Register.this, Login.class);
-        //startActivity(intentiniciar);
         finish();
     }
 }

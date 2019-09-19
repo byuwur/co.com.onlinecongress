@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -39,6 +41,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Feed extends AppCompatActivity {
 
@@ -50,14 +53,10 @@ public class Feed extends AppCompatActivity {
     private RequestQueue rq;
     //set context|
     private Context ctx;
-    //create request
-    private StringRequest jsrqfeed;
-    private Spinner spinnerasunto;
     private EditText feedtext;
-    private TextView feedenviarcomo;
-    private Button buttonfeed;
     private ArrayList<String> asunto = new ArrayList<>();
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +65,7 @@ public class Feed extends AppCompatActivity {
         setContentView(R.layout.activity_feed);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Ayuda y comentarios");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Ayuda y comentarios");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd"))));
 
@@ -74,16 +73,16 @@ public class Feed extends AppCompatActivity {
         rq = Volley.newRequestQueue(ctx);
 
         feedtext = findViewById(R.id.feedtext);
-        spinnerasunto = findViewById(R.id.spinnerasunto);
+        Spinner spinnerasunto = findViewById(R.id.spinnerasunto);
 
         usrcorreo = getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("email", null);
         usrnombre = getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("nombre", null) + " " +
                 getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("apellido", null);
 
-        feedenviarcomo = findViewById(R.id.feedenviarcomo);
+        TextView feedenviarcomo = findViewById(R.id.feedenviarcomo);
         feedenviarcomo.setText("Enviar como: " + usrnombre + "\nCorreo: " + usrcorreo);
 
-        buttonfeed = findViewById(R.id.feedenviar);
+        Button buttonfeed = findViewById(R.id.feedenviar);
         buttonfeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,7 +114,13 @@ public class Feed extends AppCompatActivity {
         progreso.setMessage("Por favor, espere...");
         progreso.show();
 
-        jsrqfeed = new StringRequest(Request.Method.POST, URLfeed,
+        //Log.d("Response", response.toString());
+        //Ejecute acciones, deje vacio para solo aceptar
+        //Ejecute acciones, deje vacio para solo aceptar
+        //Ejecute acciones, deje vacio para solo aceptar
+        //Toast.makeText(ctx, "Unable to fetch data: " + error.getMessage(),Toast.LENGTH_SHORT).show();
+        //create request
+        StringRequest jsrqfeed = new StringRequest(Request.Method.POST, URLfeed,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -131,8 +136,8 @@ public class Feed extends AppCompatActivity {
                             try {
                                 progreso.dismiss();
                                 JSONObject res = resp.getJSONObject(i);
-                                Boolean success = res.getBoolean("success");
-                                Boolean error = res.getBoolean("error");
+                                boolean success = res.getBoolean("success");
+                                boolean error = res.getBoolean("error");
 
                                 if (error) {
                                     AlertDialog.Builder dialogo = new AlertDialog.Builder(ctx);

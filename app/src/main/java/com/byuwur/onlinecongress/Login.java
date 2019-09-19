@@ -36,12 +36,8 @@ public class Login extends AppCompatActivity {
     private RequestQueue rq;
     //set context
     private Context ctx;
-    //create request
-    private StringRequest jsrqlogin;
     //create edittexts
     private EditText et_id, et_pass;
-    //buttons
-    private Button buttontoforget, buttontoregister, buttonlogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +52,10 @@ public class Login extends AppCompatActivity {
         et_id = findViewById(R.id.correologin);
         et_pass = findViewById(R.id.passlogin);
         //get buttons
-        buttontoforget = findViewById(R.id.buttontoforget);
-        buttontoregister = findViewById(R.id.buttontoregister);
-        buttonlogin = findViewById(R.id.buttonlogin);
+        //buttons
+        Button buttontoforget = findViewById(R.id.buttontoforget);
+        Button buttontoregister = findViewById(R.id.buttontoregister);
+        Button buttonlogin = findViewById(R.id.buttonlogin);
 
         buttonlogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +91,12 @@ public class Login extends AppCompatActivity {
         progreso1.setMessage("Por favor, espere...");
         progreso1.show();
 
-        jsrqlogin = new StringRequest(Request.Method.POST, URL,
+        //Log.d("Response", response.toString());
+        //Ejecute acciones, deje vacio para solo aceptar
+        //Ejecute acciones, deje vacio para solo aceptar
+        //Toast.makeText(ctx, "Unable to fetch data: " + error.getMessage(),Toast.LENGTH_SHORT).show();
+        //create request
+        StringRequest jsrqlogin = new StringRequest(Request.Method.POST, URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -110,8 +112,8 @@ public class Login extends AppCompatActivity {
                             try {
                                 JSONObject res = resp.getJSONObject(i);
                                 progreso1.dismiss();
-                                Boolean sesion = res.getBoolean("sesion");
-                                Boolean error = res.getBoolean("error");
+                                boolean sesion = res.getBoolean("sesion");
+                                boolean error = res.getBoolean("error");
 
                                 if (sesion) {
                                     getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()

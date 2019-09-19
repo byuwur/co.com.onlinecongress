@@ -7,14 +7,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="OverlayText">
-        <item name="android:textColor">#fff</item>
-        <item name="android:shadowColor">#000</item>
-        <item name="android:shadowDx">1.25</item>
-        <item name="android:shadowDy">1.25</item>
-        <item name="android:shadowRadius">6.25</item>
-    </style>
-
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

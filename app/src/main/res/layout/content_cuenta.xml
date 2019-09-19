@@ -600,7 +600,6 @@
                             android:textSize="20sp" />
 
                         <TextView
-                            android:id="@+id/sexo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="5dp"
@@ -743,7 +742,6 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/textfoto"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="5dp"

@@ -1,5 +1,6 @@
 package com.byuwur.onlinecongress;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,18 +21,18 @@ public class AdaptadorPonencia extends RecyclerView.Adapter<AdaptadorPonencia.Po
     private ArrayList<HolderPonencia> listaponencia;
     private onItemClickListener mlistener;
 
-    public AdaptadorPonencia(ArrayList<HolderPonencia> listaponencia) {
+    AdaptadorPonencia(ArrayList<HolderPonencia> listaponencia) {
         this.listaponencia = listaponencia;
     }
 
-    public void setonItemClickListener(onItemClickListener listener) {
+    void setonItemClickListener(onItemClickListener listener) {
         mlistener = listener;
     }
 
     @NonNull
     @Override
     public PonenciaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_ponencia, null, false);
+        @SuppressLint("InflateParams") View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_ponencia, null, false);
         return new PonenciaViewHolder(view, mlistener);
     }
 
@@ -71,7 +72,7 @@ public class AdaptadorPonencia extends RecyclerView.Adapter<AdaptadorPonencia.Po
         void onItemClick(int position);
     }
 
-    public class PonenciaViewHolder extends RecyclerView.ViewHolder {
+    class PonenciaViewHolder extends RecyclerView.ViewHolder {
         TextView ponencianombre, ponenciaid, ponenciainst, ponenciaidioma, ponenciacategoria, ponenciadias;
         ImageView ponenciaimg;
 

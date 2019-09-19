@@ -1,5 +1,6 @@
 package com.byuwur.onlinecongress;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,7 @@ public class AdaptadorNotif extends RecyclerView.Adapter<AdaptadorNotif.NotifVie
     private ArrayList<HolderNotif> listanotif;
     private onItemClickListener mlistener;
 
-    public AdaptadorNotif(ArrayList<HolderNotif> listanotif) {
+    AdaptadorNotif(ArrayList<HolderNotif> listanotif) {
         this.listanotif = listanotif;
     }
 
@@ -26,7 +27,7 @@ public class AdaptadorNotif extends RecyclerView.Adapter<AdaptadorNotif.NotifVie
     @NonNull
     @Override
     public NotifViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_notificacion, null, false);
+        @SuppressLint("InflateParams") View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_notificacion, null, false);
         return new NotifViewHolder(view, mlistener);
     }
 
@@ -45,11 +46,12 @@ public class AdaptadorNotif extends RecyclerView.Adapter<AdaptadorNotif.NotifVie
         void onItemClick(int position);
     }
 
-    public class NotifViewHolder extends RecyclerView.ViewHolder {
+    class NotifViewHolder extends RecyclerView.ViewHolder {
         TextView notifnombre, notifid;
 
         private NotifViewHolder(View itemView, final onItemClickListener listener) {
             super(itemView);
+
             notifnombre = itemView.findViewById(R.id.notiftext);
             notifid = itemView.findViewById(R.id.notiffecha);
 

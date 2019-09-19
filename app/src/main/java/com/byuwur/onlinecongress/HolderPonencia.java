@@ -9,7 +9,7 @@ public class HolderPonencia {
     private String ponenciadias;
     private String ponenciaimg;
 
-    public HolderPonencia(String nombre, String id, String inst, String idioma, String categoria, String dias, String imgcancha) {
+    HolderPonencia(String nombre, String id, String inst, String idioma, String categoria, String dias, String imgcancha) {
         this.ponencianombre = nombre;
         this.ponenciaid = id;
         this.ponenciainst = inst;
@@ -35,7 +35,7 @@ public class HolderPonencia {
         this.ponenciaid = id;
     }
 
-    public String getInst() {
+    String getInst() {
         return ponenciainst;
     }
 
@@ -43,7 +43,7 @@ public class HolderPonencia {
         this.ponenciainst = inst;
     }
 
-    public String getIdioma() {
+    String getIdioma() {
         return ponenciaidioma;
     }
 
@@ -51,7 +51,7 @@ public class HolderPonencia {
         this.ponenciaidioma = idioma;
     }
 
-    public String getCategoria() {
+    String getCategoria() {
         return ponenciacategoria;
     }
 
@@ -59,7 +59,7 @@ public class HolderPonencia {
         this.ponenciacategoria = categoria;
     }
 
-    public String getDias() {
+    String getDias() {
         return ponenciadias;
     }
 
@@ -67,7 +67,7 @@ public class HolderPonencia {
         this.ponenciadias = dias;
     }
 
-    public String getImg() {
+    String getImg() {
         return ponenciaimg;
     }
 

@@ -1,26 +1,15 @@
 package com.byuwur.onlinecongress;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Firsttime extends AppCompatActivity {
-    private ImageView l1;
-    //private Animation alpha,downtoup;
-    private String buscaridcongreso;
-    private Context ctx;
-    private TextView textviewapc, textviewapc2, textviewapc3;
-    private Button botoniniciar;
-    private Boolean isFirstRun, loginsesion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +17,13 @@ public class Firsttime extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_firsttime);
 
-        ctx = Firsttime.this;
-        buscaridcongreso = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+        //Animation alpha, downtoup;
+
+        String buscaridcongreso = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getString("congreso", "");
-        isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+        boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getBoolean("isFirstRun", true);
-        loginsesion = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+        boolean loginsesion = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getBoolean("loginsesion", false);
 
         if (!isFirstRun) {
@@ -54,26 +44,23 @@ public class Firsttime extends AppCompatActivity {
             }
         }
 
-        l1 = findViewById(R.id.l1);
-        textviewapc = findViewById(R.id.textviewapc);
-        textviewapc2 = findViewById(R.id.textviewapc2);
-        textviewapc3 = findViewById(R.id.textviewapc3);
-        botoniniciar = findViewById(R.id.botoniniciar);
-
         /*
+        ImageView l1 = findViewById(R.id.l1);
+        TextView textviewapc = findViewById(R.id.textviewapc);
+        TextView textviewapc2 = findViewById(R.id.textviewapc2);
+        TextView textviewapc3 = findViewById(R.id.textviewapc3);
+        Button botoniniciar = findViewById(R.id.botoniniciar);
+
         alpha = AnimationUtils.loadAnimation(this, com.APC.Reserv.R.anim.alpha);
         downtoup = AnimationUtils.loadAnimation(this, com.APC.Reserv.R.anim.downtoup);
-
         l1.setAnimation(alpha);
 
         textviewapc3.setAnimation(alpha);
         textviewapc2.setAnimation(alpha);
         textviewapc.setAnimation(alpha);
         botoniniciar.setAnimation(alpha);
-
         l1.setAnimation(downtoup);
         */
-
     }
 
     public void onClickIniciar(View view) {

@@ -37,8 +37,6 @@ public class NotifFragment extends Fragment {
     //set context, requestqueue
     private Context ctx;
     private RequestQueue rq;
-    //create request
-    private StringRequest jsrqllenar;
     //
     private OnFragmentInteractionListener mListener;
 
@@ -93,7 +91,11 @@ public class NotifFragment extends Fragment {
         progreso.setMessage("Por favor, espere...");
         progreso.show();
         // Showing progress dialog at user registration time.
-        jsrqllenar = new StringRequest(Request.Method.GET, URLnotif + "?congreso=" + congreso ,
+        //Log.d("Response", response.toString());
+        //Ejecute acciones, deje vacio para solo aceptar
+        //Ejecute acciones, deje vacio para solo aceptar
+        //create request
+        StringRequest jsrqllenar = new StringRequest(Request.Method.GET, URLnotif + "?congreso=" + congreso,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -112,7 +114,7 @@ public class NotifFragment extends Fragment {
                                 recyclerNotif.setAdapter(adapter);
 
                                 if (res.has("error")) {
-                                    Boolean error = res.getBoolean("error");
+                                    boolean error = res.getBoolean("error");
                                     if (error) {
                                         AlertDialog.Builder dialogoerror = new AlertDialog.Builder(ctx);
                                         dialogoerror.setTitle("BUSCAR");
@@ -177,6 +179,7 @@ public class NotifFragment extends Fragment {
         super.onStop();
         shouldRefreshOnResume = true;
     }
+
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
