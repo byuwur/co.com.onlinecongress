@@ -42,6 +42,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
                             android:src="@drawable/ic_menu_person" />
@@ -52,13 +53,14 @@
                             android:maxLines="1"
                             android:text="Nombre"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="10sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
                         android:layout_weight="1"
@@ -69,6 +71,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="5dp"
+                            android:layout_marginEnd="5dp"
                             android:maxLines="2"
                             android:text="Nombres y Apellidos"
                             android:textColor="@android:color/background_dark"
@@ -78,6 +81,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="5dp"
+                            android:layout_marginEnd="5dp"
                             android:maxLines="1"
                             android:text="Nombre actual"
                             android:textColor="@color/colorPrimaryDark"
@@ -117,6 +121,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
                             android:src="@drawable/ic_menu_person" />
@@ -127,13 +132,14 @@
                             android:maxLines="1"
                             android:text="Identidad"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="10sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
                         android:layout_weight="1"
@@ -144,8 +150,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="5dp"
+                            android:layout_marginEnd="5dp"
                             android:maxLines="2"
-                            android:text="1000000000"
+                            android:text="1234567890"
                             android:textColor="@android:color/background_dark"
                             android:textSize="20sp" />
 
@@ -154,6 +161,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="5dp"
+                            android:layout_marginEnd="5dp"
                             android:maxLines="1"
                             android:text="Documento de identidad"
                             android:textColor="@color/colorPrimaryDark"
@@ -193,6 +201,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
                             android:src="@drawable/ic_menu_account_box" />
@@ -203,13 +212,14 @@
                             android:maxLines="2"
                             android:text="Correo"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="10sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
                         android:layout_weight="1"
@@ -220,6 +230,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="5dp"
+                            android:layout_marginEnd="5dp"
                             android:maxLines="2"
                             android:text="correo@correo.com"
                             android:textColor="@android:color/background_dark"
@@ -229,6 +240,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="5dp"
+                            android:layout_marginEnd="5dp"
                             android:maxLines="1"
                             android:text="Correo electrónico actual"
                             android:textColor="@color/colorPrimaryDark"
@@ -268,6 +280,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
                             android:src="@drawable/ic_menu_account_box" />
@@ -278,13 +291,14 @@
                             android:maxLines="2"
                             android:text="Congreso"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="10sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
                         android:layout_weight="1"
@@ -295,6 +309,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="5dp"
+                            android:layout_marginEnd="5dp"
                             android:maxLines="2"
                             android:text="COVAITE"
                             android:textColor="@android:color/background_dark"
@@ -304,6 +319,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="5dp"
+                            android:layout_marginEnd="5dp"
                             android:maxLines="1"
                             android:text="CONGRESO"
                             android:textColor="@color/colorPrimaryDark"
@@ -343,6 +359,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
                             android:src="@drawable/ic_menu_account_box" />
@@ -353,13 +370,14 @@
                             android:maxLines="2"
                             android:text="Institución"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="10sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
                         android:layout_weight="1"
@@ -370,6 +388,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="5dp"
+                            android:layout_marginEnd="5dp"
                             android:maxLines="2"
                             android:text="ITFIP"
                             android:textColor="@android:color/background_dark"
@@ -379,6 +398,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="5dp"
+                            android:layout_marginEnd="5dp"
                             android:maxLines="1"
                             android:text="Institución educativa"
                             android:textColor="@color/colorPrimaryDark"
@@ -418,6 +438,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
                             android:src="@drawable/ic_phone_black" />
@@ -428,13 +449,14 @@
                             android:maxLines="1"
                             android:text="Teléfono"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="10sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
                         android:layout_weight="1"
@@ -445,6 +467,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="5dp"
+                            android:layout_marginEnd="5dp"
                             android:maxLines="2"
                             android:text="Teléfono"
                             android:textColor="@android:color/background_dark"
@@ -454,6 +477,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="5dp"
+                            android:layout_marginEnd="5dp"
                             android:maxLines="1"
                             android:text="Teléfono actual"
                             android:textColor="@color/colorPrimaryDark"
@@ -493,6 +517,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
                             android:src="@drawable/ic_lock_black" />
@@ -503,13 +528,14 @@
                             android:maxLines="1"
                             android:text="Seguridad"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="10sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
                         android:layout_weight="1"
@@ -519,6 +545,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="5dp"
+                            android:layout_marginEnd="5dp"
                             android:maxLines="2"
                             android:text="**********"
                             android:textColor="@android:color/background_dark"
@@ -528,6 +555,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="5dp"
+                            android:layout_marginEnd="5dp"
                             android:maxLines="1"
                             android:text="Contraseña actual"
                             android:textColor="@color/colorPrimaryDark"
@@ -567,6 +595,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
                             android:src="@drawable/ic_menu_person" />
@@ -577,13 +606,14 @@
                             android:maxLines="1"
                             android:text="Sexo"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="10sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
                         android:layout_weight="1"
@@ -594,6 +624,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="5dp"
+                            android:layout_marginEnd="5dp"
                             android:maxLines="2"
                             android:text="M/F"
                             android:textColor="@android:color/background_dark"
@@ -603,6 +634,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="5dp"
+                            android:layout_marginEnd="5dp"
                             android:maxLines="1"
                             android:text="Género"
                             android:textColor="@color/colorPrimaryDark"
@@ -642,6 +674,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
                             android:src="@drawable/ic_location_on_black_24dp" />
@@ -652,13 +685,14 @@
                             android:maxLines="1"
                             android:text="Ubicación"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="10sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
                         android:layout_weight="1"
@@ -669,6 +703,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="5dp"
+                            android:layout_marginEnd="5dp"
                             android:maxLines="2"
                             android:text="Ciudad"
                             android:textColor="@android:color/background_dark"
@@ -678,6 +713,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="5dp"
+                            android:layout_marginEnd="5dp"
                             android:maxLines="1"
                             android:text="Ciudad actual"
                             android:textColor="@color/colorPrimaryDark"
@@ -718,6 +754,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
                             android:src="@drawable/ic_photo_black" />
@@ -726,16 +763,17 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:maxLines="2"
-                            android:text="Foto de\nperfil"
+                            android:text="Foto"
                             android:textAlignment="center"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="10sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
                         android:layout_weight="1"
@@ -745,6 +783,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="5dp"
+                            android:layout_marginEnd="5dp"
                             android:maxLines="2"
                             android:text="Cambiar foto de perfil"
                             android:textColor="@android:color/background_dark"
@@ -754,8 +793,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="5dp"
+                            android:layout_marginEnd="5dp"
                             android:maxLines="1"
-                            android:text="Foto de perfil"
+                            android:text="Imagen"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="12sp" />
 

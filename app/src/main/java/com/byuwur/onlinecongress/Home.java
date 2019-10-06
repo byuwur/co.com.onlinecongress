@@ -25,14 +25,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
 
+import com.andremion.counterfab.CounterFab;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.io.File;
 import java.util.Objects;
@@ -43,13 +52,12 @@ public class Home extends AppCompatActivity
     private DefaultValues dv = new DefaultValues();
     private PonenciaFragment pf = new PonenciaFragment();
     private Context ctx;
+    private RequestQueue rq;
     //
     private String URLfotoperfil = dv.imgfotoperfil;
-    //create edittexts
     private TextView tvusername, tvuserid, tvuseremail;
-    //profile photo
     private ImageView fotoperfil;
-    //
+    private CounterFab fabnotif;
     private String usrid, usrnombre, usrcorreo;
     private boolean shouldRefreshOnResume = false;
 
@@ -90,10 +98,10 @@ public class Home extends AppCompatActivity
         setContentView(R.layout.activity_home);
 
         ctx = Home.this;
-        //
-        pf.setfragment(false, false, true, false, false);
-        Fragment fragment = new PonenciaFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.home, fragment).commit();
+        rq = Volley.newRequestQueue(ctx);
+
+        pf.setfragment(false, false, false, true, false);
+        getSupportFragmentManager().beginTransaction().replace(R.id.home, new PonenciaFragment()).commit();
         //Textview on side panel
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -118,10 +126,10 @@ public class Home extends AppCompatActivity
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Categorías");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Agenda");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd"))));
 
-        final FloatingActionButton fabnotif = findViewById(R.id.search);
+        fabnotif = findViewById(R.id.search);
         fabnotif.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd"))));
         fabnotif.setVisibility(View.VISIBLE);
         fabnotif.setOnClickListener(new View.OnClickListener() {
@@ -129,10 +137,10 @@ public class Home extends AppCompatActivity
             public void onClick(View view) {
                 Objects.requireNonNull(getSupportActionBar()).setTitle("Anuncios y notificaciones");
                 getSupportFragmentManager().beginTransaction().replace(R.id.home, new NotifFragment()).commit();
-                //hide fab
                 fabnotif.setVisibility(View.GONE);
             }
         });
+        loadnotif();
 
         DrawerLayout drawer = findViewById(R.id.home_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -213,57 +221,12 @@ public class Home extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
-            //LOGOUT ACTION
-            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                    .putBoolean("loginsesion", false).apply();
-            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                    .putString("id", null).apply();
-            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                    .putString("nombre", null).apply();
-            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                    .putString("apellido", null).apply();
-            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                    .putString("email", null).apply();
-            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                    .putString("ciudad", null).apply();
-            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                    .putString("phone", null).apply();
-            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                    .putString("pass", null).apply();
-            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                    .putString("sexo", null).apply();
-            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                    .putString("institucion", null).apply();
-            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                    .putString("congreso", "").apply();
-            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                    .putString("nombrecongreso", null).apply();
-            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                    .putString("color", "0277bd").apply();
-
+            logout();
             deleteCache(ctx);
             startActivity(new Intent(Home.this, Login.class));
             finish();
         } else if (id == R.id.action_exit) {
-            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-            dialog.setCancelable(false);
-            dialog.setMessage("¿Desea salir de la aplicación?");
-            dialog.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    //if user pressed "yes", then he is allowed to exit from application
-                    finish();
-                }
-            });
-            dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    //if user select "No", just cancel this dialog and continue with app
-                    dialog.cancel();
-                }
-            });
-            dialog.create();
-            dialog.show();
+            super.onBackPressed();
         } else if (id == R.id.action_change) {
             startActivity(new Intent(Home.this, Congresos.class));
             finish();
@@ -278,40 +241,35 @@ public class Home extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         FloatingActionButton fabnotif = findViewById(R.id.search);
+        fabnotif.setVisibility(View.VISIBLE);
         switch (id) {
             case R.id.nav_ponencia:
                 Objects.requireNonNull(getSupportActionBar()).setTitle("Ponencias");
                 pf.setfragment(true, false, false, false, false);
-                fabnotif.setVisibility(View.VISIBLE);
                 getSupportFragmentManager().beginTransaction().replace(R.id.home, new PonenciaFragment()).commit();
                 break;
             case R.id.nav_conferencia:
                 Objects.requireNonNull(getSupportActionBar()).setTitle("Conferencias");
                 pf.setfragment(false, true, false, false, false);
-                fabnotif.setVisibility(View.VISIBLE);
                 getSupportFragmentManager().beginTransaction().replace(R.id.home, new PonenciaFragment()).commit();
                 break;
             case R.id.nav_categoria:
                 Objects.requireNonNull(getSupportActionBar()).setTitle("Categorías");
                 pf.setfragment(false, false, true, false, false);
-                fabnotif.setVisibility(View.VISIBLE);
                 getSupportFragmentManager().beginTransaction().replace(R.id.home, new PonenciaFragment()).commit();
                 break;
             case R.id.nav_agenda:
                 Objects.requireNonNull(getSupportActionBar()).setTitle("Agenda");
                 pf.setfragment(false, false, false, true, false);
-                fabnotif.setVisibility(View.VISIBLE);
                 getSupportFragmentManager().beginTransaction().replace(R.id.home, new PonenciaFragment()).commit();
                 break;
             case R.id.nav_sobre:
                 Objects.requireNonNull(getSupportActionBar()).setTitle("Sobre " + ctx.getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("nombrecongreso", null));
                 pf.setfragment(false, false, false, false, true);
-                fabnotif.setVisibility(View.VISIBLE);
                 getSupportFragmentManager().beginTransaction().replace(R.id.home, new PonenciaFragment()).commit();
                 break;
             case R.id.nav_perfil:
                 Objects.requireNonNull(getSupportActionBar()).setTitle(getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("nombre", null) + " " + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("apellido", null));
-                fabnotif.setVisibility(View.VISIBLE);
                 getSupportFragmentManager().beginTransaction().replace(R.id.home, new ProfileFragment()).commit();
                 break;
             case R.id.nav_cuenta:
@@ -326,11 +284,76 @@ public class Home extends AppCompatActivity
         return true;
     }
 
+    private void loadnotif() {
+        String URLnotif = dv.url + "notificaciones.php?congreso=" + getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                .getString("congreso", null);
+        StringRequest jsrqllenar = new StringRequest(Request.Method.GET, URLnotif,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //Log.d("Response", response.toString());
+                        JSONArray resp = null;
+                        try {
+                            resp = new JSONArray(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        assert resp != null;
+                        int resplength = resp.length() - getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                                .getInt("notif", 0);
+                        for (int i = 0; i < resplength; i++) {
+                            try {
+                                fabnotif.increase();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+        rq.add(jsrqllenar);
+    }
+
+    private void logout() {
+        //LOGOUT ACTION
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putBoolean("loginsesion", false).apply();
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putString("id", null).apply();
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putString("nombre", null).apply();
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putString("apellido", null).apply();
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putString("email", null).apply();
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putString("ciudad", null).apply();
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putString("phone", null).apply();
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putString("pass", null).apply();
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putString("sexo", null).apply();
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putString("institucion", null).apply();
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putString("congreso", null).apply();
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putString("nombrecongreso", null).apply();
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putString("color", "0277bd").apply();
+
+    }
+
     @Override
     public void onResume() {
         super.onResume();
         if (shouldRefreshOnResume) {
             setuserdata();
+            loadnotif();
             shouldRefreshOnResume = false;
         }
     }

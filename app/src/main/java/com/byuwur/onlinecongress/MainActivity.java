@@ -1,15 +1,20 @@
 package com.byuwur.onlinecongress;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.vectordrawable.graphics.drawable.ArgbEvaluator;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -17,6 +22,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,9 +56,15 @@ public class MainActivity extends AppCompatActivity {
                 .getString("id", null);
         String usrpass = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getString("pass", null);
+        String congreso = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                .getString("congreso", null);
 
-        vercon(loginsesion, usrid, usrpass);
-
+        if (congreso != null){
+            loadcongress();
+            vercon(loginsesion, usrid, usrpass);
+        } else {
+            vercon(loginsesion, usrid, usrpass);
+        }
     }
 
     private void vercon(final boolean sesion, final String usrid, final String usrpass) {
@@ -143,34 +158,7 @@ public class MainActivity extends AppCompatActivity {
                                 boolean error = res.getBoolean("error");
 
                                 if (error) {
-                                    //LOGOUT ACTION
-                                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                                            .putBoolean("loginsesion", false).apply();
-                                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                                            .putString("id", null).apply();
-                                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                                            .putString("nombre", null).apply();
-                                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                                            .putString("apellido", null).apply();
-                                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                                            .putString("email", null).apply();
-                                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                                            .putString("ciudad", null).apply();
-                                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                                            .putString("phone", null).apply();
-                                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                                            .putString("pass", null).apply();
-                                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                                            .putString("sexo", null).apply();
-                                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                                            .putString("institucion", null).apply();
-                                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                                            .putString("congreso", "").apply();
-                                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                                            .putString("nombrecongreso", null).apply();
-                                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                                            .putString("color", "0277bd").apply();
-
+                                    logout();
                                     Home.deleteCache(ctx);
 
                                     AlertDialog.Builder dialogo = new AlertDialog.Builder(ctx);
@@ -319,7 +307,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void jumpnext() {
-        int DURACION_SPLASH = 1500;
+        int DURACION_SPLASH = 2000;
         new Handler().postDelayed(new Runnable() {
             public void run() {
                 Intent intent = new Intent(ctx, Firsttime.class);
@@ -327,6 +315,65 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         }, DURACION_SPLASH);
+    }
+
+    private void loadcongress() {
+        int DURACION_SPLASH = 1500;
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
+                String usrid, URLfotoperfil = dv.imgfotoperfil;
+                usrid = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                        .getString("id", null);
+                View main = findViewById(R.id.main);
+                ObjectAnimator.ofObject(main, "backgroundColor", new ArgbEvaluator(), Color.parseColor("#0277bd"), Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", ""))).setDuration(500).start();
+                final ImageView logo = findViewById(R.id.logo);
+                Picasso.get().load(URLfotoperfil + usrid + "/1.jpg")
+                        .networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE)
+                        .fit().centerInside()
+                        .into(logo, new Callback() {
+                            @Override
+                            public void onSuccess() {
+                                Log.d("Carga", "Cargada");
+                            }
+                            @Override
+                            public void onError(Exception e) {
+                                logo.setImageResource(R.drawable.logo);
+                            }
+                        });
+            }
+        }, DURACION_SPLASH);
+    }
+
+    private void logout() {
+        //LOGOUT ACTION
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putBoolean("loginsesion", false).apply();
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putString("id", null).apply();
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putString("nombre", null).apply();
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putString("apellido", null).apply();
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putString("email", null).apply();
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putString("ciudad", null).apply();
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putString("phone", null).apply();
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putString("pass", null).apply();
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putString("sexo", null).apply();
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putString("institucion", null).apply();
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putString("congreso", null).apply();
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putString("nombrecongreso", null).apply();
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putString("color", "0277bd").apply();
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putInt("notif", 0).apply();
     }
 
     @Override

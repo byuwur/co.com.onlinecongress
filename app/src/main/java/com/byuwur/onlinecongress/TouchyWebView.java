@@ -25,7 +25,6 @@ public class TouchyWebView extends WebView {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-
         if (computeVerticalScrollRange() > getMeasuredHeight())
             requestDisallowInterceptTouchEvent(false);
 

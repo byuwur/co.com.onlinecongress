@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ponencia"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -15,14 +15,10 @@
             android:layout_height="?attr/actionBarSize"
             app:titleTextColor="#FFF" />
 
-        <ScrollView
+        <com.byuwur.onlinecongress.TouchyWebView
+            android:id="@+id/webviewrecurso"
             android:layout_width="match_parent"
-            android:layout_height="222dp">
-            <com.byuwur.onlinecongress.TouchyWebView
-                android:id="@+id/webviewrecurso"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </ScrollView>
+            android:layout_height="wrap_content" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
@@ -51,6 +47,7 @@
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/container"
+        android:background="#EEE"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />

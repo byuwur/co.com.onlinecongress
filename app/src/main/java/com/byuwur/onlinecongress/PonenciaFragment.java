@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -158,8 +159,12 @@ public class PonenciaFragment extends Fragment {
             prDialog[0] = new ProgressDialog(ctx);
             prDialog[0].setMessage("Por favor, espere...");
             final WebView webviewsobre = viewsobre.findViewById(R.id.webviewsobre);
-            webviewsobre.setWebChromeClient(new WebChromeClient());
-            webviewsobre.getSettings().setJavaScriptEnabled(true);
+            webviewsobre.setWebChromeClient(new WebChromeClient() {
+                @Override
+                public Bitmap getDefaultVideoPoster() {
+                    return BitmapFactory.decodeResource(getResources(), R.drawable.logo);
+                }
+            });
             webviewsobre.setWebViewClient(new WebViewClient() {
                 @Override
                 public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -181,6 +186,7 @@ public class PonenciaFragment extends Fragment {
                     }
                 }
             });
+            webviewsobre.getSettings().setJavaScriptEnabled(true);
             webviewsobre.loadUrl(URLinfo);
             return viewsobre;
         } else {
@@ -307,7 +313,7 @@ public class PonenciaFragment extends Fragment {
                                             "ID: " + res.getString("IdPonencia"),
                                             "Institución: " + res.getString("InstitucionPatrocinadora"),
                                             "Idioma: " + res.getString("Idioma"),
-                                            "Categoría: " + res.getString("Categoria"),
+                                            "Categoría: " + res.getString("NombreCategoria"),
                                             "Fecha: " + res.getString("Fecha"),
                                             IMGURL + "/1.jpg"));
                                 }
@@ -384,7 +390,7 @@ public class PonenciaFragment extends Fragment {
                                             "ID: " + res.getString("IdPonencia"),
                                             "Institución: " + res.getString("InstitucionPatrocinadora"),
                                             "Idioma: " + res.getString("Idioma"),
-                                            "Categoría: " + res.getString("Categoria"),
+                                            "Categoría: " + res.getString("NombreCategoria"),
                                             "Fecha: " + res.getString("Fecha"),
                                             IMGURL + "/1.jpg"));
                                 }
@@ -461,7 +467,7 @@ public class PonenciaFragment extends Fragment {
                                             "ID: " + res.getString("IdPonencia"),
                                             "Institución: " + res.getString("InstitucionPatrocinadora"),
                                             "Idioma: " + res.getString("Idioma"),
-                                            "Categoría: " + res.getString("Categoria"),
+                                            "Categoría: " + res.getString("NombreCategoria"),
                                             "Fecha: " + res.getString("Fecha"),
                                             IMGURL + "/1.jpg"));
                                 }
@@ -538,7 +544,7 @@ public class PonenciaFragment extends Fragment {
                                             "ID: " + res.getString("IdPonencia"),
                                             "Institución: " + res.getString("InstitucionPatrocinadora"),
                                             "Idioma: " + res.getString("Idioma"),
-                                            "Categoría: " + res.getString("Categoria"),
+                                            "Categoría: " + res.getString("NombreCategoria"),
                                             "Fecha: " + res.getString("Fecha"),
                                             IMGURL + "/1.jpg"));
                                 }

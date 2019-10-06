@@ -60,11 +60,13 @@ public class Congresos extends AppCompatActivity {
                 .getString("id", null);
 
         getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                .putString("congreso", "").apply();
+                .putString("congreso", null).apply();
         getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                 .putString("nombrecongreso", null).apply();
         getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                 .putString("color", "0277bd").apply();
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putInt("notif", 0).apply();
 
         //initial values
         congreso.add("[--- Seleccionar congreso ---]");
@@ -95,7 +97,6 @@ public class Congresos extends AppCompatActivity {
                             public void onSuccess() {
                                 Log.d("Carga", "Cargada");
                             }
-
                             @Override
                             public void onError(Exception e) {
                                 imgcongreso.setImageResource(R.drawable.logo);

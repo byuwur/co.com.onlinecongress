@@ -1531,7 +1531,6 @@ public class Cuenta extends AppCompatActivity {
     private void setnombreciudad() {
         usrciudad = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getString("ciudad", null);
-        //
         JsonArrayRequest jsrqnombreciudad = new JsonArrayRequest(Request.Method.GET, URLnombreciudad + "?ciudad=" + usrciudad,
                 new Response.Listener<JSONArray>() {
                     @Override

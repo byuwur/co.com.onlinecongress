@@ -3,20 +3,119 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:padding="12dp"
+    android:background="#EEE"
     tools:context=".Ponencia$PlaceholderFragment">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#789"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+        android:layout_height="match_parent"
+        android:padding="4dp"
+        android:layout_weight="1">
 
-    <WebView
-        android:id="@+id/webviewautor"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgponente"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:src="@drawable/no_profile" />
+
+            <TextView
+                android:id="@+id/nombreponente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textSize="20sp"
+                android:text="NOMBRE"
+                android:textColor="#000" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombre" />
+
+            <TextView
+                android:id="@+id/instponente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="#222"
+                android:textSize="16sp"
+                android:text="UNIVERSIDAD" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Institución" />
+
+            <TextView
+                android:id="@+id/nivelponente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="#222"
+                android:textSize="16sp"
+                android:text="NIVEL" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nivel académico" />
+        </LinearLayout>
+    </ScrollView>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:padding="4dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/whatsapp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#128c7e"
+                android:textColor="#FFF"
+                android:drawableLeft="@drawable/ic_phone_msg"
+                android:drawableStart="@drawable/ic_phone_msg"
+                android:text="CONTACTAR EN WHATSAPP" />
+
+            <TextView
+                android:id="@+id/paisponente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="#222"
+                android:textSize="16sp"
+                android:text="PAÍS" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="País" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Resumen:" />
+
+            <TextView
+                android:id="@+id/resumenponente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#222"
+                android:text="RESUMEN" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

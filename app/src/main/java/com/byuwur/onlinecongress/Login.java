@@ -140,6 +140,8 @@ public class Login extends AppCompatActivity {
                                             .putString("sexo", res.getString("usrsex")).apply();
                                     getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                                             .putString("institucion", res.getString("usrinst")).apply();
+                                    getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                                            .putInt("notif", 0).apply();
 
                                     Intent intentiniciar = new Intent(Login.this, Congresos.class);
                                     startActivity(intentiniciar);

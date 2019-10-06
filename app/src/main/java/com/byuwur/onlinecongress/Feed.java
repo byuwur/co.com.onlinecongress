@@ -109,17 +109,10 @@ public class Feed extends AppCompatActivity {
     }
 
     public void onClickEnviarFeed() {
-        // Showing progress dialog at user registration time.
         final ProgressDialog progreso = new ProgressDialog(ctx);
         progreso.setMessage("Por favor, espere...");
         progreso.show();
 
-        //Log.d("Response", response.toString());
-        //Ejecute acciones, deje vacio para solo aceptar
-        //Ejecute acciones, deje vacio para solo aceptar
-        //Ejecute acciones, deje vacio para solo aceptar
-        //Toast.makeText(ctx, "Unable to fetch data: " + error.getMessage(),Toast.LENGTH_SHORT).show();
-        //create request
         StringRequest jsrqfeed = new StringRequest(Request.Method.POST, URLfeed,
                 new Response.Listener<String>() {
                     @Override

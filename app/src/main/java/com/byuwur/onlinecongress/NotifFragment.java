@@ -86,15 +86,9 @@ public class NotifFragment extends Fragment {
     }
 
     private void llenarnotif() {
-        // Showing progress dialog at user registration time.
         final ProgressDialog progreso = new ProgressDialog(ctx);
         progreso.setMessage("Por favor, espere...");
         progreso.show();
-        // Showing progress dialog at user registration time.
-        //Log.d("Response", response.toString());
-        //Ejecute acciones, deje vacio para solo aceptar
-        //Ejecute acciones, deje vacio para solo aceptar
-        //create request
         StringRequest jsrqllenar = new StringRequest(Request.Method.GET, URLnotif + "?congreso=" + congreso,
                 new Response.Listener<String>() {
                     @Override
@@ -137,6 +131,8 @@ public class NotifFragment extends Fragment {
                                 e.printStackTrace();
                             }
                         }
+                        ctx.getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                                .putInt("notif", resp.length()).apply();
                     }
                 }, new Response.ErrorListener() {
             @Override

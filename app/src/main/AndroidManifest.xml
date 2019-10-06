@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.byuwur.onlinecongress">
 
     <application
@@ -9,20 +10,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".Ponencia"></activity>
-        <activity android:name=".Congresos" />
-        <activity android:name=".Forget" />
-        <activity android:name=".Register" />
-        <activity android:name=".Login" />
+        android:usesCleartextTraffic="true"
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning"
+        tools:targetApi="m">
+        <activity android:name=".Ponencia" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".Congresos" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".Forget" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".Register" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".Login" android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".Home"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Cuenta" />
-        <activity android:name=".Feed" />
-        <activity android:name=".Firsttime" />
-        <activity android:name=".MainActivity">
+            android:theme="@style/AppTheme.NoActionBar" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".Cuenta" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".Feed" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".Firsttime" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".MainActivity" android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,10 +33,10 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE"
+        tools:ignore="ManifestOrder" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.CAMERA" />
 
 </manifest>
