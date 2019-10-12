@@ -66,7 +66,6 @@ public class Cuenta extends AppCompatActivity {
     private static final String TAG = Cuenta.class.getSimpleName();
     private final static int FCR = 1;
     private DefaultValues dv = new DefaultValues();
-    private Home home = new Home();
     //login file to request
     private String URLnombreciudad = dv.url + "nombreciudad.php",
             URLactciudad = dv.urlcuenta + "ciudad.php", URLactnombre = dv.urlcuenta + "nombre.php",
@@ -149,7 +148,6 @@ public class Cuenta extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setTitle("Modificar Cuenta");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd"))));
-
         //
         ctx = Cuenta.this;
         rq = Volley.newRequestQueue(ctx);
@@ -265,8 +263,8 @@ public class Cuenta extends AppCompatActivity {
 
     private void vieweditarcongreso() {
         startActivity(new Intent(Cuenta.this, Congresos.class));
-        //FINISHES HOME ACTIVITY REMOTELY
-        sendBroadcast(new Intent("finish_home"));
+        if (Build.VERSION.SDK_INT >= 19)
+            sendBroadcast(new Intent("finish_home"));
         finish();
     }
 

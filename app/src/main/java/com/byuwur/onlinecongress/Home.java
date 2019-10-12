@@ -35,7 +35,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.MemoryPolicy;
@@ -62,6 +61,7 @@ public class Home extends AppCompatActivity
     private CounterFab fabnotif;
     private String usrid, usrnombre, usrcorreo;
     private boolean shouldRefreshOnResume = false;
+    BroadcastReceiver broadcastReceiver;
 
     //DELETE CACHE WHEN SESSION'S GONE
     public static void deleteCache(Context context) {
@@ -151,7 +151,7 @@ public class Home extends AppCompatActivity
         toggle.syncState();
 
         //BROADCAST RECEIVER TO FINISH ACTIVITY REMOTELY
-        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context arg0, Intent intent) {
                 if (Objects.equals(intent.getAction(), "finish_home"))
@@ -161,12 +161,10 @@ public class Home extends AppCompatActivity
         registerReceiver(broadcastReceiver, new IntentFilter("finish_home"));
     }
 
-    @SuppressLint("SetTextI18n")
     private void setuserdata() {
         tvusername.setText(usrnombre);
         tvuserid.setText(usrcorreo);
-        tvuseremail.setText("#" + usrid);
-
+        tvuseremail.setText(usrid);
         //LOAD IMAGE
         Picasso.get().load(URLfotoperfil + usrid + "/1.jpg")
                 .networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE)
@@ -230,7 +228,6 @@ public class Home extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
             logout();
@@ -252,7 +249,7 @@ public class Home extends AppCompatActivity
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        FloatingActionButton fabnotif = findViewById(R.id.search);
+        resetnotif();
         fabnotif.setVisibility(View.VISIBLE);
         switch (id) {
             case R.id.nav_ponencia:
@@ -329,6 +326,11 @@ public class Home extends AppCompatActivity
         rq.add(jsrqllenar);
     }
 
+    private void resetnotif() {
+        fabnotif.setCount(0);
+        loadnotif();
+    }
+
     private void logout() {
         //LOGOUT ACTION
         getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
@@ -365,9 +367,15 @@ public class Home extends AppCompatActivity
         super.onResume();
         if (shouldRefreshOnResume) {
             setuserdata();
-            //loadnotif();
+            resetnotif();
             shouldRefreshOnResume = false;
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(broadcastReceiver);
     }
 
     @Override
