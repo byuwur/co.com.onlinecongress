@@ -97,6 +97,7 @@ public class Congresos extends AppCompatActivity {
                             public void onSuccess() {
                                 Log.d("Carga", "Cargada");
                             }
+
                             @Override
                             public void onError(Exception e) {
                                 imgcongreso.setImageResource(R.drawable.logo);

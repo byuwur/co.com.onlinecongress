@@ -16,11 +16,11 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:contentDescription="@string/logo_de_online_congress"
         android:src="@mipmap/ic_launcher_foreground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/logo_de_online_congress" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:layout_width="0dp"
@@ -100,13 +100,13 @@
                 android:layout_marginRight="32dp"
                 android:ems="10"
                 android:hint="@string/documento_de_identidad"
+                android:importantForAutofill="no"
                 android:inputType="textPersonName"
                 android:maxLength="100"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tipodni"
-                android:importantForAutofill="no" />
+                app:layout_constraintTop_toBottomOf="@+id/tipodni" />
 
             <EditText
                 android:id="@+id/nombreregistrar"
@@ -119,13 +119,13 @@
                 android:layout_marginRight="32dp"
                 android:ems="10"
                 android:hint="@string/nombres"
+                android:importantForAutofill="no"
                 android:inputType="textPersonName"
                 android:maxLength="100"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/dniregistrar"
-                android:importantForAutofill="no" />
+                app:layout_constraintTop_toBottomOf="@+id/dniregistrar" />
 
             <EditText
                 android:id="@+id/apellidoregistrar"
@@ -138,13 +138,13 @@
                 android:layout_marginRight="32dp"
                 android:ems="10"
                 android:hint="@string/apellidos"
+                android:importantForAutofill="no"
                 android:inputType="textPersonName"
                 android:maxLength="100"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nombreregistrar"
-                android:importantForAutofill="no" />
+                app:layout_constraintTop_toBottomOf="@+id/nombreregistrar" />
 
             <EditText
                 android:id="@+id/correoregistrar"
@@ -157,13 +157,13 @@
                 android:layout_marginRight="32dp"
                 android:ems="10"
                 android:hint="@string/correo_electr_nico"
+                android:importantForAutofill="no"
                 android:inputType="textEmailAddress"
                 android:maxLength="100"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sexoregistrar"
-                android:importantForAutofill="no" />
+                app:layout_constraintTop_toBottomOf="@+id/sexoregistrar" />
 
             <EditText
                 android:id="@+id/passregistrar"
@@ -176,13 +176,13 @@
                 android:layout_marginRight="32dp"
                 android:ems="10"
                 android:hint="@string/contrase_a"
+                android:importantForAutofill="no"
                 android:inputType="textPassword"
                 android:maxLength="100"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.505"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/correoregistrar"
-                android:importantForAutofill="no" />
+                app:layout_constraintTop_toBottomOf="@+id/correoregistrar" />
 
             <EditText
                 android:id="@+id/verifpassregistrar"
@@ -195,13 +195,13 @@
                 android:layout_marginRight="32dp"
                 android:ems="10"
                 android:hint="@string/verificar_contrase_a"
+                android:importantForAutofill="no"
                 android:inputType="textPassword"
                 android:maxLength="100"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.505"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/passregistrar"
-                android:importantForAutofill="no" />
+                app:layout_constraintTop_toBottomOf="@+id/passregistrar" />
 
             <EditText
                 android:id="@+id/telefonoregistrar"
@@ -214,13 +214,13 @@
                 android:layout_marginRight="32dp"
                 android:ems="10"
                 android:hint="@string/c_d_pa_s_tel_fono"
+                android:importantForAutofill="no"
                 android:inputType="phone"
                 android:maxLength="100"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/verifpassregistrar"
-                android:importantForAutofill="no" />
+                app:layout_constraintTop_toBottomOf="@+id/verifpassregistrar" />
 
             <EditText
                 android:id="@+id/institucionregistrar"
@@ -233,13 +233,13 @@
                 android:layout_marginRight="32dp"
                 android:ems="10"
                 android:hint="@string/instituci_n_educativa"
+                android:importantForAutofill="no"
                 android:inputType="textPersonName"
                 android:maxLength="100"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerciudad"
-                android:importantForAutofill="no" />
+                app:layout_constraintTop_toBottomOf="@+id/spinnerciudad" />
 
             <Spinner
                 android:id="@+id/tipodni"

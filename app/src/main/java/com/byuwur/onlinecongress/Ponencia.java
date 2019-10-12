@@ -59,6 +59,11 @@ public class Ponencia extends AppCompatActivity {
     private ProgressDialog prDialog;
     private WebView mWebView;
 
+    public static float dpToPx(Context context, float valueInDp) {
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, valueInDp, metrics);
+    }
+
     @SuppressLint("SetJavaScriptEnabled")
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -332,10 +337,5 @@ public class Ponencia extends AppCompatActivity {
             // Show 3 total pages.
             return 3;
         }
-    }
-
-    public static float dpToPx(Context context, float valueInDp) {
-        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, valueInDp, metrics);
     }
 }

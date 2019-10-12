@@ -3,16 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="12dp"
     android:background="#EEE"
-    tools:context=".Ponencia$PlaceholderFragment"
-    android:baselineAligned="false">
+    android:baselineAligned="false"
+    android:padding="12dp"
+    tools:context=".Ponencia$PlaceholderFragment">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="4dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:padding="4dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,17 +23,17 @@
                 android:id="@+id/imgponente"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:src="@drawable/no_profile"
-                android:contentDescription="@string/foto_del_autor" />
+                android:contentDescription="@string/foto_del_autor"
+                android:src="@drawable/no_profile" />
 
             <TextView
                 android:id="@+id/nombreponente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:textSize="20sp"
                 android:text="@string/nombre"
-                android:textColor="#000" />
+                android:textColor="#000"
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -45,9 +45,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
+                android:text="@string/instituci_n"
                 android:textColor="#222"
-                android:textSize="16sp"
-                android:text="@string/instituci_n" />
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -59,9 +59,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
+                android:text="@string/nivel_acad_mico"
                 android:textColor="#222"
-                android:textSize="16sp"
-                android:text="@string/nivel_acad_mico" />
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -73,8 +73,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="4dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:padding="4dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -86,19 +86,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#128c7e"
-                android:textColor="#FFF"
-                android:drawableLeft="@drawable/ic_phone_msg"
                 android:drawableStart="@drawable/ic_phone_msg"
-                android:text="@string/contactar_en_whatsapp" />
+                android:drawableLeft="@drawable/ic_phone_msg"
+                android:text="@string/contactar_en_whatsapp"
+                android:textColor="#FFF" />
 
             <TextView
                 android:id="@+id/paisponente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
+                android:text="@string/pa_s"
                 android:textColor="#222"
-                android:textSize="16sp"
-                android:text="@string/pa_s" />
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -115,8 +115,8 @@
                 android:id="@+id/resumenponente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#222"
-                android:text="@string/resume" />
+                android:text="@string/resume"
+                android:textColor="#222" />
         </LinearLayout>
     </ScrollView>
 

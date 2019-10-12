@@ -27,8 +27,8 @@
         android:layout_marginBottom="16dp"
         android:ems="10"
         android:hint="@string/c_d_pa_s_n_mero_telef_nico_nuevo"
+        android:importantForAutofill="no"
         android:inputType="phone"
-        android:maxLength="100"
-        android:importantForAutofill="no" />
+        android:maxLength="100" />
 
 </LinearLayout>

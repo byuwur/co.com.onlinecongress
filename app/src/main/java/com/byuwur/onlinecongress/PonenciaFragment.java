@@ -239,7 +239,7 @@ public class PonenciaFragment extends Fragment {
                                     listaPonencia.add(new HolderPonencia(
                                             "" + res.getString("Categoria"),
                                             "Categoría: " + res.getString("Id"),
-                                            "ID congreso: " + res.getString("IdCongreso"),"","", "",
+                                            "ID congreso: " + res.getString("IdCongreso"), "", "", "",
                                             IMGURL + res.getString("ImgCategoria") + "/1.jpg"));
                                 }
                             } catch (Exception e) {

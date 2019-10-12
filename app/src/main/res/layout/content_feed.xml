@@ -50,13 +50,13 @@
                 android:layout_marginRight="32dp"
                 android:ems="10"
                 android:hint="@string/mensaje"
+                android:importantForAutofill="no"
                 android:inputType="textMultiLine"
                 android:maxLength="255"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerasunto"
-                android:importantForAutofill="no" />
+                app:layout_constraintTop_toBottomOf="@+id/spinnerasunto" />
 
             <Spinner
                 android:id="@+id/spinnerasunto"

@@ -26,9 +26,9 @@
         android:layout_marginRight="32dp"
         android:ems="10"
         android:hint="@string/contrase_a_actual"
+        android:importantForAutofill="no"
         android:inputType="textPassword"
-        android:maxLength="100"
-        android:importantForAutofill="no" />
+        android:maxLength="100" />
 
     <EditText
         android:id="@+id/passnueva"
@@ -41,9 +41,9 @@
         android:layout_marginRight="32dp"
         android:ems="10"
         android:hint="@string/contrase_a_nueva"
+        android:importantForAutofill="no"
         android:inputType="textPassword"
-        android:maxLength="100"
-        android:importantForAutofill="no" />
+        android:maxLength="100" />
 
     <EditText
         android:id="@+id/verifpassnueva"
@@ -57,8 +57,8 @@
         android:layout_marginBottom="16dp"
         android:ems="10"
         android:hint="@string/verificar_contrase_a_nueva"
+        android:importantForAutofill="no"
         android:inputType="textPassword"
-        android:maxLength="100"
-        android:importantForAutofill="no" />
+        android:maxLength="100" />
 
 </LinearLayout>

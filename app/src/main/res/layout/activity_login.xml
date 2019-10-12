@@ -16,11 +16,11 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:contentDescription="@string/logo_de_online_congress"
         android:src="@mipmap/ic_launcher_foreground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/logo_de_online_congress" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:layout_width="0dp"
@@ -101,12 +101,12 @@
                 android:layout_marginRight="32dp"
                 android:ems="10"
                 android:hint="@string/contrase_a"
+                android:importantForAutofill="no"
                 android:inputType="textPassword"
                 android:maxLength="100"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/correologin"
-                android:importantForAutofill="no" />
+                app:layout_constraintTop_toBottomOf="@+id/correologin" />
 
             <EditText
                 android:id="@+id/correologin"
@@ -119,12 +119,12 @@
                 android:layout_marginRight="32dp"
                 android:ems="10"
                 android:hint="@string/id_o_correo_electr_nico"
+                android:importantForAutofill="no"
                 android:inputType="textPersonName"
                 android:maxLength="100"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:importantForAutofill="no" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

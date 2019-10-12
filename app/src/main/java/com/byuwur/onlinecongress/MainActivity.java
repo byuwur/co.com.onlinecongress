@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         String congreso = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getString("congreso", null);
 
-        if (congreso != null){
+        if (congreso != null) {
             loadcongress();
             vercon(loginsesion, usrid, usrpass);
         } else {
@@ -335,6 +335,7 @@ public class MainActivity extends AppCompatActivity {
                             public void onSuccess() {
                                 Log.d("Carga", "Cargada");
                             }
+
                             @Override
                             public void onError(Exception e) {
                                 logo.setImageResource(R.drawable.logo);

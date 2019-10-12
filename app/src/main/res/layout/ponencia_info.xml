@@ -3,18 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="12dp"
-    android:orientation="vertical"
     android:background="#EEE"
+    android:orientation="vertical"
+    android:padding="12dp"
     tools:context=".Ponencia$PlaceholderFragment">
 
     <TextView
         android:id="@+id/nombreponencia"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/t_tulo_de_la_ponencia"
         android:textColor="#000"
-        android:textSize="20sp"
-        android:text="@string/t_tulo_de_la_ponencia" />
+        android:textSize="20sp" />
 
     <TextView
         android:layout_width="match_parent"
@@ -30,8 +30,8 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="4dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:padding="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -47,16 +47,16 @@
                     android:id="@+id/resumenponencia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="#222"
-                    android:text="@string/resumen" />
+                    android:text="@string/resumen"
+                    android:textColor="#222" />
             </LinearLayout>
         </ScrollView>
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="4dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:padding="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -72,9 +72,9 @@
                     android:id="@+id/instponencia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="@string/instituci_n_patrocinadora"
                     android:textColor="#222"
-                    android:textSize="16sp"
-                    android:text="@string/instituci_n_patrocinadora" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -86,9 +86,9 @@
                     android:id="@+id/idiomaponencia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="@string/idioma"
                     android:textColor="#222"
-                    android:textSize="16sp"
-                    android:text="@string/idioma" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -100,9 +100,9 @@
                     android:id="@+id/categoriaponencia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="@string/categor_a"
                     android:textColor="#222"
-                    android:textSize="16sp"
-                    android:text="@string/categor_a" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -114,9 +114,9 @@
                     android:id="@+id/fechaponencia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="@string/fechas"
                     android:textColor="#222"
-                    android:textSize="16sp"
-                    android:text="@string/fechas" />
+                    android:textSize="16sp" />
 
             </LinearLayout>
         </ScrollView>
