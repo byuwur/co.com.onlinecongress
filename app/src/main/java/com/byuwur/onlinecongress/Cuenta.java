@@ -264,9 +264,9 @@ public class Cuenta extends AppCompatActivity {
     }
 
     private void vieweditarcongreso() {
-        Intent intentiniciar = new Intent(Cuenta.this, Congresos.class);
-        startActivity(intentiniciar);
-        home.finish();
+        startActivity(new Intent(Cuenta.this, Congresos.class));
+        //FINISHES HOME ACTIVITY REMOTELY
+        sendBroadcast(new Intent("finish_home"));
         finish();
     }
 

@@ -1,9 +1,11 @@
 package com.byuwur.onlinecongress;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -147,6 +149,16 @@ public class Home extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        //BROADCAST RECEIVER TO FINISH ACTIVITY REMOTELY
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context arg0, Intent intent) {
+                if (Objects.equals(intent.getAction(), "finish_home"))
+                    finish();
+            }
+        };
+        registerReceiver(broadcastReceiver, new IntentFilter("finish_home"));
     }
 
     @SuppressLint("SetTextI18n")
@@ -353,7 +365,7 @@ public class Home extends AppCompatActivity
         super.onResume();
         if (shouldRefreshOnResume) {
             setuserdata();
-            loadnotif();
+            //loadnotif();
             shouldRefreshOnResume = false;
         }
     }
