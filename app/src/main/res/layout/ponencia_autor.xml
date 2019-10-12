@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:padding="12dp"
     android:background="#EEE"
-    tools:context=".Ponencia$PlaceholderFragment">
+    tools:context=".Ponencia$PlaceholderFragment"
+    android:baselineAligned="false">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -22,7 +23,8 @@
                 android:id="@+id/imgponente"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:src="@drawable/no_profile" />
+                android:src="@drawable/no_profile"
+                android:contentDescription="@string/foto_del_autor" />
 
             <TextView
                 android:id="@+id/nombreponente"
@@ -30,13 +32,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:textSize="20sp"
-                android:text="NOMBRE"
+                android:text="@string/nombre"
                 android:textColor="#000" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nombre" />
+                android:text="@string/nombre" />
 
             <TextView
                 android:id="@+id/instponente"
@@ -45,12 +47,12 @@
                 android:layout_marginTop="12dp"
                 android:textColor="#222"
                 android:textSize="16sp"
-                android:text="UNIVERSIDAD" />
+                android:text="@string/instituci_n" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Institución" />
+                android:text="@string/instituci_n" />
 
             <TextView
                 android:id="@+id/nivelponente"
@@ -59,12 +61,12 @@
                 android:layout_marginTop="12dp"
                 android:textColor="#222"
                 android:textSize="16sp"
-                android:text="NIVEL" />
+                android:text="@string/nivel_acad_mico" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nivel académico" />
+                android:text="@string/nivel_acad_mico" />
         </LinearLayout>
     </ScrollView>
 
@@ -87,7 +89,7 @@
                 android:textColor="#FFF"
                 android:drawableLeft="@drawable/ic_phone_msg"
                 android:drawableStart="@drawable/ic_phone_msg"
-                android:text="CONTACTAR EN WHATSAPP" />
+                android:text="@string/contactar_en_whatsapp" />
 
             <TextView
                 android:id="@+id/paisponente"
@@ -96,25 +98,25 @@
                 android:layout_marginTop="12dp"
                 android:textColor="#222"
                 android:textSize="16sp"
-                android:text="PAÍS" />
+                android:text="@string/pa_s" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="País" />
+                android:text="@string/pa_s" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="Resumen:" />
+                android:text="@string/resume" />
 
             <TextView
                 android:id="@+id/resumenponente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#222"
-                android:text="RESUMEN" />
+                android:text="@string/resume" />
         </LinearLayout>
     </ScrollView>
 

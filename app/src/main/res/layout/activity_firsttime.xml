@@ -8,22 +8,35 @@
     tools:context=".Firsttime">
 
     <Button
+        android:id="@+id/button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
         android:layout_marginLeft="48dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="48dp"
         android:layout_marginRight="48dp"
         android:background="#FFF"
         android:onClick="onClickIniciar"
-        android:text="Comenzar"
+        android:text="@string/comenzar"
         android:textColor="@color/colorPrimary"
-        android:textSize="16dp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textviewapc3" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/presionando_comenzar"
+        android:textColor="#FFF"
+        android:textSize="12sp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
 
     <ImageView
         android:id="@+id/l1"
@@ -38,7 +51,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.39" />
+        app:layout_constraintVertical_bias="0.39"
+        android:contentDescription="@string/logo_de_online_congress" />
 
     <TextView
         android:id="@+id/textviewapc2"
@@ -46,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="©2019, MNM - GRIDSOA"
+        android:text="@string/_2019_mnm_gridsoa"
         android:textColor="#FFF"
         app:layout_constraintBottom_toTopOf="@+id/textviewapc5"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,9 +72,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Mateus"
-        android:textColor="@color/colorPrimary"
-        android:textSize="6dp"
+        android:text="@string/mateus"
+        android:textColor="#2FFF"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -71,9 +85,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Asiste a múltiples congresos virutales con:"
+        android:text="@string/asiste_a"
         android:textColor="#FFF"
-        android:textSize="18dp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/l1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -85,9 +99,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="¡Participa ahora!"
+        android:text="@string/participa"
         android:textColor="#FFF"
-        android:textSize="18dp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
@@ -98,9 +112,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Software para congresos virtuales de investigación."
+        android:text="@string/software_para_congresos"
         android:textColor="#FFF"
-        android:textSize="12dp"
+        android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/textviewapc2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"

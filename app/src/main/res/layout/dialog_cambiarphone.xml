@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimaryDark"
         android:minHeight="?attr/actionBarSize"
-        app:title="Cambiar Teléfono"
+        app:title="Cambiar teléfono"
         app:titleTextColor="#DDD" />
 
     <EditText
@@ -26,8 +26,9 @@
         android:layout_marginRight="32dp"
         android:layout_marginBottom="16dp"
         android:ems="10"
-        android:hint="(+cód. país) Número telefónico nuevo"
+        android:hint="@string/c_d_pa_s_n_mero_telef_nico_nuevo"
         android:inputType="phone"
-        android:maxLength="100" />
+        android:maxLength="100"
+        android:importantForAutofill="no" />
 
 </LinearLayout>

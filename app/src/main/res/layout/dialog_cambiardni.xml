@@ -37,10 +37,11 @@
         android:layout_marginRight="32dp"
         android:layout_marginBottom="16dp"
         android:ems="10"
-        android:hint="DNI nuevo"
+        android:hint="@string/dni_nuevo"
         android:inputType="textMultiLine"
         android:maxLength="100"
-        android:maxLines="2" />
+        android:maxLines="2"
+        android:importantForAutofill="no" />
 
 </LinearLayout>
 

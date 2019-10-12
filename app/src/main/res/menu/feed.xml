@@ -4,16 +4,16 @@
     <item
         android:id="@+id/action_versioninfo"
         android:orderInCategory="100"
-        android:title="Información de la versión"
+        android:title="@string/informaci_n_de_la_versi_n"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_terms"
         android:orderInCategory="100"
-        android:title="Términos y Condiciones"
+        android:title="@string/t_rminos_y_condiciones"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_contrib"
         android:orderInCategory="100"
-        android:title="Equipo desarrollador"
+        android:title="@string/equipo"
         app:showAsAction="never" />
 </menu>

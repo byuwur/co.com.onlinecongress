@@ -5,7 +5,7 @@
     android:id="@+id/congresos"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorPrimaryDark"
     tools:context=".Congresos">
 
     <Button
@@ -17,7 +17,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="Ingresar al congreso"
+        android:text="@string/ingresar_al_congreso"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnercongreso" />
@@ -37,7 +37,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintVertical_bias="0.25"
+        android:contentDescription="@string/logo_del_congreso" />
 
     <Spinner
         android:id="@+id/spinnercongreso"
@@ -64,7 +65,7 @@
         android:layout_marginBottom="8dp"
         android:shadowColor="#000"
         android:shadowRadius="5"
-        android:text="Seleccione un congreso:"
+        android:text="@string/seleccione_un_congreso"
         android:textColor="#FFF"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/imgcongreso"
@@ -82,7 +83,7 @@
         android:layout_marginRight="8dp"
         android:shadowColor="#000"
         android:shadowRadius="5"
-        android:text="CONGRESO"
+        android:text="@string/congreso"
         android:textColor="#FFF"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"

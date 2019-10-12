@@ -7,34 +7,34 @@
         <item
             android:id="@+id/nav_ponencia"
             android:icon="@drawable/ic_menu_library_add"
-            android:title="Ponencias" />
+            android:title="@string/ponencias" />
         <item
             android:id="@+id/nav_conferencia"
             android:icon="@drawable/ic_menu_library_add"
-            android:title="Conferencias" />
+            android:title="@string/conferencias" />
         <item
             android:id="@+id/nav_categoria"
             android:icon="@drawable/ic_menu_beenhere"
-            android:title="Categorías" />
+            android:title="@string/categor_as" />
         <item
             android:id="@+id/nav_agenda"
             android:icon="@drawable/ic_menu_beenhere"
-            android:title="Agenda" />
+            android:title="@string/agenda" />
         <item
             android:id="@+id/nav_sobre"
             android:icon="@drawable/ic_menu_account_box"
-            android:title="Sobre el congreso" />
+            android:title="@string/sobre_el_congreso" />
         <item
             android:id="@+id/nav_perfil"
             android:icon="@drawable/ic_menu_account_box"
-            android:title="Perfil" />
+            android:title="@string/perfil" />
     </group>
     <item
         android:id="@+id/nav_cuenta"
         android:icon="@drawable/ic_menu_settings"
-        android:title="Modificar cuenta" />
+        android:title="@string/modificar_cuenta" />
     <item
         android:id="@+id/nav_feed"
         android:icon="@drawable/ic_menu_help"
-        android:title="Ayuda y comentarios" />
+        android:title="@string/ayuda_y_comentarios" />
 </menu>

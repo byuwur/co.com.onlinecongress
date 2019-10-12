@@ -32,29 +32,15 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="@string/nombre"
                         android:layout_margin="10dp"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:src="@drawable/ic_menu_person" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:maxLines="1"
-                            android:text="Nombre"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="12sp" />
-                    </LinearLayout>
+                        android:drawableTop="@drawable/ic_menu_person"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="12sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -73,7 +59,7 @@
                             android:layout_marginRight="5dp"
                             android:layout_marginEnd="5dp"
                             android:maxLines="2"
-                            android:text="Nombres y Apellidos"
+                            android:text="@string/nombres_y_apellidos"
                             android:textColor="@android:color/background_dark"
                             android:textSize="20sp" />
 
@@ -83,7 +69,7 @@
                             android:layout_marginRight="5dp"
                             android:layout_marginEnd="5dp"
                             android:maxLines="1"
-                            android:text="Nombre actual"
+                            android:text="@string/nombre_actual"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="12sp" />
 
@@ -93,9 +79,12 @@
                         android:id="@+id/editarnombre"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
                         android:background="@color/colorPrimaryDark"
-                        android:text="Editar"
+                        android:text="@string/editar"
                         android:textColor="#FFF" />
 
                 </LinearLayout>
@@ -111,29 +100,15 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="@string/identidad"
                         android:layout_margin="10dp"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:src="@drawable/ic_menu_person" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:maxLines="1"
-                            android:text="Identidad"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="12sp" />
-                    </LinearLayout>
+                        android:drawableTop="@drawable/ic_menu_person"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="12sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -152,7 +127,7 @@
                             android:layout_marginRight="5dp"
                             android:layout_marginEnd="5dp"
                             android:maxLines="2"
-                            android:text="1234567890"
+                            android:text="@string/n_identidad"
                             android:textColor="@android:color/background_dark"
                             android:textSize="20sp" />
 
@@ -163,7 +138,7 @@
                             android:layout_marginRight="5dp"
                             android:layout_marginEnd="5dp"
                             android:maxLines="1"
-                            android:text="Documento de identidad"
+                            android:text="@string/documento_de_identidad"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="12sp" />
 
@@ -173,9 +148,12 @@
                         android:id="@+id/editardni"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
                         android:background="@color/colorPrimaryDark"
-                        android:text="Editar"
+                        android:text="@string/editar"
                         android:textColor="#FFF" />
 
                 </LinearLayout>
@@ -191,29 +169,15 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="@string/correo"
                         android:layout_margin="10dp"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:src="@drawable/ic_menu_account_box" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:maxLines="2"
-                            android:text="Correo"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="12sp" />
-                    </LinearLayout>
+                        android:drawableTop="@drawable/ic_menu_account_box"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="12sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -232,7 +196,7 @@
                             android:layout_marginRight="5dp"
                             android:layout_marginEnd="5dp"
                             android:maxLines="2"
-                            android:text="correo@correo.com"
+                            android:text="@string/correo_correo_com"
                             android:textColor="@android:color/background_dark"
                             android:textSize="20sp" />
 
@@ -242,7 +206,7 @@
                             android:layout_marginRight="5dp"
                             android:layout_marginEnd="5dp"
                             android:maxLines="1"
-                            android:text="Correo electrónico actual"
+                            android:text="@string/correo_electr_nico_actual"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="12sp" />
 
@@ -252,9 +216,12 @@
                         android:id="@+id/editarcorreo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
                         android:background="@color/colorPrimaryDark"
-                        android:text="Editar"
+                        android:text="@string/editar"
                         android:textColor="#FFF" />
 
                 </LinearLayout>
@@ -270,29 +237,15 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="@string/congresos"
                         android:layout_margin="10dp"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:src="@drawable/ic_menu_account_box" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:maxLines="2"
-                            android:text="Congreso"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="12sp" />
-                    </LinearLayout>
+                        android:drawableTop="@drawable/ic_menu_account_box"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="12sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -311,7 +264,7 @@
                             android:layout_marginRight="5dp"
                             android:layout_marginEnd="5dp"
                             android:maxLines="2"
-                            android:text="COVAITE"
+                            android:text="@string/congreso"
                             android:textColor="@android:color/background_dark"
                             android:textSize="20sp" />
 
@@ -321,7 +274,7 @@
                             android:layout_marginRight="5dp"
                             android:layout_marginEnd="5dp"
                             android:maxLines="1"
-                            android:text="CONGRESO"
+                            android:text="@string/congresos"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="12sp" />
 
@@ -331,9 +284,12 @@
                         android:id="@+id/editarcongreso"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
                         android:background="@color/colorPrimaryDark"
-                        android:text="Editar"
+                        android:text="@string/editar"
                         android:textColor="#FFF" />
 
                 </LinearLayout>
@@ -349,29 +305,15 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="@string/instituci_n"
                         android:layout_margin="10dp"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:src="@drawable/ic_menu_account_box" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:maxLines="2"
-                            android:text="Institución"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="12sp" />
-                    </LinearLayout>
+                        android:drawableTop="@drawable/ic_menu_account_box"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="12sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -390,7 +332,7 @@
                             android:layout_marginRight="5dp"
                             android:layout_marginEnd="5dp"
                             android:maxLines="2"
-                            android:text="ITFIP"
+                            android:text="@string/instituci_n"
                             android:textColor="@android:color/background_dark"
                             android:textSize="20sp" />
 
@@ -400,7 +342,7 @@
                             android:layout_marginRight="5dp"
                             android:layout_marginEnd="5dp"
                             android:maxLines="1"
-                            android:text="Institución educativa"
+                            android:text="@string/instituci_n_educativa"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="12sp" />
 
@@ -410,9 +352,12 @@
                         android:id="@+id/editarinstitucion"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
                         android:background="@color/colorPrimaryDark"
-                        android:text="Editar"
+                        android:text="@string/editar"
                         android:textColor="#FFF" />
 
                 </LinearLayout>
@@ -428,29 +373,15 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="@string/tel_fono"
                         android:layout_margin="10dp"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:src="@drawable/ic_phone_black" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:maxLines="1"
-                            android:text="Teléfono"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="12sp" />
-                    </LinearLayout>
+                        android:drawableTop="@drawable/ic_phone_black"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="12sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -469,7 +400,7 @@
                             android:layout_marginRight="5dp"
                             android:layout_marginEnd="5dp"
                             android:maxLines="2"
-                            android:text="Teléfono"
+                            android:text="@string/tel_fono"
                             android:textColor="@android:color/background_dark"
                             android:textSize="20sp" />
 
@@ -479,7 +410,7 @@
                             android:layout_marginRight="5dp"
                             android:layout_marginEnd="5dp"
                             android:maxLines="1"
-                            android:text="Teléfono actual"
+                            android:text="@string/tel_fono_actual"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="12sp" />
 
@@ -489,9 +420,12 @@
                         android:id="@+id/editarphone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
                         android:background="@color/colorPrimaryDark"
-                        android:text="Editar"
+                        android:text="@string/editar"
                         android:textColor="#FFF" />
 
                 </LinearLayout>
@@ -507,29 +441,15 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="@string/seguridad"
                         android:layout_margin="10dp"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:src="@drawable/ic_lock_black" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:maxLines="1"
-                            android:text="Seguridad"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="12sp" />
-                    </LinearLayout>
+                        android:drawableTop="@drawable/ic_lock_black"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="12sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -547,7 +467,7 @@
                             android:layout_marginRight="5dp"
                             android:layout_marginEnd="5dp"
                             android:maxLines="2"
-                            android:text="**********"
+                            android:text="@string/asterisc"
                             android:textColor="@android:color/background_dark"
                             android:textSize="20sp" />
 
@@ -557,7 +477,7 @@
                             android:layout_marginRight="5dp"
                             android:layout_marginEnd="5dp"
                             android:maxLines="1"
-                            android:text="Contraseña actual"
+                            android:text="@string/contrase_a_actual"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="12sp" />
 
@@ -567,9 +487,12 @@
                         android:id="@+id/editarpass"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
                         android:background="@color/colorPrimaryDark"
-                        android:text="Editar"
+                        android:text="@string/editar"
                         android:textColor="#FFF" />
 
                 </LinearLayout>
@@ -585,29 +508,15 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="@string/sexo"
                         android:layout_margin="10dp"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:src="@drawable/ic_menu_person" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:maxLines="1"
-                            android:text="Sexo"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="12sp" />
-                    </LinearLayout>
+                        android:drawableTop="@drawable/ic_menu_person"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="12sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -626,7 +535,7 @@
                             android:layout_marginRight="5dp"
                             android:layout_marginEnd="5dp"
                             android:maxLines="2"
-                            android:text="M/F"
+                            android:text="@string/masculino_femenino"
                             android:textColor="@android:color/background_dark"
                             android:textSize="20sp" />
 
@@ -636,7 +545,7 @@
                             android:layout_marginRight="5dp"
                             android:layout_marginEnd="5dp"
                             android:maxLines="1"
-                            android:text="Género"
+                            android:text="@string/g_nero"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="12sp" />
 
@@ -646,9 +555,12 @@
                         android:id="@+id/editarsexo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
                         android:background="@color/colorPrimaryDark"
-                        android:text="Editar"
+                        android:text="@string/editar"
                         android:textColor="#FFF" />
 
                 </LinearLayout>
@@ -664,29 +576,15 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="@string/ubicaci_n"
                         android:layout_margin="10dp"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:src="@drawable/ic_location_on_black_24dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:maxLines="1"
-                            android:text="Ubicación"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="12sp" />
-                    </LinearLayout>
+                        android:drawableTop="@drawable/ic_location_on_black_24dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="12sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -705,7 +603,7 @@
                             android:layout_marginRight="5dp"
                             android:layout_marginEnd="5dp"
                             android:maxLines="2"
-                            android:text="Ciudad"
+                            android:text="@string/ciudad"
                             android:textColor="@android:color/background_dark"
                             android:textSize="20sp" />
 
@@ -715,7 +613,7 @@
                             android:layout_marginRight="5dp"
                             android:layout_marginEnd="5dp"
                             android:maxLines="1"
-                            android:text="Ciudad actual"
+                            android:text="@string/ciudad_actual"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="12sp" />
 
@@ -725,9 +623,12 @@
                         android:id="@+id/editarciudad"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
                         android:background="@color/colorPrimaryDark"
-                        android:text="Editar"
+                        android:text="@string/editar"
                         android:textColor="#FFF" />
 
                 </LinearLayout>
@@ -744,30 +645,15 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="@string/foto"
                         android:layout_margin="10dp"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:src="@drawable/ic_photo_black" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:maxLines="2"
-                            android:text="Foto"
-                            android:textAlignment="center"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="12sp" />
-                    </LinearLayout>
+                        android:drawableTop="@drawable/ic_photo_black"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="12sp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -785,7 +671,7 @@
                             android:layout_marginRight="5dp"
                             android:layout_marginEnd="5dp"
                             android:maxLines="2"
-                            android:text="Cambiar foto de perfil"
+                            android:text="@string/cambiar_foto_de_perfil"
                             android:textColor="@android:color/background_dark"
                             android:textSize="20sp" />
 
@@ -795,7 +681,7 @@
                             android:layout_marginRight="5dp"
                             android:layout_marginEnd="5dp"
                             android:maxLines="1"
-                            android:text="Imagen"
+                            android:text="@string/imagen"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="12sp" />
 
@@ -805,9 +691,12 @@
                         android:id="@+id/editarfoto"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
                         android:background="@color/colorPrimaryDark"
-                        android:text="Cambiar"
+                        android:text="@string/cambiar"
                         android:textColor="#FFF" />
 
                 </LinearLayout>

@@ -19,7 +19,8 @@
         android:src="@mipmap/ic_launcher_foreground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/logo_de_online_congress" />
 
     <ScrollView
         android:layout_width="0dp"
@@ -45,7 +46,7 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
                 android:background="@color/colorPrimaryDark"
-                android:text="Restablecer contraseña"
+                android:text="@string/restablecer_contrase_a"
                 android:textColor="#FFF"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.502"
@@ -63,9 +64,9 @@
                 android:layout_marginRight="32dp"
                 android:layout_marginBottom="32dp"
                 android:background="#0DDD"
-                android:text="INICIAR SESIÓN"
+                android:text="@string/iniciar_sesi_n"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.503"
@@ -82,13 +83,14 @@
                 android:layout_marginEnd="24dp"
                 android:layout_marginRight="24dp"
                 android:ems="10"
-                android:hint="Correo electrónico de su cuenta"
+                android:hint="@string/correo_electr_nico_de_su_cuenta"
                 android:inputType="textPersonName"
                 android:maxLength="100"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.504"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                app:layout_constraintTop_toBottomOf="@+id/textView4"
+                android:importantForAutofill="no" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -99,10 +101,10 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
-                android:text="¿Ha olvidado su contraseña? Ingrese su dirección de correo electrónico. Recibirá un enlace para establecer una contraseña nueva."
+                android:text="@string/ha_olvidado_su_contrase_a"
                 android:textAlignment="center"
                 android:textColor="#000"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.509"
                 app:layout_constraintStart_toStartOf="parent"
@@ -119,9 +121,9 @@
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="RECUPERAR CUENTA (Asistente)"
+        android:text="@string/recuperar_cuenta_asistente"
         android:textColor="#000"
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />

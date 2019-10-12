@@ -32,7 +32,7 @@
                 android:layout_marginRight="48dp"
                 android:layout_marginBottom="32dp"
                 android:background="@color/colorPrimaryDark"
-                android:text="Enviar comentario"
+                android:text="@string/enviar_comentario"
                 android:textColor="#FFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -49,13 +49,14 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
                 android:ems="10"
-                android:hint="Mensaje"
+                android:hint="@string/mensaje"
                 android:inputType="textMultiLine"
                 android:maxLength="255"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerasunto" />
+                app:layout_constraintTop_toBottomOf="@+id/spinnerasunto"
+                android:importantForAutofill="no" />
 
             <Spinner
                 android:id="@+id/spinnerasunto"
@@ -81,9 +82,9 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
-                android:text="Enviar como: \nCorreo: "
+                android:text="@string/enviar_como_correo"
                 android:textColor="#666"
-                android:textSize="14dp"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
@@ -97,13 +98,14 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginRight="24dp"
-                android:text="El correo de la sesión actual será el utilizado para comunicarnos con usted. A continuación, envíe su mensaje debajo."
+                android:text="@string/feed_msg"
                 android:textAlignment="center"
                 android:textColor="#444"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

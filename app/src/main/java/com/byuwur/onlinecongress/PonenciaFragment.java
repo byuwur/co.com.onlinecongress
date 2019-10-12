@@ -37,7 +37,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Objects;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -105,7 +107,7 @@ public class PonenciaFragment extends Fragment {
                 @Override
                 public void onItemClick(int position) {
                     String id = ((TextView) Objects.requireNonNull(recyclerPonencia.findViewHolderForAdapterPosition(position)).itemView.findViewById(R.id.ponenciaid)).getText().toString();
-                    id = id.replaceAll("ID: ", "");
+                    id = id.replaceAll("#", "");
                     ponencia.setid(id);
                     Intent intent = new Intent(ctx, Ponencia.class);
                     startActivity(intent);
@@ -117,7 +119,7 @@ public class PonenciaFragment extends Fragment {
                     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                     @Override
                     public void onItemClick(int position) {
-                        String id = ((TextView) Objects.requireNonNull(recyclerPonencia.findViewHolderForAdapterPosition(position)).itemView.findViewById(R.id.ponenciadias)).getText().toString();
+                        String id = ((TextView) Objects.requireNonNull(recyclerPonencia.findViewHolderForAdapterPosition(position)).itemView.findViewById(R.id.ponenciaid)).getText().toString();
                         scategoria = id.replaceAll("Categoría: ", "");
                         onclickself(false, false, true, false, false);
                     }
@@ -128,7 +130,7 @@ public class PonenciaFragment extends Fragment {
                     @Override
                     public void onItemClick(int position) {
                         String id = ((TextView) Objects.requireNonNull(recyclerPonencia.findViewHolderForAdapterPosition(position)).itemView.findViewById(R.id.ponenciaid)).getText().toString();
-                        id = id.replaceAll("ID: ", "");
+                        id = id.replaceAll("#", "");
                         ponencia.setid(id);
                         Intent intent = new Intent(ctx, Ponencia.class);
                         startActivity(intent);
@@ -235,9 +237,9 @@ public class PonenciaFragment extends Fragment {
                                     }
                                 } else {
                                     listaPonencia.add(new HolderPonencia(
-                                            "" + res.getString("Categoria"), "", "",
-                                            "Congreso: " + res.getString("IdCongreso"), "",
+                                            "" + res.getString("Categoria"),
                                             "Categoría: " + res.getString("Id"),
+                                            "ID congreso: " + res.getString("IdCongreso"),"","", "",
                                             IMGURL + res.getString("ImgCategoria") + "/1.jpg"));
                                 }
                             } catch (Exception e) {
@@ -276,6 +278,7 @@ public class PonenciaFragment extends Fragment {
         // Showing progress dialog at user registration time.
         jsrqllenar = new StringRequest(Request.Method.GET, URLponcat + "?congreso=" + congreso + "&categoria=" + categoria,
                 new Response.Listener<String>() {
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                     @Override
                     public void onResponse(String response) {
                         //Log.d("Response", response.toString());
@@ -310,11 +313,12 @@ public class PonenciaFragment extends Fragment {
                                 } else {
                                     listaPonencia.add(new HolderPonencia(
                                             "" + res.getString("Titulo"),
-                                            "ID: " + res.getString("IdPonencia"),
-                                            "Institución: " + res.getString("InstitucionPatrocinadora"),
-                                            "Idioma: " + res.getString("Idioma"),
-                                            "Categoría: " + res.getString("NombreCategoria"),
-                                            "Fecha: " + res.getString("Fecha"),
+                                            "#" + res.getString("IdPonencia"),
+                                            "" + res.getString("InstitucionPatrocinadora"),
+                                            "~ " + res.getString("Idioma") + " ~",
+                                            "" + res.getString("NombreCategoria"),
+                                            "" + new SimpleDateFormat("EEEE, dd MMMM/yyyy", new Locale("es"))
+                                                    .format(Objects.requireNonNull(new SimpleDateFormat("yyyy-MM-dd", new Locale("es")).parse(res.getString("Fecha")))),
                                             IMGURL + "/1.jpg"));
                                 }
                             } catch (Exception e) {
@@ -353,6 +357,7 @@ public class PonenciaFragment extends Fragment {
         // Showing progress dialog at user registration time.
         jsrqllenar = new StringRequest(Request.Method.GET, URLpon + "?congreso=" + congreso,
                 new Response.Listener<String>() {
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                     @Override
                     public void onResponse(String response) {
                         //Log.d("Response", response.toString());
@@ -387,11 +392,12 @@ public class PonenciaFragment extends Fragment {
                                 } else {
                                     listaPonencia.add(new HolderPonencia(
                                             "" + res.getString("Titulo"),
-                                            "ID: " + res.getString("IdPonencia"),
-                                            "Institución: " + res.getString("InstitucionPatrocinadora"),
-                                            "Idioma: " + res.getString("Idioma"),
-                                            "Categoría: " + res.getString("NombreCategoria"),
-                                            "Fecha: " + res.getString("Fecha"),
+                                            "#" + res.getString("IdPonencia"),
+                                            "" + res.getString("InstitucionPatrocinadora"),
+                                            "~ " + res.getString("Idioma") + " ~",
+                                            "" + res.getString("NombreCategoria"),
+                                            "" + new SimpleDateFormat("EEEE, dd MMMM/yyyy", new Locale("es"))
+                                                    .format(Objects.requireNonNull(new SimpleDateFormat("yyyy-MM-dd", new Locale("es")).parse(res.getString("Fecha")))),
                                             IMGURL + "/1.jpg"));
                                 }
                             } catch (Exception e) {
@@ -430,6 +436,7 @@ public class PonenciaFragment extends Fragment {
         // Showing progress dialog at user registration time.
         jsrqllenar = new StringRequest(Request.Method.GET, URLcon + "?congreso=" + congreso,
                 new Response.Listener<String>() {
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                     @Override
                     public void onResponse(String response) {
                         //Log.d("Response", response.toString());
@@ -464,11 +471,12 @@ public class PonenciaFragment extends Fragment {
                                 } else {
                                     listaPonencia.add(new HolderPonencia(
                                             "" + res.getString("Titulo"),
-                                            "ID: " + res.getString("IdPonencia"),
-                                            "Institución: " + res.getString("InstitucionPatrocinadora"),
-                                            "Idioma: " + res.getString("Idioma"),
-                                            "Categoría: " + res.getString("NombreCategoria"),
-                                            "Fecha: " + res.getString("Fecha"),
+                                            "#" + res.getString("IdPonencia"),
+                                            "" + res.getString("InstitucionPatrocinadora"),
+                                            "~ " + res.getString("Idioma") + " ~",
+                                            "" + res.getString("NombreCategoria"),
+                                            "" + new SimpleDateFormat("EEEE, dd MMMM/yyyy", new Locale("es"))
+                                                    .format(Objects.requireNonNull(new SimpleDateFormat("yyyy-MM-dd", new Locale("es")).parse(res.getString("Fecha")))),
                                             IMGURL + "/1.jpg"));
                                 }
                             } catch (Exception e) {
@@ -507,6 +515,7 @@ public class PonenciaFragment extends Fragment {
         // Showing progress dialog at user registration time.
         jsrqllenar = new StringRequest(Request.Method.GET, URLage + "?congreso=" + congreso,
                 new Response.Listener<String>() {
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                     @Override
                     public void onResponse(String response) {
                         //Log.d("Response", response.toString());
@@ -541,11 +550,12 @@ public class PonenciaFragment extends Fragment {
                                 } else {
                                     listaPonencia.add(new HolderPonencia(
                                             "" + res.getString("Titulo"),
-                                            "ID: " + res.getString("IdPonencia"),
-                                            "Institución: " + res.getString("InstitucionPatrocinadora"),
-                                            "Idioma: " + res.getString("Idioma"),
-                                            "Categoría: " + res.getString("NombreCategoria"),
-                                            "Fecha: " + res.getString("Fecha"),
+                                            "#" + res.getString("IdPonencia"),
+                                            "" + res.getString("InstitucionPatrocinadora"),
+                                            "~ " + res.getString("Idioma") + " ~",
+                                            "" + res.getString("NombreCategoria"),
+                                            "" + new SimpleDateFormat("EEEE, dd MMMM/yyyy", new Locale("es"))
+                                                    .format(Objects.requireNonNull(new SimpleDateFormat("yyyy-MM-dd", new Locale("es")).parse(res.getString("Fecha")))),
                                             IMGURL + "/1.jpg"));
                                 }
                             } catch (Exception e) {

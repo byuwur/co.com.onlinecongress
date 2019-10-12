@@ -4,16 +4,16 @@
     <item
         android:id="@+id/action_change"
         android:orderInCategory="100"
-        android:title="Cambiar congreso"
+        android:title="@string/cambiar_congreso"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_logout"
         android:orderInCategory="100"
-        android:title="Cerrar Sesión"
+        android:title="@string/cerrar_sesi_n"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_exit"
         android:orderInCategory="100"
-        android:title="Salir"
+        android:title="@string/salir"
         app:showAsAction="never" />
 </menu>

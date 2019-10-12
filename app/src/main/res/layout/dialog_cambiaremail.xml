@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimaryDark"
         android:minHeight="?attr/actionBarSize"
-        app:title="Cambiar Correo electrónico"
+        app:title="Cambiar correo electrónico"
         app:titleTextColor="#DDD" />
 
     <EditText
@@ -26,8 +26,9 @@
         android:layout_marginRight="32dp"
         android:layout_marginBottom="16dp"
         android:ems="10"
-        android:hint="Correo electrónico nuevo"
+        android:hint="@string/correo_electr_nico_nuevo"
         android:inputType="textEmailAddress"
-        android:maxLength="100" />
+        android:maxLength="100"
+        android:importantForAutofill="no" />
 
 </LinearLayout>

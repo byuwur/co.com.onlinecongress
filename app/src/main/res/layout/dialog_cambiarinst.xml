@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimaryDark"
         android:minHeight="?attr/actionBarSize"
-        app:title="Cambiar institución nueva"
+        app:title="Cambiar institución educativa"
         app:titleTextColor="#DDD" />
 
     <EditText
@@ -26,8 +26,9 @@
         android:layout_marginRight="32dp"
         android:layout_marginBottom="16dp"
         android:ems="10"
-        android:hint="Institución educativa nueva"
+        android:hint="@string/instituci_n_educativa_nueva"
         android:inputType="textEmailAddress"
-        android:maxLength="100" />
+        android:maxLength="100"
+        android:importantForAutofill="no" />
 
 </LinearLayout>

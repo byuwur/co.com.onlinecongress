@@ -18,16 +18,16 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
-        android:text="ONLINE CONGRESS"
+        android:text="@string/app_name"
         android:textColor="#000"
-        android:textSize="20dp" />
+        android:textSize="20sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:text="Congresos y eventos de investigación" />
+        android:text="@string/congresos_y_eventos_de_investigaci_n" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -35,14 +35,14 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:text="Versión" />
+        android:text="@string/versi_n" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:text="1.0" />
+        android:text="@string/_1_0" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -50,7 +50,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
-        android:text="©2019, MNM - GRIDSOA." />
+        android:text="@string/_2019_mnm_gridsoa" />
 
     <TextView
         android:id="@+id/textviewapc5"
@@ -60,8 +60,8 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="16dp"
-        android:text="Mateus"
-        android:textColor="#FFF"
-        android:textSize="6sp" />
+        android:text="@string/mateus"
+        android:textColor="#2FFF"
+        android:textSize="12sp" />
 
 </LinearLayout>

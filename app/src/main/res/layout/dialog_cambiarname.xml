@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimaryDark"
         android:minHeight="?attr/actionBarSize"
-        app:title="Cambiar Nombre"
+        app:title="Cambiar nombre"
         app:titleTextColor="#DDD" />
 
     <EditText
@@ -25,10 +25,11 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:ems="10"
-        android:hint="Nombre nuevo"
+        android:hint="@string/nombre_nuevo"
         android:inputType="textMultiLine"
         android:maxLength="100"
-        android:maxLines="2" />
+        android:maxLines="2"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/apellidonuevo"
@@ -41,10 +42,11 @@
         android:layout_marginRight="32dp"
         android:layout_marginBottom="16dp"
         android:ems="10"
-        android:hint="Apellido nuevo"
+        android:hint="@string/apellido_nuevo"
         android:inputType="textMultiLine"
         android:maxLength="100"
-        android:maxLines="2" />
+        android:maxLines="2"
+        android:importantForAutofill="no" />
 
 </LinearLayout>
 

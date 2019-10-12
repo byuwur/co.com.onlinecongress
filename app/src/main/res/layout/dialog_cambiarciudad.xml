@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimaryDark"
         android:minHeight="?attr/actionBarSize"
-        app:title="Cambiar Ciudad"
+        app:title="Cambiar ciudad"
         app:titleTextColor="#DDD" />
 
     <TextView
@@ -23,7 +23,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
-        android:text="Seleccione su nueva ciudad" />
+        android:text="@string/seleccione_su_nueva_ciudad" />
 
     <Spinner
         android:id="@+id/spinnerpais"

@@ -20,7 +20,8 @@
                 android:layout_height="111dp"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/no_image" />
+                app:srcCompat="@drawable/no_image"
+                android:contentDescription="@string/imagen_de_la_ponencia" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -34,7 +35,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="4"
-                    android:text="Título"
+                    android:text="@string/t_tulo"
                     android:textColor="@android:color/background_dark"
                     android:textSize="20sp" />
 
@@ -43,43 +44,44 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
-                    android:text="ID:"
-                    android:textColor="#000"
-                    android:textSize="14dp" />
-
-                <TextView
-                    android:id="@+id/ponenciadias"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:maxLines="2"
-                    android:text="Día ponencia"
-                    android:textColor="#000" />
+                    android:text="@string/id"
+                    android:textColor="#AAA"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/ponenciainst"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:maxLines="1"
-                    android:text="Institución ponencia"
+                    android:maxLines="2"
+                    android:text="@string/instituci_n"
                     android:textColor="#000" />
-
-                <TextView
-                    android:id="@+id/ponenciaidioma"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:text="Idioma"
-                    android:textColor="@android:color/black" />
 
                 <TextView
                     android:id="@+id/ponenciacategoria"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:text="Categoria"
-                    android:textColor="@android:color/black" />
+                    android:layout_marginTop="4dp"
+                    android:maxLines="2"
+                    android:text="@string/categor_a"
+                    android:textColor="#000" />
+
+                <TextView
+                    android:id="@+id/ponenciadias"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:text="@string/fechas"
+                    android:textColor="#888" />
+
+                <TextView
+                    android:id="@+id/ponenciaidioma"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:text="@string/idioma"
+                    android:textColor="#666" />
+
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimaryDark"
         android:minHeight="?attr/actionBarSize"
-        app:title="Cambiar Foto de Perfil"
+        app:title="Cambiar foto de perfil"
         app:titleTextColor="#DDD" />
 
     <WebView

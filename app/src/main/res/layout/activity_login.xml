@@ -19,7 +19,8 @@
         android:src="@mipmap/ic_launcher_foreground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/logo_de_online_congress" />
 
     <ScrollView
         android:layout_width="0dp"
@@ -46,7 +47,7 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
                 android:background="@color/colorPrimaryDark"
-                android:text="Iniciar Sesión"
+                android:text="@string/iniciar_sesi_n"
                 android:textColor="#FFF"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.502"
@@ -63,8 +64,8 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
                 android:background="#0DDD"
-                android:text="¿Olvidó su contraseña?"
-                android:textSize="12dp"
+                android:text="@string/olvid_su_contrase_a"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.503"
                 app:layout_constraintStart_toStartOf="parent"
@@ -81,9 +82,9 @@
                 android:layout_marginRight="32dp"
                 android:layout_marginBottom="32dp"
                 android:background="#0DDD"
-                android:text="REGÍSTRESE AQUÍ"
+                android:text="@string/reg_strese_aqu"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -99,12 +100,13 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
                 android:ems="10"
-                android:hint="Contraseña"
+                android:hint="@string/contrase_a"
                 android:inputType="textPassword"
                 android:maxLength="100"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/correologin" />
+                app:layout_constraintTop_toBottomOf="@+id/correologin"
+                android:importantForAutofill="no" />
 
             <EditText
                 android:id="@+id/correologin"
@@ -116,12 +118,13 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
                 android:ems="10"
-                android:hint="ID o Correo electrónico"
+                android:hint="@string/id_o_correo_electr_nico"
                 android:inputType="textPersonName"
                 android:maxLength="100"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:importantForAutofill="no" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
@@ -134,9 +137,9 @@
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="INICIAR SESIÓN (Asistente)"
+        android:text="@string/iniciar_sesi_n_asistente"
         android:textColor="#000"
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />

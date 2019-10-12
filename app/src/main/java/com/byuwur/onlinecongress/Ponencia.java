@@ -48,6 +48,8 @@ import com.google.android.material.tabs.TabLayout;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 import java.util.Objects;
 
 public class Ponencia extends AppCompatActivity {
@@ -140,7 +142,11 @@ public class Ponencia extends AppCompatActivity {
     protected void onDestroy() {
         mWebView.destroy();
         mWebView = null;
-        super.onDestroy();
+        try {
+            super.onDestroy();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -216,6 +222,7 @@ public class Ponencia extends AppCompatActivity {
 
                 JsonArrayRequest llenarinfoponente = new JsonArrayRequest(Request.Method.GET, URLinfoponencia + "?id=" + id,
                         new Response.Listener<JSONArray>() {
+                            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                             @SuppressLint("SetTextI18n")
                             @Override
                             public void onResponse(JSONArray response) {
@@ -227,7 +234,8 @@ public class Ponencia extends AppCompatActivity {
                                         idiomaponencia.setText(res.getString("Idioma"));
                                         categoriaponencia.setText(res.getString("NombreCategoria"));
                                         resumenponencia.setText(res.getString("Resumen"));
-                                        fechaponencia.setText(res.getString("Fecha"));
+                                        fechaponencia.setText(new SimpleDateFormat("EEEE, dd MMMM/yyyy", new Locale("es"))
+                                                .format(Objects.requireNonNull(new SimpleDateFormat("yyyy-MM-dd", new Locale("es")).parse(res.getString("Fecha")))));
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }

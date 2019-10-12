@@ -4,12 +4,14 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,7 +28,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.Objects;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -91,6 +96,7 @@ public class NotifFragment extends Fragment {
         progreso.show();
         StringRequest jsrqllenar = new StringRequest(Request.Method.GET, URLnotif + "?congreso=" + congreso,
                 new Response.Listener<String>() {
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                     @Override
                     public void onResponse(String response) {
                         //Log.d("Response", response.toString());
@@ -125,7 +131,9 @@ public class NotifFragment extends Fragment {
                                 } else {
                                     listaNotif.add(new HolderNotif(
                                             ">> " + res.getString("Notificacion"),
-                                            "Fecha: " + res.getString("FechaNotificacion")));
+                                            "Fecha: " + new SimpleDateFormat("EEEE, dd MMMM/yyyy hh:mm:ss", new Locale("es"))
+                                                    .format(Objects.requireNonNull(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", new Locale("es")).parse(res.getString("FechaNotificacion"))))
+                                                    + " "));
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();

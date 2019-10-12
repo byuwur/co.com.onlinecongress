@@ -119,7 +119,7 @@ public class Congresos extends AppCompatActivity {
 
                                 @Override
                                 public void onError(Exception e) {
-                                    imgcongreso.setImageResource(R.drawable.logo);
+                                    imgcongreso.setImageResource(R.mipmap.ic_launcher_foreground);
                                 }
                             });
                 }
