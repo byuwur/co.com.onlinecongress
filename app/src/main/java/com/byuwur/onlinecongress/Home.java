@@ -50,6 +50,7 @@ import java.util.Objects;
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    BroadcastReceiver broadcastReceiver;
     private DefaultValues dv = new DefaultValues();
     private PonenciaFragment pf = new PonenciaFragment();
     private Context ctx;
@@ -61,7 +62,6 @@ public class Home extends AppCompatActivity
     private CounterFab fabnotif;
     private String usrid, usrnombre, usrcorreo;
     private boolean shouldRefreshOnResume = false;
-    BroadcastReceiver broadcastReceiver;
 
     //DELETE CACHE WHEN SESSION'S GONE
     public static void deleteCache(Context context) {
