@@ -44,6 +44,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.tabs.TabLayout;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -213,7 +217,9 @@ public class Ponencia extends AppCompatActivity {
             final Context ctx = getActivity();
             assert ctx != null;
             RequestQueue rq = Volley.newRequestQueue(ctx);
-            String URLinfoponencia = dv.url + "infoponencia.php", URLinfoponente = dv.url + "infoponente.php", URLforo = dv.urlraiz, URLautores = dv.url;
+            String URLinfoponencia = dv.url + "infoponencia.php", URLinfoponente = dv.url + "infoponente.php", URLforo = dv.url + "comentarios/Ponencia.php",
+                    IDC = getActivity().getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("congreso", null),
+                    usrid = getActivity().getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("id", null);
 
             final View viewInfo = inflater.inflate(R.layout.ponencia_info, container, false);
             final View viewComentarios = inflater.inflate(R.layout.ponencia_comentarios, container, false);
@@ -270,9 +276,9 @@ public class Ponencia extends AppCompatActivity {
                     }
                 });
                 viewdisp.getSettings().setJavaScriptEnabled(true);
-                viewdisp.loadUrl(URLforo);
+                viewdisp.loadUrl(URLforo + "?P=" + Ponencia.id + "&U=" + usrid + "&TU=2&IDC=" + IDC);
                 return viewComentarios;
-            } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 3 && Ponencia.tipo.equals("0")) {
+            } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 3 && Ponencia.tipo.equals("1")) {
                 final TextView nombreponente, instponente, nivelponente, paisponente, resumenponente;
                 final ImageView imgponente;
                 imgponente = viewAutor.findViewById(R.id.imgponente);
@@ -303,6 +309,21 @@ public class Ponencia extends AppCompatActivity {
                                                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://wa.me/" + telefono)));
                                             }
                                         });
+                                        //LOAD IMAGE
+                                        Picasso.get().load(dv.urlraiz + "congreso/Ponente/Fotografias/" + Ponencia.id + "/" + Ponencia.id + ".jpg")
+                                                .networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE)
+                                                .fit().centerInside()
+                                                .into(imgponente, new Callback() {
+                                                    @Override
+                                                    public void onSuccess() {
+                                                        Log.d("Carga", "Cargada");
+                                                    }
+
+                                                    @Override
+                                                    public void onError(Exception e) {
+                                                        imgponente.setImageResource(R.drawable.no_profile);
+                                                    }
+                                                });
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
@@ -317,7 +338,7 @@ public class Ponencia extends AppCompatActivity {
                 rq.add(llenarinfoponente);
 
                 return viewAutor;
-            } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 3 && Ponencia.tipo.equals("1") ) {
+            } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 3 && Ponencia.tipo.equals("0") ) {
                 WebView webviewautores = viewComentarios.findViewById(R.id.webviewcoments);
                 webviewautores.setWebChromeClient(new WebChromeClient());
                 webviewautores.setWebViewClient(new WebViewClient() {
@@ -328,7 +349,7 @@ public class Ponencia extends AppCompatActivity {
                     }
                 });
                 webviewautores.getSettings().setJavaScriptEnabled(true);
-                webviewautores.loadUrl(URLautores + "infoautores.php?id=" + Ponencia.id);
+                webviewautores.loadUrl(dv.url + "infoautores.php?id=" + Ponencia.id);
                 return viewComentarios;
         } else {
                 return null;

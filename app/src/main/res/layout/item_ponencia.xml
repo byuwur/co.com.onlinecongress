@@ -24,7 +24,7 @@
                 android:id="@+id/ponenciaimg"
                 android:layout_width="match_parent"
                 android:layout_height="125dp"
-                android:layout_margin="4dp"
+                android:layout_margin="8dp"
                 android:contentDescription="@string/imagen_de_la_ponencia"
                 app:srcCompat="@drawable/no_image" />
 
@@ -71,7 +71,7 @@
                     android:layout_marginTop="4dp"
                     android:maxLines="2"
                     android:text="@string/instituci_n"
-                    android:textColor="#000" />
+                    android:textColor="#666" />
 
                 <TextView
                     android:id="@+id/ponenciacategoria"

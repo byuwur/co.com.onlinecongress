@@ -58,7 +58,7 @@ public class PonenciaFragment extends Fragment {
     private DefaultValues dv = new DefaultValues();
     private Ponencia ponencia = new Ponencia();
     //register file to request
-    private String IMGURL = dv.imgcanchasurl, URLcat = dv.url + "categorias.php", URLponcat = dv.url + "poncat.php",
+    private String URLcat = dv.url + "categorias.php", URLponcat = dv.url + "poncat.php",
             URLpon = dv.url + "ponencias.php", URLcon = dv.url + "conferencias.php", URLage = dv.url + "agenda.php", URLinfo;
     //set context, requestqueue
     private Context ctx;
@@ -244,7 +244,8 @@ public class PonenciaFragment extends Fragment {
                                     listaPonencia.add(new HolderPonencia(
                                             "" + res.getString("Categoria"),
                                             "Categoría: " + res.getString("Id"),
-                                            "ID congreso: " + res.getString("Id_Congreso"), "", "", "", "logoponencia.jpg", ""));
+                                            "ID congreso: " + res.getString("Id_Congreso"), "", "", "",
+                                            dv.urlraiz + "congreso/Fotografias/Logos_Congresos/" + congreso + "/1.jpg", ""));
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -315,15 +316,27 @@ public class PonenciaFragment extends Fragment {
                                         dialogoerror.show();
                                     }
                                 } else {
-                                    listaPonencia.add(new HolderPonencia(
-                                            "" + res.getString("Titulo"),
-                                            res.getString("IdPonencia"),
-                                            "" + res.getString("InstitucionPatrocinadora"),
-                                            "~ " + res.getString("Idioma") + " ~",
-                                            "" + res.getString("NombreCategoria"),
-                                            "" + new SimpleDateFormat("EEEE, dd MMMM/yyyy", new Locale("es"))
-                                                    .format(Objects.requireNonNull(new SimpleDateFormat("yyyy-MM-dd", new Locale("es")).parse(res.getString("Fecha")))),
-                                            IMGURL + "/1.jpg", res.getString("Tipo")));
+                                    if (res.getString("Tipo").equals("1")) {
+                                        listaPonencia.add(new HolderPonencia(
+                                                "" + res.getString("Titulo"),
+                                                "" + res.getString("IdPonencia"),
+                                                "" + res.getString("InstitucionPatrocinadora"),
+                                                "~ " + res.getString("Idioma") + " ~",
+                                                "" + res.getString("NombreCategoria"),
+                                                "" + new SimpleDateFormat("EEEE, dd MMMM/yyyy", new Locale("es"))
+                                                        .format(Objects.requireNonNull(new SimpleDateFormat("yyyy-MM-dd", new Locale("es")).parse(res.getString("Fecha")))),
+                                                dv.urlraiz + "congreso/Ponente/Fotografias/" + res.getString("IdPonencia") + "/" + res.getString("IdPonencia") + ".jpg", res.getString("Tipo")));
+                                    } else if (res.getString("Tipo").equals("0")) {
+                                        listaPonencia.add(new HolderPonencia(
+                                                "" + res.getString("Titulo"),
+                                                "" + res.getString("IdPonencia"),
+                                                "" + res.getString("InstitucionPatrocinadora"),
+                                                "~ " + res.getString("Idioma") + " ~",
+                                                "" + res.getString("NombreCategoria"),
+                                                "" + new SimpleDateFormat("EEEE, dd MMMM/yyyy", new Locale("es"))
+                                                        .format(Objects.requireNonNull(new SimpleDateFormat("yyyy-MM-dd", new Locale("es")).parse(res.getString("Fecha")))),
+                                                dv.urlraiz + "congreso/Fotografias/Logos_Congresos/" + congreso + "/1.jpg", res.getString("Tipo")));
+                                    }
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -402,7 +415,7 @@ public class PonenciaFragment extends Fragment {
                                             "" + res.getString("NombreCategoria"),
                                             "" + new SimpleDateFormat("EEEE, dd MMMM/yyyy", new Locale("es"))
                                                     .format(Objects.requireNonNull(new SimpleDateFormat("yyyy-MM-dd", new Locale("es")).parse(res.getString("Fecha")))),
-                                            IMGURL + "/1.jpg", res.getString("Tipo")));
+                                            dv.urlraiz + "congreso/Fotografias/Logos_Congresos/" + congreso + "/1.jpg", res.getString("Tipo")));
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -475,13 +488,13 @@ public class PonenciaFragment extends Fragment {
                                 } else {
                                     listaPonencia.add(new HolderPonencia(
                                             "" + res.getString("Titulo"),
-                                            res.getString("IdPonencia"),
+                                            "" + res.getString("IdPonencia"),
                                             "" + res.getString("InstitucionPatrocinadora"),
                                             "~ " + res.getString("Idioma") + " ~",
                                             "" + res.getString("NombreCategoria"),
                                             "" + new SimpleDateFormat("EEEE, dd MMMM/yyyy", new Locale("es"))
                                                     .format(Objects.requireNonNull(new SimpleDateFormat("yyyy-MM-dd", new Locale("es")).parse(res.getString("Fecha")))),
-                                            IMGURL + "/1.jpg", res.getString("Tipo")));
+                                            dv.urlraiz + "congreso/Ponente/Fotografias/" + res.getString("IdPonencia") + "/" + res.getString("IdPonencia") + ".jpg", res.getString("Tipo")));
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -552,15 +565,27 @@ public class PonenciaFragment extends Fragment {
                                         dialogoerror.show();
                                     }
                                 } else {
-                                    listaPonencia.add(new HolderPonencia(
-                                            "" + res.getString("Titulo"),
-                                            res.getString("IdPonencia"),
-                                            "" + res.getString("InstitucionPatrocinadora"),
-                                            "~ " + res.getString("Idioma") + " ~",
-                                            "" + res.getString("NombreCategoria"),
-                                            "" + new SimpleDateFormat("EEEE, dd MMMM/yyyy", new Locale("es"))
-                                                    .format(Objects.requireNonNull(new SimpleDateFormat("yyyy-MM-dd", new Locale("es")).parse(res.getString("Fecha")))),
-                                            IMGURL + "/1.jpg", res.getString("Tipo")));
+                                    if (res.getString("Tipo").equals("1")) {
+                                        listaPonencia.add(new HolderPonencia(
+                                                "" + res.getString("Titulo"),
+                                                "" + res.getString("IdPonencia"),
+                                                "" + res.getString("InstitucionPatrocinadora"),
+                                                "~ " + res.getString("Idioma") + " ~",
+                                                "" + res.getString("NombreCategoria"),
+                                                "" + new SimpleDateFormat("EEEE, dd MMMM/yyyy", new Locale("es"))
+                                                        .format(Objects.requireNonNull(new SimpleDateFormat("yyyy-MM-dd", new Locale("es")).parse(res.getString("Fecha")))),
+                                                dv.urlraiz + "congreso/Ponente/Fotografias/" + res.getString("IdPonencia") + "/" + res.getString("IdPonencia") + ".jpg", res.getString("Tipo")));
+                                    } else if (res.getString("Tipo").equals("0")) {
+                                        listaPonencia.add(new HolderPonencia(
+                                                "" + res.getString("Titulo"),
+                                                "" + res.getString("IdPonencia"),
+                                                "" + res.getString("InstitucionPatrocinadora"),
+                                                "~ " + res.getString("Idioma") + " ~",
+                                                "" + res.getString("NombreCategoria"),
+                                                "" + new SimpleDateFormat("EEEE, dd MMMM/yyyy", new Locale("es"))
+                                                        .format(Objects.requireNonNull(new SimpleDateFormat("yyyy-MM-dd", new Locale("es")).parse(res.getString("Fecha")))),
+                                                dv.urlraiz + "congreso/Fotografias/Logos_Congresos/" + congreso + "/1.jpg", res.getString("Tipo")));
+                                    }
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
