@@ -56,7 +56,6 @@ public class Home extends AppCompatActivity
     private Context ctx;
     private RequestQueue rq;
     //
-    private String URLfotoperfil = dv.imgfotoperfil;
     private TextView tvusername, tvuserid, tvuseremail;
     private ImageView fotoperfil;
     private CounterFab fabnotif;
@@ -109,7 +108,7 @@ public class Home extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.getHeaderView(0);
         headerView.findViewById(R.id.navbg);
-        headerView.setBackgroundColor(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
+        headerView.setBackgroundColor(Color.parseColor(getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
 
         tvusername = headerView.findViewById(R.id.usernombre);
         tvuserid = headerView.findViewById(R.id.userid);
@@ -129,10 +128,10 @@ public class Home extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Agenda");
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd"))));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd"))));
 
         fabnotif = findViewById(R.id.search);
-        fabnotif.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd"))));
+        fabnotif.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd"))));
         fabnotif.setVisibility(View.VISIBLE);
         fabnotif.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,10 +164,12 @@ public class Home extends AppCompatActivity
         tvusername.setText(usrnombre);
         tvuserid.setText(usrcorreo);
         tvuseremail.setText(usrid);
+        String idcongreso = ctx.getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                .getString("congreso", null);
         //LOAD IMAGE
-        Picasso.get().load(URLfotoperfil + usrid + "/1.jpg")
+        Picasso.get().load(dv.urlraiz + "congreso/Fotografias/Logos_Congresos/" + idcongreso + "/1.jpg")
                 .networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE)
-                .fit().centerCrop()
+                .fit().centerInside()
                 .into(fotoperfil, new Callback() {
                     @Override
                     public void onSuccess() {
@@ -344,7 +345,7 @@ public class Home extends AppCompatActivity
         getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                 .putString("email", null).apply();
         getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                .putString("ciudad", null).apply();
+                .putString("pais", null).apply();
         getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                 .putString("phone", null).apply();
         getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()

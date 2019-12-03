@@ -67,7 +67,7 @@ public class Feed extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Ayuda y comentarios");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd"))));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd"))));
 
         ctx = Feed.this;
         rq = Volley.newRequestQueue(ctx);
@@ -89,7 +89,7 @@ public class Feed extends AppCompatActivity {
                 onClickEnviarFeed();
             }
         });
-        buttonfeed.setBackgroundColor(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
+        buttonfeed.setBackgroundColor(Color.parseColor(getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
 
         asunto.add("Soporte técnico y ayuda");
         asunto.add("Comentarios y sugerencias");

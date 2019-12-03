@@ -8,8 +8,9 @@ public class HolderPonencia {
     private String ponenciacategoria;
     private String ponenciadias;
     private String ponenciaimg;
+    private String ponenciatipo;
 
-    HolderPonencia(String nombre, String id, String inst, String idioma, String categoria, String dias, String imgcancha) {
+    HolderPonencia(String nombre, String id, String inst, String idioma, String categoria, String dias, String imgcancha, String tipo) {
         this.ponencianombre = nombre;
         this.ponenciaid = id;
         this.ponenciainst = inst;
@@ -17,6 +18,7 @@ public class HolderPonencia {
         this.ponenciacategoria = categoria;
         this.ponenciadias = dias;
         this.ponenciaimg = imgcancha;
+        this.ponenciatipo = tipo;
     }
 
     public String getNombre() {
@@ -73,5 +75,13 @@ public class HolderPonencia {
 
     public void setImgcancha(String imgcancha) {
         this.ponenciaimg = imgcancha;
+    }
+
+    public String getTipo() {
+        return ponenciatipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.ponenciatipo = tipo;
     }
 }

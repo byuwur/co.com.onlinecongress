@@ -130,7 +130,7 @@ public class NotifFragment extends Fragment {
                                     }
                                 } else {
                                     listaNotif.add(new HolderNotif(
-                                            ">> " + res.getString("Notificacion"),
+                                            "" + res.getString("Notificacion"),
                                             "Fecha: " + new SimpleDateFormat("EEEE, dd MMMM/yyyy hh:mm:ss", new Locale("es"))
                                                     .format(Objects.requireNonNull(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", new Locale("es")).parse(res.getString("FechaNotificacion"))))
                                                     + " "));

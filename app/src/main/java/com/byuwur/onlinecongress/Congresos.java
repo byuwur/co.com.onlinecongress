@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -23,6 +24,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
@@ -36,7 +40,7 @@ import java.util.ArrayList;
 public class Congresos extends AppCompatActivity {
     DefaultValues dv = new DefaultValues();
     private ArrayList<String> congreso = new ArrayList<>(), idcongreso = new ArrayList<>(), colorcongreso = new ArrayList<>(), logocongreso = new ArrayList<>();
-    private String usrid, buscaridcongreso = "", buscarcolorcongreso = "", buscarnombrecongreso = "", URLcon = dv.url + "congresos.php", URLfotoperfil = dv.imgfotoperfil, URLimgcon = dv.urlraiz + "img-main/logo.png";
+    private String usrid, buscaridcongreso = "", buscarcolorcongreso = "", buscarnombrecongreso = "", URLcon = dv.url + "congresos.php", URLimgcon = dv.urlraiz + "img-main/logo.png";
     private Context ctx;
     private TextView nombrecongreso;
     private RequestQueue rq;
@@ -71,7 +75,7 @@ public class Congresos extends AppCompatActivity {
         //initial values
         congreso.add("[--- Seleccionar congreso ---]");
         idcongreso.add("0");
-        colorcongreso.add("0277bd");
+        colorcongreso.add("#0277bd");
         logocongreso.add("");
         llenarcongresos();
         //set the spinner value from Arraylist
@@ -82,14 +86,15 @@ public class Congresos extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
-                //Toast.makeText(ctx, adapterView.getItemAtPosition(pos)+". "+idciudad.get(pos), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ctx, adapterView.getItemAtPosition(pos)+". "+idpais.get(pos), Toast.LENGTH_SHORT).show();
                 buscaridcongreso = idcongreso.get(pos);
                 buscarcolorcongreso = colorcongreso.get(pos);
                 buscarnombrecongreso = congreso.get(pos);
                 nombrecongreso.setText(buscarnombrecongreso);
-                congresos.setBackgroundColor(Color.parseColor("#" + buscarcolorcongreso));
+                Log.d("buscarcolorcongreso", buscarcolorcongreso);
+                congresos.setBackgroundColor(Color.parseColor(buscarcolorcongreso));
                 //LOAD IMAGE
-                Picasso.get().load(URLfotoperfil + usrid + "/1.jpg")
+                Picasso.get().load(dv.urlraiz + "congreso/Fotografias/Logos_Congresos/" + idcongreso.get(pos) + "/1.jpg")
                         .networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE)
                         .fit().centerInside()
                         .into(imgcongreso, new Callback() {
@@ -108,7 +113,7 @@ public class Congresos extends AppCompatActivity {
                     buscarcolorcongreso = "";
                     buscarnombrecongreso = "";
                     nombrecongreso.setText("CONGRESO VIRTUAL");
-                    congresos.setBackgroundColor(Color.parseColor("#" + colorcongreso.get(pos)));
+                    congresos.setBackgroundColor(Color.parseColor(colorcongreso.get(pos)));
                     Picasso.get().load(URLimgcon)
                             .networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE)
                             .fit().centerInside()
@@ -147,9 +152,9 @@ public class Congresos extends AppCompatActivity {
                         for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject res = response.getJSONObject(i);
-                                Log.d("Response: ", "ID:" + res.getString("Id") + ". Color: " + res.getString("Color") + ". Logo: " + res.getString("Logo"));
+                                Log.d("Response: ", "ID:" + res.getString("Id_Congreso") + ". Color: " + res.getString("Color") + ". Logo: " + res.getString("Logo"));
                                 congreso.add(res.getString("Nombre") + " (" + res.getString("Año") + ")");
-                                idcongreso.add(res.getString("Id"));
+                                idcongreso.add(res.getString("Id_Congreso"));
                                 colorcongreso.add(res.getString("Color"));
                                 logocongreso.add(res.getString("Logo"));
                             } catch (Exception e) {
@@ -177,6 +182,22 @@ public class Congresos extends AppCompatActivity {
             getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                     .putString("color", buscarcolorcongreso).apply();
             Log.d("ParamsCONGRESO", "Congreso: " + buscaridcongreso + ". Nombre congreso: " + buscarnombrecongreso + ". Color congreso: " + buscarcolorcongreso + ".");
+
+            // [START subscribe_topics]
+            FirebaseMessaging.getInstance().subscribeToTopic(buscaridcongreso)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            String msg = "Bienvenido al congreso: " + buscaridcongreso;
+                            if (!task.isSuccessful()) {
+                                msg = getString(R.string.msg_subscribe_failed);
+                            }
+                            Log.d("Congresos", msg);
+                            Toast.makeText(ctx, msg, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+            // [END subscribe_topics]
+
             Intent intentiniciar = new Intent(Congresos.this, Home.class);
             startActivity(intentiniciar);
             finish();

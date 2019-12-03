@@ -54,7 +54,7 @@ import java.util.Objects;
 
 public class Ponencia extends AppCompatActivity {
 
-    private static String id;
+    private static String id, tipo;
     private static DefaultValues dv = new DefaultValues();
     private ProgressDialog prDialog;
     private WebView mWebView;
@@ -81,7 +81,7 @@ public class Ponencia extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle(id);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setBackgroundColor(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
+        toolbar.setBackgroundColor(Color.parseColor(getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
 
         SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         ViewPager mViewPager = findViewById(R.id.container);
@@ -89,7 +89,7 @@ public class Ponencia extends AppCompatActivity {
         mViewPager.setOffscreenPageLimit(3);
 
         TabLayout tabLayout = findViewById(R.id.tabs);
-        tabLayout.setBackgroundColor(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
+        tabLayout.setBackgroundColor(Color.parseColor(getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
@@ -120,7 +120,7 @@ public class Ponencia extends AppCompatActivity {
             }
         });
         mWebView.getSettings().setJavaScriptEnabled(true);
-        mWebView.loadUrl(dv.url + "recurso.php");
+        mWebView.loadUrl(dv.url + "recurso.php?ponencia=" + id);
 
         final View activityRootView = findViewById(R.id.ponencia);
         activityRootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -137,6 +137,10 @@ public class Ponencia extends AppCompatActivity {
 
     public void setid(String id) {
         Ponencia.id = id;
+    }
+
+    public void settype(String tipo) {
+        Ponencia.tipo = tipo;
     }
 
     private void resetdata() {
@@ -209,7 +213,7 @@ public class Ponencia extends AppCompatActivity {
             final Context ctx = getActivity();
             assert ctx != null;
             RequestQueue rq = Volley.newRequestQueue(ctx);
-            String URLinfoponencia = dv.url + "infoponencia.php", URLinfoponente = dv.url + "infoponente.php", URLforo = dv.urlraiz;
+            String URLinfoponencia = dv.url + "infoponencia.php", URLinfoponente = dv.url + "infoponente.php", URLforo = dv.urlraiz, URLautores = dv.url;
 
             final View viewInfo = inflater.inflate(R.layout.ponencia_info, container, false);
             final View viewComentarios = inflater.inflate(R.layout.ponencia_comentarios, container, false);
@@ -268,7 +272,7 @@ public class Ponencia extends AppCompatActivity {
                 viewdisp.getSettings().setJavaScriptEnabled(true);
                 viewdisp.loadUrl(URLforo);
                 return viewComentarios;
-            } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 3) {
+            } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 3 && Ponencia.tipo.equals("0")) {
                 final TextView nombreponente, instponente, nivelponente, paisponente, resumenponente;
                 final ImageView imgponente;
                 imgponente = viewAutor.findViewById(R.id.imgponente);
@@ -291,7 +295,7 @@ public class Ponencia extends AppCompatActivity {
                                         nivelponente.setText(res.getString("NivelFormacion"));
                                         paisponente.setText(res.getString("NombrePais"));
                                         resumenponente.setText(res.getString("ResumenPonente"));
-                                        final String telefono = "+573013377196".replaceAll("\\+", "");
+                                        final String telefono = res.getString("Telefono").replaceAll("\\+", "");
                                         Button whatsapp = viewAutor.findViewById(R.id.whatsapp);
                                         whatsapp.setOnClickListener(new View.OnClickListener() {
                                             @Override
@@ -313,7 +317,20 @@ public class Ponencia extends AppCompatActivity {
                 rq.add(llenarinfoponente);
 
                 return viewAutor;
-            } else {
+            } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 3 && Ponencia.tipo.equals("1") ) {
+                WebView webviewautores = viewComentarios.findViewById(R.id.webviewcoments);
+                webviewautores.setWebChromeClient(new WebChromeClient());
+                webviewautores.setWebViewClient(new WebViewClient() {
+                    @Override
+                    public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                        view.loadUrl(url);
+                        return true;
+                    }
+                });
+                webviewautores.getSettings().setJavaScriptEnabled(true);
+                webviewautores.loadUrl(URLautores + "infoautores.php?id=" + Ponencia.id);
+                return viewComentarios;
+        } else {
                 return null;
             }
         }

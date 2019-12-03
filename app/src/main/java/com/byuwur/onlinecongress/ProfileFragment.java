@@ -27,8 +27,6 @@ public class ProfileFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     DefaultValues dv = new DefaultValues();
-    //login file to request
-    private String URLfotoperfil = dv.imgfotoperfil, usrid;
     private Context ctx;
 
     private ImageView fotoperfil;
@@ -68,7 +66,7 @@ public class ProfileFragment extends Fragment {
         //
         ctx = getActivity();
         assert ctx != null;
-        usrid = ctx.getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+        String usrid = ctx.getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getString("id", null);
 
         fotoperfil = view.findViewById(R.id.fotoperfil);
@@ -89,7 +87,7 @@ public class ProfileFragment extends Fragment {
                 startActivity(intent1);
             }
         });
-        buttoneditar.setBackgroundColor(Color.parseColor("#" + ctx.getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
+        buttoneditar.setBackgroundColor(Color.parseColor(ctx.getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
         return view;
     }
 
@@ -103,6 +101,8 @@ public class ProfileFragment extends Fragment {
                 .getString("phone", null);
         String usrinst = ctx.getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getString("institucion", null);
+        String idcongreso = ctx.getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                .getString("congreso", null);
         String nombrecongreso = ctx.getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getString("nombrecongreso", null);
 
@@ -113,9 +113,9 @@ public class ProfileFragment extends Fragment {
         congresoperfil.setText(nombrecongreso);
 
         //LOAD IMAGE
-        Picasso.get().load(URLfotoperfil + usrid + "/1.jpg")
+        Picasso.get().load(dv.urlraiz + "congreso/Fotografias/Logos_Congresos/" + idcongreso + "/1.jpg")
                 .networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE)
-                .fit().centerCrop()
+                .fit().centerInside()
                 .into(fotoperfil, new Callback() {
                     @Override
                     public void onSuccess() {

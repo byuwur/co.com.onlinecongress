@@ -131,7 +131,7 @@ public class Login extends AppCompatActivity {
                                     getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                                             .putString("email", res.getString("usremail")).apply();
                                     getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                                            .putString("ciudad", res.getString("usrciudad")).apply();
+                                            .putString("pais", res.getString("usrpais")).apply();
                                     getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                                             .putString("phone", res.getString("usrcel")).apply();
                                     getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()

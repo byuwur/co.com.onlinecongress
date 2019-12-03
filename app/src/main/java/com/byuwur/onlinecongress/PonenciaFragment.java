@@ -30,6 +30,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -58,7 +59,7 @@ public class PonenciaFragment extends Fragment {
     private Ponencia ponencia = new Ponencia();
     //register file to request
     private String IMGURL = dv.imgcanchasurl, URLcat = dv.url + "categorias.php", URLponcat = dv.url + "poncat.php",
-            URLpon = dv.url + "ponencias.php", URLcon = dv.url + "conferencias.php", URLage = dv.url + "agenda.php", URLinfo = dv.urlraiz;
+            URLpon = dv.url + "ponencias.php", URLcon = dv.url + "conferencias.php", URLage = dv.url + "agenda.php", URLinfo;
     //set context, requestqueue
     private Context ctx;
     private RequestQueue rq;
@@ -89,7 +90,8 @@ public class PonenciaFragment extends Fragment {
         assert ctx != null;
         rq = Volley.newRequestQueue(ctx);
         // Showing progress dialog at user registration time.
-
+        URLinfo = dv.urlraiz + ctx.getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                .getString("nombrecongreso", null);
         //GET VALUES FROM USER
         congreso = getActivity().getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getString("congreso", null);
@@ -107,8 +109,10 @@ public class PonenciaFragment extends Fragment {
                 @Override
                 public void onItemClick(int position) {
                     String id = ((TextView) Objects.requireNonNull(recyclerPonencia.findViewHolderForAdapterPosition(position)).itemView.findViewById(R.id.ponenciaid)).getText().toString();
+                    String type = ((TextView) Objects.requireNonNull(recyclerPonencia.findViewHolderForAdapterPosition(position)).itemView.findViewById(R.id.ponenciatipo)).getText().toString();
                     id = id.replaceAll("#", "");
                     ponencia.setid(id);
+                    ponencia.settype(type);
                     Intent intent = new Intent(ctx, Ponencia.class);
                     startActivity(intent);
                 }
@@ -132,6 +136,7 @@ public class PonenciaFragment extends Fragment {
                         String id = ((TextView) Objects.requireNonNull(recyclerPonencia.findViewHolderForAdapterPosition(position)).itemView.findViewById(R.id.ponenciaid)).getText().toString();
                         id = id.replaceAll("#", "");
                         ponencia.setid(id);
+                        ponencia.settype(id);
                         Intent intent = new Intent(ctx, Ponencia.class);
                         startActivity(intent);
                     }
@@ -239,8 +244,7 @@ public class PonenciaFragment extends Fragment {
                                     listaPonencia.add(new HolderPonencia(
                                             "" + res.getString("Categoria"),
                                             "Categoría: " + res.getString("Id"),
-                                            "ID congreso: " + res.getString("IdCongreso"), "", "", "",
-                                            IMGURL + res.getString("ImgCategoria") + "/1.jpg"));
+                                            "ID congreso: " + res.getString("Id_Congreso"), "", "", "", "logoponencia.jpg", ""));
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -313,13 +317,13 @@ public class PonenciaFragment extends Fragment {
                                 } else {
                                     listaPonencia.add(new HolderPonencia(
                                             "" + res.getString("Titulo"),
-                                            "#" + res.getString("IdPonencia"),
+                                            res.getString("IdPonencia"),
                                             "" + res.getString("InstitucionPatrocinadora"),
                                             "~ " + res.getString("Idioma") + " ~",
                                             "" + res.getString("NombreCategoria"),
                                             "" + new SimpleDateFormat("EEEE, dd MMMM/yyyy", new Locale("es"))
                                                     .format(Objects.requireNonNull(new SimpleDateFormat("yyyy-MM-dd", new Locale("es")).parse(res.getString("Fecha")))),
-                                            IMGURL + "/1.jpg"));
+                                            IMGURL + "/1.jpg", res.getString("Tipo")));
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -392,13 +396,13 @@ public class PonenciaFragment extends Fragment {
                                 } else {
                                     listaPonencia.add(new HolderPonencia(
                                             "" + res.getString("Titulo"),
-                                            "#" + res.getString("IdPonencia"),
+                                            res.getString("IdPonencia"),
                                             "" + res.getString("InstitucionPatrocinadora"),
                                             "~ " + res.getString("Idioma") + " ~",
                                             "" + res.getString("NombreCategoria"),
                                             "" + new SimpleDateFormat("EEEE, dd MMMM/yyyy", new Locale("es"))
                                                     .format(Objects.requireNonNull(new SimpleDateFormat("yyyy-MM-dd", new Locale("es")).parse(res.getString("Fecha")))),
-                                            IMGURL + "/1.jpg"));
+                                            IMGURL + "/1.jpg", res.getString("Tipo")));
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -471,13 +475,13 @@ public class PonenciaFragment extends Fragment {
                                 } else {
                                     listaPonencia.add(new HolderPonencia(
                                             "" + res.getString("Titulo"),
-                                            "#" + res.getString("IdPonencia"),
+                                            res.getString("IdPonencia"),
                                             "" + res.getString("InstitucionPatrocinadora"),
                                             "~ " + res.getString("Idioma") + " ~",
                                             "" + res.getString("NombreCategoria"),
                                             "" + new SimpleDateFormat("EEEE, dd MMMM/yyyy", new Locale("es"))
                                                     .format(Objects.requireNonNull(new SimpleDateFormat("yyyy-MM-dd", new Locale("es")).parse(res.getString("Fecha")))),
-                                            IMGURL + "/1.jpg"));
+                                            IMGURL + "/1.jpg", res.getString("Tipo")));
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -550,13 +554,13 @@ public class PonenciaFragment extends Fragment {
                                 } else {
                                     listaPonencia.add(new HolderPonencia(
                                             "" + res.getString("Titulo"),
-                                            "#" + res.getString("IdPonencia"),
+                                            res.getString("IdPonencia"),
                                             "" + res.getString("InstitucionPatrocinadora"),
                                             "~ " + res.getString("Idioma") + " ~",
                                             "" + res.getString("NombreCategoria"),
                                             "" + new SimpleDateFormat("EEEE, dd MMMM/yyyy", new Locale("es"))
                                                     .format(Objects.requireNonNull(new SimpleDateFormat("yyyy-MM-dd", new Locale("es")).parse(res.getString("Fecha")))),
-                                            IMGURL + "/1.jpg"));
+                                            IMGURL + "/1.jpg", res.getString("Tipo")));
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();

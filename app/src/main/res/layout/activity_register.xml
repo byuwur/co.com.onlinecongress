@@ -228,7 +228,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginLeft="32dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
                 android:ems="10"
@@ -239,7 +239,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerciudad" />
+                app:layout_constraintTop_toBottomOf="@+id/spinnerpais" />
 
             <Spinner
                 android:id="@+id/tipodni"
@@ -285,34 +285,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
-            <Spinner
-                android:id="@+id/spinnerprovincia"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginRight="32dp"
-                android:background="#FFF"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerpais" />
-
-            <Spinner
-                android:id="@+id/spinnerciudad"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginRight="32dp"
-                android:background="#FFF"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerprovincia" />
-
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
@@ -322,7 +294,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
-                android:text="@string/pa_s_provincia_ciudad_e_instituci_n"
+                android:text="@string/pa_s"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"

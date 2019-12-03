@@ -61,6 +61,8 @@ public class AdaptadorPonencia extends RecyclerView.Adapter<AdaptadorPonencia.Po
                         //Toast.makeText(ctx, "Ocurrieron errores al cargar algunas imágenes.",Toast.LENGTH_SHORT).show();
                     }
                 });
+        holder.ponenciatipo.setText(listaponencia.get(position).getTipo());
+
     }
 
     @Override
@@ -73,7 +75,7 @@ public class AdaptadorPonencia extends RecyclerView.Adapter<AdaptadorPonencia.Po
     }
 
     class PonenciaViewHolder extends RecyclerView.ViewHolder {
-        TextView ponencianombre, ponenciaid, ponenciainst, ponenciaidioma, ponenciacategoria, ponenciadias;
+        TextView ponenciatipo, ponencianombre, ponenciaid, ponenciainst, ponenciaidioma, ponenciacategoria, ponenciadias;
         ImageView ponenciaimg;
 
         private PonenciaViewHolder(View itemView, final onItemClickListener listener) {
@@ -85,6 +87,7 @@ public class AdaptadorPonencia extends RecyclerView.Adapter<AdaptadorPonencia.Po
             ponenciacategoria = itemView.findViewById(R.id.ponenciacategoria);
             ponenciadias = itemView.findViewById(R.id.ponenciadias);
             ponenciaimg = itemView.findViewById(R.id.ponenciaimg);
+            ponenciatipo = itemView.findViewById(R.id.ponenciatipo);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

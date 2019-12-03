@@ -138,12 +138,12 @@ public class Register extends AppCompatActivity {
         spinnerpais.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
-                spinnerdep.setEnabled(true);
-                spinnerdep.setClickable(true);
+                //spinnerdep.setEnabled(true);
+                //spinnerdep.setClickable(true);
                 //Toast.makeText(ctx,adapterView.getItemAtPosition(pos)+". "+iddep.get(pos), Toast.LENGTH_SHORT).show();
                 buscaridpais = idpais.get(pos);
                 //RESET CIUDAD ARRAYLIST
-                dep.clear();
+                /*dep.clear();
                 iddep.clear();
                 dep.add("[--- Provincias ---]");
                 iddep.add("0");
@@ -154,14 +154,14 @@ public class Register extends AppCompatActivity {
                     spinnerdep.setEnabled(false);
                     spinnerdep.setClickable(false);
                     buscariddepar = "";
-                }
+                }*/
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        //set the spinner value from Arraylist
+        /*set the spinner value from Arraylist
         ArrayAdapter<String> adapterdep = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item, dep);
         adapterdep.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerdep.setAdapter(adapterdep);
@@ -208,7 +208,7 @@ public class Register extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
-        });
+        });*/
     }
 
     private void llenarpaises() {
@@ -383,7 +383,7 @@ public class Register extends AppCompatActivity {
                     parametros.put("email", et_correo.getText().toString());
                     parametros.put("pass", et_pass.getText().toString());
                     parametros.put("phone", et_phone.getText().toString());
-                    parametros.put("ciudad", buscaridciudad);
+                    parametros.put("pais", buscaridpais);
                     parametros.put("inst", et_inst.getText().toString());
 
                     return parametros;

@@ -1,34 +1,42 @@
 {
   "project_info": {
-    "project_number": "962713946671",
-    "firebase_url": "https://testnotif-4a5d8.firebaseio.com",
-    "project_id": "testnotif-4a5d8",
-    "storage_bucket": "testnotif-4a5d8.appspot.com"
+    "project_number": "271703968988",
+    "firebase_url": "https://onlinecongress-byuwur.firebaseio.com",
+    "project_id": "onlinecongress-byuwur",
+    "storage_bucket": "onlinecongress-byuwur.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:962713946671:android:f4e9d820014bbb733014da",
+        "mobilesdk_app_id": "1:271703968988:android:da492481f3ba588730b819",
         "android_client_info": {
-          "package_name": "com.byuwur.testnotif"
+          "package_name": "com.byuwur.onlinecongress"
         }
       },
       "oauth_client": [
         {
-          "client_id": "962713946671-ejqecj0tq5q180083hi966sqlk6bhq49.apps.googleusercontent.com",
+          "client_id": "271703968988-pn8h4qqhc4hn2qh9ac3s72hd6naicjv1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.byuwur.onlinecongress",
+            "certificate_hash": "89182c8b68852e5b140c363d807919e3a3f54d0c"
+          }
+        },
+        {
+          "client_id": "271703968988-bu2tmp276iti35ub0af6ojqj2honmtee.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAzYnrOhrirHoZG3WPERDFlaH2Z0eXZ6XU"
+          "current_key": "AIzaSyATgBEM7wF6fj9Y_s_P8lbSRLlJbOzXtOY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "962713946671-ejqecj0tq5q180083hi966sqlk6bhq49.apps.googleusercontent.com",
+              "client_id": "271703968988-bu2tmp276iti35ub0af6ojqj2honmtee.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

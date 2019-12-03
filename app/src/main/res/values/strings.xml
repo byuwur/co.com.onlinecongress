@@ -33,7 +33,7 @@
     <string name="mateus_byuwur_mnm">Mateus [byUwUr] - MNM</string>
     <string name="info">INFO.</string>
     <string name="foro">FORO</string>
-    <string name="autor">AUTOR</string>
+    <string name="autor">AUTOR(ES)</string>
     <string name="registrarse_asistente">REGISTRARSE (Asistente)</string>
     <string name="registrar">Registrar</string>
     <string name="acepto_t_rminos">Acepto Términos y Condiciones para registrarme como asistente de Online Congress</string>
@@ -83,7 +83,7 @@
     <string name="contrase_a_nueva">Contraseña nueva</string>
     <string name="c_d_pa_s_n_mero_telef_nico_nuevo">(+cód. país) Número telefónico nuevo</string>
     <string name="andr_s_trujillo_mateus">Andrés Trujillo Mateus</string>
-    <string name="others">Angie Daniela Velasquez \n Jose Luis Rodríguez Galeano (Asesor) \n Nayibe Soraya Sánchez León (Investigadora) \n Melissa Rivera Guzmán (Investigadora)</string>
+    <string name="others">Angie Daniela Velasquez\nJose Luis Rodríguez Galeano (Asesor)\nNayibe Soraya Sánchez León (Investigadora)\nMelissa Rivera Guzmán (Investigadora)</string>
     <string name="_1_0">1.0</string>
     <string name="versi_n">Versión:</string>
     <string name="congresos_y_eventos_de_investigaci_n">Congresos y eventos de investigación</string>
@@ -122,4 +122,24 @@
     <string name="salir">Salir</string>
     <string name="cerrar_sesi_n">Cerrar sesión</string>
     <string name="cambiar_congreso">Cambiar congreso</string>
+    <string name="quickstart_message">Click the SUBSCRIBE TO WEATHER button below to subscribe to the
+        weather topic. Messages sent to the weather topic will be received. The LOG TOKEN button logs the
+        InstanceID token to logcat.</string>
+    <string name="subscribe_to_weather">Subscribe To Weather</string>
+    <string name="log_token">Log Token</string>
+
+    <string name="msg_subscribed">Subscribed to weather topic</string>
+    <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
+
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <!--
+        This is the name that users will see when interacting with this channel.
+        It should describe the category of notifications that will be sent through this channel
+     -->
+    <!-- [START fcm_default_icon_string] -->
+    <string name="default_notification_channel_name" translatable="true">Weather</string>
+    <!-- [END fcm_default_icon_string] -->
+    <string name="msg_subscribe_failed">Failed to subscribe to weather topic</string>
+    <string name="fcm_message">FCM Message</string>
+    <string name="tipo">tipo</string>
 </resources>

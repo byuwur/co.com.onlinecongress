@@ -67,22 +67,22 @@ public class Cuenta extends AppCompatActivity {
     private final static int FCR = 1;
     private DefaultValues dv = new DefaultValues();
     //login file to request
-    private String URLnombreciudad = dv.url + "nombreciudad.php",
-            URLactciudad = dv.urlcuenta + "ciudad.php", URLactnombre = dv.urlcuenta + "nombre.php",
+    private String URLnombrepais = dv.url + "nombrepais.php",
+            URLactpais = dv.urlcuenta + "pais.php", URLactnombre = dv.urlcuenta + "nombre.php",
             URLactinst = dv.urlcuenta + "inst.php", URLactsexo = dv.urlcuenta + "sexo.php", URLactdni = dv.urlcuenta + "dni.php",
             URLactcorreo = dv.urlcuenta + "correo.php", URLactphone = dv.urlcuenta + "phone.php",
             URLactpass = dv.urlcuenta + "pass.php", URLactfoto = dv.urlcuenta + "fotoperfil/fotos.php",
-            URLpais = dv.url + "paises.php", URLdep = dv.url + "provincias.php", URLciu = dv.url + "ciudades.php";
+            URLpais = dv.url + "paises.php";
     //
     private RequestQueue rq;
     //set context
     private Context ctx;
     private StringRequest jsrqactualizar;
     //list of each array
-    private ArrayList<String> tipodni = new ArrayList<>(), sexo = new ArrayList<>(), pais = new ArrayList<>(), idpais = new ArrayList<>(), dep = new ArrayList<>(), iddep = new ArrayList<>(), ciudad = new ArrayList<>(), idciudad = new ArrayList<>();
-    private String buscaridpais = "", buscariddepar = "", buscaridciudad = "";
-    private TextView textnombre, textdni, texttipodni, textcorreo, textcongreso, textinstitucion, textphone, textsexo, textciudad;
-    private String usrid, usrciudad;
+    private ArrayList<String> tipodni = new ArrayList<>(), sexo = new ArrayList<>(), pais = new ArrayList<>(), idpais = new ArrayList<>();
+    private String buscaridpais = "";
+    private TextView textnombre, textdni, texttipodni, textcorreo, textcongreso, textinstitucion, textphone, textsexo, textpais;
+    private String usrid, usrpais;
     private String mCM;
     private ValueCallback mUM;
     private ValueCallback<Uri[]> mUMA;
@@ -147,7 +147,7 @@ public class Cuenta extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Modificar Cuenta");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd"))));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd"))));
         //
         ctx = Cuenta.this;
         rq = Volley.newRequestQueue(ctx);
@@ -163,7 +163,7 @@ public class Cuenta extends AppCompatActivity {
         textinstitucion = findViewById(R.id.textinstitucion);
         textsexo = findViewById(R.id.textsexo);
         textphone = findViewById(R.id.textphone);
-        textciudad = findViewById(R.id.textciudad);
+        textpais = findViewById(R.id.textpais);
 
         settexts();
 
@@ -175,8 +175,8 @@ public class Cuenta extends AppCompatActivity {
         Button editarphone = findViewById(R.id.editarphone);
         Button editarpass = findViewById(R.id.editarpass);
         Button editarsexo = findViewById(R.id.editarsexo);
-        Button editarciudad = findViewById(R.id.editarciudad);
-        Button editarfoto = findViewById(R.id.editarfoto);
+        Button editarpais = findViewById(R.id.editarpais);
+        //Button editarfoto = findViewById(R.id.editarfoto);
 
         editarnombre.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -226,29 +226,29 @@ public class Cuenta extends AppCompatActivity {
                 vieweditarsexo();
             }
         });
-        editarciudad.setOnClickListener(new View.OnClickListener() {
+        editarpais.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                vieweditarciudad();
+                vieweditarpais();
             }
         });
-        editarfoto.setOnClickListener(new View.OnClickListener() {
+        /*editarfoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 vieweditarfoto();
             }
-        });
+        });*/
 
-        editarnombre.setBackgroundColor(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
-        editardni.setBackgroundColor(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
-        editarcorreo.setBackgroundColor(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
-        editarcongreso.setBackgroundColor(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
-        editarinstitucion.setBackgroundColor(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
-        editarphone.setBackgroundColor(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
-        editarpass.setBackgroundColor(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
-        editarsexo.setBackgroundColor(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
-        editarciudad.setBackgroundColor(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
-        editarfoto.setBackgroundColor(Color.parseColor("#" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
+        editarnombre.setBackgroundColor(Color.parseColor(getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
+        editardni.setBackgroundColor(Color.parseColor(getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
+        editarcorreo.setBackgroundColor(Color.parseColor(getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
+        editarcongreso.setBackgroundColor(Color.parseColor(getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
+        editarinstitucion.setBackgroundColor(Color.parseColor(getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
+        editarphone.setBackgroundColor(Color.parseColor(getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
+        editarpass.setBackgroundColor(Color.parseColor(getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
+        editarsexo.setBackgroundColor(Color.parseColor(getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
+        editarpais.setBackgroundColor(Color.parseColor(getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
+        //editarfoto.setBackgroundColor(Color.parseColor(getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("color", "0277bd")));
         /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -401,7 +401,7 @@ public class Cuenta extends AppCompatActivity {
         final String[] stringtipodninuevo = new String[1];
         final EditText dninuevo = layout.findViewById(R.id.dninuevo);
 
-        tipodni.add("Cédula de ciudadanía");
+        tipodni.add("Cédula de paisanía");
         tipodni.add("Cédula de extranjería");
         tipodni.add("Tarjeta de identidad");
         tipodni.add("Pasaporte");
@@ -1135,7 +1135,7 @@ public class Cuenta extends AppCompatActivity {
                                             getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                                                     .putString("email", null).apply();
                                             getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                                                    .putString("ciudad", null).apply();
+                                                    .putString("pais", null).apply();
                                             getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                                                     .putString("phone", null).apply();
                                             getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
@@ -1186,24 +1186,18 @@ public class Cuenta extends AppCompatActivity {
         rq.add(jsrqactualizar);
     }
 
-    private void vieweditarciudad() {
+    private void vieweditarpais() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);
-        @SuppressLint("InflateParams") View layout = LayoutInflater.from(ctx).inflate(R.layout.dialog_cambiarciudad, null);
+        @SuppressLint("InflateParams") View layout = LayoutInflater.from(ctx).inflate(R.layout.dialog_cambiarpais, null);
         dialog.setView(layout);
 
         //initial values
         pais.add("[--- Países (+cód. país) ---]");
         idpais.add("0");
-        dep.add("[--- Departamentos ---]");
-        iddep.add("0");
-        ciudad.add("[--- Ciudades ---]");
-        idciudad.add("0");
         //fill dep
         llenarpaises();
         //SPINNER STUFF
         final Spinner spinnerpais = layout.findViewById(R.id.spinnerpais);
-        final Spinner spinnerdep = layout.findViewById(R.id.spinnerprovincia);
-        final Spinner spinnerciu = layout.findViewById(R.id.spinnerciudad);
         //set the spinner value from Arraylist
         ArrayAdapter<String> adapterpais = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item, pais);
         adapterpais.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -1211,73 +1205,8 @@ public class Cuenta extends AppCompatActivity {
         spinnerpais.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
-                spinnerdep.setEnabled(true);
-                spinnerdep.setClickable(true);
-                //Toast.makeText(ctx,adapterView.getItemAtPosition(pos)+". "+iddep.get(pos), Toast.LENGTH_SHORT).show();
                 buscaridpais = idpais.get(pos);
-                //RESET CIUDAD ARRAYLIST
-                dep.clear();
-                iddep.clear();
-                dep.add("[--- Provincias ---]");
-                iddep.add("0");
-                spinnerdep.setSelection(0);
-                //fill ciudad arraylist
-                llenardepartamentos();
-                if (pos == 0) {
-                    spinnerdep.setEnabled(false);
-                    spinnerdep.setClickable(false);
-                    buscariddepar = "";
-                }
             }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-        //set the spinner value from Arraylist
-        ArrayAdapter<String> adapterdep = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item, dep);
-        adapterdep.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerdep.setAdapter(adapterdep);
-        spinnerdep.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
-                spinnerciu.setEnabled(true);
-                spinnerciu.setClickable(true);
-                //Toast.makeText(ctx,adapterView.getItemAtPosition(pos)+". "+iddep.get(pos), Toast.LENGTH_SHORT).show();
-                buscariddepar = iddep.get(pos);
-                //RESET CIUDAD ARRAYLIST
-                ciudad.clear();
-                idciudad.clear();
-                ciudad.add("[--- Ciudades ---]");
-                idciudad.add("0");
-                spinnerciu.setSelection(0);
-                //fill ciudad arraylist
-                llenarciudad();
-                if (pos == 0) {
-                    spinnerciu.setEnabled(false);
-                    spinnerciu.setClickable(false);
-                    buscaridciudad = "";
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-        //set the spinner value from Arraylist
-        ArrayAdapter<String> adapterciu = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item, ciudad);
-        adapterciu.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerciu.setAdapter(adapterciu);
-        spinnerciu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
-                //Toast.makeText(ctx, adapterView.getItemAtPosition(pos)+". "+idciudad.get(pos), Toast.LENGTH_SHORT).show();
-                buscaridciudad = idciudad.get(pos);
-                if (pos == 0) {
-                    buscaridciudad = "";
-                }
-            }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -1288,7 +1217,7 @@ public class Cuenta extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //if user pressed "yes", then he is allowed to exit from application
-                actualizarciudad(usrid, buscaridciudad);
+                actualizarpais(usrid, buscaridpais);
                 dialog.cancel();
             }
         });
@@ -1303,12 +1232,12 @@ public class Cuenta extends AppCompatActivity {
         dialog.show();
     }
 
-    private void actualizarciudad(final String id, final String ciudad) {
+    private void actualizarpais(final String id, final String pais) {
         // Showing progress dialog at user registration time.
         final ProgressDialog progreso = new ProgressDialog(ctx);
         progreso.setMessage("Por favor, espere...");
         progreso.show();
-        jsrqactualizar = new StringRequest(Request.Method.POST, URLactciudad,
+        jsrqactualizar = new StringRequest(Request.Method.POST, URLactpais,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -1336,14 +1265,14 @@ public class Cuenta extends AppCompatActivity {
                                         public void onClick(DialogInterface dialogo, int id) {
                                             //Ejecute acciones, deje vacio para solo aceptar
                                             dialogo.cancel();
-                                            vieweditarciudad();
+                                            vieweditarpais();
                                         }
                                     });
                                     dialogo.show();
                                 }
                                 if (success) {
                                     getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                                            .putString("ciudad", ciudad).apply();
+                                            .putString("pais", pais).apply();
 
                                     AlertDialog.Builder dialogo = new AlertDialog.Builder(ctx);
                                     dialogo.setTitle("ACTUALIZAR");
@@ -1388,7 +1317,7 @@ public class Cuenta extends AppCompatActivity {
                 Map<String, String> parametros = new HashMap<>();
 
                 parametros.put("id", id);
-                parametros.put("ciudad", ciudad);
+                parametros.put("pais", pais);
 
                 return parametros;
             }
@@ -1523,23 +1452,23 @@ public class Cuenta extends AppCompatActivity {
         textcongreso.setText(usrcongreso);
         textsexo.setText(usrsexo);
         textinstitucion.setText(usrinst);
-        setnombreciudad();
+        setnombrepais();
     }
 
-    private void setnombreciudad() {
-        usrciudad = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
-                .getString("ciudad", null);
-        JsonArrayRequest jsrqnombreciudad = new JsonArrayRequest(Request.Method.GET, URLnombreciudad + "?ciudad=" + usrciudad,
+    private void setnombrepais() {
+        usrpais = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                .getString("pais", null);
+        JsonArrayRequest jsrqnombrepais = new JsonArrayRequest(Request.Method.GET, URLnombrepais + "?pais=" + usrpais,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject res = response.getJSONObject(i);
-                                if (res.has("name_ciu")) {
-                                    textciudad.setText(res.getString("name_ciu"));
+                                if (res.has("name_pais")) {
+                                    textpais.setText(res.getString("name_pais"));
                                 } else {
-                                    textciudad.setText(usrciudad);
+                                    textpais.setText(usrpais);
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -1552,7 +1481,7 @@ public class Cuenta extends AppCompatActivity {
                 Log.d("Error", error.toString());
             }
         });
-        rq.add(jsrqnombreciudad);
+        rq.add(jsrqnombrepais);
     }
 
     private void llenarpaises() {
@@ -1579,58 +1508,6 @@ public class Cuenta extends AppCompatActivity {
             }
         });
         rq.add(jsrqpais);
-    }
-
-    private void llenardepartamentos() {
-        //Log.d("Response: ", "ID:"+res.getString("IDDEPARTAMENTOS")+". Nombre: "+res.getString("NOMBREDEPARTAMENTO"));
-        JsonArrayRequest jsrqdep = new JsonArrayRequest(Request.Method.GET, URLdep + "?pais=" + buscaridpais,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        for (int i = 0; i < response.length(); i++) {
-                            try {
-                                JSONObject res = response.getJSONObject(i);
-                                //Log.d("Response: ", "ID:"+res.getString("IDDEPARTAMENTOS")+". Nombre: "+res.getString("NOMBREDEPARTAMENTO"));
-                                dep.add(res.getString("name_pro"));
-                                iddep.add(res.getString("id"));
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("Error", error.toString());
-            }
-        });
-        rq.add(jsrqdep);
-    }
-
-    private void llenarciudad() {
-        //Log.d("Response: ", "ID:"+res.getString("IDCIUDADES")+". Nombre: "+res.getString("NOMBRECIUDAD"));
-        JsonArrayRequest jsrqciu = new JsonArrayRequest(Request.Method.GET, URLciu + "?provincia=" + buscariddepar,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        for (int i = 0; i < response.length(); i++) {
-                            try {
-                                JSONObject res = response.getJSONObject(i);
-                                //Log.d("Response: ", "ID:"+res.getString("IDCIUDADES")+". Nombre: "+res.getString("NOMBRECIUDAD"));
-                                ciudad.add(res.getString("name_ciu"));
-                                idciudad.add(res.getString("id"));
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("Error", error.toString());
-            }
-        });
-        rq.add(jsrqciu);
     }
 
     @Override

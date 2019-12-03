@@ -10,7 +10,7 @@
     <FrameLayout
         android:id="@+id/frameprofile"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="175dp"
         android:background="#FFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,8 +34,8 @@
 
             <ImageView
                 android:id="@+id/fotoperfil"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
                 android:contentDescription="@string/foto_de_perfil"
                 android:gravity="bottom"
                 android:src="@drawable/no_profile" />
